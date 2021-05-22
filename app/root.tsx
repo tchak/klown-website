@@ -9,7 +9,10 @@ import { Strobos } from './components/strobos';
 import { getHeader } from './cms.server';
 
 export const links: LinksFunction = () => {
-  return [{ rel: 'stylesheet', href: stylesUrl }];
+  return [
+    { rel: 'stylesheet', href: stylesUrl },
+    { rel: 'stylesheet', href: 'font/GeneralSans/stylesheet.css' },
+  ];
 };
 
 export const meta: MetaFunction = () => {
