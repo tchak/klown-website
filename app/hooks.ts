@@ -5,7 +5,7 @@ export function usePageColor(color?: string) {
     const [cc, bg] = color ?? 'rw';
     document.body.dataset['cc'] = cc;
     document.body.dataset['bg'] = bg;
-  }, []);
+  }, [color]);
 }
 
 export function useStrobos(): [boolean, () => void] {
