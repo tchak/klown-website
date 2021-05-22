@@ -4,8 +4,9 @@ import { Outlet } from 'react-router-dom';
 
 import stylesUrl from './styles/index.css';
 import { Header, Footer } from './components/layout';
+import { Strobos } from './components/strobos';
 
-import { getHeader } from './api-client.server';
+import { getHeader } from './cms.server';
 
 export const links: LinksFunction = () => {
   return [{ rel: 'stylesheet', href: stylesUrl }];
@@ -49,6 +50,7 @@ export default function App() {
     <Document>
       <Header />
       <Outlet />
+      <Strobos />
       <Footer />
     </Document>
   );

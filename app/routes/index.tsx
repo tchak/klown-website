@@ -1,10 +1,7 @@
 import type { MetaFunction, LoaderFunction } from 'remix';
 import { useRouteData, Link } from 'remix';
 
-import {
-  getCategories,
-  GetCategories as RouteData,
-} from '../api-client.server';
+import { getCategories, GetCategories as RouteData } from '../cms.server';
 
 export const handle = { bodyId: 'index' };
 export const meta: MetaFunction = () => ({ title: 'Klown' });
@@ -20,16 +17,7 @@ export default function Index() {
           {data.categories.map((category) => (
             <li key={category.id}>
               <Link to={`/category/${category.slug}`}>{category.title}</Link>
-              <div className="videoWrapper">
-                {category.backgroundVideo && (
-                  <video muted autoPlay loop aria-hidden>
-                    <source
-                      src={category.backgroundVideo?.url}
-                      type={category.backgroundVideo?.mimeType!}
-                    />
-                  </video>
-                )}
-              </div>
+              <VideoWrapper video={category.backgroundVideo} />
               <div className="over" aria-hidden></div>
             </li>
           ))}
@@ -37,4 +25,19 @@ export default function Index() {
       </nav>
     </main>
   );
+}
+
+type BackgroundVideo = RouteData['categories'][0]['backgroundVideo'];
+
+function VideoWrapper({ video }: { video: BackgroundVideo }) {
+  if (video) {
+    return (
+      <div className="videoWrapper">
+        <video muted autoPlay loop aria-hidden>
+          <source src={video.url} type={video.mimeType!} />
+        </video>
+      </div>
+    );
+  }
+  return <div className="videoWrapper"></div>;
 }

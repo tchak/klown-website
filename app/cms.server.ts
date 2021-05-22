@@ -10,10 +10,8 @@ import {
   GetCategoryQuery,
 } from './graphql-operations';
 
-const API_URL = process.env['API_URL'] as string;
+const API_URL = process.env['API_URL']!;
 const API_TOKEN = process.env['API_TOKEN'];
-
-console.log(API_URL);
 
 export const client = createClient({
   url: API_URL,

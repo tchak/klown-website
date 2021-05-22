@@ -2,7 +2,7 @@ import type { MetaFunction, LoaderFunction } from 'remix';
 import { useRouteData } from 'remix';
 import Markdown from 'react-markdown';
 
-import { getCategory, GetCategory as RouteData } from '../api-client.server';
+import { getCategory, GetCategory as RouteData } from '../cms.server';
 
 export const handle = { bodyId: 'categorie' };
 export const meta: MetaFunction = ({ data }: { data: RouteData }) => {
