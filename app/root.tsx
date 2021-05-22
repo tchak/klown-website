@@ -11,7 +11,7 @@ import { getHeader } from './cms.server';
 export const links: LinksFunction = () => {
   return [
     { rel: 'stylesheet', href: stylesUrl },
-    { rel: 'stylesheet', href: 'font/GeneralSans/stylesheet.css' },
+    { rel: 'stylesheet', href: '/font/GeneralSans/stylesheet.css' },
   ];
 };
 

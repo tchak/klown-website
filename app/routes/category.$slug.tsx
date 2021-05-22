@@ -1,4 +1,4 @@
-import type { MetaFunction, LoaderFunction } from 'remix';
+import { MetaFunction, LoaderFunction, Link } from 'remix';
 import { useRouteData } from 'remix';
 import Markdown from 'react-markdown';
 
@@ -22,6 +22,7 @@ export default function Category() {
 
   return (
     <main>
+      <Link to={`/piece/${data.category?.pieces[0].slug}`}>First</Link>
       <header>
         <h1>{data.category?.title}</h1>
         <p className="exp">{data.category?.pieces.length}</p>
