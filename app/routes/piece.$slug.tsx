@@ -8,7 +8,7 @@ import { usePageColor } from '../hooks';
 export const handle = { bodyId: 'piece' };
 export const meta: MetaFunction = ({ data }: { data: RouteData }) => {
   return {
-    title: data.piece?.title!,
+    title: `Klown | ${data.piece?.category?.title} | ${data.piece?.title}`,
     description: data.piece?.description ?? '',
   };
 };
@@ -22,10 +22,16 @@ export default function Category() {
 
   return (
     <main>
-      <header>
+      <section id="carrousel"></section>
+      <header id="details">
+        <p>{data.piece?.category?.title}</p>
         <h1>{data.piece?.title}</h1>
+        <ul className="secondary">
+          <li>Detail</li>
+          <li>Detail</li>
+        </ul>
       </header>
-      <div className="content">
+      <div id="content">
         <Markdown>{data.piece?.content?.markdown ?? ''}</Markdown>
       </div>
       <Side />

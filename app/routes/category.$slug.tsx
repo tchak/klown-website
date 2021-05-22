@@ -8,7 +8,7 @@ import { usePageColor } from '../hooks';
 export const handle = { bodyId: 'categorie' };
 export const meta: MetaFunction = ({ data }: { data: RouteData }) => {
   return {
-    title: data.category?.title!,
+    title: `Klown | ${data.category?.title}`,
     description: data.category?.description ?? '',
   };
 };

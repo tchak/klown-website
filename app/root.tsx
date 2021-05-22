@@ -26,8 +26,7 @@ export const meta: MetaFunction = () => {
 export const loader: LoaderFunction = async () => getHeader();
 
 function Document({ children }: { children: React.ReactNode }) {
-  const matches = useMatches();
-  const match = matches.find(({ handle }) => !!handle);
+  const match = useMatches().find(({ handle }) => !!handle);
   const bodyId = match?.handle?.bodyId ?? 'index';
 
   return (

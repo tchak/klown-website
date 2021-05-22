@@ -43,6 +43,9 @@ query getPiece($slug: String!) {
     description
     slug
     color
+    category {
+      title
+    }
     content {
       markdown
     }
@@ -53,6 +56,9 @@ query getPiece($slug: String!) {
       id
       title
       slug
+      category {
+        title
+      }
     }
   }
 }
