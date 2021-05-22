@@ -106,3 +106,4 @@ dist
 /app/styles
 /public/build
 /build
+/functions/app/build
