@@ -1,5 +1,5 @@
-query getCategories {
-  categories {
+query getCategories($stage: Stage!) {
+  categories(stage: $stage) {
     id
     title
     slug
@@ -10,16 +10,16 @@ query getCategories {
   }
 }
 
-query getHeader {
-  categories {
+query getHeader($stage: Stage!) {
+  categories(stage: $stage) {
     id
     title
     slug
   }
 }
 
-query getCategory($slug: String!) {
-  category(where: { slug: $slug }) {
+query getCategory($slug: String!, $stage: Stage!) {
+  category(where: { slug: $slug }, stage: $stage) {
     id
     title
     description
@@ -36,8 +36,8 @@ query getCategory($slug: String!) {
   }
 }
 
-query getPiece($slug: String!) {
-  piece(where: { slug: $slug }) {
+query getPiece($slug: String!, $stage: Stage!) {
+  piece(where: { slug: $slug }, stage: $stage) {
     id
     title
     description

@@ -10,6 +10,7 @@ import {
   GetCategoriesQuery,
   GetCategoryQuery,
   GetPieceQuery,
+  Stage,
 } from './graphql-operations';
 
 const API_URL = process.env['API_URL']!;
@@ -32,33 +33,9 @@ export {
   GetPieceQuery as GetPiece,
 };
 
-export async function getHeader(): Promise<GetHeaderQuery> {
-  const { data, error } = await client.query(GetHeaderDocument).toPromise();
-
-  if (error) {
-    throw error;
-  } else if (!data) {
-    throw new Error('Not Found');
-  }
-
-  return data;
-}
-
-export async function getCategories(): Promise<GetCategoriesQuery> {
-  const { data, error } = await client.query(GetCategoriesDocument).toPromise();
-
-  if (error) {
-    throw error;
-  } else if (!data) {
-    throw new Error('Not Found');
-  }
-
-  return data;
-}
-
-export async function getCategory(slug: string): Promise<GetCategoryQuery> {
+export async function getHeader(stage = Stage.Draft): Promise<GetHeaderQuery> {
   const { data, error } = await client
-    .query(GetCategoryDocument, { slug })
+    .query(GetHeaderDocument, { stage })
     .toPromise();
 
   if (error) {
@@ -70,9 +47,45 @@ export async function getCategory(slug: string): Promise<GetCategoryQuery> {
   return data;
 }
 
-export async function getPiece(slug: string): Promise<GetPieceQuery> {
+export async function getCategories(
+  stage = Stage.Draft
+): Promise<GetCategoriesQuery> {
   const { data, error } = await client
-    .query(GetPieceDocument, { slug })
+    .query(GetCategoriesDocument, { stage })
+    .toPromise();
+
+  if (error) {
+    throw error;
+  } else if (!data) {
+    throw new Error('Not Found');
+  }
+
+  return data;
+}
+
+export async function getCategory(
+  slug: string,
+  stage = Stage.Draft
+): Promise<GetCategoryQuery> {
+  const { data, error } = await client
+    .query(GetCategoryDocument, { slug, stage })
+    .toPromise();
+
+  if (error) {
+    throw error;
+  } else if (!data) {
+    throw new Error('Not Found');
+  }
+
+  return data;
+}
+
+export async function getPiece(
+  slug: string,
+  stage = Stage.Draft
+): Promise<GetPieceQuery> {
+  const { data, error } = await client
+    .query(GetPieceDocument, { slug, stage })
     .toPromise();
 
   if (error) {
