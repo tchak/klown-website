@@ -3,6 +3,7 @@ import { useRouteData } from 'remix';
 import Markdown from 'react-markdown';
 
 import { getCategory, GetCategory as RouteData } from '../cms.server';
+import { usePageColor } from '../hooks';
 
 export const handle = { bodyId: 'categorie' };
 export const meta: MetaFunction = ({ data }: { data: RouteData }) => {
@@ -16,6 +17,8 @@ export const loader: LoaderFunction = async ({ params }) =>
 
 export default function Category() {
   const data = useRouteData<RouteData>();
+
+  usePageColor(data.category?.color);
 
   return (
     <main>

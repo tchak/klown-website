@@ -24,6 +24,7 @@ query getCategory($slug: String!) {
     title
     description
     slug
+    color
     content {
       markdown
     }
@@ -41,6 +42,7 @@ query getPiece($slug: String!) {
     title
     description
     slug
+    color
     content {
       markdown
     }

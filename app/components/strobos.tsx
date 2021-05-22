@@ -1,19 +1,7 @@
-import { useState, useEffect } from 'react';
+import { useStrobos } from '../hooks';
 
 export function Strobos() {
-  const [enableStrobos, setEnableStrobos] = useState(false);
-
-  useEffect(() => {
-    if (enableStrobos) {
-      document.body.classList.add('pulse');
-    } else {
-      document.body.classList.remove('pulse');
-    }
-  }, [enableStrobos]);
-
-  useEffect(() => {
-    setEnableStrobos(!getPrefersReducedMotion());
-  }, []);
+  const [enabled, toggle] = useStrobos();
 
   return (
     <>
@@ -23,8 +11,8 @@ export function Strobos() {
           type="checkbox"
           className="on-off"
           id="i-strobos"
-          checked={enableStrobos}
-          onChange={() => setEnableStrobos((enableStrobos) => !enableStrobos)}
+          checked={enabled}
+          onChange={toggle}
         />
       </div>
       <svg
@@ -52,11 +40,4 @@ export function Strobos() {
       </svg>
     </>
   );
-}
-
-function getPrefersReducedMotion() {
-  const QUERY = '(prefers-reduced-motion: no-preference)';
-  const mediaQueryList = window.matchMedia(QUERY);
-  const prefersReducedMotion = !mediaQueryList.matches;
-  return prefersReducedMotion;
 }

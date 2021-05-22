@@ -715,6 +715,7 @@ export type Category = Node & {
   title: Scalars['String'];
   description?: Maybe<Scalars['String']>;
   slug: Scalars['String'];
+  color: PageColor;
   content?: Maybe<RichText>;
   pieces: Array<Piece>;
   backgroundVideo?: Maybe<Asset>;
@@ -791,6 +792,7 @@ export type CategoryCreateInput = {
   title: Scalars['String'];
   description?: Maybe<Scalars['String']>;
   slug: Scalars['String'];
+  color: PageColor;
   content?: Maybe<Scalars['RichTextAST']>;
   pieces?: Maybe<PieceCreateManyInlineInput>;
   backgroundVideo?: Maybe<AssetCreateOneInlineInput>;
@@ -953,6 +955,13 @@ export type CategoryManyWhereInput = {
   slug_ends_with?: Maybe<Scalars['String']>;
   /** All values not ending with the given string */
   slug_not_ends_with?: Maybe<Scalars['String']>;
+  color?: Maybe<PageColor>;
+  /** All values that are not equal to given value. */
+  color_not?: Maybe<PageColor>;
+  /** All values that are contained in given list. */
+  color_in?: Maybe<Array<PageColor>>;
+  /** All values that are not contained in given list. */
+  color_not_in?: Maybe<Array<PageColor>>;
   pieces_every?: Maybe<PieceWhereInput>;
   pieces_some?: Maybe<PieceWhereInput>;
   pieces_none?: Maybe<PieceWhereInput>;
@@ -973,13 +982,16 @@ export enum CategoryOrderByInput {
   DescriptionAsc = 'description_ASC',
   DescriptionDesc = 'description_DESC',
   SlugAsc = 'slug_ASC',
-  SlugDesc = 'slug_DESC'
+  SlugDesc = 'slug_DESC',
+  ColorAsc = 'color_ASC',
+  ColorDesc = 'color_DESC'
 }
 
 export type CategoryUpdateInput = {
   title?: Maybe<Scalars['String']>;
   description?: Maybe<Scalars['String']>;
   slug?: Maybe<Scalars['String']>;
+  color?: Maybe<PageColor>;
   content?: Maybe<Scalars['RichTextAST']>;
   pieces?: Maybe<PieceUpdateManyInlineInput>;
   backgroundVideo?: Maybe<AssetUpdateOneInlineInput>;
@@ -1004,6 +1016,7 @@ export type CategoryUpdateManyInlineInput = {
 
 export type CategoryUpdateManyInput = {
   description?: Maybe<Scalars['String']>;
+  color?: Maybe<PageColor>;
   content?: Maybe<Scalars['RichTextAST']>;
 };
 
@@ -1184,6 +1197,13 @@ export type CategoryWhereInput = {
   slug_ends_with?: Maybe<Scalars['String']>;
   /** All values not ending with the given string */
   slug_not_ends_with?: Maybe<Scalars['String']>;
+  color?: Maybe<PageColor>;
+  /** All values that are not equal to given value. */
+  color_not?: Maybe<PageColor>;
+  /** All values that are contained in given list. */
+  color_in?: Maybe<Array<PageColor>>;
+  /** All values that are not contained in given list. */
+  color_not_in?: Maybe<Array<PageColor>>;
   pieces_every?: Maybe<PieceWhereInput>;
   pieces_some?: Maybe<PieceWhereInput>;
   pieces_none?: Maybe<PieceWhereInput>;
@@ -1799,6 +1819,12 @@ export type Node = {
   stage: Stage;
 };
 
+export enum PageColor {
+  Kw = 'kw',
+  Rw = 'rw',
+  Wr = 'wr'
+}
+
 /** Information about pagination in a connection. */
 export type PageInfo = {
   __typename?: 'PageInfo';
@@ -1842,6 +1868,7 @@ export type Piece = Node & {
   category?: Maybe<Category>;
   relatedFrom: Array<Piece>;
   related: Array<Piece>;
+  color: PageColor;
   /** List of Piece versions */
   history: Array<Version>;
 };
@@ -1944,6 +1971,7 @@ export type PieceCreateInput = {
   category?: Maybe<CategoryCreateOneInlineInput>;
   relatedFrom?: Maybe<PieceCreateManyInlineInput>;
   related?: Maybe<PieceCreateManyInlineInput>;
+  color: PageColor;
 };
 
 export type PieceCreateManyInlineInput = {
@@ -2113,6 +2141,13 @@ export type PieceManyWhereInput = {
   related_every?: Maybe<PieceWhereInput>;
   related_some?: Maybe<PieceWhereInput>;
   related_none?: Maybe<PieceWhereInput>;
+  color?: Maybe<PageColor>;
+  /** All values that are not equal to given value. */
+  color_not?: Maybe<PageColor>;
+  /** All values that are contained in given list. */
+  color_in?: Maybe<Array<PageColor>>;
+  /** All values that are not contained in given list. */
+  color_not_in?: Maybe<Array<PageColor>>;
 };
 
 export enum PieceOrderByInput {
@@ -2129,7 +2164,9 @@ export enum PieceOrderByInput {
   DescriptionAsc = 'description_ASC',
   DescriptionDesc = 'description_DESC',
   SlugAsc = 'slug_ASC',
-  SlugDesc = 'slug_DESC'
+  SlugDesc = 'slug_DESC',
+  ColorAsc = 'color_ASC',
+  ColorDesc = 'color_DESC'
 }
 
 export type PieceUpdateInput = {
@@ -2141,6 +2178,7 @@ export type PieceUpdateInput = {
   category?: Maybe<CategoryUpdateOneInlineInput>;
   relatedFrom?: Maybe<PieceUpdateManyInlineInput>;
   related?: Maybe<PieceUpdateManyInlineInput>;
+  color?: Maybe<PageColor>;
 };
 
 export type PieceUpdateManyInlineInput = {
@@ -2163,6 +2201,7 @@ export type PieceUpdateManyInlineInput = {
 export type PieceUpdateManyInput = {
   description?: Maybe<Scalars['String']>;
   content?: Maybe<Scalars['RichTextAST']>;
+  color?: Maybe<PageColor>;
 };
 
 export type PieceUpdateManyWithNestedWhereInput = {
@@ -2352,6 +2391,13 @@ export type PieceWhereInput = {
   related_every?: Maybe<PieceWhereInput>;
   related_some?: Maybe<PieceWhereInput>;
   related_none?: Maybe<PieceWhereInput>;
+  color?: Maybe<PageColor>;
+  /** All values that are not equal to given value. */
+  color_not?: Maybe<PageColor>;
+  /** All values that are contained in given list. */
+  color_in?: Maybe<Array<PageColor>>;
+  /** All values that are not contained in given list. */
+  color_not_in?: Maybe<Array<PageColor>>;
 };
 
 /** References Piece record uniquely */
@@ -3070,7 +3116,7 @@ export type GetCategoryQuery = (
   { __typename?: 'Query' }
   & { category?: Maybe<(
     { __typename?: 'Category' }
-    & Pick<Category, 'id' | 'title' | 'description' | 'slug'>
+    & Pick<Category, 'id' | 'title' | 'description' | 'slug' | 'color'>
     & { content?: Maybe<(
       { __typename?: 'RichText' }
       & Pick<RichText, 'markdown'>
@@ -3090,7 +3136,7 @@ export type GetPieceQuery = (
   { __typename?: 'Query' }
   & { piece?: Maybe<(
     { __typename?: 'Piece' }
-    & Pick<Piece, 'id' | 'title' | 'description' | 'slug'>
+    & Pick<Piece, 'id' | 'title' | 'description' | 'slug' | 'color'>
     & { content?: Maybe<(
       { __typename?: 'RichText' }
       & Pick<RichText, 'markdown'>
@@ -3107,5 +3153,5 @@ export type GetPieceQuery = (
 
 export const GetCategoriesDocument: DocumentNode<GetCategoriesQuery, GetCategoriesQueryVariables> = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getCategories"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"categories"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"backgroundVideo"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"mimeType"}},{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}}]}}]};
 export const GetHeaderDocument: DocumentNode<GetHeaderQuery, GetHeaderQueryVariables> = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getHeader"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"categories"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}}]}}]}}]};
-export const GetCategoryDocument: DocumentNode<GetCategoryQuery, GetCategoryQueryVariables> = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getCategory"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"slug"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"category"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"slug"},"value":{"kind":"Variable","name":{"kind":"Name","value":"slug"}}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"content"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"markdown"}}]}},{"kind":"Field","name":{"kind":"Name","value":"pieces"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}}]}}]}}]}}]};
-export const GetPieceDocument: DocumentNode<GetPieceQuery, GetPieceQueryVariables> = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getPiece"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"slug"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"piece"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"slug"},"value":{"kind":"Variable","name":{"kind":"Name","value":"slug"}}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"content"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"markdown"}}]}},{"kind":"Field","name":{"kind":"Name","value":"photos"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}}]}},{"kind":"Field","name":{"kind":"Name","value":"related"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}}]}}]}}]}}]};
+export const GetCategoryDocument: DocumentNode<GetCategoryQuery, GetCategoryQueryVariables> = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getCategory"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"slug"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"category"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"slug"},"value":{"kind":"Variable","name":{"kind":"Name","value":"slug"}}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"color"}},{"kind":"Field","name":{"kind":"Name","value":"content"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"markdown"}}]}},{"kind":"Field","name":{"kind":"Name","value":"pieces"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}}]}}]}}]}}]};
+export const GetPieceDocument: DocumentNode<GetPieceQuery, GetPieceQueryVariables> = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getPiece"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"slug"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"piece"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"slug"},"value":{"kind":"Variable","name":{"kind":"Name","value":"slug"}}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"color"}},{"kind":"Field","name":{"kind":"Name","value":"content"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"markdown"}}]}},{"kind":"Field","name":{"kind":"Name","value":"photos"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}}]}},{"kind":"Field","name":{"kind":"Name","value":"related"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}}]}}]}}]}}]};
