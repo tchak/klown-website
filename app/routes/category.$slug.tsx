@@ -17,12 +17,13 @@ export const loader: LoaderFunction = async ({ params }) =>
 
 export default function Category() {
   const data = useRouteData<RouteData>();
+  const first = data.category?.pieces[0];
 
   usePageColor(data.category?.color);
 
   return (
     <main>
-      <Link to={`/piece/${data.category?.pieces[0].slug}`}>First</Link>
+      {first && <Link to={`/piece/${first.slug}`}>First</Link>}
       <header>
         <h1>{data.category?.title}</h1>
         <p className="exp">{data.category?.pieces.length}</p>

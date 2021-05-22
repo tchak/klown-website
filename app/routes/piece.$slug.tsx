@@ -86,7 +86,7 @@ function useSiema<Element extends HTMLElement>(): [
         onChange: () => {},
       }));
 
-      return () => siema.destroy();
+      return () => siema.destroy(true);
     }
   }, []);
 
