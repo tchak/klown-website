@@ -50,7 +50,18 @@ query getPiece($slug: String!) {
       markdown
     }
     photos {
-      url
+      jpg: url(
+        transformation: {
+          image: { resize: { width: 1000, height: 1000, fit: max } }
+          document: { output: { format: jpg } }
+        }
+      )
+      webp: url(
+        transformation: {
+          image: { resize: { width: 1000, height: 1000, fit: max } }
+          document: { output: { format: webp } }
+        }
+      )
     }
     related {
       id
