@@ -5,9 +5,11 @@ import {
   GetHeaderDocument,
   GetCategoriesDocument,
   GetCategoryDocument,
+  GetPieceDocument,
   GetHeaderQuery,
   GetCategoriesQuery,
   GetCategoryQuery,
+  GetPieceQuery,
 } from './graphql-operations';
 
 const API_URL = process.env['API_URL']!;
@@ -27,6 +29,7 @@ export {
   GetHeaderQuery as GetHeader,
   GetCategoriesQuery as GetCategories,
   GetCategoryQuery as GetCategory,
+  GetPieceQuery as GetPiece,
 };
 
 export async function getHeader(): Promise<GetHeaderQuery> {
@@ -56,6 +59,20 @@ export async function getCategories(): Promise<GetCategoriesQuery> {
 export async function getCategory(slug: string): Promise<GetCategoryQuery> {
   const { data, error } = await client
     .query(GetCategoryDocument, { slug })
+    .toPromise();
+
+  if (error) {
+    throw error;
+  } else if (!data) {
+    throw new Error('Not Found');
+  }
+
+  return data;
+}
+
+export async function getPiece(slug: string): Promise<GetPieceQuery> {
+  const { data, error } = await client
+    .query(GetPieceDocument, { slug })
     .toPromise();
 
   if (error) {

@@ -34,3 +34,23 @@ query getCategory($slug: String!) {
     }
   }
 }
+
+query getPiece($slug: String!) {
+  piece(where: { slug: $slug }) {
+    id
+    title
+    description
+    slug
+    content {
+      markdown
+    }
+    photos {
+      url
+    }
+    related {
+      id
+      title
+      slug
+    }
+  }
+}
