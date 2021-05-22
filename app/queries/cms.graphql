@@ -22,11 +22,12 @@ query getCategory($slug: String!) {
   category(where: { slug: $slug }) {
     id
     title
+    description
     slug
-    description {
+    content {
       markdown
     }
-    projects {
+    pieces {
       id
       title
       slug

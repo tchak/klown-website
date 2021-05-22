@@ -72,6 +72,7 @@ export type Asset = Node & {
   /** The mime type of the file */
   mimeType?: Maybe<Scalars['String']>;
   backgroundVideoCategory: Array<Category>;
+  photosPiece: Array<Piece>;
   /** List of Asset versions */
   history: Array<Version>;
   /** Get the url for the asset with provided transformations applied. */
@@ -144,6 +145,19 @@ export type AssetBackgroundVideoCategoryArgs = {
 
 
 /** Asset system model */
+export type AssetPhotosPieceArgs = {
+  where?: Maybe<PieceWhereInput>;
+  orderBy?: Maybe<PieceOrderByInput>;
+  skip?: Maybe<Scalars['Int']>;
+  after?: Maybe<Scalars['String']>;
+  before?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  locales?: Maybe<Array<Locale>>;
+};
+
+
+/** Asset system model */
 export type AssetHistoryArgs = {
   limit?: Scalars['Int'];
   skip?: Scalars['Int'];
@@ -183,6 +197,7 @@ export type AssetCreateInput = {
   size?: Maybe<Scalars['Float']>;
   mimeType?: Maybe<Scalars['String']>;
   backgroundVideoCategory?: Maybe<CategoryCreateManyInlineInput>;
+  photosPiece?: Maybe<PieceCreateManyInlineInput>;
   /** Inline mutations for managing document localizations excluding the default locale */
   localizations?: Maybe<AssetCreateLocalizationsInput>;
 };
@@ -312,6 +327,9 @@ export type AssetManyWhereInput = {
   backgroundVideoCategory_every?: Maybe<CategoryWhereInput>;
   backgroundVideoCategory_some?: Maybe<CategoryWhereInput>;
   backgroundVideoCategory_none?: Maybe<CategoryWhereInput>;
+  photosPiece_every?: Maybe<PieceWhereInput>;
+  photosPiece_some?: Maybe<PieceWhereInput>;
+  photosPiece_none?: Maybe<PieceWhereInput>;
 };
 
 export enum AssetOrderByInput {
@@ -353,6 +371,7 @@ export type AssetUpdateInput = {
   size?: Maybe<Scalars['Float']>;
   mimeType?: Maybe<Scalars['String']>;
   backgroundVideoCategory?: Maybe<CategoryUpdateManyInlineInput>;
+  photosPiece?: Maybe<PieceUpdateManyInlineInput>;
   /** Manage document localizations */
   localizations?: Maybe<AssetUpdateLocalizationsInput>;
 };
@@ -657,6 +676,9 @@ export type AssetWhereInput = {
   backgroundVideoCategory_every?: Maybe<CategoryWhereInput>;
   backgroundVideoCategory_some?: Maybe<CategoryWhereInput>;
   backgroundVideoCategory_none?: Maybe<CategoryWhereInput>;
+  photosPiece_every?: Maybe<PieceWhereInput>;
+  photosPiece_some?: Maybe<PieceWhereInput>;
+  photosPiece_none?: Maybe<PieceWhereInput>;
 };
 
 /** References Asset record uniquely */
@@ -691,9 +713,10 @@ export type Category = Node & {
   /** User that last published this document */
   publishedBy?: Maybe<User>;
   title: Scalars['String'];
+  description?: Maybe<Scalars['String']>;
   slug: Scalars['String'];
-  description?: Maybe<RichText>;
-  projects: Array<Project>;
+  content?: Maybe<RichText>;
+  pieces: Array<Piece>;
   backgroundVideo?: Maybe<Asset>;
   /** List of Category versions */
   history: Array<Version>;
@@ -722,9 +745,9 @@ export type CategoryPublishedByArgs = {
 };
 
 
-export type CategoryProjectsArgs = {
-  where?: Maybe<ProjectWhereInput>;
-  orderBy?: Maybe<ProjectOrderByInput>;
+export type CategoryPiecesArgs = {
+  where?: Maybe<PieceWhereInput>;
+  orderBy?: Maybe<PieceOrderByInput>;
   skip?: Maybe<Scalars['Int']>;
   after?: Maybe<Scalars['String']>;
   before?: Maybe<Scalars['String']>;
@@ -766,9 +789,10 @@ export type CategoryCreateInput = {
   createdAt?: Maybe<Scalars['DateTime']>;
   updatedAt?: Maybe<Scalars['DateTime']>;
   title: Scalars['String'];
+  description?: Maybe<Scalars['String']>;
   slug: Scalars['String'];
-  description?: Maybe<Scalars['RichTextAST']>;
-  projects?: Maybe<ProjectCreateManyInlineInput>;
+  content?: Maybe<Scalars['RichTextAST']>;
+  pieces?: Maybe<PieceCreateManyInlineInput>;
   backgroundVideo?: Maybe<AssetCreateOneInlineInput>;
 };
 
@@ -891,6 +915,25 @@ export type CategoryManyWhereInput = {
   title_ends_with?: Maybe<Scalars['String']>;
   /** All values not ending with the given string */
   title_not_ends_with?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
+  /** All values that are not equal to given value. */
+  description_not?: Maybe<Scalars['String']>;
+  /** All values that are contained in given list. */
+  description_in?: Maybe<Array<Scalars['String']>>;
+  /** All values that are not contained in given list. */
+  description_not_in?: Maybe<Array<Scalars['String']>>;
+  /** All values containing the given string. */
+  description_contains?: Maybe<Scalars['String']>;
+  /** All values not containing the given string. */
+  description_not_contains?: Maybe<Scalars['String']>;
+  /** All values starting with the given string. */
+  description_starts_with?: Maybe<Scalars['String']>;
+  /** All values not starting with the given string. */
+  description_not_starts_with?: Maybe<Scalars['String']>;
+  /** All values ending with the given string. */
+  description_ends_with?: Maybe<Scalars['String']>;
+  /** All values not ending with the given string */
+  description_not_ends_with?: Maybe<Scalars['String']>;
   slug?: Maybe<Scalars['String']>;
   /** All values that are not equal to given value. */
   slug_not?: Maybe<Scalars['String']>;
@@ -910,9 +953,9 @@ export type CategoryManyWhereInput = {
   slug_ends_with?: Maybe<Scalars['String']>;
   /** All values not ending with the given string */
   slug_not_ends_with?: Maybe<Scalars['String']>;
-  projects_every?: Maybe<ProjectWhereInput>;
-  projects_some?: Maybe<ProjectWhereInput>;
-  projects_none?: Maybe<ProjectWhereInput>;
+  pieces_every?: Maybe<PieceWhereInput>;
+  pieces_some?: Maybe<PieceWhereInput>;
+  pieces_none?: Maybe<PieceWhereInput>;
   backgroundVideo?: Maybe<AssetWhereInput>;
 };
 
@@ -927,15 +970,18 @@ export enum CategoryOrderByInput {
   PublishedAtDesc = 'publishedAt_DESC',
   TitleAsc = 'title_ASC',
   TitleDesc = 'title_DESC',
+  DescriptionAsc = 'description_ASC',
+  DescriptionDesc = 'description_DESC',
   SlugAsc = 'slug_ASC',
   SlugDesc = 'slug_DESC'
 }
 
 export type CategoryUpdateInput = {
   title?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
   slug?: Maybe<Scalars['String']>;
-  description?: Maybe<Scalars['RichTextAST']>;
-  projects?: Maybe<ProjectUpdateManyInlineInput>;
+  content?: Maybe<Scalars['RichTextAST']>;
+  pieces?: Maybe<PieceUpdateManyInlineInput>;
   backgroundVideo?: Maybe<AssetUpdateOneInlineInput>;
 };
 
@@ -957,7 +1003,8 @@ export type CategoryUpdateManyInlineInput = {
 };
 
 export type CategoryUpdateManyInput = {
-  description?: Maybe<Scalars['RichTextAST']>;
+  description?: Maybe<Scalars['String']>;
+  content?: Maybe<Scalars['RichTextAST']>;
 };
 
 export type CategoryUpdateManyWithNestedWhereInput = {
@@ -1099,6 +1146,25 @@ export type CategoryWhereInput = {
   title_ends_with?: Maybe<Scalars['String']>;
   /** All values not ending with the given string */
   title_not_ends_with?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
+  /** All values that are not equal to given value. */
+  description_not?: Maybe<Scalars['String']>;
+  /** All values that are contained in given list. */
+  description_in?: Maybe<Array<Scalars['String']>>;
+  /** All values that are not contained in given list. */
+  description_not_in?: Maybe<Array<Scalars['String']>>;
+  /** All values containing the given string. */
+  description_contains?: Maybe<Scalars['String']>;
+  /** All values not containing the given string. */
+  description_not_contains?: Maybe<Scalars['String']>;
+  /** All values starting with the given string. */
+  description_starts_with?: Maybe<Scalars['String']>;
+  /** All values not starting with the given string. */
+  description_not_starts_with?: Maybe<Scalars['String']>;
+  /** All values ending with the given string. */
+  description_ends_with?: Maybe<Scalars['String']>;
+  /** All values not ending with the given string */
+  description_not_ends_with?: Maybe<Scalars['String']>;
   slug?: Maybe<Scalars['String']>;
   /** All values that are not equal to given value. */
   slug_not?: Maybe<Scalars['String']>;
@@ -1118,9 +1184,9 @@ export type CategoryWhereInput = {
   slug_ends_with?: Maybe<Scalars['String']>;
   /** All values not ending with the given string */
   slug_not_ends_with?: Maybe<Scalars['String']>;
-  projects_every?: Maybe<ProjectWhereInput>;
-  projects_some?: Maybe<ProjectWhereInput>;
-  projects_none?: Maybe<ProjectWhereInput>;
+  pieces_every?: Maybe<PieceWhereInput>;
+  pieces_some?: Maybe<PieceWhereInput>;
+  pieces_none?: Maybe<PieceWhereInput>;
   backgroundVideo?: Maybe<AssetWhereInput>;
 };
 
@@ -1362,46 +1428,46 @@ export type Mutation = {
    * @deprecated Please use the new paginated many mutation (unpublishManyCategoriesConnection)
    */
   unpublishManyCategories: BatchPayload;
-  /** Create one project */
-  createProject?: Maybe<Project>;
-  /** Update one project */
-  updateProject?: Maybe<Project>;
-  /** Delete one project from _all_ existing stages. Returns deleted document. */
-  deleteProject?: Maybe<Project>;
-  /** Upsert one project */
-  upsertProject?: Maybe<Project>;
-  /** Publish one project */
-  publishProject?: Maybe<Project>;
-  /** Unpublish one project from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
-  unpublishProject?: Maybe<Project>;
-  /** Update many Project documents */
-  updateManyProjectsConnection: ProjectConnection;
-  /** Delete many Project documents, return deleted documents */
-  deleteManyProjectsConnection: ProjectConnection;
-  /** Publish many Project documents */
-  publishManyProjectsConnection: ProjectConnection;
-  /** Find many Project documents that match criteria in specified stage and unpublish from target stages */
-  unpublishManyProjectsConnection: ProjectConnection;
+  /** Create one piece */
+  createPiece?: Maybe<Piece>;
+  /** Update one piece */
+  updatePiece?: Maybe<Piece>;
+  /** Delete one piece from _all_ existing stages. Returns deleted document. */
+  deletePiece?: Maybe<Piece>;
+  /** Upsert one piece */
+  upsertPiece?: Maybe<Piece>;
+  /** Publish one piece */
+  publishPiece?: Maybe<Piece>;
+  /** Unpublish one piece from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
+  unpublishPiece?: Maybe<Piece>;
+  /** Update many Piece documents */
+  updateManyPiecesConnection: PieceConnection;
+  /** Delete many Piece documents, return deleted documents */
+  deleteManyPiecesConnection: PieceConnection;
+  /** Publish many Piece documents */
+  publishManyPiecesConnection: PieceConnection;
+  /** Find many Piece documents that match criteria in specified stage and unpublish from target stages */
+  unpublishManyPiecesConnection: PieceConnection;
   /**
-   * Update many projects
-   * @deprecated Please use the new paginated many mutation (updateManyProjectsConnection)
+   * Update many pieces
+   * @deprecated Please use the new paginated many mutation (updateManyPiecesConnection)
    */
-  updateManyProjects: BatchPayload;
+  updateManyPieces: BatchPayload;
   /**
-   * Delete many Project documents
-   * @deprecated Please use the new paginated many mutation (deleteManyProjectsConnection)
+   * Delete many Piece documents
+   * @deprecated Please use the new paginated many mutation (deleteManyPiecesConnection)
    */
-  deleteManyProjects: BatchPayload;
+  deleteManyPieces: BatchPayload;
   /**
-   * Publish many Project documents
-   * @deprecated Please use the new paginated many mutation (publishManyProjectsConnection)
+   * Publish many Piece documents
+   * @deprecated Please use the new paginated many mutation (publishManyPiecesConnection)
    */
-  publishManyProjects: BatchPayload;
+  publishManyPieces: BatchPayload;
   /**
-   * Unpublish many Project documents
-   * @deprecated Please use the new paginated many mutation (unpublishManyProjectsConnection)
+   * Unpublish many Piece documents
+   * @deprecated Please use the new paginated many mutation (unpublishManyPiecesConnection)
    */
-  unpublishManyProjects: BatchPayload;
+  unpublishManyPieces: BatchPayload;
 };
 
 
@@ -1624,43 +1690,43 @@ export type MutationUnpublishManyCategoriesArgs = {
 };
 
 
-export type MutationCreateProjectArgs = {
-  data: ProjectCreateInput;
+export type MutationCreatePieceArgs = {
+  data: PieceCreateInput;
 };
 
 
-export type MutationUpdateProjectArgs = {
-  where: ProjectWhereUniqueInput;
-  data: ProjectUpdateInput;
+export type MutationUpdatePieceArgs = {
+  where: PieceWhereUniqueInput;
+  data: PieceUpdateInput;
 };
 
 
-export type MutationDeleteProjectArgs = {
-  where: ProjectWhereUniqueInput;
+export type MutationDeletePieceArgs = {
+  where: PieceWhereUniqueInput;
 };
 
 
-export type MutationUpsertProjectArgs = {
-  where: ProjectWhereUniqueInput;
-  upsert: ProjectUpsertInput;
+export type MutationUpsertPieceArgs = {
+  where: PieceWhereUniqueInput;
+  upsert: PieceUpsertInput;
 };
 
 
-export type MutationPublishProjectArgs = {
-  where: ProjectWhereUniqueInput;
+export type MutationPublishPieceArgs = {
+  where: PieceWhereUniqueInput;
   to?: Array<Stage>;
 };
 
 
-export type MutationUnpublishProjectArgs = {
-  where: ProjectWhereUniqueInput;
+export type MutationUnpublishPieceArgs = {
+  where: PieceWhereUniqueInput;
   from?: Array<Stage>;
 };
 
 
-export type MutationUpdateManyProjectsConnectionArgs = {
-  where?: Maybe<ProjectManyWhereInput>;
-  data: ProjectUpdateManyInput;
+export type MutationUpdateManyPiecesConnectionArgs = {
+  where?: Maybe<PieceManyWhereInput>;
+  data: PieceUpdateManyInput;
   skip?: Maybe<Scalars['Int']>;
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
@@ -1669,8 +1735,8 @@ export type MutationUpdateManyProjectsConnectionArgs = {
 };
 
 
-export type MutationDeleteManyProjectsConnectionArgs = {
-  where?: Maybe<ProjectManyWhereInput>;
+export type MutationDeleteManyPiecesConnectionArgs = {
+  where?: Maybe<PieceManyWhereInput>;
   skip?: Maybe<Scalars['Int']>;
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
@@ -1679,8 +1745,8 @@ export type MutationDeleteManyProjectsConnectionArgs = {
 };
 
 
-export type MutationPublishManyProjectsConnectionArgs = {
-  where?: Maybe<ProjectManyWhereInput>;
+export type MutationPublishManyPiecesConnectionArgs = {
+  where?: Maybe<PieceManyWhereInput>;
   from?: Maybe<Stage>;
   to?: Array<Stage>;
   skip?: Maybe<Scalars['Int']>;
@@ -1691,8 +1757,8 @@ export type MutationPublishManyProjectsConnectionArgs = {
 };
 
 
-export type MutationUnpublishManyProjectsConnectionArgs = {
-  where?: Maybe<ProjectManyWhereInput>;
+export type MutationUnpublishManyPiecesConnectionArgs = {
+  where?: Maybe<PieceManyWhereInput>;
   stage?: Maybe<Stage>;
   from?: Array<Stage>;
   skip?: Maybe<Scalars['Int']>;
@@ -1703,25 +1769,25 @@ export type MutationUnpublishManyProjectsConnectionArgs = {
 };
 
 
-export type MutationUpdateManyProjectsArgs = {
-  where?: Maybe<ProjectManyWhereInput>;
-  data: ProjectUpdateManyInput;
+export type MutationUpdateManyPiecesArgs = {
+  where?: Maybe<PieceManyWhereInput>;
+  data: PieceUpdateManyInput;
 };
 
 
-export type MutationDeleteManyProjectsArgs = {
-  where?: Maybe<ProjectManyWhereInput>;
+export type MutationDeleteManyPiecesArgs = {
+  where?: Maybe<PieceManyWhereInput>;
 };
 
 
-export type MutationPublishManyProjectsArgs = {
-  where?: Maybe<ProjectManyWhereInput>;
+export type MutationPublishManyPiecesArgs = {
+  where?: Maybe<PieceManyWhereInput>;
   to?: Array<Stage>;
 };
 
 
-export type MutationUnpublishManyProjectsArgs = {
-  where?: Maybe<ProjectManyWhereInput>;
+export type MutationUnpublishManyPiecesArgs = {
+  where?: Maybe<PieceManyWhereInput>;
   from?: Array<Stage>;
 };
 
@@ -1748,12 +1814,12 @@ export type PageInfo = {
   pageSize?: Maybe<Scalars['Int']>;
 };
 
-export type Project = Node & {
-  __typename?: 'Project';
+export type Piece = Node & {
+  __typename?: 'Piece';
   /** System stage field */
   stage: Stage;
   /** Get the document in other stages */
-  documentInStages: Array<Project>;
+  documentInStages: Array<Piece>;
   /** The unique identifier */
   id: Scalars['ID'];
   /** The time the document was created */
@@ -1769,104 +1835,150 @@ export type Project = Node & {
   /** User that last published this document */
   publishedBy?: Maybe<User>;
   title: Scalars['String'];
+  description?: Maybe<Scalars['String']>;
   slug: Scalars['String'];
+  content?: Maybe<RichText>;
+  photos: Array<Asset>;
   category?: Maybe<Category>;
-  /** List of Project versions */
+  relatedFrom: Array<Piece>;
+  related: Array<Piece>;
+  /** List of Piece versions */
   history: Array<Version>;
 };
 
 
-export type ProjectDocumentInStagesArgs = {
+export type PieceDocumentInStagesArgs = {
   stages?: Array<Stage>;
   includeCurrent?: Scalars['Boolean'];
   inheritLocale?: Scalars['Boolean'];
 };
 
 
-export type ProjectCreatedByArgs = {
+export type PieceCreatedByArgs = {
   locales?: Maybe<Array<Locale>>;
 };
 
 
-export type ProjectUpdatedByArgs = {
+export type PieceUpdatedByArgs = {
   locales?: Maybe<Array<Locale>>;
 };
 
 
-export type ProjectPublishedByArgs = {
+export type PiecePublishedByArgs = {
   locales?: Maybe<Array<Locale>>;
 };
 
 
-export type ProjectCategoryArgs = {
+export type PiecePhotosArgs = {
+  where?: Maybe<AssetWhereInput>;
+  orderBy?: Maybe<AssetOrderByInput>;
+  skip?: Maybe<Scalars['Int']>;
+  after?: Maybe<Scalars['String']>;
+  before?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
   locales?: Maybe<Array<Locale>>;
 };
 
 
-export type ProjectHistoryArgs = {
+export type PieceCategoryArgs = {
+  locales?: Maybe<Array<Locale>>;
+};
+
+
+export type PieceRelatedFromArgs = {
+  where?: Maybe<PieceWhereInput>;
+  orderBy?: Maybe<PieceOrderByInput>;
+  skip?: Maybe<Scalars['Int']>;
+  after?: Maybe<Scalars['String']>;
+  before?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  locales?: Maybe<Array<Locale>>;
+};
+
+
+export type PieceRelatedArgs = {
+  where?: Maybe<PieceWhereInput>;
+  orderBy?: Maybe<PieceOrderByInput>;
+  skip?: Maybe<Scalars['Int']>;
+  after?: Maybe<Scalars['String']>;
+  before?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  locales?: Maybe<Array<Locale>>;
+};
+
+
+export type PieceHistoryArgs = {
   limit?: Scalars['Int'];
   skip?: Scalars['Int'];
   stageOverride?: Maybe<Stage>;
 };
 
-export type ProjectConnectInput = {
+export type PieceConnectInput = {
   /** Document to connect */
-  where: ProjectWhereUniqueInput;
+  where: PieceWhereUniqueInput;
   /** Allow to specify document position in list of connected documents, will default to appending at end of list */
   position?: Maybe<ConnectPositionInput>;
 };
 
 /** A connection to a list of items. */
-export type ProjectConnection = {
-  __typename?: 'ProjectConnection';
+export type PieceConnection = {
+  __typename?: 'PieceConnection';
   /** Information to aid in pagination. */
   pageInfo: PageInfo;
   /** A list of edges. */
-  edges: Array<ProjectEdge>;
+  edges: Array<PieceEdge>;
   aggregate: Aggregate;
 };
 
-export type ProjectCreateInput = {
+export type PieceCreateInput = {
   createdAt?: Maybe<Scalars['DateTime']>;
   updatedAt?: Maybe<Scalars['DateTime']>;
   title: Scalars['String'];
+  description?: Maybe<Scalars['String']>;
   slug: Scalars['String'];
+  content?: Maybe<Scalars['RichTextAST']>;
+  photos?: Maybe<AssetCreateManyInlineInput>;
   category?: Maybe<CategoryCreateOneInlineInput>;
+  relatedFrom?: Maybe<PieceCreateManyInlineInput>;
+  related?: Maybe<PieceCreateManyInlineInput>;
 };
 
-export type ProjectCreateManyInlineInput = {
-  /** Create and connect multiple existing Project documents */
-  create?: Maybe<Array<ProjectCreateInput>>;
-  /** Connect multiple existing Project documents */
-  connect?: Maybe<Array<ProjectWhereUniqueInput>>;
+export type PieceCreateManyInlineInput = {
+  /** Create and connect multiple existing Piece documents */
+  create?: Maybe<Array<PieceCreateInput>>;
+  /** Connect multiple existing Piece documents */
+  connect?: Maybe<Array<PieceWhereUniqueInput>>;
 };
 
-export type ProjectCreateOneInlineInput = {
-  /** Create and connect one Project document */
-  create?: Maybe<ProjectCreateInput>;
-  /** Connect one existing Project document */
-  connect?: Maybe<ProjectWhereUniqueInput>;
+export type PieceCreateOneInlineInput = {
+  /** Create and connect one Piece document */
+  create?: Maybe<PieceCreateInput>;
+  /** Connect one existing Piece document */
+  connect?: Maybe<PieceWhereUniqueInput>;
 };
 
 /** An edge in a connection. */
-export type ProjectEdge = {
-  __typename?: 'ProjectEdge';
+export type PieceEdge = {
+  __typename?: 'PieceEdge';
   /** The item at the end of the edge. */
-  node: Project;
+  node: Piece;
   /** A cursor for use in pagination. */
   cursor: Scalars['String'];
 };
 
 /** Identifies documents */
-export type ProjectManyWhereInput = {
+export type PieceManyWhereInput = {
   /** Contains search across all appropriate fields. */
   _search?: Maybe<Scalars['String']>;
   /** Logical AND on all given filters. */
-  AND?: Maybe<Array<ProjectWhereInput>>;
+  AND?: Maybe<Array<PieceWhereInput>>;
   /** Logical OR on all given filters. */
-  OR?: Maybe<Array<ProjectWhereInput>>;
+  OR?: Maybe<Array<PieceWhereInput>>;
   /** Logical NOT on all given filters combined by AND. */
-  NOT?: Maybe<Array<ProjectWhereInput>>;
+  NOT?: Maybe<Array<PieceWhereInput>>;
   id?: Maybe<Scalars['ID']>;
   /** All values that are not equal to given value. */
   id_not?: Maybe<Scalars['ID']>;
@@ -1953,6 +2065,25 @@ export type ProjectManyWhereInput = {
   title_ends_with?: Maybe<Scalars['String']>;
   /** All values not ending with the given string */
   title_not_ends_with?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
+  /** All values that are not equal to given value. */
+  description_not?: Maybe<Scalars['String']>;
+  /** All values that are contained in given list. */
+  description_in?: Maybe<Array<Scalars['String']>>;
+  /** All values that are not contained in given list. */
+  description_not_in?: Maybe<Array<Scalars['String']>>;
+  /** All values containing the given string. */
+  description_contains?: Maybe<Scalars['String']>;
+  /** All values not containing the given string. */
+  description_not_contains?: Maybe<Scalars['String']>;
+  /** All values starting with the given string. */
+  description_starts_with?: Maybe<Scalars['String']>;
+  /** All values not starting with the given string. */
+  description_not_starts_with?: Maybe<Scalars['String']>;
+  /** All values ending with the given string. */
+  description_ends_with?: Maybe<Scalars['String']>;
+  /** All values not ending with the given string */
+  description_not_ends_with?: Maybe<Scalars['String']>;
   slug?: Maybe<Scalars['String']>;
   /** All values that are not equal to given value. */
   slug_not?: Maybe<Scalars['String']>;
@@ -1972,10 +2103,19 @@ export type ProjectManyWhereInput = {
   slug_ends_with?: Maybe<Scalars['String']>;
   /** All values not ending with the given string */
   slug_not_ends_with?: Maybe<Scalars['String']>;
+  photos_every?: Maybe<AssetWhereInput>;
+  photos_some?: Maybe<AssetWhereInput>;
+  photos_none?: Maybe<AssetWhereInput>;
   category?: Maybe<CategoryWhereInput>;
+  relatedFrom_every?: Maybe<PieceWhereInput>;
+  relatedFrom_some?: Maybe<PieceWhereInput>;
+  relatedFrom_none?: Maybe<PieceWhereInput>;
+  related_every?: Maybe<PieceWhereInput>;
+  related_some?: Maybe<PieceWhereInput>;
+  related_none?: Maybe<PieceWhereInput>;
 };
 
-export enum ProjectOrderByInput {
+export enum PieceOrderByInput {
   IdAsc = 'id_ASC',
   IdDesc = 'id_DESC',
   CreatedAtAsc = 'createdAt_ASC',
@@ -1986,91 +2126,98 @@ export enum ProjectOrderByInput {
   PublishedAtDesc = 'publishedAt_DESC',
   TitleAsc = 'title_ASC',
   TitleDesc = 'title_DESC',
+  DescriptionAsc = 'description_ASC',
+  DescriptionDesc = 'description_DESC',
   SlugAsc = 'slug_ASC',
   SlugDesc = 'slug_DESC'
 }
 
-export type ProjectUpdateInput = {
+export type PieceUpdateInput = {
   title?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
   slug?: Maybe<Scalars['String']>;
+  content?: Maybe<Scalars['RichTextAST']>;
+  photos?: Maybe<AssetUpdateManyInlineInput>;
   category?: Maybe<CategoryUpdateOneInlineInput>;
+  relatedFrom?: Maybe<PieceUpdateManyInlineInput>;
+  related?: Maybe<PieceUpdateManyInlineInput>;
 };
 
-export type ProjectUpdateManyInlineInput = {
-  /** Create and connect multiple Project documents */
-  create?: Maybe<Array<ProjectCreateInput>>;
-  /** Connect multiple existing Project documents */
-  connect?: Maybe<Array<ProjectConnectInput>>;
-  /** Override currently-connected documents with multiple existing Project documents */
-  set?: Maybe<Array<ProjectWhereUniqueInput>>;
-  /** Update multiple Project documents */
-  update?: Maybe<Array<ProjectUpdateWithNestedWhereUniqueInput>>;
-  /** Upsert multiple Project documents */
-  upsert?: Maybe<Array<ProjectUpsertWithNestedWhereUniqueInput>>;
-  /** Disconnect multiple Project documents */
-  disconnect?: Maybe<Array<ProjectWhereUniqueInput>>;
-  /** Delete multiple Project documents */
-  delete?: Maybe<Array<ProjectWhereUniqueInput>>;
+export type PieceUpdateManyInlineInput = {
+  /** Create and connect multiple Piece documents */
+  create?: Maybe<Array<PieceCreateInput>>;
+  /** Connect multiple existing Piece documents */
+  connect?: Maybe<Array<PieceConnectInput>>;
+  /** Override currently-connected documents with multiple existing Piece documents */
+  set?: Maybe<Array<PieceWhereUniqueInput>>;
+  /** Update multiple Piece documents */
+  update?: Maybe<Array<PieceUpdateWithNestedWhereUniqueInput>>;
+  /** Upsert multiple Piece documents */
+  upsert?: Maybe<Array<PieceUpsertWithNestedWhereUniqueInput>>;
+  /** Disconnect multiple Piece documents */
+  disconnect?: Maybe<Array<PieceWhereUniqueInput>>;
+  /** Delete multiple Piece documents */
+  delete?: Maybe<Array<PieceWhereUniqueInput>>;
 };
 
-export type ProjectUpdateManyInput = {
-  /** No fields in updateMany data input */
-  _?: Maybe<Scalars['String']>;
+export type PieceUpdateManyInput = {
+  description?: Maybe<Scalars['String']>;
+  content?: Maybe<Scalars['RichTextAST']>;
 };
 
-export type ProjectUpdateManyWithNestedWhereInput = {
+export type PieceUpdateManyWithNestedWhereInput = {
   /** Document search */
-  where: ProjectWhereInput;
+  where: PieceWhereInput;
   /** Update many input */
-  data: ProjectUpdateManyInput;
+  data: PieceUpdateManyInput;
 };
 
-export type ProjectUpdateOneInlineInput = {
-  /** Create and connect one Project document */
-  create?: Maybe<ProjectCreateInput>;
-  /** Update single Project document */
-  update?: Maybe<ProjectUpdateWithNestedWhereUniqueInput>;
-  /** Upsert single Project document */
-  upsert?: Maybe<ProjectUpsertWithNestedWhereUniqueInput>;
-  /** Connect existing Project document */
-  connect?: Maybe<ProjectWhereUniqueInput>;
-  /** Disconnect currently connected Project document */
+export type PieceUpdateOneInlineInput = {
+  /** Create and connect one Piece document */
+  create?: Maybe<PieceCreateInput>;
+  /** Update single Piece document */
+  update?: Maybe<PieceUpdateWithNestedWhereUniqueInput>;
+  /** Upsert single Piece document */
+  upsert?: Maybe<PieceUpsertWithNestedWhereUniqueInput>;
+  /** Connect existing Piece document */
+  connect?: Maybe<PieceWhereUniqueInput>;
+  /** Disconnect currently connected Piece document */
   disconnect?: Maybe<Scalars['Boolean']>;
-  /** Delete currently connected Project document */
+  /** Delete currently connected Piece document */
   delete?: Maybe<Scalars['Boolean']>;
 };
 
-export type ProjectUpdateWithNestedWhereUniqueInput = {
+export type PieceUpdateWithNestedWhereUniqueInput = {
   /** Unique document search */
-  where: ProjectWhereUniqueInput;
+  where: PieceWhereUniqueInput;
   /** Document to update */
-  data: ProjectUpdateInput;
+  data: PieceUpdateInput;
 };
 
-export type ProjectUpsertInput = {
+export type PieceUpsertInput = {
   /** Create document if it didn't exist */
-  create: ProjectCreateInput;
+  create: PieceCreateInput;
   /** Update document if it exists */
-  update: ProjectUpdateInput;
+  update: PieceUpdateInput;
 };
 
-export type ProjectUpsertWithNestedWhereUniqueInput = {
+export type PieceUpsertWithNestedWhereUniqueInput = {
   /** Unique document search */
-  where: ProjectWhereUniqueInput;
+  where: PieceWhereUniqueInput;
   /** Upsert data */
-  data: ProjectUpsertInput;
+  data: PieceUpsertInput;
 };
 
 /** Identifies documents */
-export type ProjectWhereInput = {
+export type PieceWhereInput = {
   /** Contains search across all appropriate fields. */
   _search?: Maybe<Scalars['String']>;
   /** Logical AND on all given filters. */
-  AND?: Maybe<Array<ProjectWhereInput>>;
+  AND?: Maybe<Array<PieceWhereInput>>;
   /** Logical OR on all given filters. */
-  OR?: Maybe<Array<ProjectWhereInput>>;
+  OR?: Maybe<Array<PieceWhereInput>>;
   /** Logical NOT on all given filters combined by AND. */
-  NOT?: Maybe<Array<ProjectWhereInput>>;
+  NOT?: Maybe<Array<PieceWhereInput>>;
   id?: Maybe<Scalars['ID']>;
   /** All values that are not equal to given value. */
   id_not?: Maybe<Scalars['ID']>;
@@ -2157,6 +2304,25 @@ export type ProjectWhereInput = {
   title_ends_with?: Maybe<Scalars['String']>;
   /** All values not ending with the given string */
   title_not_ends_with?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
+  /** All values that are not equal to given value. */
+  description_not?: Maybe<Scalars['String']>;
+  /** All values that are contained in given list. */
+  description_in?: Maybe<Array<Scalars['String']>>;
+  /** All values that are not contained in given list. */
+  description_not_in?: Maybe<Array<Scalars['String']>>;
+  /** All values containing the given string. */
+  description_contains?: Maybe<Scalars['String']>;
+  /** All values not containing the given string. */
+  description_not_contains?: Maybe<Scalars['String']>;
+  /** All values starting with the given string. */
+  description_starts_with?: Maybe<Scalars['String']>;
+  /** All values not starting with the given string. */
+  description_not_starts_with?: Maybe<Scalars['String']>;
+  /** All values ending with the given string. */
+  description_ends_with?: Maybe<Scalars['String']>;
+  /** All values not ending with the given string */
+  description_not_ends_with?: Maybe<Scalars['String']>;
   slug?: Maybe<Scalars['String']>;
   /** All values that are not equal to given value. */
   slug_not?: Maybe<Scalars['String']>;
@@ -2176,11 +2342,20 @@ export type ProjectWhereInput = {
   slug_ends_with?: Maybe<Scalars['String']>;
   /** All values not ending with the given string */
   slug_not_ends_with?: Maybe<Scalars['String']>;
+  photos_every?: Maybe<AssetWhereInput>;
+  photos_some?: Maybe<AssetWhereInput>;
+  photos_none?: Maybe<AssetWhereInput>;
   category?: Maybe<CategoryWhereInput>;
+  relatedFrom_every?: Maybe<PieceWhereInput>;
+  relatedFrom_some?: Maybe<PieceWhereInput>;
+  relatedFrom_none?: Maybe<PieceWhereInput>;
+  related_every?: Maybe<PieceWhereInput>;
+  related_some?: Maybe<PieceWhereInput>;
+  related_none?: Maybe<PieceWhereInput>;
 };
 
-/** References Project record uniquely */
-export type ProjectWhereUniqueInput = {
+/** References Piece record uniquely */
+export type PieceWhereUniqueInput = {
   id?: Maybe<Scalars['ID']>;
   title?: Maybe<Scalars['String']>;
   slug?: Maybe<Scalars['String']>;
@@ -2213,14 +2388,14 @@ export type Query = {
   categoriesConnection: CategoryConnection;
   /** Retrieve document version */
   categoryVersion?: Maybe<DocumentVersion>;
-  /** Retrieve multiple projects */
-  projects: Array<Project>;
-  /** Retrieve a single project */
-  project?: Maybe<Project>;
-  /** Retrieve multiple projects using the Relay connection interface */
-  projectsConnection: ProjectConnection;
+  /** Retrieve multiple pieces */
+  pieces: Array<Piece>;
+  /** Retrieve a single piece */
+  piece?: Maybe<Piece>;
+  /** Retrieve multiple pieces using the Relay connection interface */
+  piecesConnection: PieceConnection;
   /** Retrieve document version */
-  projectVersion?: Maybe<DocumentVersion>;
+  pieceVersion?: Maybe<DocumentVersion>;
   /** Retrieve multiple users */
   users: Array<User>;
   /** Retrieve a single user */
@@ -2313,9 +2488,9 @@ export type QueryCategoryVersionArgs = {
 };
 
 
-export type QueryProjectsArgs = {
-  where?: Maybe<ProjectWhereInput>;
-  orderBy?: Maybe<ProjectOrderByInput>;
+export type QueryPiecesArgs = {
+  where?: Maybe<PieceWhereInput>;
+  orderBy?: Maybe<PieceOrderByInput>;
   skip?: Maybe<Scalars['Int']>;
   after?: Maybe<Scalars['String']>;
   before?: Maybe<Scalars['String']>;
@@ -2326,16 +2501,16 @@ export type QueryProjectsArgs = {
 };
 
 
-export type QueryProjectArgs = {
-  where: ProjectWhereUniqueInput;
+export type QueryPieceArgs = {
+  where: PieceWhereUniqueInput;
   stage?: Stage;
   locales?: Array<Locale>;
 };
 
 
-export type QueryProjectsConnectionArgs = {
-  where?: Maybe<ProjectWhereInput>;
-  orderBy?: Maybe<ProjectOrderByInput>;
+export type QueryPiecesConnectionArgs = {
+  where?: Maybe<PieceWhereInput>;
+  orderBy?: Maybe<PieceOrderByInput>;
   skip?: Maybe<Scalars['Int']>;
   after?: Maybe<Scalars['String']>;
   before?: Maybe<Scalars['String']>;
@@ -2346,7 +2521,7 @@ export type QueryProjectsConnectionArgs = {
 };
 
 
-export type QueryProjectVersionArgs = {
+export type QueryPieceVersionArgs = {
   where: VersionWhereInput;
 };
 
@@ -2895,13 +3070,13 @@ export type GetCategoryQuery = (
   { __typename?: 'Query' }
   & { category?: Maybe<(
     { __typename?: 'Category' }
-    & Pick<Category, 'id' | 'title' | 'slug'>
-    & { description?: Maybe<(
+    & Pick<Category, 'id' | 'title' | 'description' | 'slug'>
+    & { content?: Maybe<(
       { __typename?: 'RichText' }
       & Pick<RichText, 'markdown'>
-    )>, projects: Array<(
-      { __typename?: 'Project' }
-      & Pick<Project, 'id' | 'title' | 'slug'>
+    )>, pieces: Array<(
+      { __typename?: 'Piece' }
+      & Pick<Piece, 'id' | 'title' | 'slug'>
     )> }
   )> }
 );
@@ -2909,4 +3084,4 @@ export type GetCategoryQuery = (
 
 export const GetCategoriesDocument: DocumentNode<GetCategoriesQuery, GetCategoriesQueryVariables> = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getCategories"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"categories"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"backgroundVideo"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"mimeType"}},{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}}]}}]};
 export const GetHeaderDocument: DocumentNode<GetHeaderQuery, GetHeaderQueryVariables> = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getHeader"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"categories"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}}]}}]}}]};
-export const GetCategoryDocument: DocumentNode<GetCategoryQuery, GetCategoryQueryVariables> = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getCategory"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"slug"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"category"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"slug"},"value":{"kind":"Variable","name":{"kind":"Name","value":"slug"}}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"markdown"}}]}},{"kind":"Field","name":{"kind":"Name","value":"projects"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}}]}}]}}]}}]};
+export const GetCategoryDocument: DocumentNode<GetCategoryQuery, GetCategoryQueryVariables> = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getCategory"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"slug"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"category"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"slug"},"value":{"kind":"Variable","name":{"kind":"Name","value":"slug"}}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"content"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"markdown"}}]}},{"kind":"Field","name":{"kind":"Name","value":"pieces"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}}]}}]}}]}}]};

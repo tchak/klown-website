@@ -6,7 +6,10 @@ import { getCategory, GetCategory as RouteData } from '../cms.server';
 
 export const handle = { bodyId: 'categorie' };
 export const meta: MetaFunction = ({ data }: { data: RouteData }) => {
-  return { title: data.category?.title! };
+  return {
+    title: data.category?.title!,
+    description: data.category?.description ?? '',
+  };
 };
 export const loader: LoaderFunction = async ({ params }) =>
   getCategory(params.slug);
@@ -17,10 +20,10 @@ export default function Category() {
     <main>
       <header>
         <h1>{data.category?.title}</h1>
-        <p className="exp">{data.category?.projects.length}</p>
+        <p className="exp">{data.category?.pieces.length}</p>
       </header>
       <div className="content">
-        <Markdown>{data.category?.description?.markdown ?? ''}</Markdown>
+        <Markdown>{data.category?.content?.markdown ?? ''}</Markdown>
       </div>
       <Side />
     </main>
