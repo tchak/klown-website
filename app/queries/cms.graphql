@@ -1,0 +1,35 @@
+query getCategories {
+  categories {
+    id
+    title
+    slug
+    backgroundVideo {
+      mimeType
+      url
+    }
+  }
+}
+
+query getHeader {
+  categories {
+    id
+    title
+    slug
+  }
+}
+
+query getCategory($slug: String!) {
+  category(where: { slug: $slug }) {
+    id
+    title
+    slug
+    description {
+      markdown
+    }
+    projects {
+      id
+      title
+      slug
+    }
+  }
+}

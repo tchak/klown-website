@@ -1,0 +1,42 @@
+$h: $baseline*20;
+
+body#categorie{
+	
+	main{
+		header{
+			/*Fallback */ margin-top: calc(100vh - #{$baseline*5} - 4rem);
+			margin-top: calc(100vh - #{$baseline*3} - clamp(4rem, 15vw, 200px)  -  #{$baseline/2});
+			@include for-size(desktop){ 
+				/*Fallback */ margin-top: calc(100vh - #{$baseline*5} - 150px);
+				margin-top: calc(100vh - #{$baseline*4} - clamp(4rem, 15vw, 200px) -  #{$baseline/2});
+			}
+
+			h1{
+				font-family: $font-1;
+				line-height: 80%;
+				font-size: 4rem;
+				font-weight: $bold;
+				@include for-size(desktop){
+					font-size: 150px;
+					font-size: calc(clamp(4rem, 15vw, 200px));
+				}
+			}
+
+			.exp{
+				position: absolute;
+				top: $baseline*-1;
+			}
+		}
+
+		.content{
+			max-width: 400px;
+			/*Fallback */ margin: #{$baseline*6} 0 #{$baseline*5} 0;
+			margin: calc(clamp(#{$baseline*6}, 25vh, 250px)) 0 #{$baseline*5}  0;
+		}
+
+		nav#sideNav{
+			/*Fallback */ margin: #{$baseline*3} 0 #{$baseline*6} 0;
+			margin: calc(clamp(#{$baseline*3}, 10vh, 150px)) 0 calc(clamp(#{$baseline*3}, 10vh, 150px)) 0;		
+		}
+	}	
+}
