@@ -19,6 +19,7 @@ const API_TOKEN = process.env['API_TOKEN'];
 export const client = createClient({
   url: API_URL,
   exchanges: [fetchExchange],
+  preferGetMethod: true,
   fetchOptions: {
     headers: {
       authorization: `Bearer ${API_TOKEN}`,
