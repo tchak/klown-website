@@ -6,6 +6,7 @@ import Siema from 'siema';
 
 import { getPiece, GetPiece as RouteData } from '../cms.server';
 import { usePageColor } from '../hooks';
+import { Side } from '../components/side';
 
 export const handle = { bodyId: 'piece' };
 export const meta: MetaFunction = ({ data }: { data: RouteData }) => {
@@ -24,41 +25,39 @@ export default function Category() {
   const [ref, prev, next] = useSiema<HTMLDivElement>();
 
   return (
-    <main>
-      <section id="carrousel">
-        <div className="siema" ref={ref}>
-          {data.piece?.photos.map(({ jpg }) => (
-            <figure>
-              <img src={jpg} loading="lazy" />
-            </figure>
-          ))}
+    <>
+      <Side categories={data.categories} />
+      <main>
+        <section id="carrousel">
+          <div className="siema" ref={ref}>
+            {data.piece?.photos.map(({ jpg }) => (
+              <figure>
+                <img src={jpg} loading="lazy" />
+              </figure>
+            ))}
+          </div>
+
+          <button type="button" className="prev" onClick={prev}></button>
+          <button type="button" className="next" onClick={next}></button>
+
+          <a id="to-details" href="#details">
+            Plus d'information ⋁
+          </a>
+        </section>
+        <header id="details">
+          <p>{data.piece?.category?.title}</p>
+          <h1>{data.piece?.title}</h1>
+          <ul className="secondary">
+            <li>Detail</li>
+            <li>Detail</li>
+          </ul>
+        </header>
+        <div id="content">
+          <Markdown>{data.piece?.content?.markdown ?? ''}</Markdown>
         </div>
-
-        <button type="button" className="prev" onClick={prev}></button>
-        <button type="button" className="next" onClick={next}></button>
-
-        <a id="to-details" href="#details">
-          Plus d'information ⋁
-        </a>
-      </section>
-      <header id="details">
-        <p>{data.piece?.category?.title}</p>
-        <h1>{data.piece?.title}</h1>
-        <ul className="secondary">
-          <li>Detail</li>
-          <li>Detail</li>
-        </ul>
-      </header>
-      <div id="content">
-        <Markdown>{data.piece?.content?.markdown ?? ''}</Markdown>
-      </div>
-      <Side />
-    </main>
+      </main>
+    </>
   );
-}
-
-function Side() {
-  return null;
 }
 
 function useSiema<Element extends HTMLElement>(): [

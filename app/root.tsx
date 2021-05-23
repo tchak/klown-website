@@ -37,7 +37,7 @@ function Document({ children }: { children: React.ReactNode }) {
         <Meta />
         <Links />
       </head>
-      <body id={bodyId} data-cc="r" data-bg="w">
+      <body id={bodyId} data-cc="r" data-bg="w" data-categorie="1">
         {children}
 
         <Scripts />

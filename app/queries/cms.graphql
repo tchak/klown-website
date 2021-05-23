@@ -1,9 +1,6 @@
 query getCategories($stage: Stage!) {
   categories(stage: $stage) {
-    id
-    title
-    slug
-    color
+    ...CategoryFragment
     backgroundVideo {
       mimeType
       url
@@ -13,37 +10,35 @@ query getCategories($stage: Stage!) {
 
 query getHeader($stage: Stage!) {
   categories(stage: $stage) {
-    id
-    title
-    slug
-    color
+    ...CategoryFragment
   }
 }
 
 query getCategory($slug: String!, $stage: Stage!) {
+  categories(stage: $stage) {
+    ...CategoryFragment
+    ...PiecesFragment
+  }
   category(where: { slug: $slug }, stage: $stage) {
-    id
-    title
+    ...CategoryFragment
     description
-    slug
-    color
     content {
       markdown
     }
-    pieces {
-      id
-      title
-      slug
-    }
+    ...PiecesFragment
   }
 }
 
 query getPiece($slug: String!, $stage: Stage!) {
+  categories(stage: $stage) {
+    ...CategoryFragment
+    ...PiecesFragment
+  }
   piece(where: { slug: $slug }, stage: $stage) {
     id
     title
-    description
     slug
+    description
     category {
       title
       color
@@ -75,4 +70,19 @@ query getPiece($slug: String!, $stage: Stage!) {
       }
     }
   }
+}
+
+fragment PiecesFragment on Category {
+  pieces {
+    id
+    title
+    slug
+  }
+}
+
+fragment CategoryFragment on Category {
+  id
+  title
+  slug
+  color
 }

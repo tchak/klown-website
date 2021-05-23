@@ -1,9 +1,10 @@
-import { MetaFunction, LoaderFunction, Link } from 'remix';
+import { MetaFunction, LoaderFunction } from 'remix';
 import { useRouteData } from 'remix';
 import Markdown from 'react-markdown';
 
 import { getCategory, GetCategory as RouteData } from '../cms.server';
 import { usePageColor } from '../hooks';
+import { Side } from '../components/side';
 
 export const handle = { bodyId: 'categorie' };
 export const meta: MetaFunction = ({ data }: { data: RouteData }) => {
@@ -17,13 +18,11 @@ export const loader: LoaderFunction = async ({ params }) =>
 
 export default function Category() {
   const data = useRouteData<RouteData>();
-  const first = data.category?.pieces[0];
 
   usePageColor(data.category?.color);
 
   return (
     <main>
-      {first && <Link to={`/piece/${first.slug}`}>First</Link>}
       <header>
         <h1>{data.category?.title}</h1>
         <p className="exp">{data.category?.pieces.length}</p>
@@ -31,11 +30,7 @@ export default function Category() {
       <div className="content">
         <Markdown>{data.category?.content?.markdown ?? ''}</Markdown>
       </div>
-      <Side />
+      <Side categories={data.categories} />
     </main>
   );
-}
-
-function Side() {
-  return null;
 }
