@@ -3,6 +3,7 @@ query getCategories($stage: Stage!) {
     id
     title
     slug
+    color
     backgroundVideo {
       mimeType
       url
@@ -15,6 +16,7 @@ query getHeader($stage: Stage!) {
     id
     title
     slug
+    color
   }
 }
 
@@ -42,9 +44,9 @@ query getPiece($slug: String!, $stage: Stage!) {
     title
     description
     slug
-    color
     category {
       title
+      color
     }
     content {
       markdown
@@ -69,6 +71,7 @@ query getPiece($slug: String!, $stage: Stage!) {
       slug
       category {
         title
+        color
       }
     }
   }

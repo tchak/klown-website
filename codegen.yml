@@ -7,3 +7,7 @@ generates:
       - typescript
       - typescript-operations
       - typed-document-node
+    config:
+      immutableTypes: true
+      skipTypename: true
+      useTypeImports: true

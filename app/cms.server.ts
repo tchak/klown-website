@@ -27,7 +27,7 @@ export const client = createClient({
   },
 });
 
-export {
+export type {
   GetHeaderQuery as GetHeader,
   GetCategoriesQuery as GetCategories,
   GetCategoryQuery as GetCategory,

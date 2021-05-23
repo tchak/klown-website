@@ -20,7 +20,7 @@ export const loader: LoaderFunction = async ({ params }) =>
 export default function Category() {
   const data = useRouteData<RouteData>();
 
-  usePageColor(data.piece?.color);
+  usePageColor(data.piece?.category?.color);
   const [ref, prev, next] = useSiema<HTMLDivElement>();
 
   return (

@@ -1,11 +1,26 @@
 import { useEffect, useState } from 'react';
+import { useHover } from '@react-aria/interactions';
 
 export function usePageColor(color?: string) {
   useEffect(() => {
-    const [cc, bg] = color ?? 'rw';
-    document.body.dataset['cc'] = cc;
-    document.body.dataset['bg'] = bg;
+    switchPageColor(color);
   }, [color]);
+}
+
+export function useHoverPageColor(color?: string, index = 1) {
+  return useHover({
+    onHoverStart() {
+      switchPageColor(color);
+      document.body.classList.remove(
+        ...[...document.body.classList].filter((className) =>
+          className.startsWith('fadeVideo')
+        )
+      );
+    },
+    onHoverEnd() {
+      document.body.classList.add(`fadeVideo${index}`);
+    },
+  });
 }
 
 export function useStrobos(): [boolean, () => void] {
@@ -24,6 +39,12 @@ export function useStrobos(): [boolean, () => void] {
   }, []);
 
   return [enabled, () => setEnabled((enabled) => !enabled)];
+}
+
+function switchPageColor(color?: string) {
+  const [cc, bg] = color ?? 'rw';
+  document.body.dataset['cc'] = cc;
+  document.body.dataset['bg'] = bg;
 }
 
 function getPrefersReducedMotion() {

@@ -2,7 +2,7 @@ import type { MetaFunction, LoaderFunction } from 'remix';
 import { useRouteData, Link } from 'remix';
 
 import { getCategories, GetCategories as RouteData } from '../cms.server';
-import { usePageColor } from '../hooks';
+import { usePageColor, useHoverPageColor } from '../hooks';
 
 export const handle = { bodyId: 'index' };
 export const meta: MetaFunction = () => ({ title: 'Klown' });
@@ -17,12 +17,8 @@ export default function Index() {
     <main>
       <nav>
         <ul>
-          {data.categories.map((category) => (
-            <li key={category.id}>
-              <Link to={`/category/${category.slug}`}>{category.title}</Link>
-              <VideoWrapper video={category.backgroundVideo} />
-              <div className="over" aria-hidden></div>
-            </li>
+          {data.categories.map((category, i) => (
+            <CategoryLink key={category.id} category={category} index={i + 1} />
           ))}
         </ul>
       </nav>
@@ -30,17 +26,36 @@ export default function Index() {
   );
 }
 
+function CategoryLink({
+  category,
+  index,
+}: {
+  category: RouteData['categories'][0];
+  index: number;
+}) {
+  const { hoverProps } = useHoverPageColor(category.color, index);
+
+  return (
+    <li>
+      <Link {...hoverProps} to={`/category/${category.slug}`}>
+        {category.title}
+      </Link>
+      <VideoWrapper video={category.backgroundVideo} />
+      <div className="over" aria-hidden></div>
+    </li>
+  );
+}
+
 type BackgroundVideo = RouteData['categories'][0]['backgroundVideo'];
 
 function VideoWrapper({ video }: { video: BackgroundVideo }) {
-  if (video) {
-    return (
-      <div className="videoWrapper">
+  return (
+    <div className="videoWrapper">
+      {video && (
         <video muted autoPlay loop aria-hidden>
           <source src={video.url} type={video.mimeType!} />
         </video>
-      </div>
-    );
-  }
-  return <div className="videoWrapper"></div>;
+      )}
+    </div>
+  );
 }
