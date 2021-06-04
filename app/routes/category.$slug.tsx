@@ -1,4 +1,4 @@
-import { MetaFunction, LoaderFunction } from 'remix';
+import type { MetaFunction, LoaderFunction } from 'remix';
 import { useRouteData } from 'remix';
 import Markdown from 'react-markdown';
 

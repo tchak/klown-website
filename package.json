@@ -1,6 +1,6 @@
 {
   "private": true,
-  "name": "noodesign-klown",
+  "name": "klown",
   "description": "",
   "license": "",
   "scripts": {
@@ -15,31 +15,31 @@
   },
   "dependencies": {
     "@react-aria/interactions": "^3.4.0",
-    "@remix-run/node": "^0.17.3",
-    "@remix-run/react": "^0.17.3",
-    "@remix-run/serve": "^0.17.3",
-    "@urql/core": "^2.1.2",
+    "@remix-run/node": "^0.17.5",
+    "@remix-run/react": "^0.17.5",
+    "@remix-run/serve": "^0.17.5",
+    "@urql/core": "^2.1.3",
     "dotenv": "^10.0.0",
     "graphql": "^15.5.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-markdown": "^6.0.2",
     "react-router-dom": "^6.0.0-beta.0",
-    "remix": "^0.17.3",
+    "remix": "^0.17.5",
     "siema": "^1.5.1"
   },
   "devDependencies": {
-    "@graphql-codegen/cli": "1.21.4",
-    "@graphql-codegen/typed-document-node": "^1.18.5",
-    "@graphql-codegen/typescript": "1.22.0",
-    "@graphql-codegen/typescript-operations": "1.17.16",
-    "@remix-run/dev": "^0.17.3",
-    "@types/react": "^17.0.4",
-    "@types/react-dom": "^17.0.4",
+    "@graphql-codegen/cli": "^1.21.5",
+    "@graphql-codegen/typed-document-node": "^1.18.6",
+    "@graphql-codegen/typescript": "^1.22.1",
+    "@graphql-codegen/typescript-operations": "^1.18.0",
+    "@remix-run/dev": "^0.17.5",
+    "@types/react": "^17.0.9",
+    "@types/react-dom": "^17.0.6",
     "@types/siema": "^1.4.6",
     "node-sass": "^6.0.0",
     "npm-run-all": "^4.1.5",
-    "typescript": "^4.1.2"
+    "typescript": "^4.3.2"
   },
   "engines": {
     "node": ">=14"
