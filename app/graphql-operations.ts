@@ -1849,11 +1849,17 @@ export type Piece = Node & {
   readonly title: Scalars['String'];
   readonly description?: Maybe<Scalars['String']>;
   readonly slug: Scalars['String'];
+  readonly tags: ReadonlyArray<Scalars['String']>;
   readonly content?: Maybe<RichText>;
-  readonly photos: ReadonlyArray<Asset>;
+  readonly images: ReadonlyArray<Asset>;
+  readonly type: PieceType;
+  readonly technique?: Maybe<Scalars['String']>;
+  readonly dimensions?: Maybe<Scalars['String']>;
+  readonly duration?: Maybe<Scalars['String']>;
+  readonly participants: ReadonlyArray<Scalars['String']>;
   readonly category?: Maybe<Category>;
-  readonly relatedFrom: ReadonlyArray<Piece>;
   readonly related: ReadonlyArray<Piece>;
+  readonly relatedFrom: ReadonlyArray<Piece>;
   /** List of Piece versions */
   readonly history: ReadonlyArray<Version>;
 };
@@ -1881,7 +1887,7 @@ export type PiecePublishedByArgs = {
 };
 
 
-export type PiecePhotosArgs = {
+export type PieceImagesArgs = {
   where?: Maybe<AssetWhereInput>;
   orderBy?: Maybe<AssetOrderByInput>;
   skip?: Maybe<Scalars['Int']>;
@@ -1898,7 +1904,7 @@ export type PieceCategoryArgs = {
 };
 
 
-export type PieceRelatedFromArgs = {
+export type PieceRelatedArgs = {
   where?: Maybe<PieceWhereInput>;
   orderBy?: Maybe<PieceOrderByInput>;
   skip?: Maybe<Scalars['Int']>;
@@ -1910,7 +1916,7 @@ export type PieceRelatedFromArgs = {
 };
 
 
-export type PieceRelatedArgs = {
+export type PieceRelatedFromArgs = {
   where?: Maybe<PieceWhereInput>;
   orderBy?: Maybe<PieceOrderByInput>;
   skip?: Maybe<Scalars['Int']>;
@@ -1950,11 +1956,17 @@ export type PieceCreateInput = {
   readonly title: Scalars['String'];
   readonly description?: Maybe<Scalars['String']>;
   readonly slug: Scalars['String'];
+  readonly tags?: Maybe<ReadonlyArray<Scalars['String']>>;
   readonly content?: Maybe<Scalars['RichTextAST']>;
-  readonly photos?: Maybe<AssetCreateManyInlineInput>;
+  readonly images?: Maybe<AssetCreateManyInlineInput>;
+  readonly type: PieceType;
+  readonly technique?: Maybe<Scalars['String']>;
+  readonly dimensions?: Maybe<Scalars['String']>;
+  readonly duration?: Maybe<Scalars['String']>;
+  readonly participants?: Maybe<ReadonlyArray<Scalars['String']>>;
   readonly category?: Maybe<CategoryCreateOneInlineInput>;
-  readonly relatedFrom?: Maybe<PieceCreateManyInlineInput>;
   readonly related?: Maybe<PieceCreateManyInlineInput>;
+  readonly relatedFrom?: Maybe<PieceCreateManyInlineInput>;
 };
 
 export type PieceCreateManyInlineInput = {
@@ -2113,16 +2125,100 @@ export type PieceManyWhereInput = {
   readonly slug_ends_with?: Maybe<Scalars['String']>;
   /** All values not ending with the given string */
   readonly slug_not_ends_with?: Maybe<Scalars['String']>;
-  readonly photos_every?: Maybe<AssetWhereInput>;
-  readonly photos_some?: Maybe<AssetWhereInput>;
-  readonly photos_none?: Maybe<AssetWhereInput>;
+  /** Matches if the field array contains *all* items provided to the filter and order does match */
+  readonly tags?: Maybe<ReadonlyArray<Scalars['String']>>;
+  /** Matches if the field array does not contains *all* items provided to the filter or order does not match */
+  readonly tags_not?: Maybe<ReadonlyArray<Scalars['String']>>;
+  /** Matches if the field array contains *all* items provided to the filter */
+  readonly tags_contains_all?: Maybe<ReadonlyArray<Scalars['String']>>;
+  /** Matches if the field array contains at least one item provided to the filter */
+  readonly tags_contains_some?: Maybe<ReadonlyArray<Scalars['String']>>;
+  /** Matches if the field array does not contain any of the items provided to the filter */
+  readonly tags_contains_none?: Maybe<ReadonlyArray<Scalars['String']>>;
+  readonly images_every?: Maybe<AssetWhereInput>;
+  readonly images_some?: Maybe<AssetWhereInput>;
+  readonly images_none?: Maybe<AssetWhereInput>;
+  readonly type?: Maybe<PieceType>;
+  /** All values that are not equal to given value. */
+  readonly type_not?: Maybe<PieceType>;
+  /** All values that are contained in given list. */
+  readonly type_in?: Maybe<ReadonlyArray<PieceType>>;
+  /** All values that are not contained in given list. */
+  readonly type_not_in?: Maybe<ReadonlyArray<PieceType>>;
+  readonly technique?: Maybe<Scalars['String']>;
+  /** All values that are not equal to given value. */
+  readonly technique_not?: Maybe<Scalars['String']>;
+  /** All values that are contained in given list. */
+  readonly technique_in?: Maybe<ReadonlyArray<Scalars['String']>>;
+  /** All values that are not contained in given list. */
+  readonly technique_not_in?: Maybe<ReadonlyArray<Scalars['String']>>;
+  /** All values containing the given string. */
+  readonly technique_contains?: Maybe<Scalars['String']>;
+  /** All values not containing the given string. */
+  readonly technique_not_contains?: Maybe<Scalars['String']>;
+  /** All values starting with the given string. */
+  readonly technique_starts_with?: Maybe<Scalars['String']>;
+  /** All values not starting with the given string. */
+  readonly technique_not_starts_with?: Maybe<Scalars['String']>;
+  /** All values ending with the given string. */
+  readonly technique_ends_with?: Maybe<Scalars['String']>;
+  /** All values not ending with the given string */
+  readonly technique_not_ends_with?: Maybe<Scalars['String']>;
+  readonly dimensions?: Maybe<Scalars['String']>;
+  /** All values that are not equal to given value. */
+  readonly dimensions_not?: Maybe<Scalars['String']>;
+  /** All values that are contained in given list. */
+  readonly dimensions_in?: Maybe<ReadonlyArray<Scalars['String']>>;
+  /** All values that are not contained in given list. */
+  readonly dimensions_not_in?: Maybe<ReadonlyArray<Scalars['String']>>;
+  /** All values containing the given string. */
+  readonly dimensions_contains?: Maybe<Scalars['String']>;
+  /** All values not containing the given string. */
+  readonly dimensions_not_contains?: Maybe<Scalars['String']>;
+  /** All values starting with the given string. */
+  readonly dimensions_starts_with?: Maybe<Scalars['String']>;
+  /** All values not starting with the given string. */
+  readonly dimensions_not_starts_with?: Maybe<Scalars['String']>;
+  /** All values ending with the given string. */
+  readonly dimensions_ends_with?: Maybe<Scalars['String']>;
+  /** All values not ending with the given string */
+  readonly dimensions_not_ends_with?: Maybe<Scalars['String']>;
+  readonly duration?: Maybe<Scalars['String']>;
+  /** All values that are not equal to given value. */
+  readonly duration_not?: Maybe<Scalars['String']>;
+  /** All values that are contained in given list. */
+  readonly duration_in?: Maybe<ReadonlyArray<Scalars['String']>>;
+  /** All values that are not contained in given list. */
+  readonly duration_not_in?: Maybe<ReadonlyArray<Scalars['String']>>;
+  /** All values containing the given string. */
+  readonly duration_contains?: Maybe<Scalars['String']>;
+  /** All values not containing the given string. */
+  readonly duration_not_contains?: Maybe<Scalars['String']>;
+  /** All values starting with the given string. */
+  readonly duration_starts_with?: Maybe<Scalars['String']>;
+  /** All values not starting with the given string. */
+  readonly duration_not_starts_with?: Maybe<Scalars['String']>;
+  /** All values ending with the given string. */
+  readonly duration_ends_with?: Maybe<Scalars['String']>;
+  /** All values not ending with the given string */
+  readonly duration_not_ends_with?: Maybe<Scalars['String']>;
+  /** Matches if the field array contains *all* items provided to the filter and order does match */
+  readonly participants?: Maybe<ReadonlyArray<Scalars['String']>>;
+  /** Matches if the field array does not contains *all* items provided to the filter or order does not match */
+  readonly participants_not?: Maybe<ReadonlyArray<Scalars['String']>>;
+  /** Matches if the field array contains *all* items provided to the filter */
+  readonly participants_contains_all?: Maybe<ReadonlyArray<Scalars['String']>>;
+  /** Matches if the field array contains at least one item provided to the filter */
+  readonly participants_contains_some?: Maybe<ReadonlyArray<Scalars['String']>>;
+  /** Matches if the field array does not contain any of the items provided to the filter */
+  readonly participants_contains_none?: Maybe<ReadonlyArray<Scalars['String']>>;
   readonly category?: Maybe<CategoryWhereInput>;
-  readonly relatedFrom_every?: Maybe<PieceWhereInput>;
-  readonly relatedFrom_some?: Maybe<PieceWhereInput>;
-  readonly relatedFrom_none?: Maybe<PieceWhereInput>;
   readonly related_every?: Maybe<PieceWhereInput>;
   readonly related_some?: Maybe<PieceWhereInput>;
   readonly related_none?: Maybe<PieceWhereInput>;
+  readonly relatedFrom_every?: Maybe<PieceWhereInput>;
+  readonly relatedFrom_some?: Maybe<PieceWhereInput>;
+  readonly relatedFrom_none?: Maybe<PieceWhereInput>;
 };
 
 export enum PieceOrderByInput {
@@ -2139,18 +2235,42 @@ export enum PieceOrderByInput {
   DescriptionAsc = 'description_ASC',
   DescriptionDesc = 'description_DESC',
   SlugAsc = 'slug_ASC',
-  SlugDesc = 'slug_DESC'
+  SlugDesc = 'slug_DESC',
+  TagsAsc = 'tags_ASC',
+  TagsDesc = 'tags_DESC',
+  TypeAsc = 'type_ASC',
+  TypeDesc = 'type_DESC',
+  TechniqueAsc = 'technique_ASC',
+  TechniqueDesc = 'technique_DESC',
+  DimensionsAsc = 'dimensions_ASC',
+  DimensionsDesc = 'dimensions_DESC',
+  DurationAsc = 'duration_ASC',
+  DurationDesc = 'duration_DESC',
+  ParticipantsAsc = 'participants_ASC',
+  ParticipantsDesc = 'participants_DESC'
+}
+
+export enum PieceType {
+  Painting = 'Painting',
+  Photo = 'Photo',
+  Video = 'Video'
 }
 
 export type PieceUpdateInput = {
   readonly title?: Maybe<Scalars['String']>;
   readonly description?: Maybe<Scalars['String']>;
   readonly slug?: Maybe<Scalars['String']>;
+  readonly tags?: Maybe<ReadonlyArray<Scalars['String']>>;
   readonly content?: Maybe<Scalars['RichTextAST']>;
-  readonly photos?: Maybe<AssetUpdateManyInlineInput>;
+  readonly images?: Maybe<AssetUpdateManyInlineInput>;
+  readonly type?: Maybe<PieceType>;
+  readonly technique?: Maybe<Scalars['String']>;
+  readonly dimensions?: Maybe<Scalars['String']>;
+  readonly duration?: Maybe<Scalars['String']>;
+  readonly participants?: Maybe<ReadonlyArray<Scalars['String']>>;
   readonly category?: Maybe<CategoryUpdateOneInlineInput>;
-  readonly relatedFrom?: Maybe<PieceUpdateManyInlineInput>;
   readonly related?: Maybe<PieceUpdateManyInlineInput>;
+  readonly relatedFrom?: Maybe<PieceUpdateManyInlineInput>;
 };
 
 export type PieceUpdateManyInlineInput = {
@@ -2172,7 +2292,13 @@ export type PieceUpdateManyInlineInput = {
 
 export type PieceUpdateManyInput = {
   readonly description?: Maybe<Scalars['String']>;
+  readonly tags?: Maybe<ReadonlyArray<Scalars['String']>>;
   readonly content?: Maybe<Scalars['RichTextAST']>;
+  readonly type?: Maybe<PieceType>;
+  readonly technique?: Maybe<Scalars['String']>;
+  readonly dimensions?: Maybe<Scalars['String']>;
+  readonly duration?: Maybe<Scalars['String']>;
+  readonly participants?: Maybe<ReadonlyArray<Scalars['String']>>;
 };
 
 export type PieceUpdateManyWithNestedWhereInput = {
@@ -2352,16 +2478,100 @@ export type PieceWhereInput = {
   readonly slug_ends_with?: Maybe<Scalars['String']>;
   /** All values not ending with the given string */
   readonly slug_not_ends_with?: Maybe<Scalars['String']>;
-  readonly photos_every?: Maybe<AssetWhereInput>;
-  readonly photos_some?: Maybe<AssetWhereInput>;
-  readonly photos_none?: Maybe<AssetWhereInput>;
+  /** Matches if the field array contains *all* items provided to the filter and order does match */
+  readonly tags?: Maybe<ReadonlyArray<Scalars['String']>>;
+  /** Matches if the field array does not contains *all* items provided to the filter or order does not match */
+  readonly tags_not?: Maybe<ReadonlyArray<Scalars['String']>>;
+  /** Matches if the field array contains *all* items provided to the filter */
+  readonly tags_contains_all?: Maybe<ReadonlyArray<Scalars['String']>>;
+  /** Matches if the field array contains at least one item provided to the filter */
+  readonly tags_contains_some?: Maybe<ReadonlyArray<Scalars['String']>>;
+  /** Matches if the field array does not contain any of the items provided to the filter */
+  readonly tags_contains_none?: Maybe<ReadonlyArray<Scalars['String']>>;
+  readonly images_every?: Maybe<AssetWhereInput>;
+  readonly images_some?: Maybe<AssetWhereInput>;
+  readonly images_none?: Maybe<AssetWhereInput>;
+  readonly type?: Maybe<PieceType>;
+  /** All values that are not equal to given value. */
+  readonly type_not?: Maybe<PieceType>;
+  /** All values that are contained in given list. */
+  readonly type_in?: Maybe<ReadonlyArray<PieceType>>;
+  /** All values that are not contained in given list. */
+  readonly type_not_in?: Maybe<ReadonlyArray<PieceType>>;
+  readonly technique?: Maybe<Scalars['String']>;
+  /** All values that are not equal to given value. */
+  readonly technique_not?: Maybe<Scalars['String']>;
+  /** All values that are contained in given list. */
+  readonly technique_in?: Maybe<ReadonlyArray<Scalars['String']>>;
+  /** All values that are not contained in given list. */
+  readonly technique_not_in?: Maybe<ReadonlyArray<Scalars['String']>>;
+  /** All values containing the given string. */
+  readonly technique_contains?: Maybe<Scalars['String']>;
+  /** All values not containing the given string. */
+  readonly technique_not_contains?: Maybe<Scalars['String']>;
+  /** All values starting with the given string. */
+  readonly technique_starts_with?: Maybe<Scalars['String']>;
+  /** All values not starting with the given string. */
+  readonly technique_not_starts_with?: Maybe<Scalars['String']>;
+  /** All values ending with the given string. */
+  readonly technique_ends_with?: Maybe<Scalars['String']>;
+  /** All values not ending with the given string */
+  readonly technique_not_ends_with?: Maybe<Scalars['String']>;
+  readonly dimensions?: Maybe<Scalars['String']>;
+  /** All values that are not equal to given value. */
+  readonly dimensions_not?: Maybe<Scalars['String']>;
+  /** All values that are contained in given list. */
+  readonly dimensions_in?: Maybe<ReadonlyArray<Scalars['String']>>;
+  /** All values that are not contained in given list. */
+  readonly dimensions_not_in?: Maybe<ReadonlyArray<Scalars['String']>>;
+  /** All values containing the given string. */
+  readonly dimensions_contains?: Maybe<Scalars['String']>;
+  /** All values not containing the given string. */
+  readonly dimensions_not_contains?: Maybe<Scalars['String']>;
+  /** All values starting with the given string. */
+  readonly dimensions_starts_with?: Maybe<Scalars['String']>;
+  /** All values not starting with the given string. */
+  readonly dimensions_not_starts_with?: Maybe<Scalars['String']>;
+  /** All values ending with the given string. */
+  readonly dimensions_ends_with?: Maybe<Scalars['String']>;
+  /** All values not ending with the given string */
+  readonly dimensions_not_ends_with?: Maybe<Scalars['String']>;
+  readonly duration?: Maybe<Scalars['String']>;
+  /** All values that are not equal to given value. */
+  readonly duration_not?: Maybe<Scalars['String']>;
+  /** All values that are contained in given list. */
+  readonly duration_in?: Maybe<ReadonlyArray<Scalars['String']>>;
+  /** All values that are not contained in given list. */
+  readonly duration_not_in?: Maybe<ReadonlyArray<Scalars['String']>>;
+  /** All values containing the given string. */
+  readonly duration_contains?: Maybe<Scalars['String']>;
+  /** All values not containing the given string. */
+  readonly duration_not_contains?: Maybe<Scalars['String']>;
+  /** All values starting with the given string. */
+  readonly duration_starts_with?: Maybe<Scalars['String']>;
+  /** All values not starting with the given string. */
+  readonly duration_not_starts_with?: Maybe<Scalars['String']>;
+  /** All values ending with the given string. */
+  readonly duration_ends_with?: Maybe<Scalars['String']>;
+  /** All values not ending with the given string */
+  readonly duration_not_ends_with?: Maybe<Scalars['String']>;
+  /** Matches if the field array contains *all* items provided to the filter and order does match */
+  readonly participants?: Maybe<ReadonlyArray<Scalars['String']>>;
+  /** Matches if the field array does not contains *all* items provided to the filter or order does not match */
+  readonly participants_not?: Maybe<ReadonlyArray<Scalars['String']>>;
+  /** Matches if the field array contains *all* items provided to the filter */
+  readonly participants_contains_all?: Maybe<ReadonlyArray<Scalars['String']>>;
+  /** Matches if the field array contains at least one item provided to the filter */
+  readonly participants_contains_some?: Maybe<ReadonlyArray<Scalars['String']>>;
+  /** Matches if the field array does not contain any of the items provided to the filter */
+  readonly participants_contains_none?: Maybe<ReadonlyArray<Scalars['String']>>;
   readonly category?: Maybe<CategoryWhereInput>;
-  readonly relatedFrom_every?: Maybe<PieceWhereInput>;
-  readonly relatedFrom_some?: Maybe<PieceWhereInput>;
-  readonly relatedFrom_none?: Maybe<PieceWhereInput>;
   readonly related_every?: Maybe<PieceWhereInput>;
   readonly related_some?: Maybe<PieceWhereInput>;
   readonly related_none?: Maybe<PieceWhereInput>;
+  readonly relatedFrom_every?: Maybe<PieceWhereInput>;
+  readonly relatedFrom_some?: Maybe<PieceWhereInput>;
+  readonly relatedFrom_none?: Maybe<PieceWhereInput>;
 };
 
 /** References Piece record uniquely */
@@ -3082,7 +3292,7 @@ export type GetPieceQuery = { readonly categories: ReadonlyArray<(
     & PiecesFragmentFragment
   )>, readonly piece?: Maybe<(
     Pick<Piece, 'id' | 'title' | 'slug' | 'description'>
-    & { readonly category?: Maybe<Pick<Category, 'title' | 'color'>>, readonly content?: Maybe<Pick<RichText, 'markdown'>>, readonly photos: ReadonlyArray<{ jpg: Asset['url'], webp: Asset['url'] }>, readonly related: ReadonlyArray<(
+    & { readonly category?: Maybe<Pick<Category, 'title' | 'color'>>, readonly content?: Maybe<Pick<RichText, 'markdown'>>, readonly images: ReadonlyArray<{ jpg: Asset['url'], webp: Asset['url'] }>, readonly related: ReadonlyArray<(
       Pick<Piece, 'id' | 'title' | 'slug'>
       & { readonly category?: Maybe<Pick<Category, 'title' | 'color'>> }
     )> }
@@ -3092,9 +3302,9 @@ export type PiecesFragmentFragment = { readonly pieces: ReadonlyArray<Pick<Piece
 
 export type CategoryFragmentFragment = Pick<Category, 'id' | 'title' | 'slug' | 'color'>;
 
-export const PiecesFragmentFragmentDoc: DocumentNode<PiecesFragmentFragment, unknown> = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"PiecesFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Category"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"pieces"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}}]}}]}}]};
-export const CategoryFragmentFragmentDoc: DocumentNode<CategoryFragmentFragment, unknown> = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"CategoryFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Category"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"color"}}]}}]};
-export const GetCategoriesDocument: DocumentNode<GetCategoriesQuery, GetCategoriesQueryVariables> = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getCategories"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"stage"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Stage"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"categories"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"stage"},"value":{"kind":"Variable","name":{"kind":"Name","value":"stage"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"CategoryFragment"}},{"kind":"Field","name":{"kind":"Name","value":"backgroundVideo"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"mimeType"}},{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}}]}},...CategoryFragmentFragmentDoc.definitions]};
-export const GetHeaderDocument: DocumentNode<GetHeaderQuery, GetHeaderQueryVariables> = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getHeader"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"stage"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Stage"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"categories"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"stage"},"value":{"kind":"Variable","name":{"kind":"Name","value":"stage"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"CategoryFragment"}}]}}]}},...CategoryFragmentFragmentDoc.definitions]};
-export const GetCategoryDocument: DocumentNode<GetCategoryQuery, GetCategoryQueryVariables> = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getCategory"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"slug"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"stage"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Stage"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"categories"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"stage"},"value":{"kind":"Variable","name":{"kind":"Name","value":"stage"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"CategoryFragment"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"PiecesFragment"}}]}},{"kind":"Field","name":{"kind":"Name","value":"category"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"slug"},"value":{"kind":"Variable","name":{"kind":"Name","value":"slug"}}}]}},{"kind":"Argument","name":{"kind":"Name","value":"stage"},"value":{"kind":"Variable","name":{"kind":"Name","value":"stage"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"CategoryFragment"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"content"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"markdown"}}]}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"PiecesFragment"}}]}}]}},...CategoryFragmentFragmentDoc.definitions,...PiecesFragmentFragmentDoc.definitions]};
-export const GetPieceDocument: DocumentNode<GetPieceQuery, GetPieceQueryVariables> = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getPiece"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"slug"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"stage"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Stage"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"categories"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"stage"},"value":{"kind":"Variable","name":{"kind":"Name","value":"stage"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"CategoryFragment"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"PiecesFragment"}}]}},{"kind":"Field","name":{"kind":"Name","value":"piece"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"slug"},"value":{"kind":"Variable","name":{"kind":"Name","value":"slug"}}}]}},{"kind":"Argument","name":{"kind":"Name","value":"stage"},"value":{"kind":"Variable","name":{"kind":"Name","value":"stage"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"category"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"color"}}]}},{"kind":"Field","name":{"kind":"Name","value":"content"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"markdown"}}]}},{"kind":"Field","name":{"kind":"Name","value":"photos"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","alias":{"kind":"Name","value":"jpg"},"name":{"kind":"Name","value":"url"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"transformation"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"image"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"resize"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"width"},"value":{"kind":"IntValue","value":"1000"}},{"kind":"ObjectField","name":{"kind":"Name","value":"height"},"value":{"kind":"IntValue","value":"1000"}},{"kind":"ObjectField","name":{"kind":"Name","value":"fit"},"value":{"kind":"EnumValue","value":"max"}}]}}]}},{"kind":"ObjectField","name":{"kind":"Name","value":"document"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"output"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"format"},"value":{"kind":"EnumValue","value":"jpg"}}]}}]}}]}}]},{"kind":"Field","alias":{"kind":"Name","value":"webp"},"name":{"kind":"Name","value":"url"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"transformation"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"image"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"resize"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"width"},"value":{"kind":"IntValue","value":"1000"}},{"kind":"ObjectField","name":{"kind":"Name","value":"height"},"value":{"kind":"IntValue","value":"1000"}},{"kind":"ObjectField","name":{"kind":"Name","value":"fit"},"value":{"kind":"EnumValue","value":"max"}}]}}]}},{"kind":"ObjectField","name":{"kind":"Name","value":"document"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"output"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"format"},"value":{"kind":"EnumValue","value":"webp"}}]}}]}}]}}]}]}},{"kind":"Field","name":{"kind":"Name","value":"related"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"category"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"color"}}]}}]}}]}}]}},...CategoryFragmentFragmentDoc.definitions,...PiecesFragmentFragmentDoc.definitions]};
+export const PiecesFragmentFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"PiecesFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Category"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"pieces"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}}]}}]}}]} as unknown as DocumentNode<PiecesFragmentFragment, unknown>;
+export const CategoryFragmentFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"CategoryFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Category"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"color"}}]}}]} as unknown as DocumentNode<CategoryFragmentFragment, unknown>;
+export const GetCategoriesDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getCategories"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"stage"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Stage"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"categories"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"stage"},"value":{"kind":"Variable","name":{"kind":"Name","value":"stage"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"CategoryFragment"}},{"kind":"Field","name":{"kind":"Name","value":"backgroundVideo"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"mimeType"}},{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}}]}},...CategoryFragmentFragmentDoc.definitions]} as unknown as DocumentNode<GetCategoriesQuery, GetCategoriesQueryVariables>;
+export const GetHeaderDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getHeader"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"stage"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Stage"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"categories"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"stage"},"value":{"kind":"Variable","name":{"kind":"Name","value":"stage"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"CategoryFragment"}}]}}]}},...CategoryFragmentFragmentDoc.definitions]} as unknown as DocumentNode<GetHeaderQuery, GetHeaderQueryVariables>;
+export const GetCategoryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getCategory"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"slug"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"stage"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Stage"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"categories"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"stage"},"value":{"kind":"Variable","name":{"kind":"Name","value":"stage"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"CategoryFragment"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"PiecesFragment"}}]}},{"kind":"Field","name":{"kind":"Name","value":"category"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"slug"},"value":{"kind":"Variable","name":{"kind":"Name","value":"slug"}}}]}},{"kind":"Argument","name":{"kind":"Name","value":"stage"},"value":{"kind":"Variable","name":{"kind":"Name","value":"stage"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"CategoryFragment"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"content"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"markdown"}}]}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"PiecesFragment"}}]}}]}},...CategoryFragmentFragmentDoc.definitions,...PiecesFragmentFragmentDoc.definitions]} as unknown as DocumentNode<GetCategoryQuery, GetCategoryQueryVariables>;
+export const GetPieceDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getPiece"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"slug"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"stage"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Stage"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"categories"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"stage"},"value":{"kind":"Variable","name":{"kind":"Name","value":"stage"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"CategoryFragment"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"PiecesFragment"}}]}},{"kind":"Field","name":{"kind":"Name","value":"piece"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"slug"},"value":{"kind":"Variable","name":{"kind":"Name","value":"slug"}}}]}},{"kind":"Argument","name":{"kind":"Name","value":"stage"},"value":{"kind":"Variable","name":{"kind":"Name","value":"stage"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"category"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"color"}}]}},{"kind":"Field","name":{"kind":"Name","value":"content"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"markdown"}}]}},{"kind":"Field","name":{"kind":"Name","value":"images"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","alias":{"kind":"Name","value":"jpg"},"name":{"kind":"Name","value":"url"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"transformation"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"image"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"resize"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"width"},"value":{"kind":"IntValue","value":"1000"}},{"kind":"ObjectField","name":{"kind":"Name","value":"height"},"value":{"kind":"IntValue","value":"1000"}},{"kind":"ObjectField","name":{"kind":"Name","value":"fit"},"value":{"kind":"EnumValue","value":"max"}}]}}]}},{"kind":"ObjectField","name":{"kind":"Name","value":"document"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"output"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"format"},"value":{"kind":"EnumValue","value":"jpg"}}]}}]}}]}}]},{"kind":"Field","alias":{"kind":"Name","value":"webp"},"name":{"kind":"Name","value":"url"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"transformation"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"image"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"resize"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"width"},"value":{"kind":"IntValue","value":"1000"}},{"kind":"ObjectField","name":{"kind":"Name","value":"height"},"value":{"kind":"IntValue","value":"1000"}},{"kind":"ObjectField","name":{"kind":"Name","value":"fit"},"value":{"kind":"EnumValue","value":"max"}}]}}]}},{"kind":"ObjectField","name":{"kind":"Name","value":"document"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"output"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"format"},"value":{"kind":"EnumValue","value":"webp"}}]}}]}}]}}]}]}},{"kind":"Field","name":{"kind":"Name","value":"related"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"category"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"color"}}]}}]}}]}}]}},...CategoryFragmentFragmentDoc.definitions,...PiecesFragmentFragmentDoc.definitions]} as unknown as DocumentNode<GetPieceQuery, GetPieceQueryVariables>;

@@ -46,7 +46,7 @@ query getPiece($slug: String!, $stage: Stage!) {
     content {
       markdown
     }
-    photos {
+    images {
       jpg: url(
         transformation: {
           image: { resize: { width: 1000, height: 1000, fit: max } }

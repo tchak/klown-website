@@ -30,7 +30,7 @@ export default function Category() {
       <main>
         <section id="carrousel">
           <div className="siema" ref={ref}>
-            {data.piece?.photos.map(({ jpg }) => (
+            {data.piece?.images.map(({ jpg }) => (
               <figure>
                 <img src={jpg} loading="lazy" />
               </figure>
