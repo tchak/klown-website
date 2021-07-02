@@ -30,7 +30,11 @@ export default function Category() {
       <div className="content">
         <Markdown>{data.category?.content?.markdown ?? ''}</Markdown>
       </div>
-      <Side categories={data.categories} />
+      <Side
+        categories={data.categories.filter(
+          (category) => category.id == data.category?.id
+        )}
+      />
     </main>
   );
 }
