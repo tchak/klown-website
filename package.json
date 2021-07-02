@@ -11,7 +11,8 @@
     "netlify:dev": "netlify dev",
     "start": "remix-serve functions/app/build",
     "build:css": "node-sass styles/main.scss app/styles/index.css",
-    "generate": "graphql-codegen -r dotenv/config --config codegen.yml"
+    "generate": "graphql-codegen -r dotenv/config --config codegen.yml",
+    "postinstall": "./bin/remix-magic"
   },
   "dependencies": {
     "@react-aria/interactions": "^3.5.0",
