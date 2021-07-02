@@ -23,7 +23,7 @@ export function Side({
           type="radio"
           name="c1-sort-medium"
           hidden
-          checked
+          defaultChecked
         />
         <input id="c1-sort-1" type="radio" name="c1-sort-medium" hidden />
         <input id="c1-sort-2" type="radio" name="c1-sort-medium" hidden />
@@ -48,7 +48,7 @@ export function Side({
 
         <ul className="cat-container noJS">
           {categories.map((category, index) => (
-            <li className="cat" data-categorie={index + 1}>
+            <li key={category.id} className="cat" data-categorie={index + 1}>
               <input
                 id={`toggle-c${index + 1}`}
                 name="toggle-c"
@@ -57,26 +57,19 @@ export function Side({
               />
               <label htmlFor={`toggle-c${index + 1}`}>{category.title}</label>
               <ul className="item-container">
-                {Array(6)
-                  .fill(0)
-                  .map((_, index) => (
-                    <li key={index} className="item">
-                      <Link
-                        to={
-                          category.pieces[0]
-                            ? `/pieces/${category.pieces[0].slug}`
-                            : '/pieces/000'
-                        }
-                      >
+                {category.pieces.map((piece) =>
+                  piece.images[0] ? (
+                    <li key={piece.id} className="item">
+                      <Link to={`/piece/${piece.slug}`}>
                         <img
                           className="cover"
-                          src={`/static/svg/example${
-                            Math.floor(Math.random() * 5) + 2
-                          }.svg`}
+                          src={piece.images[0].jpg}
+                          loading="lazy"
                         />
                       </Link>
                     </li>
-                  ))}
+                  ) : null
+                )}
               </ul>
             </li>
           ))}

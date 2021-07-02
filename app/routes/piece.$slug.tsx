@@ -18,7 +18,7 @@ export const meta: MetaFunction = ({ data }: { data: RouteData }) => {
 export const loader: LoaderFunction = async ({ params }) =>
   getPiece(params.slug);
 
-export default function Category() {
+export default function Piece() {
   const data = useRouteData<RouteData>();
 
   usePageColor(data.piece?.category?.color);
@@ -31,7 +31,7 @@ export default function Category() {
         <section id="carrousel">
           <div className="siema" ref={ref}>
             {data.piece?.images.map(({ jpg }) => (
-              <figure>
+              <figure key={jpg}>
                 <img src={jpg} loading="lazy" />
               </figure>
             ))}
