@@ -30,8 +30,8 @@ export default function Piece() {
       <main>
         <section id="carrousel">
           <div className="siema" ref={ref}>
-            {data.piece?.images.map(({ jpg }) => (
-              <figure key={jpg}>
+            {data.piece?.images.map(({ id, jpg }) => (
+              <figure key={id}>
                 <img src={jpg} loading="lazy" />
               </figure>
             ))}
