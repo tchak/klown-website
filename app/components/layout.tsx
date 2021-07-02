@@ -46,17 +46,6 @@ export function Footer() {
       <nav>
         <ul>
           <li>
-            <ul>
-              {data.categories.map((category) => (
-                <li key={category.id}>
-                  <NavLink to={`/category/${category.slug}`}>
-                    {category.title}
-                  </NavLink>
-                </li>
-              ))}
-            </ul>
-          </li>
-          <li>
             <NavLink to="/info">info</NavLink>
           </li>
           <li>

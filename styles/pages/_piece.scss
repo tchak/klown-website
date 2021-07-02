@@ -34,6 +34,7 @@ body#piece{
 		button{
 			position: absolute;
 			height: 100%;
+			max-height: 75vh;
 			width: 33.333%;
 			top: 0;
 			background: transparent;
@@ -46,6 +47,7 @@ body#piece{
 			transform:translateY(-60%);
 			text-align: center;
 			img{ width: calc(100% - #{$unite*2}); max-width: 1920px; object-fit: contain;	}
+			@include for-size(desktop){img{ width: calc(100% - #{$unite*4});}}
 		}
 
 		a#to-details{
@@ -56,7 +58,23 @@ body#piece{
 			@include f1-s0();
 			text-align: center;
 			padding: $baseline/4 2px;
-			border-bottom: .5px solid currentColor;
+			stroke-width: 1.5px;
+			transition: .5s ease;
+			transform: translateY(0);
+			display: none;
+			@include for-size(desktop){
+				display: inline-block;
+				bottom: $baseline*-1;
+			}
+
+			@keyframes upDown{
+				0%{ transform: translateY(0);}
+				100%{ transform: translateY($baseline);}
+			}
+
+			&:hover svg{
+				animation: .75s ease-in-out infinite alternate upDown;
+			}
 		}
 	}
 
@@ -70,10 +88,15 @@ body#piece{
 
 	// details
 	#details{
-		padding: calc(clamp(#{$baseline*6}, 25vh, 300px)) 0  calc(clamp(#{$baseline*4}, 10vh, 100px)) 0; 
+		margin-top: $baseline*3;
+		padding: $baseline 0  $baseline 0; 
+		@include for-size(desktop){
+			margin-top: calc(clamp(#{$baseline*4}, 20vh, 250px));
+			padding: $baseline*2 0  calc(clamp(#{$baseline*4}, 10vh, 100px)) 0; 
+		}
 		p:first-of-type{}
 		h1{
-			@include f1-s3();
+			@include f1-s4();
 			@include for-size(desktop){ 
 				@include f1-s6();
 			}
@@ -98,9 +121,11 @@ body#piece{
 			margin-bottom: $baseline * 2;
 		}
 		figure{
-			left: $unite*2;
+			
 			margin: $baseline*2 0;
 			max-width: inherit;
+			@include for-size(phone){ padding-left: $unite*2; }
+			@include for-size(desktop){ left: $unite*2; }
 			img{
 				object-fit: contain;
 				object-position: left;
@@ -119,6 +144,7 @@ body#piece{
 		height: calc(100vh - #{$baseline*5});
 		@include for-size(desktop){ 		
 			height: calc(100vh - #{$baseline*8});
+			height: calc(clamp(300px, calc(100vh - #{$baseline*8}), 800px));
 			@include grid(repeat(8, 1fr), auto,  $baseline $unite/2, null, end);
 		}
 		@include for-size(desktop-1200){
@@ -130,13 +156,26 @@ body#piece{
 
 		h2{
 			@include f1-s2();
-			@include for-size(desktop){ 
-				@include f1-s4();
-				margin-left: calc(clamp())
-			}
 			line-height: 90% !important;
 			position: absolute;
-			bottom: $baseline*2;						
+			bottom: $baseline*22; 
+			@include for-size(desktop){ 
+				@include f1-s4();
+				bottom: $baseline*2;
+			}
 		}		
+	}
+
+	// SideNav
+	@include for-size(phone){
+	  @include sideNavHorizontal();
+	  nav#sideNav{
+	  	position: absolute; bottom: $baseline*15;
+	  	.sort-options{display: none;}
+	  	.item:not(.related){display: none !important;}
+	  }
+	}
+	@include for-size(desktop){
+	  @include sideNavVertical();
 	}
 }

@@ -16,35 +16,12 @@ export function Side({
     <>
       <input id="toggle-sideNav" type="checkbox" hidden />
       <nav id="sideNav">
-        <label htmlFor="toggle-sideNav">Pièces</label>
-
-        <input
-          id="c1-sort-0"
-          type="radio"
-          name="c1-sort-medium"
-          hidden
-          defaultChecked
-        />
-        <input id="c1-sort-1" type="radio" name="c1-sort-medium" hidden />
-        <input id="c1-sort-2" type="radio" name="c1-sort-medium" hidden />
-        <input id="c1-sort-3" type="radio" name="c1-sort-medium" hidden />
-        <div className="sort-options">
-          <p>Medium&nbsp;</p>
-          <ul>
-            <li data-for="sort-0">
-              <label htmlFor="c1-sort-0">⦰</label>
-            </li>
-            <li data-for="sort-1">
-              <label htmlFor="c1-sort-1">Video</label>
-            </li>
-            <li data-for="sort-2">
-              <label htmlFor="c1-sort-2">Peinture</label>
-            </li>
-            <li data-for="sort-3">
-              <label htmlFor="c1-sort-3">Photo</label>
-            </li>
-          </ul>
-        </div>
+        <label htmlFor="toggle-sideNav">
+          <h1>Pièces</h1>
+          <svg width="24" height="24" viewBox="0 -2 60 60" aria-hidden>
+            <use href="#i-side" />
+          </svg>
+        </label>
 
         <ul className="cat-container noJS">
           {categories.map((category, index) => (
