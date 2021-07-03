@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 import type { GetCategory } from '../cms.server';
+import { Picture } from './picture';
 
 export function Side({
   categories,
@@ -38,10 +39,21 @@ export function Side({
                   piece.images[0] ? (
                     <li key={piece.id} className="item">
                       <Link to={`/piece/${piece.slug}`}>
-                        <img
+                        <Picture
                           className="cover"
+                          sources={[
+                            {
+                              srcSet: piece.images[0].webp,
+                              type: 'image/webp',
+                            },
+                            {
+                              srcSet: piece.images[0].jpg,
+                              type: 'image/jpeg',
+                            },
+                          ]}
                           src={piece.images[0].jpg}
                           loading="lazy"
+                          alt={piece.title}
                         />
                       </Link>
                     </li>

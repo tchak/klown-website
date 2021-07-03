@@ -7,6 +7,7 @@ import Siema from 'siema';
 import { getPiece, GetPiece as RouteData } from '../cms.server';
 import { usePageColor } from '../hooks';
 import { Side } from '../components/side';
+import { Picture } from '../components/picture';
 
 export const handle = { bodyId: 'piece' };
 export const meta: MetaFunction = ({ data }: { data: RouteData }) => {
@@ -30,9 +31,22 @@ export default function Piece() {
       <main>
         <section id="carrousel">
           <div className="siema" ref={ref}>
-            {data.piece?.images.map(({ id, jpg }) => (
+            {data.piece?.images.map(({ id, jpg, webp }) => (
               <figure key={id}>
-                <img src={jpg} loading="lazy" />
+                <Picture
+                  sources={[
+                    {
+                      srcSet: webp,
+                      type: 'image/webp',
+                    },
+                    {
+                      srcSet: jpg,
+                      type: 'image/jpeg',
+                    },
+                  ]}
+                  src={jpg}
+                  loading="lazy"
+                />
               </figure>
             ))}
           </div>
