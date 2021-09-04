@@ -24,10 +24,18 @@ export const meta: MetaFunction = () => {
 
 export const loader: LoaderFunction = async () => getHeader();
 
-function Document({ children }: { children: React.ReactNode }) {
+function useBodyId() {
   const match = useMatches().find(({ handle }) => !!handle);
-  const bodyId = match?.handle?.bodyId ?? 'index';
+  return match?.handle?.bodyId ?? 'index';
+}
 
+function Document({
+  bodyId = 'index',
+  children,
+}: {
+  bodyId?: string;
+  children: React.ReactNode;
+}) {
   return (
     <html lang="en">
       <head>
@@ -48,7 +56,7 @@ function Document({ children }: { children: React.ReactNode }) {
 
 export default function App() {
   return (
-    <Document>
+    <Document bodyId={useBodyId()}>
       <Header />
       <Outlet />
       <Strobos />
