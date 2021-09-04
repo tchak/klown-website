@@ -22,10 +22,11 @@
     "@urql/core": "^2.3.1",
     "dotenv": "^10.0.0",
     "graphql": "^15.5.2",
+    "history": "^5.0.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-markdown": "^6.0.0",
-    "react-router-dom": "=6.0.0-beta.0",
+    "react-router-dom": "^6.0.0-beta.3",
     "remix": "^0.18.0",
     "siema": "^1.5.1"
   },
