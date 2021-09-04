@@ -12,10 +12,10 @@ export function InlineSVG() {
       preserveAspectRatio="xMinYMid meet"
     >
       <g id="arrow-L" className="stroke">
-        <path vector-effect="non-scaling-stroke" d="M45,0L15,30l30,30" />
+        <path vectorEffect="non-scaling-stroke" d="M45,0L15,30l30,30" />
       </g>
       <g id="arrow-R" className="stroke">
-        <path vector-effect="non-scaling-stroke" d="M15,60,45,30,15,0" />
+        <path vectorEffect="non-scaling-stroke" d="M15,60,45,30,15,0" />
       </g>
       <g id="i-filter" className="stroke">
         <line x1="0" y1="22.6" x2="40.8" y2="22.6" />
