@@ -4,10 +4,10 @@ import { useRouteData } from 'remix';
 import Markdown from 'react-markdown';
 import Siema from 'siema';
 
-import { getPiece, GetPiece as RouteData } from '../cms.server';
-import { usePageColor } from '../hooks';
-import { Side } from '../components/side';
-import { Picture } from '../components/picture';
+import { getPiece, GetPiece as RouteData } from '~/cms.server';
+import { usePageColor } from '~/hooks';
+import { Side } from '~/components/side';
+import { Picture } from '~/components/picture';
 
 export const handle = { bodyId: 'piece' };
 export const meta: MetaFunction = ({ data }: { data: RouteData }) => {

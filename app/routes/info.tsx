@@ -1,4 +1,4 @@
-import { usePageColor } from '../hooks';
+import { usePageColor } from '~/hooks';
 
 export const handle = { bodyId: 'info' };
 

@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
-import type { GetCategory } from '../cms.server';
+import type { GetCategory } from '~/cms.server';
 import { Picture } from './picture';
 
 export function Side({

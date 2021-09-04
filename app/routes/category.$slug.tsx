@@ -2,9 +2,9 @@ import type { MetaFunction, LoaderFunction } from 'remix';
 import { useRouteData } from 'remix';
 import Markdown from 'react-markdown';
 
-import { getCategory, GetCategory as RouteData } from '../cms.server';
-import { usePageColor } from '../hooks';
-import { Side } from '../components/side';
+import { getCategory, GetCategory as RouteData } from '~/cms.server';
+import { usePageColor } from '~/hooks';
+import { Side } from '~/components/side';
 
 export const handle = { bodyId: 'categorie' };
 export const meta: MetaFunction = ({ data }: { data: RouteData }) => {

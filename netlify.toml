@@ -1,15 +1,19 @@
 [build]
-  functions = "functions"
+  functions = "netlify/functions"
   publish = "public"
 
-# [[redirects]]
-#   from = "/_static/*"
-#   to = "/public/:splat"
-#   status = 200
+[dev]
+  functions = "netlify/functions"
+  publish = "public"
+  port = 3000
+
+[functions]
+  node_bundler = "esbuild"
+  external_node_modules = ["@remix-run/react", "react", "react-dom"]
 
 [[redirects]]
   from = "/*"
-  to = "/.netlify/functions/app"
+  to = "/.netlify/functions/server"
   status = 200
 
 [[headers]]

@@ -5,7 +5,6 @@ import { Outlet } from 'react-router-dom';
 import stylesUrl from './styles/index.css';
 import { Header, Footer } from './components/layout';
 import { Strobos } from './components/strobos';
-
 import { getHeader } from './cms.server';
 
 export const links: LinksFunction = () => {

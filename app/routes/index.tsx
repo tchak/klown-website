@@ -1,8 +1,8 @@
 import type { MetaFunction, LoaderFunction } from 'remix';
 import { useRouteData, Link } from 'remix';
 
-import { getCategories, GetCategories as RouteData } from '../cms.server';
-import { usePageColor, useHoverPageColor } from '../hooks';
+import { getCategories, GetCategories as RouteData } from '~/cms.server';
+import { usePageColor, useHoverPageColor } from '~/hooks';
 
 export const handle = { bodyId: 'index' };
 export const meta: MetaFunction = () => ({ title: 'Klown' });

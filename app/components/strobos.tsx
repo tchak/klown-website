@@ -1,4 +1,4 @@
-import { useStrobos } from '../hooks';
+import { useStrobos } from '~/hooks';
 
 export function Strobos() {
   const [enabled, toggle] = useStrobos();

@@ -1,7 +1,7 @@
 import { NavLink, Link } from 'react-router-dom';
 import { useRouteData } from 'remix';
 
-import type { GetHeader } from '../cms.server';
+import type { GetHeader } from '~/cms.server';
 
 export function Header() {
   const data = useRouteData<GetHeader>();
