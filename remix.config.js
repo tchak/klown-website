@@ -3,9 +3,9 @@ module.exports = {
   browserBuildDirectory: 'public/build',
   publicPath: '/build/',
   // Vercel
-  serverBuildDirectory: 'server/build',
-  devServerPort: 8002,
+  // serverBuildDirectory: 'server/build',
+  // devServerPort: 8002,
   // Netlify
-  // serverBuildDirectory: 'netlify/functions/server/build',
-  // devServerPort: 8888,
+  serverBuildDirectory: 'netlify/functions/server/build',
+  devServerPort: 8888,
 };
