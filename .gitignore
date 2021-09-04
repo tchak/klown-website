@@ -105,5 +105,8 @@ dist
 /app/styles
 /public/build
 /build
+/server/build
 /netlify/functions/server/build
 .netlify
+
+.vercel
