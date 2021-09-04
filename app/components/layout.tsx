@@ -2,6 +2,7 @@ import { NavLink, Link } from 'react-router-dom';
 import { useRouteData } from 'remix';
 
 import type { GetHeader } from '~/cms.server';
+import { InlineSVG } from './inline-svg';
 
 export function Header() {
   const data = useRouteData<GetHeader>();
@@ -9,25 +10,18 @@ export function Header() {
   return (
     <header id="topbar" role="navigation" aria-label="topbar">
       <h1>
-        <Link to="/">Klown</Link>
+        <Link to="/info">Klown</Link>
       </h1>
       <nav>
+        <span className="parent">Menu</span>
         <ul>
-          <li>
-            <span className="parent">Menu</span>
-            <ul>
-              {data.categories.map((category) => (
-                <li key={category.id}>
-                  <NavLink to={`/category/${category.slug}`}>
-                    {category.title}
-                  </NavLink>
-                </li>
-              ))}
-            </ul>
-          </li>
-          <li>
-            <NavLink to="/info">Info</NavLink>
-          </li>
+          {data.categories.map((category) => (
+            <li key={category.id}>
+              <NavLink to={`/category/${category.slug}`}>
+                {category.title}
+              </NavLink>
+            </li>
+          ))}
         </ul>
       </nav>
     </header>
@@ -35,8 +29,6 @@ export function Header() {
 }
 
 export function Footer() {
-  const data = useRouteData<GetHeader>();
-
   return (
     <footer>
       <p className="description">
@@ -55,6 +47,7 @@ export function Footer() {
       </nav>
       <p className="mentions">2021 — Tous droits réservés</p>
       <p className="mentions">Design Dev: </p>
+      <InlineSVG />
     </footer>
   );
 }

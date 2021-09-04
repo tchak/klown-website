@@ -54,10 +54,13 @@ export default function Piece() {
           <button type="button" className="prev" onClick={prev}></button>
           <button type="button" className="next" onClick={next}></button>
 
-          <a id="to-details" href="#details">
-            Plus d'information ⋁
+          <a id="to-details" href="#details" title="Plus d‘informations">
+            <svg width="2rem" height="2rem" viewBox="0 -2 60 60">
+              <use href="#i-down" />
+            </svg>
           </a>
         </section>
+
         <header id="details">
           <p>{data.piece?.category?.title}</p>
           <h1>{data.piece?.title}</h1>
@@ -66,6 +69,7 @@ export default function Piece() {
             <li>Detail</li>
           </ul>
         </header>
+
         <div id="content">
           <Markdown>{data.piece?.content?.markdown ?? ''}</Markdown>
         </div>

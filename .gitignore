@@ -102,11 +102,12 @@ dist
 
 # TernJS port file
 .tern-port
+
+/design
 /app/styles
 /public/build
 /build
 /server/build
 /netlify/functions/server/build
 .netlify
-
 .vercel

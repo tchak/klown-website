@@ -25,7 +25,7 @@ export default function Category() {
     <main>
       <header>
         <h1>{data.category?.title}</h1>
-        <p className="exp">{data.category?.pieces.length}</p>
+        <p className="exp">{data.category?.pieces.length} pièces</p>
       </header>
       <div className="content">
         <Markdown>{data.category?.content?.markdown ?? ''}</Markdown>

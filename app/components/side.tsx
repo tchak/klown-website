@@ -24,6 +24,40 @@ export function Side({
           </svg>
         </label>
 
+        <input
+          id="medium-reset"
+          type="radio"
+          name="sort-by-medium"
+          hidden
+          checked
+        />
+        <input id="medium-1" type="radio" name="sort-by-medium" hidden />
+        <input id="medium-2" type="radio" name="sort-by-medium" hidden />
+        <input id="medium-3" type="radio" name="sort-by-medium" hidden />
+        <input id="medium-4" type="radio" name="sort-by-medium" hidden />
+        <input id="medium-5" type="radio" name="sort-by-medium" hidden />
+        <ul className="sort-options">
+          <li data-for="medium-reset">
+            <label htmlFor="medium-reset">
+              <svg width="18" height="18" viewBox="0 0 60 60">
+                <use href="#i-reset" />
+              </svg>
+              <svg width="18" height="18" viewBox="0 0 60 60">
+                <use href="#i-filter" />
+              </svg>
+            </label>
+          </li>
+          <li data-for="medium-1">
+            <label htmlFor="medium-1">Video</label>
+          </li>
+          <li data-for="medium-2">
+            <label htmlFor="medium-2">Peinture</label>
+          </li>
+          <li data-for="medium-3">
+            <label htmlFor="medium-3">Photo</label>
+          </li>
+        </ul>
+
         <ul className="cat-container noJS">
           {categories.map((category, index) => (
             <li key={category.id} className="cat" data-categorie={index + 1}>
