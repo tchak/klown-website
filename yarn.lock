@@ -982,7 +982,7 @@
   dependencies:
     "@remix-run/node" "0.18.0"
 
-"@remix-run/node@0.18.0":
+"@remix-run/node@0.18.0", "@remix-run/node@^0.18.0":
   version "0.18.0"
   resolved "https://npm.remix.run/download/@remix-run/node/0.18.0/154ce0e77e01bd86b625ec6ca812754eb97f77ce54213c0995eae1413f51f765#4271a548a42235810228015f556e112378fdca1a"
   integrity sha512-wryvONIIvDOjAhRxMxIuF5Q0P5f4C6TBlVHfOciymF+ts1FXWe4qw2JsJcFoDkVOEolBIxGz0tXQdIwf5VNCzA==
