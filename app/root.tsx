@@ -59,8 +59,8 @@ export default function App() {
     <Document bodyId={useBodyId()}>
       {/* <Header /> */}
       <Outlet />
-      {/* <Strobos />
-      <Footer /> */}
+      <Strobos />
+      {/* <Footer /> */}
     </Document>
   );
 }
