@@ -60,7 +60,7 @@ export default function App() {
       {/* <Header /> */}
       <Outlet />
       <Strobos />
-      {/* <Footer /> */}
+      <Footer />
     </Document>
   );
 }
