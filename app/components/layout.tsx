@@ -1,5 +1,4 @@
-import { NavLink, Link } from 'react-router-dom';
-import { useRouteData } from 'remix';
+import { useRouteData, Link } from 'remix';
 
 import type { GetHeader } from '~/cms.server';
 import { InlineSVG } from './inline-svg';
@@ -17,9 +16,7 @@ export function Header() {
         <ul>
           {data.categories.map((category) => (
             <li key={category.id}>
-              <NavLink to={`/category/${category.slug}`}>
-                {category.title}
-              </NavLink>
+              <Link to={`/category/${category.slug}`}>{category.title}</Link>
             </li>
           ))}
         </ul>
@@ -38,10 +35,10 @@ export function Footer() {
       <nav>
         <ul>
           <li>
-            <NavLink to="/info">info</NavLink>
+            <Link to="/info">info</Link>
           </li>
           <li>
-            <NavLink to="/contact">contact</NavLink>
+            <Link to="/contact">contact</Link>
           </li>
         </ul>
       </nav>
