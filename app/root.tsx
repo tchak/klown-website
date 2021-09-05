@@ -57,10 +57,10 @@ function Document({
 export default function App() {
   return (
     <Document bodyId={useBodyId()}>
-      <Header />
+      {/* <Header /> */}
       <Outlet />
-      <Strobos />
-      <Footer />
+      {/* <Strobos />
+      <Footer /> */}
     </Document>
   );
 }
