@@ -22,37 +22,35 @@ export const loader: LoaderFunction = async ({ params }) =>
 export default function Piece() {
   const data = useRouteData<RouteData>();
 
+  const images = data.piece?.images ?? [];
+  const needsCarrousel = images.length > 1;
   usePageColor(data.piece?.category?.color);
-  const [ref, prev, next] = useSiema<HTMLDivElement>();
 
   return (
     <>
       <Side categories={data.categories} />
       <main>
         <section id="carrousel">
-          <div className="siema" ref={ref}>
-            {data.piece?.images.map(({ id, jpg, webp }) => (
-              <figure key={id}>
-                <Picture
-                  sources={[
-                    {
-                      srcSet: webp,
-                      type: 'image/webp',
-                    },
-                    {
-                      srcSet: jpg,
-                      type: 'image/jpeg',
-                    },
-                  ]}
-                  src={jpg}
-                  loading="lazy"
-                />
-              </figure>
-            ))}
-          </div>
-
-          <button type="button" className="prev" onClick={prev}></button>
-          <button type="button" className="next" onClick={next}></button>
+          {needsCarrousel ? (
+            <Carrousel images={images} />
+          ) : images.length == 0 ? null : (
+            <figure>
+              <Picture
+                sources={[
+                  {
+                    srcSet: images[0].webp,
+                    type: 'image/webp',
+                  },
+                  {
+                    srcSet: images[0].jpg,
+                    type: 'image/jpeg',
+                  },
+                ]}
+                src={images[0].jpg}
+                loading="lazy"
+              />
+            </figure>
+          )}
 
           <a id="to-details" href="#details" title="Plus d‘informations">
             <svg width="2rem" height="2rem" viewBox="0 -2 60 60">
@@ -74,6 +72,41 @@ export default function Piece() {
           <Markdown>{data.piece?.content?.markdown ?? ''}</Markdown>
         </div>
       </main>
+    </>
+  );
+}
+
+function Carrousel({
+  images,
+}: {
+  images: NonNullable<RouteData['piece']>['images'];
+}) {
+  const [ref, prev, next] = useSiema<HTMLDivElement>();
+  return (
+    <>
+      <div className="siema" ref={ref}>
+        {images.map(({ id, jpg, webp }) => (
+          <figure key={id}>
+            <Picture
+              sources={[
+                {
+                  srcSet: webp,
+                  type: 'image/webp',
+                },
+                {
+                  srcSet: jpg,
+                  type: 'image/jpeg',
+                },
+              ]}
+              src={jpg}
+              loading="lazy"
+            />
+          </figure>
+        ))}
+      </div>
+
+      <button type="button" className="prev" onClick={prev}></button>
+      <button type="button" className="next" onClick={next}></button>
     </>
   );
 }
