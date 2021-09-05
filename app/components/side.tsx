@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 
 import type { GetCategory } from '~/cms.server';
 import { Picture } from './picture';
+import { ArrowR, IconSide, IconReset, IconFilter } from './icons';
 
 export function Side({
   categories,
@@ -19,9 +20,7 @@ export function Side({
       <nav id="sideNav">
         <label htmlFor="toggle-sideNav">
           <h1>Pièces</h1>
-          <svg width="24" height="24" viewBox="0 -2 60 60" aria-hidden>
-            <use href="#i-side" />
-          </svg>
+          <IconSide />
         </label>
 
         <input
@@ -39,12 +38,8 @@ export function Side({
         <ul className="sort-options">
           <li data-for="medium-reset">
             <label htmlFor="medium-reset">
-              <svg width="18" height="18" viewBox="0 0 60 60">
-                <use href="#i-reset" />
-              </svg>
-              <svg width="18" height="18" viewBox="0 0 60 60">
-                <use href="#i-filter" />
-              </svg>
+              <IconReset width={18} height={18} />
+              <IconFilter width={18} height={18} />
             </label>
           </li>
           <li data-for="medium-1">
@@ -99,9 +94,7 @@ export function Side({
         </ul>
 
         <button id="scrollTrigger">
-          <svg viewBox="0 0 60 60">
-            <use href="#arrow-R" />
-          </svg>
+          <ArrowR height={60} width={60} />
         </button>
       </nav>
     </>

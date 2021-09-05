@@ -8,6 +8,7 @@ import { getPiece, GetPiece as RouteData } from '~/cms.server';
 import { usePageColor } from '~/hooks';
 import { Side } from '~/components/side';
 import { Picture } from '~/components/picture';
+import { IconDown } from '~/components/icons';
 
 export const handle = { bodyId: 'piece' };
 export const meta: MetaFunction = ({ data }: { data: RouteData }) => {
@@ -53,9 +54,7 @@ export default function Piece() {
           )}
 
           <a id="to-details" href="#details" title="Plus d‘informations">
-            <svg width="2rem" height="2rem" viewBox="0 -2 60 60">
-              <use href="#i-down" />
-            </svg>
+            <IconDown />
           </a>
         </section>
 

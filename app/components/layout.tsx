@@ -1,7 +1,6 @@
 import { useRouteData, Link } from 'remix';
 
 import type { GetHeader } from '~/cms.server';
-import { InlineSVG } from './inline-svg';
 
 export function Header() {
   const data = useRouteData<GetHeader>();
@@ -44,7 +43,6 @@ export function Footer() {
       </nav>
       <p className="mentions">2021 — Tous droits réservés</p>
       <p className="mentions">Design Dev: </p>
-      <InlineSVG />
     </footer>
   );
 }
