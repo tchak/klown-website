@@ -7,9 +7,11 @@
     "typecheck": "tsc",
     "build": "run-s build:css build:remix",
     "build:remix": "remix build",
-    "dev": "remix run",
+    "start:dev": "remix run",
+    "dev": "concurrently \"npm:watch:css\" \"npm:start:dev\"",
     "netlify:dev": "netlify dev",
-    "build:css": "node-sass styles/main.scss app/styles/index.css",
+    "build:css": "sass styles/main.scss app/styles/index.css",
+    "watch:css": "sass -w styles/main.scss app/styles/index.css",
     "test": "run-s typecheck",
     "generate": "graphql-codegen -r dotenv/config --config codegen.yml",
     "postinstall": "remix setup"
@@ -40,8 +42,9 @@
     "@types/react": "^17.0.19",
     "@types/react-dom": "^17.0.9",
     "@types/siema": "^1.4.7",
-    "node-sass": "^6.0.1",
+    "concurrently": "^6.2.1",
     "npm-run-all": "^4.1.5",
+    "sass": "^1.39.2",
     "typescript": "^4.4.2"
   },
   "engines": {
