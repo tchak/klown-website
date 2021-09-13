@@ -4,7 +4,7 @@ import { useRouteData } from 'remix';
 import Markdown from 'react-markdown';
 import Siema from 'siema';
 
-import { getPiece, GetPiece as RouteData, PieceType } from '~/cms.server';
+import { getPiece, GetPiece as RouteData } from '~/cms.server';
 import { usePageColor } from '~/hooks';
 import { Side } from '~/components/side';
 import { Picture } from '~/components/picture';
@@ -62,16 +62,16 @@ export default function Piece() {
           <p>{data.piece?.category?.title}</p>
           <h1>{data.piece?.title}</h1>
           <ul className="secondary">
-            {data.piece?.type == PieceType.Video ? (
+            {data.piece?.type == 'Video' ? (
               <VideoDetails piece={data.piece} />
             ) : null}
-            {data.piece?.type == PieceType.Painting ? (
+            {data.piece?.type == 'Painting' ? (
               <PaintingDetails piece={data.piece} />
             ) : null}
-            {data.piece?.type == PieceType.Photo ? (
+            {data.piece?.type == 'Photo' ? (
               <PhotoDetails piece={data.piece} />
             ) : null}
-            {data.piece?.type == PieceType.Installation ? (
+            {data.piece?.type == 'Installation' ? (
               <InstallationDetails piece={data.piece} />
             ) : null}
           </ul>
