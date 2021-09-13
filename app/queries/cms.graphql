@@ -39,6 +39,13 @@ query getPiece($slug: String!, $stage: Stage!) {
     title
     slug
     description
+    type
+    tags
+    technique
+    location
+    dimensions
+    duration
+    participants
     category {
       title
       color

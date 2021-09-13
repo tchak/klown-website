@@ -11,10 +11,13 @@ import {
   GetCategoryQuery,
   GetPieceQuery,
   Stage,
+  PieceType,
 } from './graphql-operations';
 
 const API_URL = process.env['API_URL']!;
 const API_TOKEN = process.env['API_TOKEN'];
+
+export { PieceType };
 
 export const client = createClient({
   url: API_URL,

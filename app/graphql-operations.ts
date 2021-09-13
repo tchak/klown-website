@@ -25,10 +25,6 @@ export type Scalars = {
   RichTextAST: any;
 };
 
-
-
-
-
 export type Aggregate = {
   readonly count: Scalars['Int'];
 };
@@ -47,16 +43,10 @@ export type Asset = Node & {
   readonly id: Scalars['ID'];
   /** The time the document was created */
   readonly createdAt: Scalars['DateTime'];
-  /** User that created this document */
-  readonly createdBy?: Maybe<User>;
   /** The time the document was updated */
   readonly updatedAt: Scalars['DateTime'];
-  /** User that last updated this document */
-  readonly updatedBy?: Maybe<User>;
   /** The time the document was published. Null on documents in draft stage. */
   readonly publishedAt?: Maybe<Scalars['DateTime']>;
-  /** User that last published this document */
-  readonly publishedBy?: Maybe<User>;
   /** The file handle */
   readonly handle: Scalars['String'];
   /** The file name */
@@ -69,6 +59,12 @@ export type Asset = Node & {
   readonly size?: Maybe<Scalars['Float']>;
   /** The mime type of the file */
   readonly mimeType?: Maybe<Scalars['String']>;
+  /** User that created this document */
+  readonly createdBy?: Maybe<User>;
+  /** User that last updated this document */
+  readonly updatedBy?: Maybe<User>;
+  /** User that last published this document */
+  readonly publishedBy?: Maybe<User>;
   readonly backgroundVideoCategory: ReadonlyArray<Category>;
   readonly photosPiece: ReadonlyArray<Piece>;
   /** List of Asset versions */
@@ -100,26 +96,26 @@ export type AssetCreatedAtArgs = {
 
 
 /** Asset system model */
-export type AssetCreatedByArgs = {
-  locales?: Maybe<ReadonlyArray<Locale>>;
-};
-
-
-/** Asset system model */
 export type AssetUpdatedAtArgs = {
   variation?: SystemDateTimeFieldVariation;
 };
 
 
 /** Asset system model */
-export type AssetUpdatedByArgs = {
+export type AssetPublishedAtArgs = {
+  variation?: SystemDateTimeFieldVariation;
+};
+
+
+/** Asset system model */
+export type AssetCreatedByArgs = {
   locales?: Maybe<ReadonlyArray<Locale>>;
 };
 
 
 /** Asset system model */
-export type AssetPublishedAtArgs = {
-  variation?: SystemDateTimeFieldVariation;
+export type AssetUpdatedByArgs = {
+  locales?: Maybe<ReadonlyArray<Locale>>;
 };
 
 
@@ -287,7 +283,6 @@ export type AssetManyWhereInput = {
   readonly createdAt_gt?: Maybe<Scalars['DateTime']>;
   /** All values greater than or equal the given value. */
   readonly createdAt_gte?: Maybe<Scalars['DateTime']>;
-  readonly createdBy?: Maybe<UserWhereInput>;
   readonly updatedAt?: Maybe<Scalars['DateTime']>;
   /** All values that are not equal to given value. */
   readonly updatedAt_not?: Maybe<Scalars['DateTime']>;
@@ -303,7 +298,6 @@ export type AssetManyWhereInput = {
   readonly updatedAt_gt?: Maybe<Scalars['DateTime']>;
   /** All values greater than or equal the given value. */
   readonly updatedAt_gte?: Maybe<Scalars['DateTime']>;
-  readonly updatedBy?: Maybe<UserWhereInput>;
   readonly publishedAt?: Maybe<Scalars['DateTime']>;
   /** All values that are not equal to given value. */
   readonly publishedAt_not?: Maybe<Scalars['DateTime']>;
@@ -319,6 +313,8 @@ export type AssetManyWhereInput = {
   readonly publishedAt_gt?: Maybe<Scalars['DateTime']>;
   /** All values greater than or equal the given value. */
   readonly publishedAt_gte?: Maybe<Scalars['DateTime']>;
+  readonly createdBy?: Maybe<UserWhereInput>;
+  readonly updatedBy?: Maybe<UserWhereInput>;
   readonly publishedBy?: Maybe<UserWhereInput>;
   readonly backgroundVideoCategory_every?: Maybe<CategoryWhereInput>;
   readonly backgroundVideoCategory_some?: Maybe<CategoryWhereInput>;
@@ -534,7 +530,6 @@ export type AssetWhereInput = {
   readonly createdAt_gt?: Maybe<Scalars['DateTime']>;
   /** All values greater than or equal the given value. */
   readonly createdAt_gte?: Maybe<Scalars['DateTime']>;
-  readonly createdBy?: Maybe<UserWhereInput>;
   readonly updatedAt?: Maybe<Scalars['DateTime']>;
   /** All values that are not equal to given value. */
   readonly updatedAt_not?: Maybe<Scalars['DateTime']>;
@@ -550,7 +545,6 @@ export type AssetWhereInput = {
   readonly updatedAt_gt?: Maybe<Scalars['DateTime']>;
   /** All values greater than or equal the given value. */
   readonly updatedAt_gte?: Maybe<Scalars['DateTime']>;
-  readonly updatedBy?: Maybe<UserWhereInput>;
   readonly publishedAt?: Maybe<Scalars['DateTime']>;
   /** All values that are not equal to given value. */
   readonly publishedAt_not?: Maybe<Scalars['DateTime']>;
@@ -566,7 +560,6 @@ export type AssetWhereInput = {
   readonly publishedAt_gt?: Maybe<Scalars['DateTime']>;
   /** All values greater than or equal the given value. */
   readonly publishedAt_gte?: Maybe<Scalars['DateTime']>;
-  readonly publishedBy?: Maybe<UserWhereInput>;
   readonly handle?: Maybe<Scalars['String']>;
   /** All values that are not equal to given value. */
   readonly handle_not?: Maybe<Scalars['String']>;
@@ -669,6 +662,9 @@ export type AssetWhereInput = {
   readonly mimeType_ends_with?: Maybe<Scalars['String']>;
   /** All values not ending with the given string */
   readonly mimeType_not_ends_with?: Maybe<Scalars['String']>;
+  readonly createdBy?: Maybe<UserWhereInput>;
+  readonly updatedBy?: Maybe<UserWhereInput>;
+  readonly publishedBy?: Maybe<UserWhereInput>;
   readonly backgroundVideoCategory_every?: Maybe<CategoryWhereInput>;
   readonly backgroundVideoCategory_some?: Maybe<CategoryWhereInput>;
   readonly backgroundVideoCategory_none?: Maybe<CategoryWhereInput>;
@@ -696,23 +692,23 @@ export type Category = Node & {
   readonly id: Scalars['ID'];
   /** The time the document was created */
   readonly createdAt: Scalars['DateTime'];
-  /** User that created this document */
-  readonly createdBy?: Maybe<User>;
   /** The time the document was updated */
   readonly updatedAt: Scalars['DateTime'];
-  /** User that last updated this document */
-  readonly updatedBy?: Maybe<User>;
   /** The time the document was published. Null on documents in draft stage. */
   readonly publishedAt?: Maybe<Scalars['DateTime']>;
-  /** User that last published this document */
-  readonly publishedBy?: Maybe<User>;
   readonly title: Scalars['String'];
   readonly description?: Maybe<Scalars['String']>;
   readonly slug: Scalars['String'];
-  readonly color: PageColor;
   readonly content?: Maybe<RichText>;
+  /** User that created this document */
+  readonly createdBy?: Maybe<User>;
+  /** User that last updated this document */
+  readonly updatedBy?: Maybe<User>;
+  /** User that last published this document */
+  readonly publishedBy?: Maybe<User>;
   readonly pieces: ReadonlyArray<Piece>;
   readonly backgroundVideo?: Maybe<Asset>;
+  readonly color: PageColor;
   /** List of Category versions */
   readonly history: ReadonlyArray<Version>;
 };
@@ -785,10 +781,10 @@ export type CategoryCreateInput = {
   readonly title: Scalars['String'];
   readonly description?: Maybe<Scalars['String']>;
   readonly slug: Scalars['String'];
-  readonly color: PageColor;
   readonly content?: Maybe<Scalars['RichTextAST']>;
   readonly pieces?: Maybe<PieceCreateManyInlineInput>;
   readonly backgroundVideo?: Maybe<AssetCreateOneInlineInput>;
+  readonly color: PageColor;
 };
 
 export type CategoryCreateManyInlineInput = {
@@ -857,7 +853,6 @@ export type CategoryManyWhereInput = {
   readonly createdAt_gt?: Maybe<Scalars['DateTime']>;
   /** All values greater than or equal the given value. */
   readonly createdAt_gte?: Maybe<Scalars['DateTime']>;
-  readonly createdBy?: Maybe<UserWhereInput>;
   readonly updatedAt?: Maybe<Scalars['DateTime']>;
   /** All values that are not equal to given value. */
   readonly updatedAt_not?: Maybe<Scalars['DateTime']>;
@@ -873,7 +868,6 @@ export type CategoryManyWhereInput = {
   readonly updatedAt_gt?: Maybe<Scalars['DateTime']>;
   /** All values greater than or equal the given value. */
   readonly updatedAt_gte?: Maybe<Scalars['DateTime']>;
-  readonly updatedBy?: Maybe<UserWhereInput>;
   readonly publishedAt?: Maybe<Scalars['DateTime']>;
   /** All values that are not equal to given value. */
   readonly publishedAt_not?: Maybe<Scalars['DateTime']>;
@@ -889,7 +883,6 @@ export type CategoryManyWhereInput = {
   readonly publishedAt_gt?: Maybe<Scalars['DateTime']>;
   /** All values greater than or equal the given value. */
   readonly publishedAt_gte?: Maybe<Scalars['DateTime']>;
-  readonly publishedBy?: Maybe<UserWhereInput>;
   readonly title?: Maybe<Scalars['String']>;
   /** All values that are not equal to given value. */
   readonly title_not?: Maybe<Scalars['String']>;
@@ -947,6 +940,13 @@ export type CategoryManyWhereInput = {
   readonly slug_ends_with?: Maybe<Scalars['String']>;
   /** All values not ending with the given string */
   readonly slug_not_ends_with?: Maybe<Scalars['String']>;
+  readonly createdBy?: Maybe<UserWhereInput>;
+  readonly updatedBy?: Maybe<UserWhereInput>;
+  readonly publishedBy?: Maybe<UserWhereInput>;
+  readonly pieces_every?: Maybe<PieceWhereInput>;
+  readonly pieces_some?: Maybe<PieceWhereInput>;
+  readonly pieces_none?: Maybe<PieceWhereInput>;
+  readonly backgroundVideo?: Maybe<AssetWhereInput>;
   readonly color?: Maybe<PageColor>;
   /** All values that are not equal to given value. */
   readonly color_not?: Maybe<PageColor>;
@@ -954,10 +954,6 @@ export type CategoryManyWhereInput = {
   readonly color_in?: Maybe<ReadonlyArray<PageColor>>;
   /** All values that are not contained in given list. */
   readonly color_not_in?: Maybe<ReadonlyArray<PageColor>>;
-  readonly pieces_every?: Maybe<PieceWhereInput>;
-  readonly pieces_some?: Maybe<PieceWhereInput>;
-  readonly pieces_none?: Maybe<PieceWhereInput>;
-  readonly backgroundVideo?: Maybe<AssetWhereInput>;
 };
 
 export enum CategoryOrderByInput {
@@ -983,10 +979,10 @@ export type CategoryUpdateInput = {
   readonly title?: Maybe<Scalars['String']>;
   readonly description?: Maybe<Scalars['String']>;
   readonly slug?: Maybe<Scalars['String']>;
-  readonly color?: Maybe<PageColor>;
   readonly content?: Maybe<Scalars['RichTextAST']>;
   readonly pieces?: Maybe<PieceUpdateManyInlineInput>;
   readonly backgroundVideo?: Maybe<AssetUpdateOneInlineInput>;
+  readonly color?: Maybe<PageColor>;
 };
 
 export type CategoryUpdateManyInlineInput = {
@@ -1008,8 +1004,8 @@ export type CategoryUpdateManyInlineInput = {
 
 export type CategoryUpdateManyInput = {
   readonly description?: Maybe<Scalars['String']>;
-  readonly color?: Maybe<PageColor>;
   readonly content?: Maybe<Scalars['RichTextAST']>;
+  readonly color?: Maybe<PageColor>;
 };
 
 export type CategoryUpdateManyWithNestedWhereInput = {
@@ -1099,7 +1095,6 @@ export type CategoryWhereInput = {
   readonly createdAt_gt?: Maybe<Scalars['DateTime']>;
   /** All values greater than or equal the given value. */
   readonly createdAt_gte?: Maybe<Scalars['DateTime']>;
-  readonly createdBy?: Maybe<UserWhereInput>;
   readonly updatedAt?: Maybe<Scalars['DateTime']>;
   /** All values that are not equal to given value. */
   readonly updatedAt_not?: Maybe<Scalars['DateTime']>;
@@ -1115,7 +1110,6 @@ export type CategoryWhereInput = {
   readonly updatedAt_gt?: Maybe<Scalars['DateTime']>;
   /** All values greater than or equal the given value. */
   readonly updatedAt_gte?: Maybe<Scalars['DateTime']>;
-  readonly updatedBy?: Maybe<UserWhereInput>;
   readonly publishedAt?: Maybe<Scalars['DateTime']>;
   /** All values that are not equal to given value. */
   readonly publishedAt_not?: Maybe<Scalars['DateTime']>;
@@ -1131,7 +1125,6 @@ export type CategoryWhereInput = {
   readonly publishedAt_gt?: Maybe<Scalars['DateTime']>;
   /** All values greater than or equal the given value. */
   readonly publishedAt_gte?: Maybe<Scalars['DateTime']>;
-  readonly publishedBy?: Maybe<UserWhereInput>;
   readonly title?: Maybe<Scalars['String']>;
   /** All values that are not equal to given value. */
   readonly title_not?: Maybe<Scalars['String']>;
@@ -1189,6 +1182,13 @@ export type CategoryWhereInput = {
   readonly slug_ends_with?: Maybe<Scalars['String']>;
   /** All values not ending with the given string */
   readonly slug_not_ends_with?: Maybe<Scalars['String']>;
+  readonly createdBy?: Maybe<UserWhereInput>;
+  readonly updatedBy?: Maybe<UserWhereInput>;
+  readonly publishedBy?: Maybe<UserWhereInput>;
+  readonly pieces_every?: Maybe<PieceWhereInput>;
+  readonly pieces_some?: Maybe<PieceWhereInput>;
+  readonly pieces_none?: Maybe<PieceWhereInput>;
+  readonly backgroundVideo?: Maybe<AssetWhereInput>;
   readonly color?: Maybe<PageColor>;
   /** All values that are not equal to given value. */
   readonly color_not?: Maybe<PageColor>;
@@ -1196,10 +1196,6 @@ export type CategoryWhereInput = {
   readonly color_in?: Maybe<ReadonlyArray<PageColor>>;
   /** All values that are not contained in given list. */
   readonly color_not_in?: Maybe<ReadonlyArray<PageColor>>;
-  readonly pieces_every?: Maybe<PieceWhereInput>;
-  readonly pieces_some?: Maybe<PieceWhereInput>;
-  readonly pieces_none?: Maybe<PieceWhereInput>;
-  readonly backgroundVideo?: Maybe<AssetWhereInput>;
 };
 
 /** References Category record uniquely */
@@ -1232,8 +1228,6 @@ export type ConnectPositionInput = {
   /** Connect document at last position */
   readonly end?: Maybe<Scalars['Boolean']>;
 };
-
-
 
 export enum DocumentFileTypes {
   Jpg = 'jpg',
@@ -1298,7 +1292,6 @@ export type DocumentVersion = {
   readonly data?: Maybe<Scalars['Json']>;
 };
 
-
 export enum ImageFit {
   /** Resizes the image to fit within the specified parameters without distorting, cropping, or changing the aspect ratio. */
   Clip = 'clip',
@@ -1325,7 +1318,6 @@ export type ImageTransformationInput = {
   readonly resize?: Maybe<ImageResizeInput>;
 };
 
-
 /** Locale system enumeration */
 export enum Locale {
   /** System locale */
@@ -1351,8 +1343,47 @@ export type LocationInput = {
   readonly longitude: Scalars['Float'];
 };
 
-
 export type Mutation = {
+  /** Create one piece */
+  readonly createPiece?: Maybe<Piece>;
+  /** Update one piece */
+  readonly updatePiece?: Maybe<Piece>;
+  /** Delete one piece from _all_ existing stages. Returns deleted document. */
+  readonly deletePiece?: Maybe<Piece>;
+  /** Upsert one piece */
+  readonly upsertPiece?: Maybe<Piece>;
+  /** Publish one piece */
+  readonly publishPiece?: Maybe<Piece>;
+  /** Unpublish one piece from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
+  readonly unpublishPiece?: Maybe<Piece>;
+  /** Update many Piece documents */
+  readonly updateManyPiecesConnection: PieceConnection;
+  /** Delete many Piece documents, return deleted documents */
+  readonly deleteManyPiecesConnection: PieceConnection;
+  /** Publish many Piece documents */
+  readonly publishManyPiecesConnection: PieceConnection;
+  /** Find many Piece documents that match criteria in specified stage and unpublish from target stages */
+  readonly unpublishManyPiecesConnection: PieceConnection;
+  /**
+   * Update many pieces
+   * @deprecated Please use the new paginated many mutation (updateManyPiecesConnection)
+   */
+  readonly updateManyPieces: BatchPayload;
+  /**
+   * Delete many Piece documents
+   * @deprecated Please use the new paginated many mutation (deleteManyPiecesConnection)
+   */
+  readonly deleteManyPieces: BatchPayload;
+  /**
+   * Publish many Piece documents
+   * @deprecated Please use the new paginated many mutation (publishManyPiecesConnection)
+   */
+  readonly publishManyPieces: BatchPayload;
+  /**
+   * Unpublish many Piece documents
+   * @deprecated Please use the new paginated many mutation (unpublishManyPiecesConnection)
+   */
+  readonly unpublishManyPieces: BatchPayload;
   /**
    * Create one asset
    * @deprecated Asset mutations will be overhauled soon
@@ -1436,46 +1467,108 @@ export type Mutation = {
    * @deprecated Please use the new paginated many mutation (unpublishManyCategoriesConnection)
    */
   readonly unpublishManyCategories: BatchPayload;
-  /** Create one piece */
-  readonly createPiece?: Maybe<Piece>;
-  /** Update one piece */
-  readonly updatePiece?: Maybe<Piece>;
-  /** Delete one piece from _all_ existing stages. Returns deleted document. */
-  readonly deletePiece?: Maybe<Piece>;
-  /** Upsert one piece */
-  readonly upsertPiece?: Maybe<Piece>;
-  /** Publish one piece */
-  readonly publishPiece?: Maybe<Piece>;
-  /** Unpublish one piece from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
-  readonly unpublishPiece?: Maybe<Piece>;
-  /** Update many Piece documents */
-  readonly updateManyPiecesConnection: PieceConnection;
-  /** Delete many Piece documents, return deleted documents */
-  readonly deleteManyPiecesConnection: PieceConnection;
-  /** Publish many Piece documents */
-  readonly publishManyPiecesConnection: PieceConnection;
-  /** Find many Piece documents that match criteria in specified stage and unpublish from target stages */
-  readonly unpublishManyPiecesConnection: PieceConnection;
-  /**
-   * Update many pieces
-   * @deprecated Please use the new paginated many mutation (updateManyPiecesConnection)
-   */
-  readonly updateManyPieces: BatchPayload;
-  /**
-   * Delete many Piece documents
-   * @deprecated Please use the new paginated many mutation (deleteManyPiecesConnection)
-   */
-  readonly deleteManyPieces: BatchPayload;
-  /**
-   * Publish many Piece documents
-   * @deprecated Please use the new paginated many mutation (publishManyPiecesConnection)
-   */
-  readonly publishManyPieces: BatchPayload;
-  /**
-   * Unpublish many Piece documents
-   * @deprecated Please use the new paginated many mutation (unpublishManyPiecesConnection)
-   */
-  readonly unpublishManyPieces: BatchPayload;
+};
+
+
+export type MutationCreatePieceArgs = {
+  data: PieceCreateInput;
+};
+
+
+export type MutationUpdatePieceArgs = {
+  where: PieceWhereUniqueInput;
+  data: PieceUpdateInput;
+};
+
+
+export type MutationDeletePieceArgs = {
+  where: PieceWhereUniqueInput;
+};
+
+
+export type MutationUpsertPieceArgs = {
+  where: PieceWhereUniqueInput;
+  upsert: PieceUpsertInput;
+};
+
+
+export type MutationPublishPieceArgs = {
+  where: PieceWhereUniqueInput;
+  to?: ReadonlyArray<Stage>;
+};
+
+
+export type MutationUnpublishPieceArgs = {
+  where: PieceWhereUniqueInput;
+  from?: ReadonlyArray<Stage>;
+};
+
+
+export type MutationUpdateManyPiecesConnectionArgs = {
+  where?: Maybe<PieceManyWhereInput>;
+  data: PieceUpdateManyInput;
+  skip?: Maybe<Scalars['Int']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['ID']>;
+  after?: Maybe<Scalars['ID']>;
+};
+
+
+export type MutationDeleteManyPiecesConnectionArgs = {
+  where?: Maybe<PieceManyWhereInput>;
+  skip?: Maybe<Scalars['Int']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['ID']>;
+  after?: Maybe<Scalars['ID']>;
+};
+
+
+export type MutationPublishManyPiecesConnectionArgs = {
+  where?: Maybe<PieceManyWhereInput>;
+  from?: Maybe<Stage>;
+  to?: ReadonlyArray<Stage>;
+  skip?: Maybe<Scalars['Int']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['ID']>;
+  after?: Maybe<Scalars['ID']>;
+};
+
+
+export type MutationUnpublishManyPiecesConnectionArgs = {
+  where?: Maybe<PieceManyWhereInput>;
+  stage?: Maybe<Stage>;
+  from?: ReadonlyArray<Stage>;
+  skip?: Maybe<Scalars['Int']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['ID']>;
+  after?: Maybe<Scalars['ID']>;
+};
+
+
+export type MutationUpdateManyPiecesArgs = {
+  where?: Maybe<PieceManyWhereInput>;
+  data: PieceUpdateManyInput;
+};
+
+
+export type MutationDeleteManyPiecesArgs = {
+  where?: Maybe<PieceManyWhereInput>;
+};
+
+
+export type MutationPublishManyPiecesArgs = {
+  where?: Maybe<PieceManyWhereInput>;
+  to?: ReadonlyArray<Stage>;
+};
+
+
+export type MutationUnpublishManyPiecesArgs = {
+  where?: Maybe<PieceManyWhereInput>;
+  from?: ReadonlyArray<Stage>;
 };
 
 
@@ -1697,108 +1790,6 @@ export type MutationUnpublishManyCategoriesArgs = {
   from?: ReadonlyArray<Stage>;
 };
 
-
-export type MutationCreatePieceArgs = {
-  data: PieceCreateInput;
-};
-
-
-export type MutationUpdatePieceArgs = {
-  where: PieceWhereUniqueInput;
-  data: PieceUpdateInput;
-};
-
-
-export type MutationDeletePieceArgs = {
-  where: PieceWhereUniqueInput;
-};
-
-
-export type MutationUpsertPieceArgs = {
-  where: PieceWhereUniqueInput;
-  upsert: PieceUpsertInput;
-};
-
-
-export type MutationPublishPieceArgs = {
-  where: PieceWhereUniqueInput;
-  to?: ReadonlyArray<Stage>;
-};
-
-
-export type MutationUnpublishPieceArgs = {
-  where: PieceWhereUniqueInput;
-  from?: ReadonlyArray<Stage>;
-};
-
-
-export type MutationUpdateManyPiecesConnectionArgs = {
-  where?: Maybe<PieceManyWhereInput>;
-  data: PieceUpdateManyInput;
-  skip?: Maybe<Scalars['Int']>;
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
-  before?: Maybe<Scalars['ID']>;
-  after?: Maybe<Scalars['ID']>;
-};
-
-
-export type MutationDeleteManyPiecesConnectionArgs = {
-  where?: Maybe<PieceManyWhereInput>;
-  skip?: Maybe<Scalars['Int']>;
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
-  before?: Maybe<Scalars['ID']>;
-  after?: Maybe<Scalars['ID']>;
-};
-
-
-export type MutationPublishManyPiecesConnectionArgs = {
-  where?: Maybe<PieceManyWhereInput>;
-  from?: Maybe<Stage>;
-  to?: ReadonlyArray<Stage>;
-  skip?: Maybe<Scalars['Int']>;
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
-  before?: Maybe<Scalars['ID']>;
-  after?: Maybe<Scalars['ID']>;
-};
-
-
-export type MutationUnpublishManyPiecesConnectionArgs = {
-  where?: Maybe<PieceManyWhereInput>;
-  stage?: Maybe<Stage>;
-  from?: ReadonlyArray<Stage>;
-  skip?: Maybe<Scalars['Int']>;
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
-  before?: Maybe<Scalars['ID']>;
-  after?: Maybe<Scalars['ID']>;
-};
-
-
-export type MutationUpdateManyPiecesArgs = {
-  where?: Maybe<PieceManyWhereInput>;
-  data: PieceUpdateManyInput;
-};
-
-
-export type MutationDeleteManyPiecesArgs = {
-  where?: Maybe<PieceManyWhereInput>;
-};
-
-
-export type MutationPublishManyPiecesArgs = {
-  where?: Maybe<PieceManyWhereInput>;
-  to?: ReadonlyArray<Stage>;
-};
-
-
-export type MutationUnpublishManyPiecesArgs = {
-  where?: Maybe<PieceManyWhereInput>;
-  from?: ReadonlyArray<Stage>;
-};
-
 /** An object with an ID */
 export type Node = {
   /** The id of the object. */
@@ -1836,30 +1827,31 @@ export type Piece = Node & {
   readonly id: Scalars['ID'];
   /** The time the document was created */
   readonly createdAt: Scalars['DateTime'];
-  /** User that created this document */
-  readonly createdBy?: Maybe<User>;
   /** The time the document was updated */
   readonly updatedAt: Scalars['DateTime'];
-  /** User that last updated this document */
-  readonly updatedBy?: Maybe<User>;
   /** The time the document was published. Null on documents in draft stage. */
   readonly publishedAt?: Maybe<Scalars['DateTime']>;
-  /** User that last published this document */
-  readonly publishedBy?: Maybe<User>;
   readonly title: Scalars['String'];
   readonly description?: Maybe<Scalars['String']>;
   readonly slug: Scalars['String'];
   readonly tags: ReadonlyArray<Scalars['String']>;
   readonly content?: Maybe<RichText>;
-  readonly images: ReadonlyArray<Asset>;
-  readonly type: PieceType;
   readonly technique?: Maybe<Scalars['String']>;
   readonly dimensions?: Maybe<Scalars['String']>;
   readonly duration?: Maybe<Scalars['String']>;
   readonly participants: ReadonlyArray<Scalars['String']>;
+  readonly location?: Maybe<Scalars['String']>;
+  /** User that created this document */
+  readonly createdBy?: Maybe<User>;
+  /** User that last updated this document */
+  readonly updatedBy?: Maybe<User>;
+  /** User that last published this document */
+  readonly publishedBy?: Maybe<User>;
+  readonly images: ReadonlyArray<Asset>;
   readonly category?: Maybe<Category>;
   readonly related: ReadonlyArray<Piece>;
   readonly relatedFrom: ReadonlyArray<Piece>;
+  readonly type: PieceType;
   /** List of Piece versions */
   readonly history: ReadonlyArray<Version>;
 };
@@ -1958,15 +1950,16 @@ export type PieceCreateInput = {
   readonly slug: Scalars['String'];
   readonly tags?: Maybe<ReadonlyArray<Scalars['String']>>;
   readonly content?: Maybe<Scalars['RichTextAST']>;
-  readonly images?: Maybe<AssetCreateManyInlineInput>;
-  readonly type: PieceType;
   readonly technique?: Maybe<Scalars['String']>;
   readonly dimensions?: Maybe<Scalars['String']>;
   readonly duration?: Maybe<Scalars['String']>;
   readonly participants?: Maybe<ReadonlyArray<Scalars['String']>>;
+  readonly location?: Maybe<Scalars['String']>;
+  readonly images?: Maybe<AssetCreateManyInlineInput>;
   readonly category?: Maybe<CategoryCreateOneInlineInput>;
   readonly related?: Maybe<PieceCreateManyInlineInput>;
   readonly relatedFrom?: Maybe<PieceCreateManyInlineInput>;
+  readonly type: PieceType;
 };
 
 export type PieceCreateManyInlineInput = {
@@ -2035,7 +2028,6 @@ export type PieceManyWhereInput = {
   readonly createdAt_gt?: Maybe<Scalars['DateTime']>;
   /** All values greater than or equal the given value. */
   readonly createdAt_gte?: Maybe<Scalars['DateTime']>;
-  readonly createdBy?: Maybe<UserWhereInput>;
   readonly updatedAt?: Maybe<Scalars['DateTime']>;
   /** All values that are not equal to given value. */
   readonly updatedAt_not?: Maybe<Scalars['DateTime']>;
@@ -2051,7 +2043,6 @@ export type PieceManyWhereInput = {
   readonly updatedAt_gt?: Maybe<Scalars['DateTime']>;
   /** All values greater than or equal the given value. */
   readonly updatedAt_gte?: Maybe<Scalars['DateTime']>;
-  readonly updatedBy?: Maybe<UserWhereInput>;
   readonly publishedAt?: Maybe<Scalars['DateTime']>;
   /** All values that are not equal to given value. */
   readonly publishedAt_not?: Maybe<Scalars['DateTime']>;
@@ -2067,7 +2058,6 @@ export type PieceManyWhereInput = {
   readonly publishedAt_gt?: Maybe<Scalars['DateTime']>;
   /** All values greater than or equal the given value. */
   readonly publishedAt_gte?: Maybe<Scalars['DateTime']>;
-  readonly publishedBy?: Maybe<UserWhereInput>;
   readonly title?: Maybe<Scalars['String']>;
   /** All values that are not equal to given value. */
   readonly title_not?: Maybe<Scalars['String']>;
@@ -2135,16 +2125,6 @@ export type PieceManyWhereInput = {
   readonly tags_contains_some?: Maybe<ReadonlyArray<Scalars['String']>>;
   /** Matches if the field array does not contain any of the items provided to the filter */
   readonly tags_contains_none?: Maybe<ReadonlyArray<Scalars['String']>>;
-  readonly images_every?: Maybe<AssetWhereInput>;
-  readonly images_some?: Maybe<AssetWhereInput>;
-  readonly images_none?: Maybe<AssetWhereInput>;
-  readonly type?: Maybe<PieceType>;
-  /** All values that are not equal to given value. */
-  readonly type_not?: Maybe<PieceType>;
-  /** All values that are contained in given list. */
-  readonly type_in?: Maybe<ReadonlyArray<PieceType>>;
-  /** All values that are not contained in given list. */
-  readonly type_not_in?: Maybe<ReadonlyArray<PieceType>>;
   readonly technique?: Maybe<Scalars['String']>;
   /** All values that are not equal to given value. */
   readonly technique_not?: Maybe<Scalars['String']>;
@@ -2212,6 +2192,31 @@ export type PieceManyWhereInput = {
   readonly participants_contains_some?: Maybe<ReadonlyArray<Scalars['String']>>;
   /** Matches if the field array does not contain any of the items provided to the filter */
   readonly participants_contains_none?: Maybe<ReadonlyArray<Scalars['String']>>;
+  readonly location?: Maybe<Scalars['String']>;
+  /** All values that are not equal to given value. */
+  readonly location_not?: Maybe<Scalars['String']>;
+  /** All values that are contained in given list. */
+  readonly location_in?: Maybe<ReadonlyArray<Scalars['String']>>;
+  /** All values that are not contained in given list. */
+  readonly location_not_in?: Maybe<ReadonlyArray<Scalars['String']>>;
+  /** All values containing the given string. */
+  readonly location_contains?: Maybe<Scalars['String']>;
+  /** All values not containing the given string. */
+  readonly location_not_contains?: Maybe<Scalars['String']>;
+  /** All values starting with the given string. */
+  readonly location_starts_with?: Maybe<Scalars['String']>;
+  /** All values not starting with the given string. */
+  readonly location_not_starts_with?: Maybe<Scalars['String']>;
+  /** All values ending with the given string. */
+  readonly location_ends_with?: Maybe<Scalars['String']>;
+  /** All values not ending with the given string */
+  readonly location_not_ends_with?: Maybe<Scalars['String']>;
+  readonly createdBy?: Maybe<UserWhereInput>;
+  readonly updatedBy?: Maybe<UserWhereInput>;
+  readonly publishedBy?: Maybe<UserWhereInput>;
+  readonly images_every?: Maybe<AssetWhereInput>;
+  readonly images_some?: Maybe<AssetWhereInput>;
+  readonly images_none?: Maybe<AssetWhereInput>;
   readonly category?: Maybe<CategoryWhereInput>;
   readonly related_every?: Maybe<PieceWhereInput>;
   readonly related_some?: Maybe<PieceWhereInput>;
@@ -2219,6 +2224,13 @@ export type PieceManyWhereInput = {
   readonly relatedFrom_every?: Maybe<PieceWhereInput>;
   readonly relatedFrom_some?: Maybe<PieceWhereInput>;
   readonly relatedFrom_none?: Maybe<PieceWhereInput>;
+  readonly type?: Maybe<PieceType>;
+  /** All values that are not equal to given value. */
+  readonly type_not?: Maybe<PieceType>;
+  /** All values that are contained in given list. */
+  readonly type_in?: Maybe<ReadonlyArray<PieceType>>;
+  /** All values that are not contained in given list. */
+  readonly type_not_in?: Maybe<ReadonlyArray<PieceType>>;
 };
 
 export enum PieceOrderByInput {
@@ -2238,8 +2250,6 @@ export enum PieceOrderByInput {
   SlugDesc = 'slug_DESC',
   TagsAsc = 'tags_ASC',
   TagsDesc = 'tags_DESC',
-  TypeAsc = 'type_ASC',
-  TypeDesc = 'type_DESC',
   TechniqueAsc = 'technique_ASC',
   TechniqueDesc = 'technique_DESC',
   DimensionsAsc = 'dimensions_ASC',
@@ -2247,13 +2257,18 @@ export enum PieceOrderByInput {
   DurationAsc = 'duration_ASC',
   DurationDesc = 'duration_DESC',
   ParticipantsAsc = 'participants_ASC',
-  ParticipantsDesc = 'participants_DESC'
+  ParticipantsDesc = 'participants_DESC',
+  LocationAsc = 'location_ASC',
+  LocationDesc = 'location_DESC',
+  TypeAsc = 'type_ASC',
+  TypeDesc = 'type_DESC'
 }
 
 export enum PieceType {
   Painting = 'Painting',
   Photo = 'Photo',
-  Video = 'Video'
+  Video = 'Video',
+  Installation = 'Installation'
 }
 
 export type PieceUpdateInput = {
@@ -2262,15 +2277,16 @@ export type PieceUpdateInput = {
   readonly slug?: Maybe<Scalars['String']>;
   readonly tags?: Maybe<ReadonlyArray<Scalars['String']>>;
   readonly content?: Maybe<Scalars['RichTextAST']>;
-  readonly images?: Maybe<AssetUpdateManyInlineInput>;
-  readonly type?: Maybe<PieceType>;
   readonly technique?: Maybe<Scalars['String']>;
   readonly dimensions?: Maybe<Scalars['String']>;
   readonly duration?: Maybe<Scalars['String']>;
   readonly participants?: Maybe<ReadonlyArray<Scalars['String']>>;
+  readonly location?: Maybe<Scalars['String']>;
+  readonly images?: Maybe<AssetUpdateManyInlineInput>;
   readonly category?: Maybe<CategoryUpdateOneInlineInput>;
   readonly related?: Maybe<PieceUpdateManyInlineInput>;
   readonly relatedFrom?: Maybe<PieceUpdateManyInlineInput>;
+  readonly type?: Maybe<PieceType>;
 };
 
 export type PieceUpdateManyInlineInput = {
@@ -2294,11 +2310,12 @@ export type PieceUpdateManyInput = {
   readonly description?: Maybe<Scalars['String']>;
   readonly tags?: Maybe<ReadonlyArray<Scalars['String']>>;
   readonly content?: Maybe<Scalars['RichTextAST']>;
-  readonly type?: Maybe<PieceType>;
   readonly technique?: Maybe<Scalars['String']>;
   readonly dimensions?: Maybe<Scalars['String']>;
   readonly duration?: Maybe<Scalars['String']>;
   readonly participants?: Maybe<ReadonlyArray<Scalars['String']>>;
+  readonly location?: Maybe<Scalars['String']>;
+  readonly type?: Maybe<PieceType>;
 };
 
 export type PieceUpdateManyWithNestedWhereInput = {
@@ -2388,7 +2405,6 @@ export type PieceWhereInput = {
   readonly createdAt_gt?: Maybe<Scalars['DateTime']>;
   /** All values greater than or equal the given value. */
   readonly createdAt_gte?: Maybe<Scalars['DateTime']>;
-  readonly createdBy?: Maybe<UserWhereInput>;
   readonly updatedAt?: Maybe<Scalars['DateTime']>;
   /** All values that are not equal to given value. */
   readonly updatedAt_not?: Maybe<Scalars['DateTime']>;
@@ -2404,7 +2420,6 @@ export type PieceWhereInput = {
   readonly updatedAt_gt?: Maybe<Scalars['DateTime']>;
   /** All values greater than or equal the given value. */
   readonly updatedAt_gte?: Maybe<Scalars['DateTime']>;
-  readonly updatedBy?: Maybe<UserWhereInput>;
   readonly publishedAt?: Maybe<Scalars['DateTime']>;
   /** All values that are not equal to given value. */
   readonly publishedAt_not?: Maybe<Scalars['DateTime']>;
@@ -2420,7 +2435,6 @@ export type PieceWhereInput = {
   readonly publishedAt_gt?: Maybe<Scalars['DateTime']>;
   /** All values greater than or equal the given value. */
   readonly publishedAt_gte?: Maybe<Scalars['DateTime']>;
-  readonly publishedBy?: Maybe<UserWhereInput>;
   readonly title?: Maybe<Scalars['String']>;
   /** All values that are not equal to given value. */
   readonly title_not?: Maybe<Scalars['String']>;
@@ -2488,16 +2502,6 @@ export type PieceWhereInput = {
   readonly tags_contains_some?: Maybe<ReadonlyArray<Scalars['String']>>;
   /** Matches if the field array does not contain any of the items provided to the filter */
   readonly tags_contains_none?: Maybe<ReadonlyArray<Scalars['String']>>;
-  readonly images_every?: Maybe<AssetWhereInput>;
-  readonly images_some?: Maybe<AssetWhereInput>;
-  readonly images_none?: Maybe<AssetWhereInput>;
-  readonly type?: Maybe<PieceType>;
-  /** All values that are not equal to given value. */
-  readonly type_not?: Maybe<PieceType>;
-  /** All values that are contained in given list. */
-  readonly type_in?: Maybe<ReadonlyArray<PieceType>>;
-  /** All values that are not contained in given list. */
-  readonly type_not_in?: Maybe<ReadonlyArray<PieceType>>;
   readonly technique?: Maybe<Scalars['String']>;
   /** All values that are not equal to given value. */
   readonly technique_not?: Maybe<Scalars['String']>;
@@ -2565,6 +2569,31 @@ export type PieceWhereInput = {
   readonly participants_contains_some?: Maybe<ReadonlyArray<Scalars['String']>>;
   /** Matches if the field array does not contain any of the items provided to the filter */
   readonly participants_contains_none?: Maybe<ReadonlyArray<Scalars['String']>>;
+  readonly location?: Maybe<Scalars['String']>;
+  /** All values that are not equal to given value. */
+  readonly location_not?: Maybe<Scalars['String']>;
+  /** All values that are contained in given list. */
+  readonly location_in?: Maybe<ReadonlyArray<Scalars['String']>>;
+  /** All values that are not contained in given list. */
+  readonly location_not_in?: Maybe<ReadonlyArray<Scalars['String']>>;
+  /** All values containing the given string. */
+  readonly location_contains?: Maybe<Scalars['String']>;
+  /** All values not containing the given string. */
+  readonly location_not_contains?: Maybe<Scalars['String']>;
+  /** All values starting with the given string. */
+  readonly location_starts_with?: Maybe<Scalars['String']>;
+  /** All values not starting with the given string. */
+  readonly location_not_starts_with?: Maybe<Scalars['String']>;
+  /** All values ending with the given string. */
+  readonly location_ends_with?: Maybe<Scalars['String']>;
+  /** All values not ending with the given string */
+  readonly location_not_ends_with?: Maybe<Scalars['String']>;
+  readonly createdBy?: Maybe<UserWhereInput>;
+  readonly updatedBy?: Maybe<UserWhereInput>;
+  readonly publishedBy?: Maybe<UserWhereInput>;
+  readonly images_every?: Maybe<AssetWhereInput>;
+  readonly images_some?: Maybe<AssetWhereInput>;
+  readonly images_none?: Maybe<AssetWhereInput>;
   readonly category?: Maybe<CategoryWhereInput>;
   readonly related_every?: Maybe<PieceWhereInput>;
   readonly related_some?: Maybe<PieceWhereInput>;
@@ -2572,6 +2601,13 @@ export type PieceWhereInput = {
   readonly relatedFrom_every?: Maybe<PieceWhereInput>;
   readonly relatedFrom_some?: Maybe<PieceWhereInput>;
   readonly relatedFrom_none?: Maybe<PieceWhereInput>;
+  readonly type?: Maybe<PieceType>;
+  /** All values that are not equal to given value. */
+  readonly type_not?: Maybe<PieceType>;
+  /** All values that are contained in given list. */
+  readonly type_in?: Maybe<ReadonlyArray<PieceType>>;
+  /** All values that are not contained in given list. */
+  readonly type_not_in?: Maybe<ReadonlyArray<PieceType>>;
 };
 
 /** References Piece record uniquely */
@@ -2591,6 +2627,20 @@ export type PublishLocaleInput = {
 export type Query = {
   /** Fetches an object given its ID */
   readonly node?: Maybe<Node>;
+  /** Retrieve multiple pieces */
+  readonly pieces: ReadonlyArray<Piece>;
+  /** Retrieve a single piece */
+  readonly piece?: Maybe<Piece>;
+  /** Retrieve multiple pieces using the Relay connection interface */
+  readonly piecesConnection: PieceConnection;
+  /** Retrieve document version */
+  readonly pieceVersion?: Maybe<DocumentVersion>;
+  /** Retrieve multiple users */
+  readonly users: ReadonlyArray<User>;
+  /** Retrieve a single user */
+  readonly user?: Maybe<User>;
+  /** Retrieve multiple users using the Relay connection interface */
+  readonly usersConnection: UserConnection;
   /** Retrieve multiple assets */
   readonly assets: ReadonlyArray<Asset>;
   /** Retrieve a single asset */
@@ -2607,25 +2657,82 @@ export type Query = {
   readonly categoriesConnection: CategoryConnection;
   /** Retrieve document version */
   readonly categoryVersion?: Maybe<DocumentVersion>;
-  /** Retrieve multiple pieces */
-  readonly pieces: ReadonlyArray<Piece>;
-  /** Retrieve a single piece */
-  readonly piece?: Maybe<Piece>;
-  /** Retrieve multiple pieces using the Relay connection interface */
-  readonly piecesConnection: PieceConnection;
-  /** Retrieve document version */
-  readonly pieceVersion?: Maybe<DocumentVersion>;
-  /** Retrieve multiple users */
-  readonly users: ReadonlyArray<User>;
-  /** Retrieve a single user */
-  readonly user?: Maybe<User>;
-  /** Retrieve multiple users using the Relay connection interface */
-  readonly usersConnection: UserConnection;
 };
 
 
 export type QueryNodeArgs = {
   id: Scalars['ID'];
+  stage?: Stage;
+  locales?: ReadonlyArray<Locale>;
+};
+
+
+export type QueryPiecesArgs = {
+  where?: Maybe<PieceWhereInput>;
+  orderBy?: Maybe<PieceOrderByInput>;
+  skip?: Maybe<Scalars['Int']>;
+  after?: Maybe<Scalars['String']>;
+  before?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  stage?: Stage;
+  locales?: ReadonlyArray<Locale>;
+};
+
+
+export type QueryPieceArgs = {
+  where: PieceWhereUniqueInput;
+  stage?: Stage;
+  locales?: ReadonlyArray<Locale>;
+};
+
+
+export type QueryPiecesConnectionArgs = {
+  where?: Maybe<PieceWhereInput>;
+  orderBy?: Maybe<PieceOrderByInput>;
+  skip?: Maybe<Scalars['Int']>;
+  after?: Maybe<Scalars['String']>;
+  before?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  stage?: Stage;
+  locales?: ReadonlyArray<Locale>;
+};
+
+
+export type QueryPieceVersionArgs = {
+  where: VersionWhereInput;
+};
+
+
+export type QueryUsersArgs = {
+  where?: Maybe<UserWhereInput>;
+  orderBy?: Maybe<UserOrderByInput>;
+  skip?: Maybe<Scalars['Int']>;
+  after?: Maybe<Scalars['String']>;
+  before?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  stage?: Stage;
+  locales?: ReadonlyArray<Locale>;
+};
+
+
+export type QueryUserArgs = {
+  where: UserWhereUniqueInput;
+  stage?: Stage;
+  locales?: ReadonlyArray<Locale>;
+};
+
+
+export type QueryUsersConnectionArgs = {
+  where?: Maybe<UserWhereInput>;
+  orderBy?: Maybe<UserOrderByInput>;
+  skip?: Maybe<Scalars['Int']>;
+  after?: Maybe<Scalars['String']>;
+  before?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
   stage?: Stage;
   locales?: ReadonlyArray<Locale>;
 };
@@ -2706,77 +2813,6 @@ export type QueryCategoryVersionArgs = {
   where: VersionWhereInput;
 };
 
-
-export type QueryPiecesArgs = {
-  where?: Maybe<PieceWhereInput>;
-  orderBy?: Maybe<PieceOrderByInput>;
-  skip?: Maybe<Scalars['Int']>;
-  after?: Maybe<Scalars['String']>;
-  before?: Maybe<Scalars['String']>;
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
-  stage?: Stage;
-  locales?: ReadonlyArray<Locale>;
-};
-
-
-export type QueryPieceArgs = {
-  where: PieceWhereUniqueInput;
-  stage?: Stage;
-  locales?: ReadonlyArray<Locale>;
-};
-
-
-export type QueryPiecesConnectionArgs = {
-  where?: Maybe<PieceWhereInput>;
-  orderBy?: Maybe<PieceOrderByInput>;
-  skip?: Maybe<Scalars['Int']>;
-  after?: Maybe<Scalars['String']>;
-  before?: Maybe<Scalars['String']>;
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
-  stage?: Stage;
-  locales?: ReadonlyArray<Locale>;
-};
-
-
-export type QueryPieceVersionArgs = {
-  where: VersionWhereInput;
-};
-
-
-export type QueryUsersArgs = {
-  where?: Maybe<UserWhereInput>;
-  orderBy?: Maybe<UserOrderByInput>;
-  skip?: Maybe<Scalars['Int']>;
-  after?: Maybe<Scalars['String']>;
-  before?: Maybe<Scalars['String']>;
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
-  stage?: Stage;
-  locales?: ReadonlyArray<Locale>;
-};
-
-
-export type QueryUserArgs = {
-  where: UserWhereUniqueInput;
-  stage?: Stage;
-  locales?: ReadonlyArray<Locale>;
-};
-
-
-export type QueryUsersConnectionArgs = {
-  where?: Maybe<UserWhereInput>;
-  orderBy?: Maybe<UserOrderByInput>;
-  skip?: Maybe<Scalars['Int']>;
-  after?: Maybe<Scalars['String']>;
-  before?: Maybe<Scalars['String']>;
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
-  stage?: Stage;
-  locales?: ReadonlyArray<Locale>;
-};
-
 /** Representing a RGBA color value: https://developer.mozilla.org/en-US/docs/Web/CSS/color_value#rgb()_and_rgba() */
 export type Rgba = {
   readonly r: Scalars['RGBAHue'];
@@ -2785,7 +2821,6 @@ export type Rgba = {
   readonly a: Scalars['RGBATransparency'];
 };
 
-
 /** Input type representing a RGBA color value: https://developer.mozilla.org/en-US/docs/Web/CSS/color_value#rgb()_and_rgba() */
 export type RgbaInput = {
   readonly r: Scalars['RGBAHue'];
@@ -2793,7 +2828,6 @@ export type RgbaInput = {
   readonly b: Scalars['RGBAHue'];
   readonly a: Scalars['RGBATransparency'];
 };
-
 
 /** Custom type representing a rich text value comprising of raw rich text ast, html, markdown and text values */
 export type RichText = {
@@ -2806,7 +2840,6 @@ export type RichText = {
   /** Returns plain-text contents of RichText */
   readonly text: Scalars['String'];
 };
-
 
 /** Stage system enumeration */
 export enum Stage {
@@ -2847,10 +2880,10 @@ export type User = Node & {
   readonly name: Scalars['String'];
   /** Profile Picture url */
   readonly picture?: Maybe<Scalars['String']>;
-  /** User Kind. Can be either MEMBER, PAT or PUBLIC */
-  readonly kind: UserKind;
   /** Flag to determine if user is active or not */
   readonly isActive: Scalars['Boolean'];
+  /** User Kind. Can be either MEMBER, PAT or PUBLIC */
+  readonly kind: UserKind;
 };
 
 
@@ -2861,6 +2894,13 @@ export type UserDocumentInStagesArgs = {
   inheritLocale?: Scalars['Boolean'];
 };
 
+export type UserConnectInput = {
+  /** Document to connect */
+  readonly where: UserWhereUniqueInput;
+  /** Allow to specify document position in list of connected documents, will default to appending at end of list */
+  readonly position?: Maybe<ConnectPositionInput>;
+};
+
 /** A connection to a list of items. */
 export type UserConnection = {
   /** Information to aid in pagination. */
@@ -2868,6 +2908,16 @@ export type UserConnection = {
   /** A list of edges. */
   readonly edges: ReadonlyArray<UserEdge>;
   readonly aggregate: Aggregate;
+};
+
+export type UserCreateManyInlineInput = {
+  /** Connect multiple existing User documents */
+  readonly connect?: Maybe<ReadonlyArray<UserWhereUniqueInput>>;
+};
+
+export type UserCreateOneInlineInput = {
+  /** Connect one existing User document */
+  readonly connect?: Maybe<UserWhereUniqueInput>;
 };
 
 /** An edge in a connection. */
@@ -2998,6 +3048,9 @@ export type UserManyWhereInput = {
   readonly picture_ends_with?: Maybe<Scalars['String']>;
   /** All values not ending with the given string */
   readonly picture_not_ends_with?: Maybe<Scalars['String']>;
+  readonly isActive?: Maybe<Scalars['Boolean']>;
+  /** All values that are not equal to given value. */
+  readonly isActive_not?: Maybe<Scalars['Boolean']>;
   readonly kind?: Maybe<UserKind>;
   /** All values that are not equal to given value. */
   readonly kind_not?: Maybe<UserKind>;
@@ -3005,9 +3058,6 @@ export type UserManyWhereInput = {
   readonly kind_in?: Maybe<ReadonlyArray<UserKind>>;
   /** All values that are not contained in given list. */
   readonly kind_not_in?: Maybe<ReadonlyArray<UserKind>>;
-  readonly isActive?: Maybe<Scalars['Boolean']>;
-  /** All values that are not equal to given value. */
-  readonly isActive_not?: Maybe<Scalars['Boolean']>;
 };
 
 export enum UserOrderByInput {
@@ -3023,11 +3073,27 @@ export enum UserOrderByInput {
   NameDesc = 'name_DESC',
   PictureAsc = 'picture_ASC',
   PictureDesc = 'picture_DESC',
-  KindAsc = 'kind_ASC',
-  KindDesc = 'kind_DESC',
   IsActiveAsc = 'isActive_ASC',
-  IsActiveDesc = 'isActive_DESC'
+  IsActiveDesc = 'isActive_DESC',
+  KindAsc = 'kind_ASC',
+  KindDesc = 'kind_DESC'
 }
+
+export type UserUpdateManyInlineInput = {
+  /** Connect multiple existing User documents */
+  readonly connect?: Maybe<ReadonlyArray<UserConnectInput>>;
+  /** Override currently-connected documents with multiple existing User documents */
+  readonly set?: Maybe<ReadonlyArray<UserWhereUniqueInput>>;
+  /** Disconnect multiple User documents */
+  readonly disconnect?: Maybe<ReadonlyArray<UserWhereUniqueInput>>;
+};
+
+export type UserUpdateOneInlineInput = {
+  /** Connect existing User document */
+  readonly connect?: Maybe<UserWhereUniqueInput>;
+  /** Disconnect currently connected User document */
+  readonly disconnect?: Maybe<Scalars['Boolean']>;
+};
 
 /** Identifies documents */
 export type UserWhereInput = {
@@ -3141,6 +3207,9 @@ export type UserWhereInput = {
   readonly picture_ends_with?: Maybe<Scalars['String']>;
   /** All values not ending with the given string */
   readonly picture_not_ends_with?: Maybe<Scalars['String']>;
+  readonly isActive?: Maybe<Scalars['Boolean']>;
+  /** All values that are not equal to given value. */
+  readonly isActive_not?: Maybe<Scalars['Boolean']>;
   readonly kind?: Maybe<UserKind>;
   /** All values that are not equal to given value. */
   readonly kind_not?: Maybe<UserKind>;
@@ -3148,9 +3217,6 @@ export type UserWhereInput = {
   readonly kind_in?: Maybe<ReadonlyArray<UserKind>>;
   /** All values that are not contained in given list. */
   readonly kind_not_in?: Maybe<ReadonlyArray<UserKind>>;
-  readonly isActive?: Maybe<Scalars['Boolean']>;
-  /** All values that are not equal to given value. */
-  readonly isActive_not?: Maybe<Scalars['Boolean']>;
 };
 
 /** References User record uniquely */
@@ -3253,17 +3319,14 @@ export type GetCategoriesQueryVariables = Exact<{
 }>;
 
 
-export type GetCategoriesQuery = { readonly categories: ReadonlyArray<(
-    { readonly backgroundVideo?: Maybe<Pick<Asset, 'mimeType' | 'url'>> }
-    & CategoryFragmentFragment
-  )> };
+export type GetCategoriesQuery = { readonly categories: ReadonlyArray<{ readonly id: string, readonly title: string, readonly slug: string, readonly color: PageColor, readonly backgroundVideo?: Maybe<{ readonly mimeType?: Maybe<string>, readonly url: string }> }> };
 
 export type GetHeaderQueryVariables = Exact<{
   stage: Stage;
 }>;
 
 
-export type GetHeaderQuery = { readonly categories: ReadonlyArray<CategoryFragmentFragment> };
+export type GetHeaderQuery = { readonly categories: ReadonlyArray<{ readonly id: string, readonly title: string, readonly slug: string, readonly color: PageColor }> };
 
 export type GetCategoryQueryVariables = Exact<{
   slug: Scalars['String'];
@@ -3271,15 +3334,7 @@ export type GetCategoryQueryVariables = Exact<{
 }>;
 
 
-export type GetCategoryQuery = { readonly categories: ReadonlyArray<(
-    CategoryFragmentFragment
-    & PiecesFragmentFragment
-  )>, readonly category?: Maybe<(
-    Pick<Category, 'description'>
-    & { readonly content?: Maybe<Pick<RichText, 'markdown'>> }
-    & CategoryFragmentFragment
-    & PiecesFragmentFragment
-  )> };
+export type GetCategoryQuery = { readonly categories: ReadonlyArray<{ readonly id: string, readonly title: string, readonly slug: string, readonly color: PageColor, readonly pieces: ReadonlyArray<{ readonly id: string, readonly title: string, readonly slug: string, readonly images: ReadonlyArray<{ readonly id: string, readonly mimeType?: Maybe<string>, readonly jpg: string, readonly webp: string }> }> }>, readonly category?: Maybe<{ readonly description?: Maybe<string>, readonly id: string, readonly title: string, readonly slug: string, readonly color: PageColor, readonly content?: Maybe<{ readonly markdown: string }>, readonly pieces: ReadonlyArray<{ readonly id: string, readonly title: string, readonly slug: string, readonly images: ReadonlyArray<{ readonly id: string, readonly mimeType?: Maybe<string>, readonly jpg: string, readonly webp: string }> }> }> };
 
 export type GetPieceQueryVariables = Exact<{
   slug: Scalars['String'];
@@ -3287,33 +3342,15 @@ export type GetPieceQueryVariables = Exact<{
 }>;
 
 
-export type GetPieceQuery = { readonly categories: ReadonlyArray<(
-    CategoryFragmentFragment
-    & PiecesFragmentFragment
-  )>, readonly piece?: Maybe<(
-    Pick<Piece, 'id' | 'title' | 'slug' | 'description'>
-    & { readonly category?: Maybe<Pick<Category, 'title' | 'color'>>, readonly content?: Maybe<Pick<RichText, 'markdown'>>, readonly images: ReadonlyArray<(
-      Pick<Asset, 'id' | 'mimeType'>
-      & { jpg: Asset['url'], webp: Asset['url'] }
-    )>, readonly related: ReadonlyArray<(
-      Pick<Piece, 'id' | 'title' | 'slug'>
-      & { readonly category?: Maybe<Pick<Category, 'title' | 'color'>> }
-    )> }
-  )> };
+export type GetPieceQuery = { readonly categories: ReadonlyArray<{ readonly id: string, readonly title: string, readonly slug: string, readonly color: PageColor, readonly pieces: ReadonlyArray<{ readonly id: string, readonly title: string, readonly slug: string, readonly images: ReadonlyArray<{ readonly id: string, readonly mimeType?: Maybe<string>, readonly jpg: string, readonly webp: string }> }> }>, readonly piece?: Maybe<{ readonly id: string, readonly title: string, readonly slug: string, readonly description?: Maybe<string>, readonly type: PieceType, readonly tags: ReadonlyArray<string>, readonly technique?: Maybe<string>, readonly location?: Maybe<string>, readonly dimensions?: Maybe<string>, readonly duration?: Maybe<string>, readonly participants: ReadonlyArray<string>, readonly category?: Maybe<{ readonly title: string, readonly color: PageColor }>, readonly content?: Maybe<{ readonly markdown: string }>, readonly images: ReadonlyArray<{ readonly id: string, readonly mimeType?: Maybe<string>, readonly jpg: string, readonly webp: string }>, readonly related: ReadonlyArray<{ readonly id: string, readonly title: string, readonly slug: string, readonly category?: Maybe<{ readonly title: string, readonly color: PageColor }> }> }> };
 
-export type PiecesFragmentFragment = { readonly pieces: ReadonlyArray<(
-    Pick<Piece, 'id' | 'title' | 'slug'>
-    & { readonly images: ReadonlyArray<(
-      Pick<Asset, 'id' | 'mimeType'>
-      & { jpg: Asset['url'], webp: Asset['url'] }
-    )> }
-  )> };
+export type PiecesFragmentFragment = { readonly pieces: ReadonlyArray<{ readonly id: string, readonly title: string, readonly slug: string, readonly images: ReadonlyArray<{ readonly id: string, readonly mimeType?: Maybe<string>, readonly jpg: string, readonly webp: string }> }> };
 
-export type CategoryFragmentFragment = Pick<Category, 'id' | 'title' | 'slug' | 'color'>;
+export type CategoryFragmentFragment = { readonly id: string, readonly title: string, readonly slug: string, readonly color: PageColor };
 
 export const PiecesFragmentFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"PiecesFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Category"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"pieces"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"images"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"first"},"value":{"kind":"IntValue","value":"1"}},{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"mimeType_in"},"value":{"kind":"ListValue","values":[{"kind":"StringValue","value":"image/jpeg","block":false}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"mimeType"}},{"kind":"Field","alias":{"kind":"Name","value":"jpg"},"name":{"kind":"Name","value":"url"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"transformation"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"image"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"resize"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"width"},"value":{"kind":"IntValue","value":"200"}},{"kind":"ObjectField","name":{"kind":"Name","value":"height"},"value":{"kind":"IntValue","value":"200"}},{"kind":"ObjectField","name":{"kind":"Name","value":"fit"},"value":{"kind":"EnumValue","value":"max"}}]}}]}},{"kind":"ObjectField","name":{"kind":"Name","value":"document"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"output"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"format"},"value":{"kind":"EnumValue","value":"jpg"}}]}}]}}]}}]},{"kind":"Field","alias":{"kind":"Name","value":"webp"},"name":{"kind":"Name","value":"url"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"transformation"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"image"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"resize"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"width"},"value":{"kind":"IntValue","value":"200"}},{"kind":"ObjectField","name":{"kind":"Name","value":"height"},"value":{"kind":"IntValue","value":"200"}},{"kind":"ObjectField","name":{"kind":"Name","value":"fit"},"value":{"kind":"EnumValue","value":"max"}}]}}]}},{"kind":"ObjectField","name":{"kind":"Name","value":"document"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"output"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"format"},"value":{"kind":"EnumValue","value":"webp"}}]}}]}}]}}]}]}}]}}]}}]} as unknown as DocumentNode<PiecesFragmentFragment, unknown>;
 export const CategoryFragmentFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"CategoryFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Category"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"color"}}]}}]} as unknown as DocumentNode<CategoryFragmentFragment, unknown>;
 export const GetCategoriesDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getCategories"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"stage"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Stage"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"categories"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"stage"},"value":{"kind":"Variable","name":{"kind":"Name","value":"stage"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"CategoryFragment"}},{"kind":"Field","name":{"kind":"Name","value":"backgroundVideo"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"mimeType"}},{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}}]}},...CategoryFragmentFragmentDoc.definitions]} as unknown as DocumentNode<GetCategoriesQuery, GetCategoriesQueryVariables>;
 export const GetHeaderDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getHeader"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"stage"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Stage"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"categories"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"stage"},"value":{"kind":"Variable","name":{"kind":"Name","value":"stage"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"CategoryFragment"}}]}}]}},...CategoryFragmentFragmentDoc.definitions]} as unknown as DocumentNode<GetHeaderQuery, GetHeaderQueryVariables>;
 export const GetCategoryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getCategory"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"slug"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"stage"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Stage"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"categories"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"stage"},"value":{"kind":"Variable","name":{"kind":"Name","value":"stage"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"CategoryFragment"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"PiecesFragment"}}]}},{"kind":"Field","name":{"kind":"Name","value":"category"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"slug"},"value":{"kind":"Variable","name":{"kind":"Name","value":"slug"}}}]}},{"kind":"Argument","name":{"kind":"Name","value":"stage"},"value":{"kind":"Variable","name":{"kind":"Name","value":"stage"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"CategoryFragment"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"content"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"markdown"}}]}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"PiecesFragment"}}]}}]}},...CategoryFragmentFragmentDoc.definitions,...PiecesFragmentFragmentDoc.definitions]} as unknown as DocumentNode<GetCategoryQuery, GetCategoryQueryVariables>;
-export const GetPieceDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getPiece"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"slug"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"stage"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Stage"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"categories"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"stage"},"value":{"kind":"Variable","name":{"kind":"Name","value":"stage"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"CategoryFragment"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"PiecesFragment"}}]}},{"kind":"Field","name":{"kind":"Name","value":"piece"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"slug"},"value":{"kind":"Variable","name":{"kind":"Name","value":"slug"}}}]}},{"kind":"Argument","name":{"kind":"Name","value":"stage"},"value":{"kind":"Variable","name":{"kind":"Name","value":"stage"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"category"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"color"}}]}},{"kind":"Field","name":{"kind":"Name","value":"content"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"markdown"}}]}},{"kind":"Field","name":{"kind":"Name","value":"images"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"mimeType_in"},"value":{"kind":"ListValue","values":[{"kind":"StringValue","value":"image/jpeg","block":false}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"mimeType"}},{"kind":"Field","alias":{"kind":"Name","value":"jpg"},"name":{"kind":"Name","value":"url"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"transformation"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"image"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"resize"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"width"},"value":{"kind":"IntValue","value":"1000"}},{"kind":"ObjectField","name":{"kind":"Name","value":"height"},"value":{"kind":"IntValue","value":"1000"}},{"kind":"ObjectField","name":{"kind":"Name","value":"fit"},"value":{"kind":"EnumValue","value":"max"}}]}}]}},{"kind":"ObjectField","name":{"kind":"Name","value":"document"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"output"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"format"},"value":{"kind":"EnumValue","value":"jpg"}}]}}]}}]}}]},{"kind":"Field","alias":{"kind":"Name","value":"webp"},"name":{"kind":"Name","value":"url"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"transformation"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"image"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"resize"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"width"},"value":{"kind":"IntValue","value":"1000"}},{"kind":"ObjectField","name":{"kind":"Name","value":"height"},"value":{"kind":"IntValue","value":"1000"}},{"kind":"ObjectField","name":{"kind":"Name","value":"fit"},"value":{"kind":"EnumValue","value":"max"}}]}}]}},{"kind":"ObjectField","name":{"kind":"Name","value":"document"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"output"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"format"},"value":{"kind":"EnumValue","value":"webp"}}]}}]}}]}}]}]}},{"kind":"Field","name":{"kind":"Name","value":"related"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"category"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"color"}}]}}]}}]}}]}},...CategoryFragmentFragmentDoc.definitions,...PiecesFragmentFragmentDoc.definitions]} as unknown as DocumentNode<GetPieceQuery, GetPieceQueryVariables>;
+export const GetPieceDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getPiece"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"slug"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"stage"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Stage"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"categories"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"stage"},"value":{"kind":"Variable","name":{"kind":"Name","value":"stage"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"CategoryFragment"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"PiecesFragment"}}]}},{"kind":"Field","name":{"kind":"Name","value":"piece"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"slug"},"value":{"kind":"Variable","name":{"kind":"Name","value":"slug"}}}]}},{"kind":"Argument","name":{"kind":"Name","value":"stage"},"value":{"kind":"Variable","name":{"kind":"Name","value":"stage"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"type"}},{"kind":"Field","name":{"kind":"Name","value":"tags"}},{"kind":"Field","name":{"kind":"Name","value":"technique"}},{"kind":"Field","name":{"kind":"Name","value":"location"}},{"kind":"Field","name":{"kind":"Name","value":"dimensions"}},{"kind":"Field","name":{"kind":"Name","value":"duration"}},{"kind":"Field","name":{"kind":"Name","value":"participants"}},{"kind":"Field","name":{"kind":"Name","value":"category"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"color"}}]}},{"kind":"Field","name":{"kind":"Name","value":"content"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"markdown"}}]}},{"kind":"Field","name":{"kind":"Name","value":"images"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"mimeType_in"},"value":{"kind":"ListValue","values":[{"kind":"StringValue","value":"image/jpeg","block":false}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"mimeType"}},{"kind":"Field","alias":{"kind":"Name","value":"jpg"},"name":{"kind":"Name","value":"url"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"transformation"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"image"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"resize"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"width"},"value":{"kind":"IntValue","value":"1000"}},{"kind":"ObjectField","name":{"kind":"Name","value":"height"},"value":{"kind":"IntValue","value":"1000"}},{"kind":"ObjectField","name":{"kind":"Name","value":"fit"},"value":{"kind":"EnumValue","value":"max"}}]}}]}},{"kind":"ObjectField","name":{"kind":"Name","value":"document"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"output"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"format"},"value":{"kind":"EnumValue","value":"jpg"}}]}}]}}]}}]},{"kind":"Field","alias":{"kind":"Name","value":"webp"},"name":{"kind":"Name","value":"url"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"transformation"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"image"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"resize"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"width"},"value":{"kind":"IntValue","value":"1000"}},{"kind":"ObjectField","name":{"kind":"Name","value":"height"},"value":{"kind":"IntValue","value":"1000"}},{"kind":"ObjectField","name":{"kind":"Name","value":"fit"},"value":{"kind":"EnumValue","value":"max"}}]}}]}},{"kind":"ObjectField","name":{"kind":"Name","value":"document"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"output"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"format"},"value":{"kind":"EnumValue","value":"webp"}}]}}]}}]}}]}]}},{"kind":"Field","name":{"kind":"Name","value":"related"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"category"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"color"}}]}}]}}]}}]}},...CategoryFragmentFragmentDoc.definitions,...PiecesFragmentFragmentDoc.definitions]} as unknown as DocumentNode<GetPieceQuery, GetPieceQueryVariables>;

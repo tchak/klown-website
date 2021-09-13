@@ -4,7 +4,7 @@ import { useRouteData } from 'remix';
 import Markdown from 'react-markdown';
 import Siema from 'siema';
 
-import { getPiece, GetPiece as RouteData } from '~/cms.server';
+import { getPiece, GetPiece as RouteData, PieceType } from '~/cms.server';
 import { usePageColor } from '~/hooks';
 import { Side } from '~/components/side';
 import { Picture } from '~/components/picture';
@@ -62,8 +62,18 @@ export default function Piece() {
           <p>{data.piece?.category?.title}</p>
           <h1>{data.piece?.title}</h1>
           <ul className="secondary">
-            <li>Detail</li>
-            <li>Detail</li>
+            {data.piece?.type == PieceType.Video ? (
+              <VideoDetails piece={data.piece} />
+            ) : null}
+            {data.piece?.type == PieceType.Painting ? (
+              <PaintingDetails piece={data.piece} />
+            ) : null}
+            {data.piece?.type == PieceType.Photo ? (
+              <PhotoDetails piece={data.piece} />
+            ) : null}
+            {data.piece?.type == PieceType.Installation ? (
+              <InstallationDetails piece={data.piece} />
+            ) : null}
           </ul>
         </header>
 
@@ -71,6 +81,55 @@ export default function Piece() {
           <Markdown>{data.piece?.content?.markdown ?? ''}</Markdown>
         </div>
       </main>
+    </>
+  );
+}
+
+function VideoDetails({ piece }: { piece: NonNullable<RouteData['piece']> }) {
+  return (
+    <>
+      <li>video</li>
+      {piece.duration ? <li>{piece.duration}</li> : null}
+      {piece.location ? <li>{piece.location}</li> : null}
+      {piece.participants ? <li>{piece.participants}</li> : null}
+    </>
+  );
+}
+
+function PaintingDetails({
+  piece,
+}: {
+  piece: NonNullable<RouteData['piece']>;
+}) {
+  return (
+    <>
+      <li>peinture</li>
+      {piece.dimensions ? <li>{piece.dimensions}</li> : null}
+      {piece.technique ? <li>{piece.technique}</li> : null}
+    </>
+  );
+}
+
+function PhotoDetails({ piece }: { piece: NonNullable<RouteData['piece']> }) {
+  return (
+    <>
+      <li>photo</li>
+      {piece.dimensions ? <li>{piece.dimensions}</li> : null}
+      {piece.technique ? <li>{piece.technique}</li> : null}
+    </>
+  );
+}
+
+function InstallationDetails({
+  piece,
+}: {
+  piece: NonNullable<RouteData['piece']>;
+}) {
+  return (
+    <>
+      <li>installation</li>
+      {piece.location ? <li>{piece.location}</li> : null}
+      {piece.participants ? <li>{piece.participants}</li> : null}
     </>
   );
 }
