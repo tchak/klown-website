@@ -81,6 +81,7 @@ export function IconSide({ height = 24, width = 24 }: IconParams) {
       y="0"
       height={height}
       width={width}
+      viewBox="0 0 60 60"
       preserveAspectRatio="xMinYMid meet"
     >
       <g id="i-side" className="stroke">
@@ -100,6 +101,7 @@ export function IconDown({ height = 24, width = 24 }: IconParams) {
       y="0"
       height={height}
       width={width}
+      viewBox="0 0 60 60"
       preserveAspectRatio="xMinYMid meet"
     >
       <g id="i-down" className="stroke">
