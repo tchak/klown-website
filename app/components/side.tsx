@@ -64,8 +64,8 @@ export function Side({
               />
               <label htmlFor={`toggle-c${index + 1}`}>{category.title}</label>
               <ul className="item-container">
-                {category.pieces.map((piece) =>
-                  piece.images[0] ? (
+                { ((category.pieces).sort(() => 0.5 - Math.random()))
+                    .map((piece) => piece.images[0] ? (
                     <li key={piece.id} className="item">
                       <Link to={`/piece/${piece.slug}`}>
                         <Picture

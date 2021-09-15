@@ -103,7 +103,11 @@ nav#sideNav ul.sort-options{
 
     width: 100vw;
     left: -$unite;
-    @include for-size(desktop){ left: $unite*-4;}
+    @include for-size(desktop){
+      left: $unite*-4;
+      margin-bottom: $baseline*10;
+      margin-bottom: calc(clamp(#{$baseline*2}, 10vw, #{$baseline*10}))
+    }
 
     > label{ opacity: 0; position: absolute;}
 
@@ -132,6 +136,8 @@ nav#sideNav ul.sort-options{
         display: inline-block;
         padding-right: $unite*4;
         vertical-align: top;
+        overflow: scroll visible;
+        scrollbar-width: none;
         label{ display: none; }
 
         ul.item-container {
@@ -143,13 +149,43 @@ nav#sideNav ul.sort-options{
             white-space: nowrap;
             margin: $baseline $unite/2 $baseline 0;
             //scroll-snap-align: start;
+            width: 20vw;
+            width: calc(clamp(#{$unite*8}, 20vw, 350px));
+            transition: .25s ease-in-out;
 
-            img.cover{
-              width: 20vw;
-              width: calc(clamp(#{$unite*8}, 20vw, 350px));
-              
-              &:hover{ transform: scale(1.5); }           
+            a{display: inline-block; width: 100%; height: 100%;}
+            
+            h2{
+              @include f1-s1(white);
+              z-index: 5;
+              position: absolute;
+              max-width: 80%;
+              left: 50%;
+              top: 50%;
+              transform: translate(-50%);
+              display: none;
             }
+
+            picture{
+              //top: 0;
+              width: 100%;
+              display: inline-block;
+              transition: .25s ease-in-out;
+
+              img, source{width: 100%;}
+            }
+            
+            &:hover{
+              //padding: 0 $unite/2;
+              picture{
+                transform: scale(.9)
+              }
+              //top: -$baseline
+              //padding: 0 $unite;
+              // width: 25vw;
+              // width: calc(clamp(#{$unite*10}, 22vw, 400px));
+              //padding: 0 $unite*4 0 $unite/4
+            }           
           }
         }
       }
