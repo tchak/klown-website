@@ -1,1 +1,11 @@
-icons.scss
+.stroke{
+	fill:none;
+	stroke: var(--cc);
+	stroke-linecap:round;
+	stroke-linejoin:round;
+	stroke-miterlimit:10;
+}
+.fill{
+	fill:var(--cc);
+	stroke: none;
+}
