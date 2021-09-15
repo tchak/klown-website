@@ -94,7 +94,7 @@ export function Side({
         </ul>
 
         <button id="scrollTrigger">
-          <ArrowR height={60} width={60} />
+          <ArrowR height={38} width={38} />
         </button>
       </nav>
     </>

@@ -7,6 +7,7 @@ export function ArrowL({ height = 24, width = 24 }: IconParams) {
       y="0"
       height={height}
       width={width}
+      viewBox="0 0 60 60"
       preserveAspectRatio="xMinYMid meet"
     >
       <g id="arrow-L" className="stroke">
@@ -23,6 +24,7 @@ export function ArrowR({ height = 24, width = 24 }: IconParams) {
       y="0"
       height={height}
       width={width}
+      viewBox="0 0 60 60"
       preserveAspectRatio="xMinYMid meet"
     >
       <g id="arrow-R" className="stroke">
@@ -39,6 +41,7 @@ export function IconFilter({ height = 24, width = 24 }: IconParams) {
       y="0"
       height={height}
       width={width}
+      viewBox="0 0 60 60"
       preserveAspectRatio="xMinYMid meet"
     >
       <g id="i-filter" className="stroke">
@@ -60,6 +63,7 @@ export function IconReset({ height = 24, width = 24 }: IconParams) {
       y="0"
       height={height}
       width={width}
+      viewBox="0 0 60 60"
       preserveAspectRatio="xMinYMid meet"
     >
       <g id="i-reset" className="stroke">
