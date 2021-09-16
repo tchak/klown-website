@@ -24,7 +24,7 @@ input.on-off{
     left: 0;
     width: 100%;
     height: 100%;
-    background: var(--cc);
+    background: transparent; //var(--cc);
     opacity: 0;
   }
 
