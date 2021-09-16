@@ -79,6 +79,7 @@ export default function Piece() {
         <div id="content">
           <Markdown>{data.piece?.content?.markdown ?? ''}</Markdown>
         </div>
+        <Related/>
       </main>
     </>
   );
@@ -92,6 +93,19 @@ function VideoDetails({ piece }: { piece: NonNullable<RouteData['piece']> }) {
       {piece.location ? <li>{piece.location}</li> : null}
       {piece.participants ? <li>{piece.participants}</li> : null}
     </>
+  );
+}
+
+function Related({ piece }: { piece: NonNullable<RouteData['piece']> }) {
+  return (
+    <>
+      <aside id="related">
+        <h2>Pièces <br/>en liens</h2>
+        <ul class="sr-only" aria-role="nav">
+          <li></li>
+        </ul>
+      </aside>
+      </>
   );
 }
 
