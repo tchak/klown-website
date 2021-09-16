@@ -41,7 +41,7 @@ nav#sideNav ul.sort-options{
         height: 18px;
       }
       svg{
-        stroke-width : 2px;
+        stroke-width : 3px;
         transition: .5s ease-in-out;
         position: absolute;
         top: 5px;
@@ -253,7 +253,7 @@ nav#sideNav ul.sort-options{
 
         transition: opacity .25s ease-in-out;
       }
-      svg{opacity: 1; stroke-width: 1.5px; top: -2px; position: absolute;}
+      svg{opacity: 1; stroke-width: 3px/* 1.5px */; top: -2px; position: absolute;}
       h1{
         @include f1-s1();
         opacity: 0;

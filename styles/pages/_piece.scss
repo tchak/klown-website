@@ -67,7 +67,7 @@ body#piece{
 			@include f1-s0();
 			text-align: center;
 			padding: $baseline/4 2px;
-			stroke-width: 1.5px;
+			stroke-width: 3px;//1.5px;
 			transition: .5s ease;
 			transform: translateY(0);
 			display: none;
