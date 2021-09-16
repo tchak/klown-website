@@ -26,12 +26,11 @@ export default function Piece() {
   const images = data.piece?.images ?? [];
   const needsCarrousel = images.length > 1;
   usePageColor(data.piece?.category?.color);
-
   return (
     <>
       <Side categories={data.categories} />
       <main>
-        <section id="carrousel">
+        <section id="carrousel" className={needsCarrousel ? '' : 'single'}>
           {needsCarrousel ? (
             <Carrousel images={images} />
           ) : images.length == 0 ? null : (
