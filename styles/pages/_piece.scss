@@ -99,21 +99,18 @@ body#piece{
 	#details{
 		margin-top: $baseline*3;
 		padding: $baseline 0  $baseline 0; 
-		@include for-size(desktop){
-			margin-top: calc(clamp(#{$baseline*4}, 20vh, 250px));
-			padding: $baseline*2 0  calc(clamp(#{$baseline*4}, 10vh, 100px)) 0; 
-		}
 		p:first-of-type{}
-		h1{
-			@include f1-s4();
-			@include for-size(desktop){ 
-				@include f1-s6();
-			}
-		}
+		h1{ @include f1-s4(); }
 		ul{
 			@include flex();
 			gap: $unite/2;
 			li{ width: 20%; min-width: 75px }
+		}
+		@include for-size(desktop){
+			margin-top: calc(clamp(#{$baseline*4}, 20vh, 250px));
+			padding: $baseline*2 0  calc(clamp(#{$baseline*4}, 10vh, 100px)) 0; 
+			p:first-of-type{margin-bottom: $baseline/2;}
+			h1{ @include f1-s6(); margin-bottom: $baseline*1.5;}
 		}
 	}	
 
