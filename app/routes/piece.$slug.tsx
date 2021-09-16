@@ -96,19 +96,6 @@ function VideoDetails({ piece }: { piece: NonNullable<RouteData['piece']> }) {
   );
 }
 
-function Related({ piece }: { piece: NonNullable<RouteData['piece']> }) {
-  return (
-    <>
-      <aside id="related">
-        <h2>Pièces <br/>en liens</h2>
-        <ul class="sr-only" aria-role="nav">
-          <li></li>
-        </ul>
-      </aside>
-      </>
-  );
-}
-
 function PaintingDetails({
   piece,
 }: {
@@ -219,4 +206,17 @@ function useSiema<Element extends HTMLElement>(): [
   };
 
   return [ref, prev, next];
+}
+
+function Related({ piece }: { piece: NonNullable<RouteData['piece']> }) {
+  return (
+    <>
+      <aside id="related">
+        <h2>Pièces <br/>en liens</h2>
+        <ul class="sr-only" aria-role="nav">
+          <li></li>
+        </ul>
+      </aside>
+      </>
+  );
 }

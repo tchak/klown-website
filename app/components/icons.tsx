@@ -44,13 +44,13 @@ export function IconFilter({ height = 24, width = 24 }: IconParams) {
       viewBox="0 0 60 60"
       preserveAspectRatio="xMinYMid meet"
     >
-      <g id="i-filter" className="stroke">
-        <line x1="0" y1="22.6" x2="40.8" y2="22.6" />
-        <line x1="0" y1="5.1" x2="40.8" y2="5.1" />
-        <line x1="0" y1="40.2" x2="40.8" y2="40.2" />
-        <circle fill="var(--bg)" cx="33.4" cy="5.1" r="5.1" />
-        <circle fill="var(--bg)" cx="8.5" cy="22.6" r="5.1" />
-        <circle fill="var(--bg)" cx="28.4" cy="40.2" r="5.1" />
+      <g id="i-filter" class="stroke">
+        <line y1="22.6" x2="40.8" y2="22.6" x1="12"></line>
+        <line x2="30" x1="2" y1="6" y2="6"></line>
+        <line y2="40.2" y1="40.2" x2="30" x1="2"></line>
+        <circle cx="35" r="5.1" cy="6"></circle>
+        <circle cx="6" cy="22.6" r="5.1"></circle>
+        <circle cx="35" cy="40.2" r="5.1"></circle>
       </g>
     </svg>
   );
