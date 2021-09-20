@@ -143,7 +143,8 @@ nav#sideNav ul.sort-options{
         ul.item-container {
           @include flex();
           @include flex-direction(row);
-          @include align-items(center);          
+          @include align-items(center);
+          padding: $baseline*2 0;        
           li.item{
             display: inline-block;
             white-space: nowrap;
@@ -170,15 +171,17 @@ nav#sideNav ul.sort-options{
               //top: 0;
               width: 100%;
               display: inline-block;
-              transition: .25s ease-in-out;
+              transition: all .25s ease-in-out transform .1s ease-in-out;
 
               img, source{width: 100%;}
             }
             
             &:hover{
               //padding: 0 $unite/2;
+              z-index: 10;
               picture{
-                transform: scale(.9)
+                transform: scale(1.2);
+                transition: .2s ease-in-out;
               }
               //top: -$baseline
               //padding: 0 $unite;
