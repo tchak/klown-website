@@ -186,7 +186,8 @@ nav#sideNav ul.sort-options{
               transform: scale(1.1);
               header{
                 opacity: 1;
-                bottom: $baseline*-1.5;              
+                bottom: $baseline*-1.5;
+                transition-delay: .1s;         
               }
               picture{
                 transition: transform .2s ease-in-out;
