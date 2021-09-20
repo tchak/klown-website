@@ -69,7 +69,6 @@ body#piece{
 			padding: $baseline/4 2px;
 			stroke-width: 3px;//1.5px;
 			transition: .5s ease;
-			transform: translateY(0);
 			display: none;
 			@include for-size(desktop){
 				display: inline-block;
