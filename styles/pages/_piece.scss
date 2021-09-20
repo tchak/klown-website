@@ -63,7 +63,7 @@ body#piece{
 			position: absolute;
 			bottom: $baseline;
 			left: 50%;
-			transform: translateX(-50%);
+			transform: translateX(-50%) translateY(0);
 			@include f1-s0();
 			text-align: center;
 			padding: $baseline/4 2px;
