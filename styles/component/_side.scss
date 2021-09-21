@@ -182,7 +182,7 @@ nav#sideNav ul.sort-options{
             
             &:hover{
               //padding: 0 $unite/2;
-              z-index: 10;
+              z-index: 5;
               transform: scale(1.1);
               header{
                 opacity: 1;
@@ -213,7 +213,8 @@ nav#sideNav ul.sort-options{
         background: transparent;
         cursor: pointer;
         top: 50%;
-        transform: translateY(-50%);        
+        transform: translateY(-50%);
+        z-index: 6;     
 
         svg{transform: scaleY(200%);}
       }
