@@ -259,13 +259,24 @@ nav#sideNav ul.sort-options{
       transition: transform .5s ease-in-out;
       transform: translateX(0);
       >*{
-
         transition: opacity .25s ease-in-out;
       }
-      svg{opacity: 1; stroke-width: 3px/* 1.5px */; top: -2px; position: absolute;}
+      svg{opacity: 1; stroke-width: 2px/* 1.5px */; top: -2px; position: absolute;}
       h1{
         @include f1-s1();
         opacity: 0;
+
+        &:after{
+          content: "";
+          position: absolute;
+          top: 0;
+          right: -16px;
+          height: 100%;
+          width: 1px;
+          opacity: 0;
+          transition: .25s .5s ease-in-out;
+          background: currentColor;
+        }
       }
     }
 
@@ -307,12 +318,18 @@ nav#sideNav ul.sort-options{
             max-height: 200px;
             cursor: pointer;
             
-            img.cover{
+            img, source{
               height: 75px;
               max-height: 200px;
               //transform-origin: left;
               &:hover{height: 200px;}
             }
+
+            header{
+              display: none;
+            }
+
+
           }
         }
       }
@@ -332,7 +349,7 @@ nav#sideNav ul.sort-options{
     label[for="toggle-sideNav"]{
     transform: translateX(-282px);  
       svg{opacity: 0;}
-      h1{opacity: 1;}
+      h1, h1:after{opacity: 1;}
     }
     @include for-size(phone){
       border-bottom: 1px solid currentColor;

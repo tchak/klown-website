@@ -9,7 +9,7 @@
 		margin-bottom: $baseline*3; 
 	}
 
-	*{ @include f1-s1(); font-weight: $bold; }
+	*{ @include f1-s1(); /* font-weight: $bold; */ }
 
 	h1{ transition: .25s ease-in-out;} 
 

@@ -32,6 +32,8 @@ body#categorie{
 			max-width: 400px;
 			/*Fallback */ margin: #{$baseline*6} 0 #{$baseline*5} 0;
 			margin: calc(clamp(#{$baseline*6}, 25vh, 250px)) 0 #{$baseline*5}  0;
+
+			min-height: calc(clamp(#{$baseline*10, 33vh, 400px}))
 		}
 
 		nav#sideNav{
