@@ -214,6 +214,7 @@ function Related({ piece }: { piece: NonNullable<RouteData['piece']> }) {
       <aside id="related">
         <h2>Pièces <br/>en liens</h2>
         <ul class="sr-only" aria-role="nav">
+          /*Lister les items ici pour des questions d'accesibilité*/
           <li></li>
         </ul>
       </aside>
