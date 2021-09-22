@@ -28,18 +28,18 @@ body#index{
 						padding: $baseline/2 $unite/2;
 						z-index: 1;
 
-			      &:after {
-			      		// underline
-			          content: "";
-			          display: block;
-			          margin: 0 auto;
-			          width: 0;
-			          height: 1px;
-			          left: $unite/2;
-			          background-color: var(--cc);
-			          transition: opacity .2s ease,width .2s ease;
-			          z-index: 1;
-			      }
+				      &:after {
+				      		// underline
+				          content: "";
+				          display: block;
+				          margin: 0 auto;
+				          width: 0;
+				          height: 1px;
+				          left: $unite/2;
+				          background-color: var(--cc);
+				          transition: opacity .2s ease,width .2s ease;
+				          z-index: 1;
+				   		}
 					}
 
 
@@ -56,7 +56,7 @@ body#index{
 						video, iframe{
 							opacity: 0;
 							min-width: 100vw;
-						  height: 100vh;
+						  	height: 100vh;
 							mix-blend-mode: luminosity;
 						}
 
@@ -75,8 +75,8 @@ body#index{
 						}
 					}
 
-					// Specific for black
-					&:nth-of-type(1) .videoWrapper video { mix-blend-mode: hard-light }
+					// Specific
+					&:nth-of-type(2) .videoWrapper video{ mix-blend-mode: screen}
 
 				}
 			}
@@ -107,4 +107,6 @@ body#index{
 		}
 	}	
 
+	// hard ugly coding
+	&[data-cc="k"][data-bg="w"]{--cc: var(--cW)}
 }
