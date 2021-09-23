@@ -8,6 +8,7 @@ nav#sideNav{
   //transition: all 0.5s ease-in-out, width 0s, margin 0s, padding 0s, left 0s;
   box-sizing: border-box;
   z-index: 5;  
+  font-weight: $bold;
   //*{border: 1px solid;}
   li.cat{
     ul.item-container{
@@ -134,9 +135,14 @@ nav#sideNav ul.sort-options{
         display: inline-block;
         padding-right: $unite*4;
         vertical-align: top;
-        overflow: scroll visible;
+        overflow: visible;
         scrollbar-width: none;
-        label{ display: none; }
+        label{ 
+          position: sticky;
+          padding: 0 $unite; 
+          top: $baseline;
+          left: 0;
+        }
 
         ul.item-container {
           @include flex();
@@ -265,18 +271,6 @@ nav#sideNav ul.sort-options{
       h1{
         @include f1-s1();
         opacity: 0;
-
-        &:after{
-          content: "";
-          position: absolute;
-          top: 0;
-          right: -16px;
-          height: 100%;
-          width: 1px;
-          opacity: 0;
-          transition: .25s .5s ease-in-out;
-          background: currentColor;
-        }
       }
     }
 
@@ -349,12 +343,13 @@ nav#sideNav ul.sort-options{
     label[for="toggle-sideNav"]{
     transform: translateX(-282px);  
       svg{opacity: 0;}
-      h1, h1:after{opacity: 1;}
+      h1{opacity: 1;}
     }
     @include for-size(phone){
       border-bottom: 1px solid currentColor;
       background: var(--bg);
     }
-    & + #topbar h1{ opacity: 0; }
+    // & + #topbar h1{ opacity: 0; }
+    & + #topbar h1:before{ content: ""; opacity: 1; }
   }  
 }

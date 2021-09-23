@@ -23,9 +23,9 @@ body#piece{
 			@include align-items(center);
 			> video, > figure{
 				width: 100%;
-
 				max-width: 1920px;
-				// padding-bottom: 10vh;
+				max-width: calc(max(100%, 1920px));
+
 			}
 			> figure{height: 100%;}
 		}
@@ -55,8 +55,9 @@ body#piece{
 			top: 50%;
 			transform:translateY(-50%);
 			text-align: center;
-			img{ /* max-width: calc(100% - #{$unite*2}); */ max-width: 1920px; object-fit: contain;	}
-			// @include for-size(desktop){ img{ max-width: calc(100% - #{$unite*4});}}
+			img{ max-width: calc(100% - #{$unite*2}); object-fit: contain;	}
+			@include for-size(desktop){ img{ max-width: calc(max(100%, 1920px))} }
+
 		}
 
 		a#to-details{
@@ -98,6 +99,7 @@ body#piece{
 	#details{
 		margin-top: $baseline*3;
 		padding: $baseline 0  $baseline*3 0; 
+		p, ul{font-weight: $bold;}
 		p:first-of-type{ margin-bottom: $baseline/2; }
 		h1{ @include f1-s4(); line-height: 4rem; margin-bottom: $baseline*1.5;}
 		ul{
@@ -152,6 +154,10 @@ body#piece{
 
 	#related{
 		height: calc(100vh - #{$baseline*5});
+		@include for-size(phone){ 		
+			padding: $baseline*2 0;
+			box-sizing: border-box;
+		}
 		@include for-size(desktop){ 		
 			height: calc(100vh - #{$baseline*8});
 			height: calc(clamp(300px, calc(100vh - #{$baseline*8}), 800px));
@@ -167,9 +173,8 @@ body#piece{
 		h2{
 			@include f1-s2();
 			line-height: 90% !important;
-			position: absolute;
-			bottom: $baseline*22; 
 			@include for-size(desktop){ 
+				position: absolute;
 				@include f1-s4();
 				bottom: $baseline*2;
 			}
@@ -182,7 +187,8 @@ body#piece{
 	  nav#sideNav{
 	  	position: absolute; bottom: $baseline*15;
 	  	.sort-options{display: none;}
-	  	.item:not(.related){display: none !important;}
+	  	.item.related{order: 1;}
+	  	.item:not(.related){opacity: .5; order: 2}
 	  }
 	}
 	@include for-size(desktop){

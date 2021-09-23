@@ -11,7 +11,20 @@
 
 	*{ @include f1-s1(); /* font-weight: $bold; */ }
 
-	h1{ transition: .25s ease-in-out;} 
+	h1{ 
+		transition: .25s ease-in-out;
+		&:before{
+		  content: "";
+	      position: absolute;
+	      top: 0;
+	      left: -16px;
+	      height: 75%;
+	      width: 1px;
+	      opacity: 0;
+	      transition: .25s .5s ease-in-out;
+	      background: currentColor;
+		}
+	}
 
 	nav{
 		cursor: pointer;

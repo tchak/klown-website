@@ -44,10 +44,10 @@ input.on-off{
       stroke-width : 1px;
       transform: scale(.75);
       transition: all 0s 0s, transform 0.25s 0 ease;
-      @media(-webkit-min-device-pixel-ratio: 1.5){
+/*       @media(-webkit-min-device-pixel-ratio: 1.5){
         stroke-width: .75px;
         top: -.5px
-      }
+      } */
       .second{ opacity: 0; transition:  color 0s, opacity .1s ease-in-out;}
     }
   }

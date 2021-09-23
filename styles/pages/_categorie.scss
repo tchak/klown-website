@@ -38,6 +38,9 @@ body#categorie{
 		nav#sideNav{
 			///*Fallback */ margin: #{$baseline*3} 0 #{$baseline*6} 0;
 			//margin: calc(clamp(#{$baseline*3}, 10vh, 150px)) 0 calc(clamp(#{$baseline*3}, 10vh, 150px)) 0;		
+			
+			> ul.cat-container li.cat label{display: none;}
+
 		}
 	}
 

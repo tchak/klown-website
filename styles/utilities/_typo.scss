@@ -44,5 +44,5 @@ html{
   @include f1(1, 1, 400, 0,  $color);
 }
 @mixin f1-s0($color: var(--color3)){
-  @include f1(.75, .75, 300, 0,  $color);
+  @include f1(.75, .75, 400, 0,  $color);
 }
