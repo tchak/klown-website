@@ -26,6 +26,7 @@ export function Header() {
 
 export function Footer() {
   const year = new Date().getFullYear();
+
   return (
     <footer>
       <p className="description">
