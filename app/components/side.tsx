@@ -64,35 +64,33 @@ export function Side({
               />
               <label htmlFor={`toggle-c${index + 1}`}>{category.title}</label>
               <ul className="item-container">
-                {[...category.pieces]
-                  .sort(() => 0.5 - Math.random())
-                  .map((piece) =>
-                    piece.images[0] ? (
-                      <li key={piece.id} className="item">
-                        <Link to={`/piece/${piece.slug}`}>
-                          <header>
-                            <h2>{piece.title}</h2>
-                          </header>
-                          <Picture
-                            className="cover"
-                            sources={[
-                              {
-                                srcSet: piece.images[0].webp,
-                                type: 'image/webp',
-                              },
-                              {
-                                srcSet: piece.images[0].jpg,
-                                type: 'image/jpeg',
-                              },
-                            ]}
-                            src={piece.images[0].jpg}
-                            loading="lazy"
-                            alt={piece.title}
-                          />
-                        </Link>
-                      </li>
-                    ) : null
-                  )}
+                {[...category.pieces].sort(order).map((piece) =>
+                  piece.images[0] ? (
+                    <li key={piece.id} className="item">
+                      <Link to={`/piece/${piece.slug}`}>
+                        <header>
+                          <h2>{piece.title}</h2>
+                        </header>
+                        <Picture
+                          className="cover"
+                          sources={[
+                            {
+                              srcSet: piece.images[0].webp,
+                              type: 'image/webp',
+                            },
+                            {
+                              srcSet: piece.images[0].jpg,
+                              type: 'image/jpeg',
+                            },
+                          ]}
+                          src={piece.images[0].jpg}
+                          loading="lazy"
+                          alt={piece.title}
+                        />
+                      </Link>
+                    </li>
+                  ) : null
+                )}
               </ul>
             </li>
           ))}
@@ -104,4 +102,12 @@ export function Side({
       </nav>
     </>
   );
+}
+
+const pieceOrder = new Map<string, number>();
+function order({ id }: { id: string }): number {
+  if (!pieceOrder.has(id)) {
+    pieceOrder.set(id, 0.5 - Math.random());
+  }
+  return pieceOrder.get(id)!;
 }
