@@ -29,20 +29,6 @@ export function Footer() {
 
   return (
     <footer>
-      <p className="description">
-        Le site du Klown est un espace de présentation du travail d’Igor
-        Galligo. Ce travail est représenté par la gallerie XX à Paris.
-      </p>
-      <nav>
-        <ul>
-          <li>
-            <Link to="/info">info</Link>
-          </li>
-          <li>
-            <Link to="/contact">contact</Link>
-          </li>
-        </ul>
-      </nav>
       <p className="mentions">{year} — Tous droits réservés</p>
       <p className="mentions">
         Design&#8239;: <a href="https://benjmng.eu">Benjamin G.</a><br/>
