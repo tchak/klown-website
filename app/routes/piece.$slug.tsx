@@ -22,10 +22,11 @@ export const loader: LoaderFunction = async ({ params }) =>
 
 export default function Piece() {
   const data = useRouteData<RouteData>();
+  const piece = data.piece!;
 
-  const images = data.piece?.images ?? [];
+  const images = piece.images ?? [];
   const needsCarrousel = images.length > 1;
-  usePageColor(data.piece?.category?.color);
+  usePageColor(piece.category?.color);
   return (
     <>
       <Side categories={data.categories} />
@@ -58,28 +59,24 @@ export default function Piece() {
         </section>
 
         <header id="details">
-          <p>{data.piece?.category?.title}</p>
-          <h1>{data.piece?.title}</h1>
+          <p>{piece.category?.title}</p>
+          <h1>{piece.title}</h1>
           <ul className="secondary">
-            {data.piece?.type == 'Video' ? (
-              <VideoDetails piece={data.piece} />
+            {piece.type == 'Video' ? <VideoDetails piece={piece} /> : null}
+            {piece.type == 'Painting' ? (
+              <PaintingDetails piece={piece} />
             ) : null}
-            {data.piece?.type == 'Painting' ? (
-              <PaintingDetails piece={data.piece} />
-            ) : null}
-            {data.piece?.type == 'Photo' ? (
-              <PhotoDetails piece={data.piece} />
-            ) : null}
-            {data.piece?.type == 'Installation' ? (
-              <InstallationDetails piece={data.piece} />
+            {piece.type == 'Photo' ? <PhotoDetails piece={piece} /> : null}
+            {piece.type == 'Installation' ? (
+              <InstallationDetails piece={piece} />
             ) : null}
           </ul>
         </header>
 
         <div id="content">
-          <Markdown>{data.piece?.content?.markdown ?? ''}</Markdown>
+          <Markdown>{piece.content?.markdown ?? ''}</Markdown>
         </div>
-        <Related/>
+        <Related piece={piece} />
       </main>
     </>
   );
@@ -212,12 +209,15 @@ function Related({ piece }: { piece: NonNullable<RouteData['piece']> }) {
   return (
     <>
       <aside id="related">
-        <h2>Pièces <br/>en liens</h2>
-        <ul class="sr-only" aria-role="nav">
+        <h2>
+          Pièces <br />
+          en liens
+        </h2>
+        <ul className="sr-only" aria-role="nav">
           /*Lister les items ici pour des questions d'accesibilité*/
           <li></li>
         </ul>
       </aside>
-      </>
+    </>
   );
 }

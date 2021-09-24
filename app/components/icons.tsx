@@ -44,7 +44,7 @@ export function IconFilter({ height = 24, width = 24 }: IconParams) {
       viewBox="0 0 60 60"
       preserveAspectRatio="xMinYMid meet"
     >
-      <g id="i-filter" class="stroke">
+      <g id="i-filter" className="stroke">
         <line y1="22.6" x2="40.8" y2="22.6" x1="12"></line>
         <line x2="30" x1="2" y1="6" y2="6"></line>
         <line y2="40.2" y1="40.2" x2="30" x1="2"></line>
