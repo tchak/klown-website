@@ -150,6 +150,7 @@ nav#sideNav ul.sort-options{
           @include align-items(center);
           padding: $baseline*2 $unite;        
           @include for-size(desktop){ padding: $baseline*2 $unite*4;}
+          &:hover li.item:not(:hover){filter: brightness(.6) blur(1px)}
           li.item{
             display: inline-block;
             white-space: nowrap;
@@ -189,7 +190,7 @@ nav#sideNav ul.sort-options{
             &:hover{
               //padding: 0 $unite/2;
               z-index: 5;
-              transform: scale(1.1);
+              transform: scale(1.2);
               header{
                 opacity: 1;
                 bottom: $baseline*-1.5;
@@ -197,7 +198,7 @@ nav#sideNav ul.sort-options{
               }
               picture{
                 transition: transform .2s ease-in-out;
-                img, source{width: 100%; filter: brightness(.8);}
+                img, source{width: 100%;}
               }
             }           
           }
