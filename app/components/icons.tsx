@@ -7,6 +7,7 @@ export function ArrowL({ height = 24, width = 24 }: IconParams) {
       y="0"
       height={height}
       width={width}
+      viewBox="0 0 60 60"
       preserveAspectRatio="xMinYMid meet"
     >
       <g id="arrow-L" className="stroke">
@@ -23,6 +24,7 @@ export function ArrowR({ height = 24, width = 24 }: IconParams) {
       y="0"
       height={height}
       width={width}
+      viewBox="0 0 60 60"
       preserveAspectRatio="xMinYMid meet"
     >
       <g id="arrow-R" className="stroke">
@@ -39,15 +41,16 @@ export function IconFilter({ height = 24, width = 24 }: IconParams) {
       y="0"
       height={height}
       width={width}
+      viewBox="0 0 60 60"
       preserveAspectRatio="xMinYMid meet"
     >
-      <g id="i-filter" className="stroke">
-        <line x1="0" y1="22.6" x2="40.8" y2="22.6" />
-        <line x1="0" y1="5.1" x2="40.8" y2="5.1" />
-        <line x1="0" y1="40.2" x2="40.8" y2="40.2" />
-        <circle fill="var(--bg)" cx="33.4" cy="5.1" r="5.1" />
-        <circle fill="var(--bg)" cx="8.5" cy="22.6" r="5.1" />
-        <circle fill="var(--bg)" cx="28.4" cy="40.2" r="5.1" />
+      <g id="i-filter" class="stroke">
+        <line y1="22.6" x2="40.8" y2="22.6" x1="12"></line>
+        <line x2="30" x1="2" y1="6" y2="6"></line>
+        <line y2="40.2" y1="40.2" x2="30" x1="2"></line>
+        <circle cx="35" r="5.1" cy="6"></circle>
+        <circle cx="6" cy="22.6" r="5.1"></circle>
+        <circle cx="35" cy="40.2" r="5.1"></circle>
       </g>
     </svg>
   );
@@ -60,6 +63,7 @@ export function IconReset({ height = 24, width = 24 }: IconParams) {
       y="0"
       height={height}
       width={width}
+      viewBox="0 0 60 60"
       preserveAspectRatio="xMinYMid meet"
     >
       <g id="i-reset" className="stroke">
@@ -77,10 +81,11 @@ export function IconSide({ height = 24, width = 24 }: IconParams) {
       y="0"
       height={height}
       width={width}
+      viewBox="0 0 60 60"
       preserveAspectRatio="xMinYMid meet"
     >
       <g id="i-side" className="stroke">
-        <line x1="0" y1="0.5" x2="25" y2="0.5" />
+        <line x1="0" y1="1.5" x2="25" y2="1.5" />
         <line x1="11" y1="17.6" x2="49.2" y2="17.6" />
         <line x1="0" y1="34.7" x2="25" y2="34.7" />
         <polyline points="42.3,10.7 49.2,17.6 42.3,24.5" />
@@ -96,6 +101,7 @@ export function IconDown({ height = 24, width = 24 }: IconParams) {
       y="0"
       height={height}
       width={width}
+      viewBox="0 0 60 60"
       preserveAspectRatio="xMinYMid meet"
     >
       <g id="i-down" className="stroke">

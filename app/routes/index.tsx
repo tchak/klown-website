@@ -41,7 +41,6 @@ function CategoryLink({
         {category.title}
       </Link>
       <VideoWrapper video={category.backgroundVideo} />
-      <div className="over" aria-hidden></div>
     </li>
   );
 }

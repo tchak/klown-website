@@ -26,12 +26,11 @@ export default function Piece() {
   const images = data.piece?.images ?? [];
   const needsCarrousel = images.length > 1;
   usePageColor(data.piece?.category?.color);
-
   return (
     <>
       <Side categories={data.categories} />
       <main>
-        <section id="carrousel">
+        <section id="carrousel" className={needsCarrousel ? '' : 'single'}>
           {needsCarrousel ? (
             <Carrousel images={images} />
           ) : images.length == 0 ? null : (
@@ -80,6 +79,7 @@ export default function Piece() {
         <div id="content">
           <Markdown>{data.piece?.content?.markdown ?? ''}</Markdown>
         </div>
+        <Related/>
       </main>
     </>
   );
@@ -206,4 +206,18 @@ function useSiema<Element extends HTMLElement>(): [
   };
 
   return [ref, prev, next];
+}
+
+function Related({ piece }: { piece: NonNullable<RouteData['piece']> }) {
+  return (
+    <>
+      <aside id="related">
+        <h2>Pièces <br/>en liens</h2>
+        <ul class="sr-only" aria-role="nav">
+          /*Lister les items ici pour des questions d'accesibilité*/
+          <li></li>
+        </ul>
+      </aside>
+      </>
+  );
 }

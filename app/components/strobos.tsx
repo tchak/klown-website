@@ -15,8 +15,8 @@ export function Strobos() {
         />
         <label htmlFor="i-strobos">
           <svg
-            width="20"
-            height="20"
+            width="1.25em"
+            height="1.25em"
             viewBox="0 0 20 20"
             xmlns="http://www.w3.org/2000/svg"
           >

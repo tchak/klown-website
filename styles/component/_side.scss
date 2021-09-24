@@ -8,6 +8,7 @@ nav#sideNav{
   //transition: all 0.5s ease-in-out, width 0s, margin 0s, padding 0s, left 0s;
   box-sizing: border-box;
   z-index: 5;  
+  font-weight: $bold;
   //*{border: 1px solid;}
   li.cat{
     ul.item-container{
@@ -41,7 +42,7 @@ nav#sideNav ul.sort-options{
         height: 18px;
       }
       svg{
-        stroke-width : 2px;
+        stroke-width : 3px;
         transition: .5s ease-in-out;
         position: absolute;
         top: 5px;
@@ -103,7 +104,11 @@ nav#sideNav ul.sort-options{
 
     width: 100vw;
     left: -$unite;
-    @include for-size(desktop){ left: $unite*-4;}
+    @include for-size(desktop){
+      left: $unite*-4;
+      margin-bottom: $baseline*10;
+      margin-bottom: calc(clamp(#{$baseline*2}, 10vw, #{$baseline*10}))
+    }
 
     > label{ opacity: 0; position: absolute;}
 
@@ -111,7 +116,7 @@ nav#sideNav ul.sort-options{
 
     .sort-options{
       position: absolute;
-      top: $baseline*-1;
+      // top: $baseline;
       li:first-of-type{ top: 2px; }
       @include for-size(phone){left: $unite;}
       @include for-size(desktop){right: $unite;}
@@ -123,8 +128,6 @@ nav#sideNav ul.sort-options{
       
       overflow: scroll hidden;
       white-space: nowrap;
-      padding: 0 $unite;
-      @include for-size(desktop){ padding: 0 $unite*4;}
   
       #scrollTrigger{display: none;}
 
@@ -132,24 +135,71 @@ nav#sideNav ul.sort-options{
         display: inline-block;
         padding-right: $unite*4;
         vertical-align: top;
-        label{ display: none; }
+        overflow: visible;
+        scrollbar-width: none;
+        label{ 
+          position: sticky;
+          padding: 0 $unite; 
+          top: $baseline;
+          left: 0;
+        }
 
         ul.item-container {
           @include flex();
           @include flex-direction(row);
-          @include align-items(center);          
+          @include align-items(center);
+          padding: $baseline*2 $unite;        
+          @include for-size(desktop){ padding: $baseline*2 $unite*4;}
           li.item{
             display: inline-block;
             white-space: nowrap;
             margin: $baseline $unite/2 $baseline 0;
             //scroll-snap-align: start;
+            width: 20vw;
+            width: calc(clamp(#{$unite*8}, 20vw, 350px));
+            // max-height: 500px;
+            transition: .25s ease-in-out;
 
-            img.cover{
-              width: 20vw;
-              width: calc(clamp(#{$unite*8}, 20vw, 350px));
-              
-              &:hover{ transform: scale(1.5); }           
+            a{display: inline-block; width: 100%; height: 100%;}
+            
+            header{
+              z-index: 5;
+              position: absolute;
+              max-width: 80%;
+              bottom: 0;
+              transition: .25s ease-in-out;
+              opacity: 0;          
+              transform: scale(.9);
+              transform-origin: left;
+
+              h2{
+                @include f1-s1(white);
+              }
             }
+
+            picture{
+              //top: 0;
+              width: 100%;
+              display: inline-block;
+              transition: all .25s ease-in-out, transform .05s ease-in-out;
+
+              img, source{width: 100%; filter: brightness(1);}
+            }
+            
+            &:hover{
+              //padding: 0 $unite/2;
+              z-index: 5;
+              transform: scale(1.1);
+              header{
+                opacity: 1;
+                bottom: $baseline*-1.5;
+                transition-delay: .1s;         
+              }
+              picture{
+                transition: transform .2s ease-in-out;
+                img, source{width: 100%; filter: brightness(.8);}
+              }
+            }           
           }
         }
       }
@@ -169,7 +219,8 @@ nav#sideNav ul.sort-options{
         background: transparent;
         cursor: pointer;
         top: 50%;
-        transform: translateY(-50%);        
+        transform: translateY(-50%);
+        z-index: 6;     
 
         svg{transform: scaleY(200%);}
       }
@@ -214,10 +265,9 @@ nav#sideNav ul.sort-options{
       transition: transform .5s ease-in-out;
       transform: translateX(0);
       >*{
-
         transition: opacity .25s ease-in-out;
       }
-      svg{opacity: 1; stroke-width: 1.5px; top: -2px; position: absolute;}
+      svg{opacity: 1; stroke-width: 2px/* 1.5px */; top: -2px; position: absolute;}
       h1{
         @include f1-s1();
         opacity: 0;
@@ -262,12 +312,18 @@ nav#sideNav ul.sort-options{
             max-height: 200px;
             cursor: pointer;
             
-            img.cover{
+            img, source{
               height: 75px;
               max-height: 200px;
               //transform-origin: left;
               &:hover{height: 200px;}
             }
+
+            header{
+              display: none;
+            }
+
+
           }
         }
       }
@@ -293,6 +349,7 @@ nav#sideNav ul.sort-options{
       border-bottom: 1px solid currentColor;
       background: var(--bg);
     }
-    & + #topbar h1{ opacity: 0; }
+    // & + #topbar h1{ opacity: 0; }
+    & + #topbar h1:before{ content: ""; opacity: 1; }
   }  
 }

@@ -23,9 +23,11 @@ body#piece{
 			@include align-items(center);
 			> video, > figure{
 				width: 100%;
-				padding-bottom: 10vh;
+				max-width: 1920px;
+				max-width: calc(max(100%, 1920px));
+
 			}
-			> video{ max-width: 1080px; }
+			> figure{height: 100%;}
 		}
 
 		// special Siema
@@ -42,25 +44,32 @@ body#piece{
 			&.prev{left: 0;cursor: url('/static/svg/arrow-L.svg') 50 50, auto;}
 			&.next{right: 0;cursor: url('/static/svg/arrow-R.svg') 50 50, auto;}
 		}
+
+		picture{
+			@include flex;
+			@include justify-content(center);
+			max-width: 100%;
+			max-height: 100%;
+		}
 		figure{
 			top: 50%;
-			transform:translateY(-60%);
+			transform:translateY(-50%);
 			text-align: center;
-			img{ width: calc(100% - #{$unite*2}); max-width: 1920px; object-fit: contain;	}
-			@include for-size(desktop){img{ width: calc(100% - #{$unite*4});}}
+			img{ max-width: calc(100% - #{$unite*2}); object-fit: contain;	}
+			@include for-size(desktop){ img{ max-width: calc(max(100%, 1920px))} }
+
 		}
 
 		a#to-details{
 			position: absolute;
 			bottom: $baseline;
 			left: 50%;
-			transform: translateX(-50%);
+			transform: translateX(-50%) translateY(0);
 			@include f1-s0();
 			text-align: center;
 			padding: $baseline/4 2px;
-			stroke-width: 1.5px;
+			stroke-width: 3px;//1.5px;
 			transition: .5s ease;
-			transform: translateY(0);
 			display: none;
 			@include for-size(desktop){
 				display: inline-block;
@@ -89,22 +98,25 @@ body#piece{
 	// details
 	#details{
 		margin-top: $baseline*3;
-		padding: $baseline 0  $baseline 0; 
+		padding: $baseline 0  $baseline*3 0; 
+		p, ul{font-weight: $bold;}
+		p:first-of-type{ margin-bottom: $baseline/2; }
+		h1{ @include f1-s4(); line-height: 4rem; margin-bottom: $baseline*1.5;}
+		ul{
+			@include flex();
+			@include flex-wrap(wrap);
+			gap: $unite/2;
+			li{
+				width: 20%; 
+				min-width: $unite*5;
+				text-transform: capitalize;
+			}
+		}
 		@include for-size(desktop){
 			margin-top: calc(clamp(#{$baseline*4}, 20vh, 250px));
 			padding: $baseline*2 0  calc(clamp(#{$baseline*4}, 10vh, 100px)) 0; 
-		}
-		p:first-of-type{}
-		h1{
-			@include f1-s4();
-			@include for-size(desktop){ 
-				@include f1-s6();
-			}
-		}
-		ul{
-			@include flex();
-			gap: $unite/2;
-			li{ width: 20%; min-width: 75px }
+			p:first-of-type{}
+			h1{ @include f1-s6(); line-height: 6rem;}
 		}
 	}	
 
@@ -142,6 +154,10 @@ body#piece{
 
 	#related{
 		height: calc(100vh - #{$baseline*5});
+		@include for-size(phone){ 		
+			padding: $baseline*2 0;
+			box-sizing: border-box;
+		}
 		@include for-size(desktop){ 		
 			height: calc(100vh - #{$baseline*8});
 			height: calc(clamp(300px, calc(100vh - #{$baseline*8}), 800px));
@@ -157,9 +173,8 @@ body#piece{
 		h2{
 			@include f1-s2();
 			line-height: 90% !important;
-			position: absolute;
-			bottom: $baseline*22; 
 			@include for-size(desktop){ 
+				position: absolute;
 				@include f1-s4();
 				bottom: $baseline*2;
 			}
@@ -172,7 +187,8 @@ body#piece{
 	  nav#sideNav{
 	  	position: absolute; bottom: $baseline*15;
 	  	.sort-options{display: none;}
-	  	.item:not(.related){display: none !important;}
+	  	.item.related{order: 1;}
+	  	.item:not(.related){opacity: .5; order: 2}
 	  }
 	}
 	@include for-size(desktop){
