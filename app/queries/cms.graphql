@@ -91,13 +91,13 @@ fragment PiecesFragment on Category {
       mimeType
       jpg: url(
         transformation: {
-          image: { resize: { width: 200, height: 200, fit: max } }
+          image: { resize: { width: 500, height: 500, fit: max } }
           document: { output: { format: jpg } }
         }
       )
       webp: url(
         transformation: {
-          image: { resize: { width: 200, height: 200, fit: max } }
+          image: { resize: { width: 500, height: 500, fit: max } }
           document: { output: { format: webp } }
         }
       )
