@@ -1,5 +1,7 @@
 body#piece{
 
+	main > * {transition: filter .25s ease-in-out;}
+
 	// Carrousel
 	#carrousel{
 		height: calc(100vh - #{$baseline*5});
@@ -56,7 +58,7 @@ body#piece{
 			transform:translateY(-50%);
 			text-align: center;
 			img{ max-width: calc(100% - #{$unite*2}); object-fit: contain;	}
-			@include for-size(desktop){ img{ max-width: calc(max(100%, 1920px))} }
+			// @include for-size(desktop){ img{ max-width: calc(max(100%, 1920px))} }
 
 		}
 
@@ -188,7 +190,11 @@ body#piece{
 	  	position: absolute; bottom: $baseline*15;
 	  	.sort-options{display: none;}
 	  	.item.related{order: 1;}
-	  	.item:not(.related){opacity: .5; order: 2}
+	  	.item:not(.related){
+	  		order: 2;
+	  		background: var(--bg);
+	  		> *{ opacity: .5; }
+	  	}
 	  }
 	}
 	@include for-size(desktop){
