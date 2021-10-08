@@ -40,12 +40,12 @@ function CategoryLink({
       <Link {...hoverProps} to={`/category/${category.slug}`}>
         {category.title}
       </Link>
-      <VideoWrapper video={category.backgroundVideo} />
+      <VideoWrapper video={category.backgroundVideoShort} />
     </li>
   );
 }
 
-type BackgroundVideo = RouteData['categories'][0]['backgroundVideo'];
+type BackgroundVideo = RouteData['categories'][0]['backgroundVideoShort'];
 
 function VideoWrapper({ video }: { video: BackgroundVideo }) {
   return (
