@@ -5,6 +5,10 @@ query getCategories($stage: Stage!) {
       mimeType
       url
     }
+    backgroundVideoShort {
+      mimeType
+      url
+    }
   }
 }
 
