@@ -68,9 +68,6 @@ export function Side({
                   piece.images[0] ? (
                     <li key={piece.id} className="item">
                       <Link to={`/piece/${piece.slug}`}>
-                        <header>
-                          <h2>{piece.title}</h2>
-                        </header>
                         <Picture
                           className="cover"
                           sources={[
