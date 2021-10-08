@@ -30,10 +30,6 @@ export function Footer() {
   return (
     <footer>
       <p className="mentions">{year} — Tous droits réservés</p>
-      <p className="mentions">
-        Design&#8239;: <a href="https://benjmng.eu">Benjamin G.</a><br/>
-        Développement&#8239;: <a href="https://github.com/tchak">Paul Chavard</a>
-      </p>
     </footer>
   );
 }
