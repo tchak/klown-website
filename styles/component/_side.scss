@@ -15,7 +15,7 @@ nav#sideNav{
       h1{@include f1-s0();}
       li.item{
         img.cover{
-          transition: all .25s ease-in-out;//0s, height .25s ease, width .25s ease;   
+          transition: all .25s cubic-bezier(.77,0,.18,1);//0s, height .25s ease, width .25s ease;   
         }
       }
     }
@@ -150,6 +150,7 @@ nav#sideNav ul.sort-options{
           @include align-items(center);
           padding: $baseline*2 $unite;        
           @include for-size(desktop){ padding: $baseline*2 $unite*4;}
+          &:hover li.item:not(:hover){filter: blur(2px) saturate(50%); opacity: .75;}
           li.item{
             display: inline-block;
             white-space: nowrap;
@@ -158,7 +159,7 @@ nav#sideNav ul.sort-options{
             width: 20vw;
             width: calc(clamp(#{$unite*8}, 20vw, 350px));
             // max-height: 500px;
-            transition: .25s ease-in-out;
+            transition: all 0.25s ease-in-out, opacity .25s ease-in-out .125s;
 
             a{display: inline-block; width: 100%; height: 100%;}
             
@@ -189,7 +190,8 @@ nav#sideNav ul.sort-options{
             &:hover{
               //padding: 0 $unite/2;
               z-index: 5;
-              transform: scale(1.1);
+              transform: scale(1.2);
+              transition: all .25s ease-in-out, opacity .25s ease-in-out 0s, transform 0.33s cubic-bezier(.86,0,.07,1) .15s;
               header{
                 opacity: 1;
                 bottom: $baseline*-1.5;
@@ -197,7 +199,7 @@ nav#sideNav ul.sort-options{
               }
               picture{
                 transition: transform .2s ease-in-out;
-                img, source{width: 100%; filter: brightness(.8);}
+                img, source{width: 100%;}
               }
             }           
           }
@@ -244,11 +246,18 @@ nav#sideNav ul.sort-options{
     left: 0;
     top: 0;
 
+    overflow: visible scroll;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    &::-webkit-scrollbar {display: none;}
+
     ul.sort-options{
       @include flex();
       @include flex-direction(row);
+      @include flex-wrap(wrap);
       position: relative;
       margin: $baseline*6 0 0 $unite ;
+      max-width: 250px;
 
       li:first-of-type{ top: -3px; }
     }
@@ -276,29 +285,26 @@ nav#sideNav ul.sort-options{
 
     &.related{
       ul.cat-container li.cat ul.item-container li.item:not(.related){
-        opacity: .2;
+        background: var(--bg);
+        > *{opacity: .2;}
       }
     }
 
     // inside behavior
     ul.cat-container{
 
-      overflow: visible scroll;
-      -ms-overflow-style: none;
-      scrollbar-width: none;
-      &::-webkit-scrollbar {display: none;}
       scroll-snap-type: y mandatory;
-      position: absolute;
-      top: 0;
+      // position: absolute;
+      // top: 0;
       height: 100%;
       box-sizing: border-box;
-      padding: $baseline*2 $unite $baseline*2 $unite;
+      padding: $baseline $unite $baseline*2 $unite;
 
       li.cat{
         margin: 0 0 $baseline*2 0;
         //scroll-snap-align: start;
         overflow: hidden;
-        &:first-of-type{padding-top: $baseline*7;}
+        // &:first-of-type{padding-top: $baseline*7;}
         ul.item-container{
           @include flex();
           @include flex-direction(column);
@@ -348,6 +354,13 @@ nav#sideNav ul.sort-options{
     @include for-size(phone){
       border-bottom: 1px solid currentColor;
       background: var(--bg);
+    }
+    @include for-size(desktop){
+      & + main > :not(#related) {
+          opacity: .5;
+          transition: .5s ease;
+          filter: blur(4px);
+      }      
     }
     // & + #topbar h1{ opacity: 0; }
     & + #topbar h1:before{ content: ""; opacity: 1; }
