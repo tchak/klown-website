@@ -105,7 +105,7 @@ body#piece{
 		padding: $baseline 0  $baseline*3 0; 
 		p, ul{font-weight: $bold;}
 		p:first-of-type{ margin-bottom: $baseline/2; }
-		h1{ @include f1-s4(); line-height: 4rem; margin-bottom: $baseline*1.5;}
+		h1{ @include f1-s4(); line-height: 4rem; margin-bottom: $baseline*1.5; word-break: break-word;}
 		ul{
 			@include flex();
 			@include flex-wrap(wrap);
