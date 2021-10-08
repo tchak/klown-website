@@ -4,7 +4,7 @@ body#piece{
 
 	// Carrousel
 	#carrousel{
-		height: calc(100vh - #{$baseline*5});
+		//height: calc(100vh - #{$baseline*5});
 		box-sizing: border-box;
 		@include for-size(desktop){ 
 			height: calc(100vh - #{$baseline*10});
@@ -54,9 +54,11 @@ body#piece{
 			max-height: 100%;
 		}
 		figure{
-			top: 50%;
-			transform:translateY(-50%);
 			text-align: center;
+			@include for-size(desktop){
+				top: 50%;
+				transform:translateY(-50%);
+			}
 			img{ max-width: calc(100% - #{$unite*2}); object-fit: contain;	}
 			// @include for-size(desktop){ img{ max-width: calc(max(100%, 1920px))} }
 
