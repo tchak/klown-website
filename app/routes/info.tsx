@@ -9,11 +9,6 @@ export default function Info() {
     <main>
       <h1 className="sr-only">Information</h1>
 
-      <figure>
-        <img src="static/svg/example.svg" />
-        <figcaption className="sr-only"></figcaption>
-      </figure>
-
       <div id="texte_presentation">
         <p>
           Je suis...
