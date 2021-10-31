@@ -71,7 +71,7 @@ body#piece{
 			transform: translateX(-50%) translateY(0);
 			@include f1-s0();
 			text-align: center;
-			padding: $baseline/4 2px;
+			padding: math.div($baseline, 4) 2px;
 			stroke-width: 3px;//1.5px;
 			transition: .5s ease;
 			display: none;
@@ -104,12 +104,12 @@ body#piece{
 		margin-top: $baseline*3;
 		padding: $baseline 0  $baseline*3 0; 
 		p, ul{font-weight: $bold;}
-		p:first-of-type{ margin-bottom: $baseline/2; }
+		p:first-of-type{ margin-bottom: math.div($baseline, 2); }
 		h1{ @include f1-s4(); line-height: 4rem; margin-bottom: $baseline*1.5; word-break: break-word;}
 		ul{
 			@include flex();
 			@include flex-wrap(wrap);
-			gap: $unite/2;
+			gap: math.div($unite, 2);
 			li{
 				width: 20%; 
 				min-width: $unite*5;
@@ -165,10 +165,10 @@ body#piece{
 		@include for-size(desktop){ 		
 			height: calc(100vh - #{$baseline*8});
 			height: calc(clamp(300px, calc(100vh - #{$baseline*8}), 800px));
-			@include grid(repeat(8, 1fr), auto,  $baseline $unite/2, null, end);
+			@include grid(repeat(8, 1fr), auto,  $baseline math.div($unite, 2), null, end);
 		}
 		@include for-size(desktop-1200){
-			@include grid(repeat(9, 1fr), auto,  $baseline $unite/2, null, end);
+			@include grid(repeat(9, 1fr), auto,  $baseline math.div($unite, 2), null, end);
 			padding: $baseline*2 0;
 			box-sizing: border-box;
 			h2{grid-column: 2/ span 6; -ms-grid-column: 2/ span 6;}

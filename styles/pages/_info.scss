@@ -17,7 +17,7 @@ body#info{
 			grid-row: 2;
 			@include flex();
 			@include flex-wrap(wrap);
-			gap: $unite/2;
+			gap: math.div($unite, 2);
 			li{ width: 20%; min-width: $unite*5 }
 		}
 

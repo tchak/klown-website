@@ -31,7 +31,7 @@ nav#sideNav ul.sort-options{
 
   li{
     display: inline-block;
-    padding: 0 $unite/4 $baseline/2 $unite/4;
+    padding: 0 math.div($unite, 4) math.div($baseline, 2) math.div($unite, 4);
     order: 2;
     transition: .25s ease-in-out;
     &:first-of-type{
@@ -61,7 +61,7 @@ nav#sideNav ul.sort-options{
         margin: 0 auto;
         width: 0;
         height: 1px;
-        bottom: $baseline/-4;
+        bottom: math.div($baseline, -4);
         background-color: var(--cc);
         transition: opacity .2s ease,width .2s ease;
         z-index: 1;
@@ -154,7 +154,7 @@ nav#sideNav ul.sort-options{
           li.item{
             display: inline-block;
             white-space: nowrap;
-            margin: $baseline $unite/2 $baseline 0;
+            margin: $baseline math.div($unite, 2) $baseline 0;
             //scroll-snap-align: start;
             width: 20vw;
             width: calc(clamp(#{$unite*8}, 20vw, 350px));
@@ -188,7 +188,7 @@ nav#sideNav ul.sort-options{
             }
             
             &:hover{
-              //padding: 0 $unite/2;
+              //padding: 0 math.div($unite, 2);
               z-index: 5;
               transform: scale(1.2);
               transition: all .25s ease-in-out, opacity .25s ease-in-out 0s, transform 0.33s cubic-bezier(.86,0,.07,1) .15s;
@@ -217,7 +217,7 @@ nav#sideNav ul.sort-options{
         right: $unite*.75;
         width: $unite*1.5;
         height: 100%;
-        padding: $baseline 0 $baseline $unite/2;
+        padding: $baseline 0 $baseline math.div($unite, 2);
         background: transparent;
         cursor: pointer;
         top: 50%;
@@ -270,7 +270,7 @@ nav#sideNav ul.sort-options{
       z-index: 2;
       top: $baseline*3;
       right: 0;
-      padding-left: $unite/2 .5rem 0;      
+      padding-left: math.div($unite, 2) .5rem 0;      
       transition: transform .5s ease-in-out;
       transform: translateX(0);
       >*{
@@ -310,9 +310,9 @@ nav#sideNav ul.sort-options{
           @include flex-direction(column);
           @include align-items(flex-start);
           gap: 0;
-          margin: $baseline/2 0;
+          margin: math.div($baseline, 2) 0;
           li.item{
-            margin: $baseline/6 0;
+            margin: math.div($baseline, 6) 0;
             scroll-snap-align: start;
             transition: all .25s ease, max-height .5s ease-in-out, margin 0s;
             max-height: 200px;

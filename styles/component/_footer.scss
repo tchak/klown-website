@@ -15,7 +15,7 @@ body > footer{
 	// Desktop, 2 cols
 	@include for-size(desktop){
 		margin: $baseline*3 0;
-		@include grid(repeat(8, 1fr), 50px auto auto,  $baseline $unite/2);
+		@include grid(repeat(8, 1fr), 50px auto auto,  $baseline math.div($unite, 2));
 		.mentions{
 			-ms-grid-row: 2; grid-row: 2;
 			&:nth-of-type(2){-ms-grid-column: 1 / span 4; grid-column: 1 / span 4;}
@@ -24,7 +24,7 @@ body > footer{
 	}
 	// Desktop wide, 3cols
 	@include for-size(desktop-1200){
-		@include grid(repeat(9, 1fr), 50px 1rem,  $baseline $unite/2);
+		@include grid(repeat(9, 1fr), 50px 1rem,  $baseline math.div($unite, 2));
 		.mentions{
 			-ms-grid-row: 2; grid-row: 2;
 			&:nth-of-type(2){-ms-grid-column: 1 / span 6; grid-column: 1 / span 6;}
