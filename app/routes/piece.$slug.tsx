@@ -1,9 +1,9 @@
 import { MutableRefObject, useEffect, useRef } from 'react';
 import type { MetaFunction, LoaderFunction } from 'remix';
-import { useRouteData } from 'remix';
-import Markdown from 'react-markdown';
+import { useLoaderData } from 'remix';
 import Siema from 'siema';
 
+import { Markdown } from '~/components/markdown';
 import { getPiece, GetPiece as RouteData } from '~/cms.server';
 import { usePageColor } from '~/hooks';
 import { Side } from '~/components/side';
@@ -18,10 +18,10 @@ export const meta: MetaFunction = ({ data }: { data: RouteData }) => {
   };
 };
 export const loader: LoaderFunction = async ({ params }) =>
-  getPiece(params.slug);
+  getPiece(params.slug!);
 
 export default function Piece() {
-  const data = useRouteData<RouteData>();
+  const data = useLoaderData<RouteData>();
   const piece = data.piece!;
 
   const images = piece.images ?? [];
@@ -74,7 +74,19 @@ export default function Piece() {
         </header>
 
         <div id="content">
-          <Markdown>{piece.content?.markdown ?? ''}</Markdown>
+          <Markdown
+            rehypeReactOptions={{
+              components: {
+                img: (props: any) => (
+                  <figure>
+                    <img {...props} />
+                  </figure>
+                ),
+              },
+            }}
+          >
+            {piece.content?.markdown ?? ''}
+          </Markdown>
         </div>
         <Related piece={piece} />
       </main>
@@ -213,10 +225,10 @@ function Related({ piece }: { piece: NonNullable<RouteData['piece']> }) {
           Pièces <br />
           en liens
         </h2>
-        <ul className="sr-only" aria-role="nav">
+        <nav className="sr-only">
           /*Lister les items ici pour des questions d'accesibilité*/
           <li></li>
-        </ul>
+        </nav>
       </aside>
     </>
   );
