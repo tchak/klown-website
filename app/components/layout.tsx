@@ -1,9 +1,9 @@
-import { useRouteData, Link } from 'remix';
+import { useLoaderData, Link } from 'remix';
 
 import type { GetHeader } from '~/cms.server';
 
 export function Header() {
-  const data = useRouteData<GetHeader>();
+  const data = useLoaderData<GetHeader>();
 
   return (
     <header id="topbar" role="navigation" aria-label="topbar">
@@ -31,8 +31,10 @@ export function Footer() {
     <footer>
       <p className="mentions">{year} — Tous droits réservés</p>
       <p className="mentions">
-        Design&#8239;: <a href="https://benjmng.eu">Benjamin G.</a><br/>
-        Développement&#8239;: <a href="https://github.com/tchak">Paul Chavard</a>
+        Design&#8239;: <a href="https://benjmng.eu">Benjamin G.</a>
+        <br />
+        Développement&#8239;:{' '}
+        <a href="https://github.com/tchak">Paul Chavard</a>
       </p>
     </footer>
   );
