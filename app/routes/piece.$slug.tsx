@@ -31,7 +31,7 @@ export default function Piece() {
     <>
       <Side categories={data.categories} />
       <main>
-        <section id="carrousel" className={needsCarrousel ? '' : 'single'}>
+        <section id="carrousel" className={needsCarrousel ? '' : 'single'} style={{maxHeight: '100vh'}}>
           {needsCarrousel ? (
             <Carrousel images={images} />
           ) : images.length == 0 ? null : (
@@ -178,6 +178,21 @@ function Carrousel({
   );
 }
 
+function autoHeight(currentSlide) {
+  let carrousel = document.querySelector('#carrousel') 
+  let currentEl = document.querySelector('.siema > div > div:nth-of-type('+ (currentSlide + 2) +')');
+  let maxHeight = currentEl.offsetHeight;
+  carrousel.style.maxHeight = maxHeight + 'px';
+  console.log(maxHeight, carrousel)
+}
+
+export function resize() {
+  useEffect(function onFirstMount() {
+    window.addEventListener("resize", setTimeout(autoHeight, 500));
+  }, []);
+  return null;
+}
+
 function useSiema<Element extends HTMLElement>(): [
   MutableRefObject<Element | null>,
   () => void,
@@ -200,7 +215,9 @@ function useSiema<Element extends HTMLElement>(): [
         loop: true,
         rtl: false,
         onInit: () => {},
-        onChange: () => {},
+        onChange: () => {
+          autoHeight(siema.currentSlide);
+        },
       }));
 
       return () => siema.destroy(true);

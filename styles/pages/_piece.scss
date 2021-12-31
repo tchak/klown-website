@@ -15,10 +15,11 @@ body#piece{
 			width: 100vw;
 			width: calc(100vw - $unite*2);
 			left: $unite*-3;
+			transition: max-height .25s .25s ease;
 
-			figure, video, iframe{margin: 0 $unite/2}
+			figure, video, iframe{margin: 0 math.div($unite, 2)}
 
-			.siema{margin: 0 -$unite/2}
+			.siema{margin: 0 math.div($unite, -2)}
 			// @include for-size(desktop){left: $unite*-4;}
 		}
 
@@ -45,7 +46,6 @@ body#piece{
 		button{
 			position: absolute;
 			height: 100%;
-			max-height: 75vh;
 			width: 33.333%;
 			top: 0;
 			background: transparent;
