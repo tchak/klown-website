@@ -31,7 +31,7 @@ export default function Piece() {
     <>
       <Side categories={data.categories} />
       <main>
-        <section id="carrousel" className={needsCarrousel ? '' : 'single'} style={{maxHeight: '100vh'}}>
+        <section id="carrousel" className={needsCarrousel ? '' : 'single'}>
           {needsCarrousel ? (
             <Carrousel images={images} />
           ) : images.length == 0 ? null : (
@@ -183,7 +183,6 @@ function autoHeight(currentSlide) {
   let currentEl = document.querySelector('.siema > div > div:nth-of-type('+ (currentSlide + 2) +')');
   let maxHeight = currentEl.offsetHeight;
   carrousel.style.maxHeight = maxHeight + 'px';
-  console.log(maxHeight, carrousel)
 }
 
 export function resize() {
@@ -231,7 +230,7 @@ function useSiema<Element extends HTMLElement>(): [
     siemaRef.current?.next();
   };
 
-  return [ref, prev, next];
+  return [ref, prev, next, height];
 }
 
 function Related({ piece }: { piece: NonNullable<RouteData['piece']> }) {
