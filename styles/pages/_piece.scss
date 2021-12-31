@@ -15,6 +15,10 @@ body#piece{
 			width: 100vw;
 			width: calc(100vw - $unite*2);
 			left: $unite*-3;
+
+			figure, video, iframe{margin: 0 $unite/2}
+
+			.siema{margin: 0 -$unite/2}
 			// @include for-size(desktop){left: $unite*-4;}
 		}
 
