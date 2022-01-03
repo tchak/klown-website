@@ -64,7 +64,7 @@ export function Side({
               />
               <label htmlFor={`toggle-c${index + 1}`}>{category.title}</label>
               <ul className="item-container">
-                {[...category.pieces].sort(order).map((piece) =>
+                {category.pieces.map((piece) =>
                   piece.images[0] ? (
                     <li key={piece.id} className="item">
                       <Link to={`/piece/${piece.slug}`}>
@@ -99,12 +99,4 @@ export function Side({
       </nav>
     </>
   );
-}
-
-const pieceOrder = new Map<string, number>();
-function order({ id }: { id: string }): number {
-  if (!pieceOrder.has(id)) {
-    pieceOrder.set(id, 0.5 - Math.random());
-  }
-  return pieceOrder.get(id)!;
 }

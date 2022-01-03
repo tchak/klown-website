@@ -52,7 +52,7 @@ function VideoWrapper({ video }: { video: BackgroundVideo }) {
     <div className="videoWrapper">
       {video && (
         <video muted autoPlay loop aria-hidden>
-          <source src={video.url} type={video.mimeType!} />
+          <source src={video.url} type={String(video.mimeType)} />
         </video>
       )}
     </div>

@@ -14,31 +14,34 @@ import {
   PieceType,
 } from './queries';
 
-const API_URL = process.env['API_URL']!;
-const API_TOKEN = process.env['API_TOKEN'];
+const API_URL = String(process.env['API_URL']);
+const API_TOKEN = String(process.env['API_TOKEN']);
 
 export { PieceType };
 
-export const client = createClient({
-  url: API_URL,
-  exchanges: [fetchExchange],
-  preferGetMethod: true,
-  fetchOptions: {
-    headers: {
-      authorization: `Bearer ${API_TOKEN}`,
+export const getClient = () =>
+  createClient({
+    url: API_URL,
+    exchanges: [fetchExchange],
+    preferGetMethod: true,
+    fetchOptions: {
+      headers: {
+        authorization: `Bearer ${API_TOKEN}`,
+      },
     },
-  },
-});
+  });
 
-export type {
-  GetHeaderQuery as GetHeader,
-  GetCategoriesQuery as GetCategories,
-  GetCategoryQuery as GetCategory,
-  GetPieceQuery as GetPiece,
+export type GetPiece = GetPieceQuery & {
+  piece: NonNullable<GetPieceQuery['piece']>;
 };
+export type GetCategory = GetCategoryQuery & {
+  category: NonNullable<GetCategoryQuery['category']>;
+};
+export type GetCategories = GetCategoriesQuery;
+export type GetHeader = GetHeaderQuery;
 
 export async function getHeader(stage = Stage.Draft): Promise<GetHeaderQuery> {
-  const { data, error } = await client
+  const { data, error } = await getClient()
     .query(GetHeaderDocument, { stage })
     .toPromise();
 
@@ -54,7 +57,7 @@ export async function getHeader(stage = Stage.Draft): Promise<GetHeaderQuery> {
 export async function getCategories(
   stage = Stage.Draft
 ): Promise<GetCategoriesQuery> {
-  const { data, error } = await client
+  const { data, error } = await getClient()
     .query(GetCategoriesDocument, { stage })
     .toPromise();
 
@@ -71,7 +74,7 @@ export async function getCategory(
   slug: string,
   stage = Stage.Draft
 ): Promise<GetCategoryQuery> {
-  const { data, error } = await client
+  const { data, error } = await getClient()
     .query(GetCategoryDocument, { slug, stage })
     .toPromise();
 
@@ -88,7 +91,7 @@ export async function getPiece(
   slug: string,
   stage = Stage.Draft
 ): Promise<GetPieceQuery> {
-  const { data, error } = await client
+  const { data, error } = await getClient()
     .query(GetPieceDocument, { slug, stage })
     .toPromise();
 

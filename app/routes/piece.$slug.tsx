@@ -17,19 +17,27 @@ export const meta: MetaFunction = ({ data }: { data: RouteData }) => {
     description: data.piece?.description ?? '',
   };
 };
-export const loader: LoaderFunction = async ({ params }) =>
-  getPiece(params.slug!);
+export const loader: LoaderFunction = async ({ params }) => {
+  const { piece, categories } = await getPiece(String(params.slug));
+
+  return {
+    piece,
+    categories: categories.map((category) => ({
+      ...category,
+      pieces: [...category.pieces].sort(() => 0.5 - Math.random()),
+    })),
+  };
+};
 
 export default function Piece() {
-  const data = useLoaderData<RouteData>();
-  const piece = data.piece!;
-
+  const { piece, categories } = useLoaderData<RouteData>();
   const images = piece.images ?? [];
   const needsCarrousel = images.length > 1;
+
   usePageColor(piece.category?.color);
   return (
     <>
-      <Side categories={data.categories} />
+      <Side categories={categories} />
       <main>
         <section id="carrousel" className={needsCarrousel ? '' : 'single'}>
           {needsCarrousel ? (

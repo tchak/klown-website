@@ -14,7 +14,7 @@ export const meta: MetaFunction = ({ data }: { data: RouteData }) => {
   };
 };
 export const loader: LoaderFunction = async ({ params }) =>
-  getCategory(params.slug!);
+  getCategory(String(params.slug));
 
 export default function Category() {
   const data = useLoaderData<RouteData>();
