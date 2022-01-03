@@ -2,7 +2,7 @@ import type { MetaFunction, LoaderFunction } from 'remix';
 import { useLoaderData, Link } from 'remix';
 
 import { getCategories, GetCategories as RouteData } from '~/cms.server';
-import { usePageColor, useHoverPageColor } from '~/hooks';
+import { usePageColor, useHoverPageColor, pageColor } from '~/hooks';
 
 export const handle = { bodyId: 'index' };
 export const meta: MetaFunction = () => ({ title: 'Klown' });
@@ -14,7 +14,7 @@ export default function Index() {
   usePageColor('rw');
 
   return (
-    <main>
+    <main {...pageColor('rw')}>
       <nav>
         <ul>
           {data.categories.map((category, i) => (

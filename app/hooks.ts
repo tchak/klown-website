@@ -41,6 +41,11 @@ export function useStrobos(): [boolean, () => void] {
   return [enabled, () => setEnabled((enabled) => !enabled)];
 }
 
+export function pageColor(color?: string) {
+  const [cc, bg] = color ?? 'rw';
+  return { 'data-cc': cc, 'data-bg': bg };
+}
+
 function switchPageColor(color?: string) {
   const [cc, bg] = color ?? 'rw';
   document.body.dataset['cc'] = cc;

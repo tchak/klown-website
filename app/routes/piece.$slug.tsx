@@ -5,7 +5,7 @@ import Siema from 'siema';
 
 import { Markdown } from '~/components/markdown';
 import { getPiece, GetPiece as RouteData } from '~/cms.server';
-import { usePageColor } from '~/hooks';
+import { usePageColor, pageColor } from '~/hooks';
 import { Side } from '~/components/side';
 import { Picture } from '~/components/picture';
 import { IconDown } from '~/components/icons';
@@ -33,12 +33,14 @@ export default function Piece() {
   const { piece, categories } = useLoaderData<RouteData>();
   const images = piece.images ?? [];
   const needsCarrousel = images.length > 1;
+  const color = piece.category?.color;
 
-  usePageColor(piece.category?.color);
+  usePageColor(color);
+
   return (
     <>
       <Side categories={categories} />
-      <main>
+      <main {...pageColor(color)}>
         <section id="carrousel" className={needsCarrousel ? '' : 'single'}>
           {needsCarrousel ? (
             <Carrousel images={images} />

@@ -3,7 +3,7 @@ import { useLoaderData } from 'remix';
 
 import { Markdown } from '~/components/markdown';
 import { getCategory, GetCategory as RouteData } from '~/cms.server';
-import { usePageColor } from '~/hooks';
+import { usePageColor, pageColor } from '~/hooks';
 import { Side } from '~/components/side';
 
 export const handle = { bodyId: 'categorie' };
@@ -18,11 +18,12 @@ export const loader: LoaderFunction = async ({ params }) =>
 
 export default function Category() {
   const data = useLoaderData<RouteData>();
+  const color = data.category?.color;
 
-  usePageColor(data.category?.color);
+  usePageColor(color);
 
   return (
-    <main>
+    <main {...pageColor(color)}>
       <header>
         <h1>{data.category?.title}</h1>
         <p className="exp">{data.category?.pieces.length} pièces</p>
