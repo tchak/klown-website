@@ -13,13 +13,12 @@ body#piece{
 
 		&:not(.single){
 			width: 100vw;
-			width: calc(100vw - $unite*2);
-			left: $unite*-3;
+			width: calc(100% + $unite*7); // +1
+			left: $unite*-3.5; // +.5 our compenser les margin sur child figure
 			transition: max-height .25s .25s ease;
 
-			figure, video, iframe{margin: 0 math.div($unite, 2)}
+			figure, video, iframe{padding: 0 math.div($unite, 2)}
 
-			.siema{margin: 0 math.div($unite, -2)}
 			// @include for-size(desktop){left: $unite*-4;}
 		}
 
@@ -173,6 +172,7 @@ body#piece{
 
 	#related{
 		height: calc(100vh - #{$baseline*5});
+		max-height: 800px;
 		@include for-size(phone){ 		
 			padding: $baseline*2 0;
 			box-sizing: border-box;
