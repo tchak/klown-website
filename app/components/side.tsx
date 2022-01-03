@@ -28,7 +28,7 @@ export function Side({
           type="radio"
           name="sort-by-medium"
           hidden
-          checked
+          defaultChecked
         />
         <input id="medium-1" type="radio" name="sort-by-medium" hidden />
         <input id="medium-2" type="radio" name="sort-by-medium" hidden />

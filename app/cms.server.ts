@@ -12,7 +12,7 @@ import {
   GetPieceQuery,
   Stage,
   PieceType,
-} from './graphql-operations';
+} from './queries';
 
 const API_URL = process.env['API_URL']!;
 const API_TOKEN = process.env['API_TOKEN'];
