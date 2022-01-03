@@ -172,25 +172,33 @@ function Carrousel({
         ))}
       </div>
 
-      <button type="button" className="prev" onClick={prev}></button>
-      <button type="button" className="next" onClick={next}></button>
+      <button type="button" className="prev" onClick={prev}>
+        <span className="sr-only">Précédent</span>
+      </button>
+      <button type="button" className="next" onClick={next}>
+        <span className="sr-only">Suivant</span>
+      </button>
     </>
   );
 }
 
-function autoHeight(currentSlide) {
-  let carrousel = document.querySelector('#carrousel') 
-  let currentEl = document.querySelector('.siema > div > div:nth-of-type('+ (currentSlide + 2) +')');
-  let maxHeight = currentEl.offsetHeight;
-  carrousel.style.maxHeight = maxHeight + 'px';
+function autoHeight(currentSlide: number) {
+  const carrousel = document.querySelector<HTMLDivElement>('#carrousel');
+  const currentEl = document.querySelector<HTMLDivElement>(
+    '.siema > div > div:nth-of-type(' + (currentSlide + 2) + ')'
+  );
+  const maxHeight = currentEl?.offsetHeight;
+  if (carrousel) {
+    carrousel.style.maxHeight = maxHeight + 'px';
+  }
 }
 
-export function resize() {
-  useEffect(function onFirstMount() {
-    window.addEventListener("resize", setTimeout(autoHeight, 500));
-  }, []);
-  return null;
-}
+// export function resize() {
+//   useEffect(function onFirstMount() {
+//     window.addEventListener('resize', setTimeout(autoHeight, 500));
+//   }, []);
+//   return null;
+// }
 
 function useSiema<Element extends HTMLElement>(): [
   MutableRefObject<Element | null>,
