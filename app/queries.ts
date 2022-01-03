@@ -2127,6 +2127,7 @@ export type Node = {
 export enum PageColor {
   Kw = 'kw',
   Rw = 'rw',
+  Wk = 'wk',
   Wr = 'wr'
 }
 
