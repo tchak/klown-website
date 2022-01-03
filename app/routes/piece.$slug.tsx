@@ -230,7 +230,7 @@ function useSiema<Element extends HTMLElement>(): [
     siemaRef.current?.next();
   };
 
-  return [ref, prev, next, height];
+  return [ref, prev, next];
 }
 
 function Related({ piece }: { piece: NonNullable<RouteData['piece']> }) {

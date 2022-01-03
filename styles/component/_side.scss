@@ -214,7 +214,7 @@ nav#sideNav ul.sort-options{
       &~#scrollTrigger{
         display: inline-block;
         position: absolute;
-        right: $unite*.75;
+        right: $unite*2;
         width: $unite*1.5;
         height: 100%;
         padding: $baseline 0 $baseline math.div($unite, 2);
@@ -222,9 +222,14 @@ nav#sideNav ul.sort-options{
         cursor: pointer;
         top: 50%;
         transform: translateY(-50%);
-        z-index: 6;     
+        z-index: 6;
 
-        svg{transform: scaleY(200%);}
+        svg{
+          transform: scaleY(200%);
+          transition: .25s ease-in-out;
+          right: 0;
+          &:hover{right: $unite*-.5;}
+        }
       }
 
     }

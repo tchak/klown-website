@@ -63,7 +63,7 @@ export function IconReset({ height = 24, width = 24 }: IconParams) {
       y="0"
       height={height}
       width={width}
-      viewBox="0 0 60 60"
+      viewBox="-2 -2 60 60"
       preserveAspectRatio="xMinYMid meet"
     >
       <g id="i-reset" className="stroke">
