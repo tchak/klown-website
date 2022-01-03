@@ -45,6 +45,20 @@ body#piece{
 		// special Siema
 		div{height: 100%;}
 
+		// special iframe
+		.iframeContainer{
+			position: relative;
+			padding-top: 56.25%;
+			width: 100%;
+			iframe{
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+			}
+		}
+
 		button{
 			position: absolute;
 			height: 100%;
