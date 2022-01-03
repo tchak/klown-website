@@ -7,26 +7,34 @@ body#piece{
 		//height: calc(100vh - #{$baseline*5});
 		box-sizing: border-box;
 		@include for-size(desktop){ 
-			height: calc(100vh - #{$baseline*10});
+			// height: calc(100vh - #{$baseline*10});
 			padding: $baseline*2 0;
 		}
 
 		&:not(.single){
 			width: 100vw;
-			left: -$unite;
-			@include for-size(desktop){left: $unite*-4;}
+			width: calc(100vw - $unite*2);
+			left: $unite*-3;
+			transition: max-height .25s .25s ease;
+
+			figure, video, iframe{margin: 0 math.div($unite, 2)}
+
+			.siema{margin: 0 math.div($unite, -2)}
+			// @include for-size(desktop){left: $unite*-4;}
 		}
 
 		// if single Media
 		&.single{
-			width: 100%;
+			width: 100vw;
+			width: calc(100vw - $unite*2);
+			left: $unite*-3;
 			@include flex();
 			@include justify-content(center);
 			@include align-items(center);
 			> video, > figure{
 				width: 100%;
-				max-width: 1920px;
-				max-width: calc(max(100%, 1920px));
+				// max-width: 1920px;
+				// max-width: calc(max(100%, 1920px));
 
 			}
 			> figure{height: 100%;}
@@ -38,7 +46,6 @@ body#piece{
 		button{
 			position: absolute;
 			height: 100%;
-			max-height: 75vh;
 			width: 33.333%;
 			top: 0;
 			background: transparent;
@@ -56,28 +63,37 @@ body#piece{
 		figure{
 			text-align: center;
 			@include for-size(desktop){
+				padding-bottom: calc(clamp(#{$baseline*4}, 20vh, 250px));
+			}
+
+/* 			@include for-size(desktop){
 				top: 50%;
 				transform:translateY(-50%);
+			} */
+			img{ 
+				// max-width: calc(100% - #{$unite*2});
+				// object-fit: contain;
+				width: 100%;
+				object-fit: cover;
 			}
-			img{ max-width: calc(100% - #{$unite*2}); object-fit: contain;	}
 			// @include for-size(desktop){ img{ max-width: calc(max(100%, 1920px))} }
 
 		}
 
 		a#to-details{
 			position: absolute;
-			bottom: $baseline;
-			left: 50%;
+			top: calc(100vh - 12rem - $baseline*2);
+			// left: 50%;
 			transform: translateX(-50%) translateY(0);
-			@include f1-s0();
+			display: none;
 			text-align: center;
-			padding: $baseline/4 2px;
+			padding: math.div($baseline, 4) 2px;
+			@include f1-s0();
 			stroke-width: 3px;//1.5px;
 			transition: .5s ease;
-			display: none;
 			@include for-size(desktop){
-				display: inline-block;
-				bottom: $baseline*-1;
+				// display: inline-block;
+				// bottom: $baseline*-1;
 			}
 
 			@keyframes upDown{
@@ -104,12 +120,12 @@ body#piece{
 		margin-top: $baseline*3;
 		padding: $baseline 0  $baseline*3 0; 
 		p, ul{font-weight: $bold;}
-		p:first-of-type{ margin-bottom: $baseline/2; }
+		p:first-of-type{ margin-bottom: math.div($baseline, 2); }
 		h1{ @include f1-s4(); line-height: 4rem; margin-bottom: $baseline*1.5; word-break: break-word;}
 		ul{
 			@include flex();
 			@include flex-wrap(wrap);
-			gap: $unite/2;
+			gap: math.div($unite, 2);
 			li{
 				width: 20%; 
 				min-width: $unite*5;
@@ -117,7 +133,6 @@ body#piece{
 			}
 		}
 		@include for-size(desktop){
-			margin-top: calc(clamp(#{$baseline*4}, 20vh, 250px));
 			padding: $baseline*2 0  calc(clamp(#{$baseline*4}, 10vh, 100px)) 0; 
 			p:first-of-type{}
 			h1{ @include f1-s6(); line-height: 6rem;}
@@ -165,10 +180,10 @@ body#piece{
 		@include for-size(desktop){ 		
 			height: calc(100vh - #{$baseline*8});
 			height: calc(clamp(300px, calc(100vh - #{$baseline*8}), 800px));
-			@include grid(repeat(8, 1fr), auto,  $baseline $unite/2, null, end);
+			@include grid(repeat(8, 1fr), auto,  $baseline math.div($unite, 2), null, end);
 		}
 		@include for-size(desktop-1200){
-			@include grid(repeat(9, 1fr), auto,  $baseline $unite/2, null, end);
+			@include grid(repeat(9, 1fr), auto,  $baseline math.div($unite, 2), null, end);
 			padding: $baseline*2 0;
 			box-sizing: border-box;
 			h2{grid-column: 2/ span 6; -ms-grid-column: 2/ span 6;}

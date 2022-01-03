@@ -1,7 +1,7 @@
 import type { MetaFunction, LoaderFunction } from 'remix';
-import { useRouteData } from 'remix';
-import Markdown from 'react-markdown';
+import { useLoaderData } from 'remix';
 
+import { Markdown } from '~/components/markdown';
 import { getCategory, GetCategory as RouteData } from '~/cms.server';
 import { usePageColor } from '~/hooks';
 import { Side } from '~/components/side';
@@ -14,10 +14,10 @@ export const meta: MetaFunction = ({ data }: { data: RouteData }) => {
   };
 };
 export const loader: LoaderFunction = async ({ params }) =>
-  getCategory(params.slug);
+  getCategory(params.slug!);
 
 export default function Category() {
-  const data = useRouteData<RouteData>();
+  const data = useLoaderData<RouteData>();
 
   usePageColor(data.category?.color);
 
@@ -28,7 +28,19 @@ export default function Category() {
         <p className="exp">{data.category?.pieces.length} pièces</p>
       </header>
       <div className="content">
-        <Markdown>{data.category?.content?.markdown ?? ''}</Markdown>
+        <Markdown
+          rehypeReactOptions={{
+            components: {
+              img: (props: any) => (
+                <figure>
+                  <img {...props} />
+                </figure>
+              ),
+            },
+          }}
+        >
+          {data.category?.content?.markdown ?? ''}
+        </Markdown>
       </div>
       <Side
         categories={data.categories.filter(

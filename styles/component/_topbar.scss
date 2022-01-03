@@ -56,7 +56,7 @@
 			> li{
 				display: inline-block;
 				text-transform: capitalize;
-				padding: 0 0 $baseline/3 $unite/2;
+				padding: 0 0 math.div($baseline, 3) math.div($unite, 2);
 
 				&:after {
       		// underline
@@ -65,7 +65,7 @@
           margin: 0 auto;
           width: 0;
           height: 1px;
-          bottom: $baseline/-3;
+          bottom: math.div($baseline, -3);
           background-color: var(--cc);
           transition: opacity .2s ease,width .2s ease;
           z-index: 1;

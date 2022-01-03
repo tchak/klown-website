@@ -160,7 +160,7 @@
   @include flex-direction(row);
 
   > * {
-    $item-width: 100% / $cols;
+    $item-width: math.div(100%, $cols);
     width: $item-width;
     box-sizing: border-box;
     padding: 0 $unite;
@@ -170,7 +170,7 @@
 //
 // Grid
 //
-@mixin grid($col, $row, $gap: $baseline $unite/2, $justify: null, $align: null){
+@mixin grid($col, $row, $gap: $baseline math.div($unite, 2), $justify: null, $align: null){
   display:-ms-grid;
   display: grid;
   -ms-grid-columns: $col;

@@ -1,9 +1,9 @@
-import { useRouteData, Link } from 'remix';
+import { useLoaderData, Link } from 'remix';
 
 import type { GetHeader } from '~/cms.server';
 
 export function Header() {
-  const data = useRouteData<GetHeader>();
+  const data = useLoaderData<GetHeader>();
 
   return (
     <header id="topbar" role="navigation" aria-label="topbar">

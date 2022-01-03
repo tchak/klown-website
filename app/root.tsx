@@ -1,5 +1,5 @@
 import { LinksFunction, LoaderFunction, MetaFunction, useMatches } from 'remix';
-import { Meta, Links, Scripts, LiveReload } from 'remix';
+import { Meta, Links, Scripts, LiveReload, ScrollRestoration } from 'remix';
 import { Outlet } from 'react-router-dom';
 
 import stylesUrl from './styles/index.css';
@@ -47,6 +47,7 @@ function Document({
       <body id={bodyId} data-cc="r" data-bg="w" data-categorie="1">
         {children}
 
+        <ScrollRestoration />
         <Scripts />
         {process.env.NODE_ENV === 'development' && <LiveReload />}
       </body>

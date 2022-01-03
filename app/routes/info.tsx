@@ -21,8 +21,7 @@ export default function Info() {
       </div>
 
       <ul className="details">
-        <li>email@email.com</li>
-        <li>Gallerie XX Adresse </li>
+        <li></li>
       </ul>
     </main>
   );

@@ -1,9 +1,9 @@
 import { MutableRefObject, useEffect, useRef } from 'react';
 import type { MetaFunction, LoaderFunction } from 'remix';
-import { useRouteData } from 'remix';
-import Markdown from 'react-markdown';
+import { useLoaderData } from 'remix';
 import Siema from 'siema';
 
+import { Markdown } from '~/components/markdown';
 import { getPiece, GetPiece as RouteData } from '~/cms.server';
 import { usePageColor } from '~/hooks';
 import { Side } from '~/components/side';
@@ -18,10 +18,10 @@ export const meta: MetaFunction = ({ data }: { data: RouteData }) => {
   };
 };
 export const loader: LoaderFunction = async ({ params }) =>
-  getPiece(params.slug);
+  getPiece(params.slug!);
 
 export default function Piece() {
-  const data = useRouteData<RouteData>();
+  const data = useLoaderData<RouteData>();
   const piece = data.piece!;
 
   const images = piece.images ?? [];
@@ -74,7 +74,19 @@ export default function Piece() {
         </header>
 
         <div id="content">
-          <Markdown>{piece.content?.markdown ?? ''}</Markdown>
+          <Markdown
+            rehypeReactOptions={{
+              components: {
+                img: (props: any) => (
+                  <figure>
+                    <img {...props} />
+                  </figure>
+                ),
+              },
+            }}
+          >
+            {piece.content?.markdown ?? ''}
+          </Markdown>
         </div>
         <Related piece={piece} />
       </main>
@@ -166,6 +178,20 @@ function Carrousel({
   );
 }
 
+function autoHeight(currentSlide) {
+  let carrousel = document.querySelector('#carrousel') 
+  let currentEl = document.querySelector('.siema > div > div:nth-of-type('+ (currentSlide + 2) +')');
+  let maxHeight = currentEl.offsetHeight;
+  carrousel.style.maxHeight = maxHeight + 'px';
+}
+
+export function resize() {
+  useEffect(function onFirstMount() {
+    window.addEventListener("resize", setTimeout(autoHeight, 500));
+  }, []);
+  return null;
+}
+
 function useSiema<Element extends HTMLElement>(): [
   MutableRefObject<Element | null>,
   () => void,
@@ -188,7 +214,9 @@ function useSiema<Element extends HTMLElement>(): [
         loop: true,
         rtl: false,
         onInit: () => {},
-        onChange: () => {},
+        onChange: () => {
+          autoHeight(siema.currentSlide);
+        },
       }));
 
       return () => siema.destroy(true);
@@ -202,7 +230,7 @@ function useSiema<Element extends HTMLElement>(): [
     siemaRef.current?.next();
   };
 
-  return [ref, prev, next];
+  return [ref, prev, next, height];
 }
 
 function Related({ piece }: { piece: NonNullable<RouteData['piece']> }) {
@@ -213,10 +241,10 @@ function Related({ piece }: { piece: NonNullable<RouteData['piece']> }) {
           Pièces <br />
           en liens
         </h2>
-        <ul className="sr-only" aria-role="nav">
+        <nav className="sr-only">
           /*Lister les items ici pour des questions d'accesibilité*/
           <li></li>
-        </ul>
+        </nav>
       </aside>
     </>
   );
