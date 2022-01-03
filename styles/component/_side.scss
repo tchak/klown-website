@@ -119,7 +119,7 @@ nav#sideNav ul.sort-options{
       // top: $baseline;
       li:first-of-type{ top: 2px; }
       @include for-size(phone){left: $unite;}
-      @include for-size(desktop){right: $unite;}
+      @include for-size(desktop){right: $unite*4.5;}
     }
 
     > ul.cat-container{
