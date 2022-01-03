@@ -74,7 +74,7 @@ export function IconReset({ height = 24, width = 24 }: IconParams) {
   );
 }
 
-export function IconSide({ height = 24, width = 24 }: IconParams) {
+export function IconSide({ height = 24, width = 40 }: IconParams) {
   return (
     <svg
       x="0"
@@ -85,10 +85,8 @@ export function IconSide({ height = 24, width = 24 }: IconParams) {
       preserveAspectRatio="xMinYMid meet"
     >
       <g id="i-side" className="stroke">
-        <line x1="0" y1="1.5" x2="25" y2="1.5" />
-        <line x1="11" y1="17.6" x2="49.2" y2="17.6" />
-        <line x1="0" y1="34.7" x2="25" y2="34.7" />
-        <polyline points="42.3,10.7 49.2,17.6 42.3,24.5" />
+        <line x1="0" y1="2" y2="2" x2="70"></line>
+        <line y1="18" y2="18" x2="40"></line>
       </g>
     </svg>
   );

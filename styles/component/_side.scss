@@ -281,7 +281,7 @@ nav#sideNav ul.sort-options{
       >*{
         transition: opacity .25s ease-in-out;
       }
-      svg{opacity: 1; stroke-width: 2px/* 1.5px */; top: -2px; position: absolute;}
+      svg{opacity: 1; stroke-width: 2px/* 1.5px */; top: 4px; left: $unite*-.5; position: absolute;}
       h1{
         @include f1-s1();
         opacity: 0;
