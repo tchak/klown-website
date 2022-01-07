@@ -3,6 +3,7 @@ import type { MetaFunction, LoaderFunction } from 'remix';
 import { useLoaderData } from 'remix';
 import Siema from 'siema';
 import { DynamicLinksFunction } from 'remix-utils';
+import { useWindowSize } from '@reach/window-size';
 
 import { Markdown } from '~/components/markdown';
 import { getPiece, GetPiece as RouteData } from '~/cms.server';
@@ -66,6 +67,18 @@ export default function Piece() {
   const images = piece.images ?? [];
   const needsCarrousel = images.length > 1;
 
+  const { width } = useWindowSize();
+  useEffect(() => {
+    const figure = document.querySelector<HTMLElement>(
+      '#carrousel.single figure'
+    );
+
+    if (figure) {
+      console.log(figure, figure.offsetHeight);
+      setCarrouselHeight(figure.offsetHeight);
+    }
+  }, [width]);
+
   return (
     <>
       <Side categories={categories} />
@@ -88,6 +101,12 @@ export default function Piece() {
                 ]}
                 src={images[0].jpg}
                 loading="lazy"
+                onLoad={(img) => {
+                  const figure = img.closest<HTMLElement>('figure');
+                  if (figure) {
+                    setCarrouselHeight(figure.offsetHeight);
+                  }
+                }}
               />
             </figure>
           )}
@@ -218,6 +237,12 @@ function Carrousel({
               ]}
               src={jpg}
               loading="lazy"
+              onLoad={(img) => {
+                const figure = img.closest<HTMLElement>('figure');
+                if (figure) {
+                  setCarrouselHeight(figure.offsetHeight);
+                }
+              }}
             />
           </figure>
         ))}
@@ -234,22 +259,20 @@ function Carrousel({
 }
 
 function autoHeight(currentSlide: number) {
-  const carrousel = document.querySelector<HTMLDivElement>('#carrousel');
   const currentEl = document.querySelector<HTMLDivElement>(
     '.siema > div > div:nth-of-type(' + (currentSlide + 2) + ')'
   );
-  const maxHeight = currentEl?.offsetHeight;
-  if (carrousel) {
-    carrousel.style.maxHeight = maxHeight + 'px';
+  if (currentEl) {
+    setCarrouselHeight(currentEl.offsetHeight);
   }
 }
 
-// export function resize() {
-//   useEffect(function onFirstMount() {
-//     window.addEventListener('resize', setTimeout(autoHeight, 500));
-//   }, []);
-//   return null;
-// }
+function setCarrouselHeight(maxHeight: number) {
+  const carrousel = document.querySelector<HTMLDivElement>('#carrousel');
+  if (carrousel) {
+    carrousel.style.maxHeight = `${maxHeight}px`;
+  }
+}
 
 function useSiema<Element extends HTMLElement>(): [
   MutableRefObject<Element | null>,

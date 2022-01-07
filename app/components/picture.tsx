@@ -12,6 +12,7 @@ type PictureProps = {
   width?: number | string;
   height?: number | string;
   fallbackSrc?: string;
+  onLoad?: (img: HTMLImageElement) => void;
 };
 
 const BLANK_IMG =
@@ -28,6 +29,7 @@ export const Picture = forwardRef<HTMLImageElement, PictureProps>(
       loading,
       width,
       height,
+      onLoad,
     },
     ref
   ) => {
@@ -45,7 +47,10 @@ export const Picture = forwardRef<HTMLImageElement, PictureProps>(
           alt={alt}
           width={width}
           height={height}
-          onLoad={() => setLoading(false)}
+          onLoad={(event) => {
+            setLoading(false);
+            onLoad && onLoad(event.target as HTMLImageElement);
+          }}
           onError={(event) => {
             event.currentTarget.src = fallbackSrc;
             setLoading(false);
