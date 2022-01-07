@@ -21,6 +21,7 @@
   },
   "dependencies": {
     "@netlify/functions": "^0.10.0",
+    "@reach/window-size": "^0.16.0",
     "@react-aria/interactions": "^3.7.0",
     "@remix-run/dev": "^1.1.1",
     "@remix-run/netlify": "^1.1.1",

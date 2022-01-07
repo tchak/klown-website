@@ -1,6 +1,13 @@
-import { LinksFunction, LoaderFunction, MetaFunction, useMatches } from 'remix';
-import { Meta, Links, Scripts, LiveReload, ScrollRestoration } from 'remix';
-import { Outlet } from 'react-router-dom';
+import { LinksFunction, LoaderFunction, MetaFunction } from 'remix';
+import {
+  Meta,
+  Links,
+  Scripts,
+  LiveReload,
+  ScrollRestoration,
+  Outlet,
+  useMatches,
+} from 'remix';
 import { DynamicLinks } from 'remix-utils';
 
 import stylesUrl from './styles/index.css';
@@ -25,16 +32,22 @@ export const meta: MetaFunction = () => {
 
 export const loader: LoaderFunction = async () => getHeader();
 
-function useBodyId() {
-  const match = useMatches().find(({ handle }) => !!handle);
-  return match?.handle?.bodyId ?? 'index';
+function useBodyAttributes() {
+  const attributes = useMatches()
+    .map((match) => {
+      const fn = match?.handle?.body;
+      if (typeof fn !== 'function') return false;
+      return match?.handle?.body(match);
+    })
+    .find(Boolean);
+  return attributes ?? { id: 'index', 'data-cc': 'r', 'data-bg': 'w' };
 }
 
 function Document({
-  bodyId = 'index',
+  body,
   children,
 }: {
-  bodyId?: string;
+  body?: { id: string };
   children: React.ReactNode;
 }) {
   return (
@@ -46,7 +59,7 @@ function Document({
         <Links />
         <DynamicLinks />
       </head>
-      <body id={bodyId} data-cc="r" data-bg="w" data-categorie="1">
+      <body {...body}>
         {children}
 
         <ScrollRestoration />
@@ -59,7 +72,7 @@ function Document({
 
 export default function App() {
   return (
-    <Document bodyId={useBodyId()}>
+    <Document body={useBodyAttributes()}>
       <Header />
       <Outlet />
       <Strobos />

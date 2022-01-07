@@ -2,19 +2,25 @@ import type { MetaFunction, LoaderFunction } from 'remix';
 import { useLoaderData, Link } from 'remix';
 
 import { getCategories, GetCategories as RouteData } from '~/cms.server';
-import { usePageColor, useHoverPageColor, pageColor } from '~/hooks';
+import { useHoverPageColor } from '~/hooks';
 
-export const handle = { bodyId: 'index' };
+export const handle = {
+  body: () => {
+    return {
+      'data-cc': 'r',
+      'data-bg': 'w',
+      id: 'index',
+    };
+  },
+};
 export const meta: MetaFunction = () => ({ title: 'Klown' });
 export const loader: LoaderFunction = async () => getCategories();
 
 export default function Index() {
   const data = useLoaderData<RouteData>();
 
-  usePageColor('rw');
-
   return (
-    <main {...pageColor('rw')}>
+    <main>
       <nav>
         <ul>
           {data.categories.map((category, i) => (

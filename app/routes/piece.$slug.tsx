@@ -3,10 +3,11 @@ import type { MetaFunction, LoaderFunction } from 'remix';
 import { useLoaderData } from 'remix';
 import Siema from 'siema';
 import { DynamicLinksFunction } from 'remix-utils';
+import { useWindowSize } from '@reach/window-size';
 
 import { Markdown } from '~/components/markdown';
 import { getPiece, GetPiece as RouteData } from '~/cms.server';
-import { usePageColor, pageColor, parseColor, getHexColor } from '~/hooks';
+import { parseColor, getHexColor } from '~/hooks';
 import { Side } from '~/components/side';
 import { Picture } from '~/components/picture';
 import { IconDown } from '~/components/icons';
@@ -37,7 +38,17 @@ const dynamicLinks: DynamicLinksFunction<RouteData> = ({ data }) => {
     },
   ];
 };
-export const handle = { bodyId: 'piece', dynamicLinks };
+export const handle = {
+  dynamicLinks,
+  body: ({ data }: { data: RouteData }) => {
+    const { cc, bg } = parseColor(data.piece.category?.color);
+    return {
+      'data-cc': cc,
+      'data-bg': bg,
+      id: 'piece',
+    };
+  },
+};
 
 export const loader: LoaderFunction = async ({ params }) => {
   const { piece, categories } = await getPiece(String(params.slug));
@@ -55,14 +66,23 @@ export default function Piece() {
   const { piece, categories } = useLoaderData<RouteData>();
   const images = piece.images ?? [];
   const needsCarrousel = images.length > 1;
-  const color = piece.category?.color;
 
-  usePageColor(color);
+  const { width } = useWindowSize();
+  useEffect(() => {
+    const figure = document.querySelector<HTMLElement>(
+      '#carrousel.single figure'
+    );
+
+    if (figure) {
+      console.log(figure, figure.offsetHeight);
+      setCarrouselHeight(figure.offsetHeight);
+    }
+  }, [width]);
 
   return (
     <>
       <Side categories={categories} />
-      <main {...pageColor(color)}>
+      <main>
         <section id="carrousel" className={needsCarrousel ? '' : 'single'}>
           {needsCarrousel ? (
             <Carrousel images={images} />
@@ -81,6 +101,12 @@ export default function Piece() {
                 ]}
                 src={images[0].jpg}
                 loading="lazy"
+                onLoad={(img) => {
+                  const figure = img.closest<HTMLElement>('figure');
+                  if (figure) {
+                    setCarrouselHeight(figure.offsetHeight);
+                  }
+                }}
               />
             </figure>
           )}
@@ -156,8 +182,8 @@ function PaintingDetails({
 function PaintingTechnique({ technique }: { technique: string }) {
   return (
     <ul>
-      {technique.split(',').map((technique) => (
-        <li>{technique.trim()}</li>
+      {technique.split(',').map((technique, index) => (
+        <li key={index}>{technique.trim()}</li>
       ))}
     </ul>
   );
@@ -211,6 +237,12 @@ function Carrousel({
               ]}
               src={jpg}
               loading="lazy"
+              onLoad={(img) => {
+                const figure = img.closest<HTMLElement>('figure');
+                if (figure) {
+                  setCarrouselHeight(figure.offsetHeight);
+                }
+              }}
             />
           </figure>
         ))}
@@ -227,22 +259,20 @@ function Carrousel({
 }
 
 function autoHeight(currentSlide: number) {
-  const carrousel = document.querySelector<HTMLDivElement>('#carrousel');
   const currentEl = document.querySelector<HTMLDivElement>(
     '.siema > div > div:nth-of-type(' + (currentSlide + 2) + ')'
   );
-  const maxHeight = currentEl?.offsetHeight;
-  if (carrousel) {
-    carrousel.style.maxHeight = maxHeight + 'px';
+  if (currentEl) {
+    setCarrouselHeight(currentEl.offsetHeight);
   }
 }
 
-// export function resize() {
-//   useEffect(function onFirstMount() {
-//     window.addEventListener('resize', setTimeout(autoHeight, 500));
-//   }, []);
-//   return null;
-// }
+function setCarrouselHeight(maxHeight: number) {
+  const carrousel = document.querySelector<HTMLDivElement>('#carrousel');
+  if (carrousel) {
+    carrousel.style.maxHeight = `${maxHeight}px`;
+  }
+}
 
 function useSiema<Element extends HTMLElement>(): [
   MutableRefObject<Element | null>,

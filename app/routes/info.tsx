@@ -1,12 +1,16 @@
-import { usePageColor, pageColor } from '~/hooks';
-
-export const handle = { bodyId: 'info' };
+export const handle = {
+  body: () => {
+    return {
+      'data-cc': 'k',
+      'data-bg': 'w',
+      id: 'info',
+    };
+  },
+};
 
 export default function Info() {
-  usePageColor('kw');
-
   return (
-    <main {...pageColor('kw')}>
+    <main>
       <h1 className="sr-only">Information</h1>
 
       <div id="texte_presentation">

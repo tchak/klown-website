@@ -1,5 +1,5 @@
-import { useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { useEffect, ChangeEventHandler, MouseEventHandler } from 'react';
+import { useSearchParams, Link } from 'remix';
 
 import type { GetCategory } from '~/cms.server';
 import { Picture } from './picture';
@@ -10,9 +10,46 @@ export function Side({
 }: {
   categories: GetCategory['categories'];
 }) {
+  const [searchParams, setSearchParams] = useSearchParams();
   useEffect(() => {
     document.querySelector('.cat-container')?.classList.remove('noJS');
   }, []);
+
+  const selectedType = searchParams.get('type')?.toLowerCase();
+  const types = [
+    ...new Set(
+      categories.flatMap((category) =>
+        category.pieces.map((piece) => piece.type)
+      )
+    ),
+  ].sort();
+  const onChangeType: ChangeEventHandler<HTMLInputElement> = (event) => {
+    const type = event.target.value;
+    if (type) {
+      searchParams.set('type', type);
+    } else {
+      searchParams.delete('type');
+    }
+    setSearchParams(searchParams);
+  };
+
+  const scrollRight: MouseEventHandler<HTMLButtonElement> = () => {
+    const step = document.body.clientWidth * 0.9;
+    const delta = step / 4;
+    const scrollContainer =
+      document.querySelector<HTMLUListElement>('.cat-container');
+
+    if (scrollContainer) {
+      if (
+        scrollContainer.offsetWidth + scrollContainer.scrollLeft + delta >=
+        scrollContainer.scrollWidth
+      ) {
+        scrollContainer.scrollLeft = 0;
+      } else {
+        scrollContainer.scrollBy(step, 0);
+      }
+    }
+  };
 
   return (
     <>
@@ -27,14 +64,23 @@ export function Side({
           id="medium-reset"
           type="radio"
           name="sort-by-medium"
+          value=""
+          checked={!selectedType}
+          onChange={onChangeType}
           hidden
-          defaultChecked
         />
-        <input id="medium-1" type="radio" name="sort-by-medium" hidden />
-        <input id="medium-2" type="radio" name="sort-by-medium" hidden />
-        <input id="medium-3" type="radio" name="sort-by-medium" hidden />
-        <input id="medium-4" type="radio" name="sort-by-medium" hidden />
-        <input id="medium-5" type="radio" name="sort-by-medium" hidden />
+        {types.map((type, index) => (
+          <input
+            key={type}
+            id={`medium-${index + 1}`}
+            type="radio"
+            name="sort-by-medium"
+            value={type.toLowerCase()}
+            checked={type.toLowerCase() == selectedType}
+            onChange={onChangeType}
+            hidden
+          />
+        ))}
         <ul className="sort-options">
           <li data-for="medium-reset">
             <label htmlFor="medium-reset">
@@ -42,15 +88,11 @@ export function Side({
               <IconFilter width={18} height={18} />
             </label>
           </li>
-          <li data-for="medium-1">
-            <label htmlFor="medium-1">Video</label>
-          </li>
-          <li data-for="medium-2">
-            <label htmlFor="medium-2">Peinture</label>
-          </li>
-          <li data-for="medium-3">
-            <label htmlFor="medium-3">Photo</label>
-          </li>
+          {types.map((type, index) => (
+            <li key={type} data-for={`medium-${index + 1}`}>
+              <label htmlFor={`medium-${index + 1}`}>{type}</label>
+            </li>
+          ))}
         </ul>
 
         <ul className="cat-container noJS">
@@ -66,7 +108,11 @@ export function Side({
               <ul className="item-container">
                 {category.pieces.map((piece) =>
                   piece.images[0] ? (
-                    <li key={piece.id} className="item">
+                    <li
+                      key={piece.id}
+                      className="item"
+                      data-medium={types.indexOf(piece.type) + 1}
+                    >
                       <Link to={`/piece/${piece.slug}`}>
                         <Picture
                           className="cover"
@@ -93,7 +139,7 @@ export function Side({
           ))}
         </ul>
 
-        <button id="scrollTrigger">
+        <button type="button" id="scrollTrigger" onClick={scrollRight}>
           <ArrowR height={38} width={38} />
         </button>
       </nav>
