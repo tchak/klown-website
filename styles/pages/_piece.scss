@@ -27,9 +27,9 @@ body#piece{
 
 		// if single Media
 		&.single{
-			width: 100vw;
-			width: calc(100vw - $unite*2);
-			left: $unite*-3;
+			width: 100%;
+			width: calc(100% + #{$unite});
+			left: math.div($unite, -2);
 			@include flex();
 			@include justify-content(center);
 			@include align-items(center);
