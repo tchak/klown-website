@@ -18,6 +18,14 @@ query getHeader($stage: Stage!) {
   }
 }
 
+query getInfo($id: ID!) {
+  info(where: { id: $id }) {
+    presentation {
+      markdown
+    }
+  }
+}
+
 query getCategory($slug: String!, $stage: Stage!) {
   categories(stage: $stage) {
     ...CategoryFragment

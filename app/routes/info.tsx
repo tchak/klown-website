@@ -1,3 +1,8 @@
+import type { LoaderFunction } from 'remix';
+import { useLoaderData } from 'remix';
+
+import { Markdown } from '~/components/markdown';
+import { getInfo, GetInfo as RouteData } from '~/cms.server';
 export const handle = {
   body: () => {
     return {
@@ -7,21 +12,29 @@ export const handle = {
     };
   },
 };
+export const loader: LoaderFunction = async () => getInfo();
 
 export default function Info() {
+  const data = useLoaderData<RouteData>();
+
   return (
     <main>
       <h1 className="sr-only">Information</h1>
 
       <div id="texte_presentation">
-        <p>
-          Je suis...
-          <i>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Amet mauris
-            pretium, vulputate neque placerat neque, nascetur
-          </i>
-          lectus gravida.
-        </p>
+        <Markdown
+          rehypeReactOptions={{
+            components: {
+              img: (props: any) => (
+                <figure>
+                  <img {...props} />
+                </figure>
+              ),
+            },
+          }}
+        >
+          {data.info.presentation?.markdown ?? ''}
+        </Markdown>
       </div>
 
       <ul className="details">
