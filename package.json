@@ -36,6 +36,7 @@
     "remark-parse": "^9.0.0",
     "remark-rehype": "^8.0.0",
     "remix": "^1.1.1",
+    "remix-utils": "^2.4.0",
     "siema": "^1.5.1",
     "unified": "^9.0.0"
   },

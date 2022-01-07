@@ -2,21 +2,43 @@ import { MutableRefObject, useEffect, useRef } from 'react';
 import type { MetaFunction, LoaderFunction } from 'remix';
 import { useLoaderData } from 'remix';
 import Siema from 'siema';
+import { DynamicLinksFunction } from 'remix-utils';
 
 import { Markdown } from '~/components/markdown';
 import { getPiece, GetPiece as RouteData } from '~/cms.server';
-import { usePageColor, pageColor } from '~/hooks';
+import { usePageColor, pageColor, parseColor, getHexColor } from '~/hooks';
 import { Side } from '~/components/side';
 import { Picture } from '~/components/picture';
 import { IconDown } from '~/components/icons';
 
-export const handle = { bodyId: 'piece' };
 export const meta: MetaFunction = ({ data }: { data: RouteData }) => {
+  const { bg } = parseColor(data.piece.category?.color);
+  const color = getHexColor(bg);
   return {
     title: `Klown | ${data.piece?.category?.title} | ${data.piece?.title}`,
     description: data.piece?.description ?? '',
+    'theme-color': color,
   };
 };
+const dynamicLinks: DynamicLinksFunction<RouteData> = ({ data }) => {
+  const { bg } = parseColor(data.piece.category?.color);
+  return [
+    {
+      rel: 'icon',
+      href: `/favicon-${bg}.ico`,
+    },
+    {
+      rel: 'icon',
+      href: `/favicon-${bg}.svg`,
+    },
+    {
+      rel: 'apple-touch-icon',
+      href: `/apple-touch-icon-${bg}.png`,
+    },
+  ];
+};
+export const handle = { bodyId: 'piece', dynamicLinks };
+
 export const loader: LoaderFunction = async ({ params }) => {
   const { piece, categories } = await getPiece(String(params.slug));
 

@@ -1,6 +1,7 @@
 import { LinksFunction, LoaderFunction, MetaFunction, useMatches } from 'remix';
 import { Meta, Links, Scripts, LiveReload, ScrollRestoration } from 'remix';
 import { Outlet } from 'react-router-dom';
+import { DynamicLinks } from 'remix-utils';
 
 import stylesUrl from './styles/index.css';
 import { Strobos } from './components/strobos';
@@ -43,6 +44,7 @@ function Document({
         <link rel="icon" href="/favicon.png" type="image/png" />
         <Meta />
         <Links />
+        <DynamicLinks />
       </head>
       <body id={bodyId} data-cc="r" data-bg="w" data-categorie="1">
         {children}

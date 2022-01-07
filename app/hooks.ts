@@ -41,13 +41,31 @@ export function useStrobos(): [boolean, () => void] {
   return [enabled, () => setEnabled((enabled) => !enabled)];
 }
 
-export function pageColor(color?: string) {
+export function parseColor(color?: string) {
   const [cc, bg] = color ?? 'rw';
+  return { cc, bg };
+}
+
+export function getHexColor(bg: string) {
+  switch (bg) {
+    case 'w':
+      return '#ffffff';
+    case 'k':
+      return '#262626';
+    case 'r':
+      return '#db0d06';
+    default:
+      return '#ffffff';
+  }
+}
+
+export function pageColor(color?: string) {
+  const { cc, bg } = parseColor(color);
   return { 'data-cc': cc, 'data-bg': bg };
 }
 
 function switchPageColor(color?: string) {
-  const [cc, bg] = color ?? 'rw';
+  const { cc, bg } = parseColor(color);
   document.body.dataset['cc'] = cc;
   document.body.dataset['bg'] = bg;
 }
