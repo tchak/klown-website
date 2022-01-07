@@ -146,8 +146,20 @@ function PaintingDetails({
     <>
       <li>peinture</li>
       {piece.dimensions ? <li>{piece.dimensions}</li> : null}
-      {piece.technique ? <li>{piece.technique}</li> : null}
+      {piece.technique ? (
+        <PaintingTechnique technique={piece.technique} />
+      ) : null}
     </>
+  );
+}
+
+function PaintingTechnique({ technique }: { technique: string }) {
+  return (
+    <ul>
+      {technique.split(',').map((technique) => (
+        <li>{technique.trim()}</li>
+      ))}
+    </ul>
   );
 }
 
