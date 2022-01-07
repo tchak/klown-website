@@ -90,6 +90,7 @@ fragment PiecesFragment on Category {
     id
     title
     slug
+    type
     images(first: 1, where: { mimeType_in: ["image/jpeg"] }) {
       id
       mimeType

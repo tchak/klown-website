@@ -1,12 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useHover } from '@react-aria/interactions';
 
-export function usePageColor(color?: string) {
-  useEffect(() => {
-    switchPageColor(color);
-  }, [color]);
-}
-
 export function useHoverPageColor(color?: string, index = 1) {
   return useHover({
     onHoverStart() {

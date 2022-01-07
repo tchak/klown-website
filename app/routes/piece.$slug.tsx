@@ -6,7 +6,7 @@ import { DynamicLinksFunction } from 'remix-utils';
 
 import { Markdown } from '~/components/markdown';
 import { getPiece, GetPiece as RouteData } from '~/cms.server';
-import { usePageColor, pageColor, parseColor, getHexColor } from '~/hooks';
+import { parseColor, getHexColor } from '~/hooks';
 import { Side } from '~/components/side';
 import { Picture } from '~/components/picture';
 import { IconDown } from '~/components/icons';
@@ -37,7 +37,17 @@ const dynamicLinks: DynamicLinksFunction<RouteData> = ({ data }) => {
     },
   ];
 };
-export const handle = { bodyId: 'piece', dynamicLinks };
+export const handle = {
+  dynamicLinks,
+  body: ({ data }: { data: RouteData }) => {
+    const { cc, bg } = parseColor(data.piece.category?.color);
+    return {
+      'data-cc': cc,
+      'data-bg': bg,
+      id: 'piece',
+    };
+  },
+};
 
 export const loader: LoaderFunction = async ({ params }) => {
   const { piece, categories } = await getPiece(String(params.slug));
@@ -55,14 +65,11 @@ export default function Piece() {
   const { piece, categories } = useLoaderData<RouteData>();
   const images = piece.images ?? [];
   const needsCarrousel = images.length > 1;
-  const color = piece.category?.color;
-
-  usePageColor(color);
 
   return (
     <>
       <Side categories={categories} />
-      <main {...pageColor(color)}>
+      <main>
         <section id="carrousel" className={needsCarrousel ? '' : 'single'}>
           {needsCarrousel ? (
             <Carrousel images={images} />
@@ -156,8 +163,8 @@ function PaintingDetails({
 function PaintingTechnique({ technique }: { technique: string }) {
   return (
     <ul>
-      {technique.split(',').map((technique) => (
-        <li>{technique.trim()}</li>
+      {technique.split(',').map((technique, index) => (
+        <li key={index}>{technique.trim()}</li>
       ))}
     </ul>
   );

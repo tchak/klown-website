@@ -4,7 +4,7 @@ import { DynamicLinksFunction } from 'remix-utils';
 
 import { Markdown } from '~/components/markdown';
 import { getCategory, GetCategory as RouteData } from '~/cms.server';
-import { usePageColor, pageColor, parseColor, getHexColor } from '~/hooks';
+import { parseColor, getHexColor } from '~/hooks';
 import { Side } from '~/components/side';
 
 export const meta: MetaFunction = ({ data }: { data: RouteData }) => {
@@ -33,19 +33,27 @@ const dynamicLinks: DynamicLinksFunction<RouteData> = ({ data }) => {
     },
   ];
 };
-export const handle = { bodyId: 'categorie', dynamicLinks };
+export const handle = {
+  dynamicLinks,
+  body: ({ data }: { data: RouteData }) => {
+    const { cc, bg } = parseColor(data.category.color);
+    return {
+      'data-cc': cc,
+      'data-bg': bg,
+      'data-categorie': 1,
+      id: 'categorie',
+    };
+  },
+};
 
 export const loader: LoaderFunction = async ({ params }) =>
   getCategory(String(params.slug));
 
 export default function Category() {
   const data = useLoaderData<RouteData>();
-  const color = data.category?.color;
-
-  usePageColor(color);
 
   return (
-    <main {...pageColor(color)}>
+    <main>
       <header>
         <h1>{data.category?.title}</h1>
         <p className="exp">{data.category?.pieces.length} pièces</p>
