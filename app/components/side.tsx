@@ -1,4 +1,4 @@
-import { useEffect, ChangeEventHandler } from 'react';
+import { useEffect, ChangeEventHandler, MouseEventHandler } from 'react';
 import { useSearchParams, Link } from 'remix';
 
 import type { GetCategory } from '~/cms.server';
@@ -31,6 +31,24 @@ export function Side({
       searchParams.delete('type');
     }
     setSearchParams(searchParams);
+  };
+
+  const scrollRight: MouseEventHandler<HTMLButtonElement> = () => {
+    const step = document.body.clientWidth * 0.9;
+    const delta = step / 4;
+    const scrollContainer =
+      document.querySelector<HTMLUListElement>('.cat-container');
+
+    if (scrollContainer) {
+      if (
+        scrollContainer.offsetWidth + scrollContainer.scrollLeft + delta >=
+        scrollContainer.scrollWidth
+      ) {
+        scrollContainer.scrollLeft = 0;
+      } else {
+        scrollContainer.scrollBy(step, 0);
+      }
+    }
   };
 
   return (
@@ -121,7 +139,7 @@ export function Side({
           ))}
         </ul>
 
-        <button id="scrollTrigger">
+        <button type="button" id="scrollTrigger" onClick={scrollRight}>
           <ArrowR height={38} width={38} />
         </button>
       </nav>
