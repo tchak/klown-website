@@ -1,8 +1,9 @@
-import type { LoaderFunction } from 'remix';
+import type { LoaderFunction, MetaFunction } from 'remix';
 import { useLoaderData } from 'remix';
 
 import { Markdown } from '~/components/markdown';
 import { getInfo, GetInfo as RouteData } from '~/cms.server';
+import { getHexColor } from '~/hooks';
 export const handle = {
   body: () => {
     return {
@@ -12,6 +13,11 @@ export const handle = {
     };
   },
 };
+export const meta: MetaFunction = ({ data }: { data: RouteData }) => ({
+  title: 'Klown | Information',
+  description: (data.info.presentation?.text ?? '').replace(/\\n/g, ' '),
+  'theme-color': getHexColor('w'),
+});
 export const loader: LoaderFunction = async () => getInfo();
 
 export default function Info() {
