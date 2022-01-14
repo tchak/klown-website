@@ -9,11 +9,10 @@ import { Side } from '~/components/side';
 
 export const meta: MetaFunction = ({ data }: { data: RouteData }) => {
   const { bg } = parseColor(data.category.color);
-  const color = getHexColor(bg);
   return {
     title: `Klown | ${data.category?.title}`,
     description: data.category?.description ?? '',
-    'theme-color': color,
+    'theme-color': getHexColor(bg),
   };
 };
 const dynamicLinks: DynamicLinksFunction<RouteData> = ({ data }) => {

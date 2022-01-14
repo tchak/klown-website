@@ -14,11 +14,10 @@ import { IconDown } from '~/components/icons';
 
 export const meta: MetaFunction = ({ data }: { data: RouteData }) => {
   const { bg } = parseColor(data.piece.category?.color);
-  const color = getHexColor(bg);
   return {
     title: `Klown | ${data.piece?.category?.title} | ${data.piece?.title}`,
     description: data.piece?.description ?? '',
-    'theme-color': color,
+    'theme-color': getHexColor(bg),
   };
 };
 const dynamicLinks: DynamicLinksFunction<RouteData> = ({ data }) => {

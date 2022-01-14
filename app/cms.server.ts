@@ -10,6 +10,8 @@ import {
   GetCategoriesQuery,
   GetCategoryQuery,
   GetPieceQuery,
+  GetInfoDocument,
+  GetInfoQuery,
   Stage,
   PieceType,
 } from './queries';
@@ -39,6 +41,23 @@ export type GetCategory = GetCategoryQuery & {
 };
 export type GetCategories = GetCategoriesQuery;
 export type GetHeader = GetHeaderQuery;
+export type GetInfo = GetInfoQuery & {
+  info: NonNullable<GetInfoQuery['info']>;
+};
+
+export async function getInfo(): Promise<GetInfoQuery> {
+  const { data, error } = await getClient()
+    .query(GetInfoDocument, { id: 'cky4ol9k8etyc0c98jgid4i7q' })
+    .toPromise();
+
+  if (error) {
+    throw error;
+  } else if (!data) {
+    throw new Error('Not Found');
+  }
+
+  return data;
+}
 
 export async function getHeader(stage = Stage.Draft): Promise<GetHeaderQuery> {
   const { data, error } = await getClient()

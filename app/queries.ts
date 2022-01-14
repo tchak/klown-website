@@ -1388,6 +1388,363 @@ export type ImageTransformationInput = {
   readonly resize?: InputMaybe<ImageResizeInput>;
 };
 
+export type Info = Node & {
+  /** The time the document was created */
+  readonly createdAt: Scalars['DateTime'];
+  /** User that created this document */
+  readonly createdBy?: Maybe<User>;
+  /** Get the document in other stages */
+  readonly documentInStages: ReadonlyArray<Info>;
+  /** List of Info versions */
+  readonly history: ReadonlyArray<Version>;
+  /** The unique identifier */
+  readonly id: Scalars['ID'];
+  readonly presentation?: Maybe<RichText>;
+  /** The time the document was published. Null on documents in draft stage. */
+  readonly publishedAt?: Maybe<Scalars['DateTime']>;
+  /** User that last published this document */
+  readonly publishedBy?: Maybe<User>;
+  readonly scheduledIn: ReadonlyArray<ScheduledOperation>;
+  /** System stage field */
+  readonly stage: Stage;
+  /** The time the document was updated */
+  readonly updatedAt: Scalars['DateTime'];
+  /** User that last updated this document */
+  readonly updatedBy?: Maybe<User>;
+};
+
+
+export type InfoCreatedByArgs = {
+  locales?: InputMaybe<ReadonlyArray<Locale>>;
+};
+
+
+export type InfoDocumentInStagesArgs = {
+  includeCurrent?: Scalars['Boolean'];
+  inheritLocale?: Scalars['Boolean'];
+  stages?: ReadonlyArray<Stage>;
+};
+
+
+export type InfoHistoryArgs = {
+  limit?: Scalars['Int'];
+  skip?: Scalars['Int'];
+  stageOverride?: InputMaybe<Stage>;
+};
+
+
+export type InfoPublishedByArgs = {
+  locales?: InputMaybe<ReadonlyArray<Locale>>;
+};
+
+
+export type InfoScheduledInArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+  locales?: InputMaybe<ReadonlyArray<Locale>>;
+  skip?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<ScheduledOperationWhereInput>;
+};
+
+
+export type InfoUpdatedByArgs = {
+  locales?: InputMaybe<ReadonlyArray<Locale>>;
+};
+
+export type InfoConnectInput = {
+  /** Allow to specify document position in list of connected documents, will default to appending at end of list */
+  readonly position?: InputMaybe<ConnectPositionInput>;
+  /** Document to connect */
+  readonly where: InfoWhereUniqueInput;
+};
+
+/** A connection to a list of items. */
+export type InfoConnection = {
+  readonly aggregate: Aggregate;
+  /** A list of edges. */
+  readonly edges: ReadonlyArray<InfoEdge>;
+  /** Information to aid in pagination. */
+  readonly pageInfo: PageInfo;
+};
+
+export type InfoCreateInput = {
+  readonly createdAt?: InputMaybe<Scalars['DateTime']>;
+  readonly presentation?: InputMaybe<Scalars['RichTextAST']>;
+  readonly updatedAt?: InputMaybe<Scalars['DateTime']>;
+};
+
+export type InfoCreateManyInlineInput = {
+  /** Connect multiple existing Info documents */
+  readonly connect?: InputMaybe<ReadonlyArray<InfoWhereUniqueInput>>;
+  /** Create and connect multiple existing Info documents */
+  readonly create?: InputMaybe<ReadonlyArray<InfoCreateInput>>;
+};
+
+export type InfoCreateOneInlineInput = {
+  /** Connect one existing Info document */
+  readonly connect?: InputMaybe<InfoWhereUniqueInput>;
+  /** Create and connect one Info document */
+  readonly create?: InputMaybe<InfoCreateInput>;
+};
+
+/** An edge in a connection. */
+export type InfoEdge = {
+  /** A cursor for use in pagination. */
+  readonly cursor: Scalars['String'];
+  /** The item at the end of the edge. */
+  readonly node: Info;
+};
+
+/** Identifies documents */
+export type InfoManyWhereInput = {
+  /** Logical AND on all given filters. */
+  readonly AND?: InputMaybe<ReadonlyArray<InfoWhereInput>>;
+  /** Logical NOT on all given filters combined by AND. */
+  readonly NOT?: InputMaybe<ReadonlyArray<InfoWhereInput>>;
+  /** Logical OR on all given filters. */
+  readonly OR?: InputMaybe<ReadonlyArray<InfoWhereInput>>;
+  /** Contains search across all appropriate fields. */
+  readonly _search?: InputMaybe<Scalars['String']>;
+  readonly createdAt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than the given value. */
+  readonly createdAt_gt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than or equal the given value. */
+  readonly createdAt_gte?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are contained in given list. */
+  readonly createdAt_in?: InputMaybe<ReadonlyArray<Scalars['DateTime']>>;
+  /** All values less than the given value. */
+  readonly createdAt_lt?: InputMaybe<Scalars['DateTime']>;
+  /** All values less than or equal the given value. */
+  readonly createdAt_lte?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are not equal to given value. */
+  readonly createdAt_not?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are not contained in given list. */
+  readonly createdAt_not_in?: InputMaybe<ReadonlyArray<Scalars['DateTime']>>;
+  readonly createdBy?: InputMaybe<UserWhereInput>;
+  readonly id?: InputMaybe<Scalars['ID']>;
+  /** All values containing the given string. */
+  readonly id_contains?: InputMaybe<Scalars['ID']>;
+  /** All values ending with the given string. */
+  readonly id_ends_with?: InputMaybe<Scalars['ID']>;
+  /** All values that are contained in given list. */
+  readonly id_in?: InputMaybe<ReadonlyArray<Scalars['ID']>>;
+  /** All values that are not equal to given value. */
+  readonly id_not?: InputMaybe<Scalars['ID']>;
+  /** All values not containing the given string. */
+  readonly id_not_contains?: InputMaybe<Scalars['ID']>;
+  /** All values not ending with the given string */
+  readonly id_not_ends_with?: InputMaybe<Scalars['ID']>;
+  /** All values that are not contained in given list. */
+  readonly id_not_in?: InputMaybe<ReadonlyArray<Scalars['ID']>>;
+  /** All values not starting with the given string. */
+  readonly id_not_starts_with?: InputMaybe<Scalars['ID']>;
+  /** All values starting with the given string. */
+  readonly id_starts_with?: InputMaybe<Scalars['ID']>;
+  readonly publishedAt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than the given value. */
+  readonly publishedAt_gt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than or equal the given value. */
+  readonly publishedAt_gte?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are contained in given list. */
+  readonly publishedAt_in?: InputMaybe<ReadonlyArray<Scalars['DateTime']>>;
+  /** All values less than the given value. */
+  readonly publishedAt_lt?: InputMaybe<Scalars['DateTime']>;
+  /** All values less than or equal the given value. */
+  readonly publishedAt_lte?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are not equal to given value. */
+  readonly publishedAt_not?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are not contained in given list. */
+  readonly publishedAt_not_in?: InputMaybe<ReadonlyArray<Scalars['DateTime']>>;
+  readonly publishedBy?: InputMaybe<UserWhereInput>;
+  readonly scheduledIn_every?: InputMaybe<ScheduledOperationWhereInput>;
+  readonly scheduledIn_none?: InputMaybe<ScheduledOperationWhereInput>;
+  readonly scheduledIn_some?: InputMaybe<ScheduledOperationWhereInput>;
+  readonly updatedAt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than the given value. */
+  readonly updatedAt_gt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than or equal the given value. */
+  readonly updatedAt_gte?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are contained in given list. */
+  readonly updatedAt_in?: InputMaybe<ReadonlyArray<Scalars['DateTime']>>;
+  /** All values less than the given value. */
+  readonly updatedAt_lt?: InputMaybe<Scalars['DateTime']>;
+  /** All values less than or equal the given value. */
+  readonly updatedAt_lte?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are not equal to given value. */
+  readonly updatedAt_not?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are not contained in given list. */
+  readonly updatedAt_not_in?: InputMaybe<ReadonlyArray<Scalars['DateTime']>>;
+  readonly updatedBy?: InputMaybe<UserWhereInput>;
+};
+
+export enum InfoOrderByInput {
+  CreatedAtAsc = 'createdAt_ASC',
+  CreatedAtDesc = 'createdAt_DESC',
+  IdAsc = 'id_ASC',
+  IdDesc = 'id_DESC',
+  PublishedAtAsc = 'publishedAt_ASC',
+  PublishedAtDesc = 'publishedAt_DESC',
+  UpdatedAtAsc = 'updatedAt_ASC',
+  UpdatedAtDesc = 'updatedAt_DESC'
+}
+
+export type InfoUpdateInput = {
+  readonly presentation?: InputMaybe<Scalars['RichTextAST']>;
+};
+
+export type InfoUpdateManyInlineInput = {
+  /** Connect multiple existing Info documents */
+  readonly connect?: InputMaybe<ReadonlyArray<InfoConnectInput>>;
+  /** Create and connect multiple Info documents */
+  readonly create?: InputMaybe<ReadonlyArray<InfoCreateInput>>;
+  /** Delete multiple Info documents */
+  readonly delete?: InputMaybe<ReadonlyArray<InfoWhereUniqueInput>>;
+  /** Disconnect multiple Info documents */
+  readonly disconnect?: InputMaybe<ReadonlyArray<InfoWhereUniqueInput>>;
+  /** Override currently-connected documents with multiple existing Info documents */
+  readonly set?: InputMaybe<ReadonlyArray<InfoWhereUniqueInput>>;
+  /** Update multiple Info documents */
+  readonly update?: InputMaybe<ReadonlyArray<InfoUpdateWithNestedWhereUniqueInput>>;
+  /** Upsert multiple Info documents */
+  readonly upsert?: InputMaybe<ReadonlyArray<InfoUpsertWithNestedWhereUniqueInput>>;
+};
+
+export type InfoUpdateManyInput = {
+  readonly presentation?: InputMaybe<Scalars['RichTextAST']>;
+};
+
+export type InfoUpdateManyWithNestedWhereInput = {
+  /** Update many input */
+  readonly data: InfoUpdateManyInput;
+  /** Document search */
+  readonly where: InfoWhereInput;
+};
+
+export type InfoUpdateOneInlineInput = {
+  /** Connect existing Info document */
+  readonly connect?: InputMaybe<InfoWhereUniqueInput>;
+  /** Create and connect one Info document */
+  readonly create?: InputMaybe<InfoCreateInput>;
+  /** Delete currently connected Info document */
+  readonly delete?: InputMaybe<Scalars['Boolean']>;
+  /** Disconnect currently connected Info document */
+  readonly disconnect?: InputMaybe<Scalars['Boolean']>;
+  /** Update single Info document */
+  readonly update?: InputMaybe<InfoUpdateWithNestedWhereUniqueInput>;
+  /** Upsert single Info document */
+  readonly upsert?: InputMaybe<InfoUpsertWithNestedWhereUniqueInput>;
+};
+
+export type InfoUpdateWithNestedWhereUniqueInput = {
+  /** Document to update */
+  readonly data: InfoUpdateInput;
+  /** Unique document search */
+  readonly where: InfoWhereUniqueInput;
+};
+
+export type InfoUpsertInput = {
+  /** Create document if it didn't exist */
+  readonly create: InfoCreateInput;
+  /** Update document if it exists */
+  readonly update: InfoUpdateInput;
+};
+
+export type InfoUpsertWithNestedWhereUniqueInput = {
+  /** Upsert data */
+  readonly data: InfoUpsertInput;
+  /** Unique document search */
+  readonly where: InfoWhereUniqueInput;
+};
+
+/** Identifies documents */
+export type InfoWhereInput = {
+  /** Logical AND on all given filters. */
+  readonly AND?: InputMaybe<ReadonlyArray<InfoWhereInput>>;
+  /** Logical NOT on all given filters combined by AND. */
+  readonly NOT?: InputMaybe<ReadonlyArray<InfoWhereInput>>;
+  /** Logical OR on all given filters. */
+  readonly OR?: InputMaybe<ReadonlyArray<InfoWhereInput>>;
+  /** Contains search across all appropriate fields. */
+  readonly _search?: InputMaybe<Scalars['String']>;
+  readonly createdAt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than the given value. */
+  readonly createdAt_gt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than or equal the given value. */
+  readonly createdAt_gte?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are contained in given list. */
+  readonly createdAt_in?: InputMaybe<ReadonlyArray<Scalars['DateTime']>>;
+  /** All values less than the given value. */
+  readonly createdAt_lt?: InputMaybe<Scalars['DateTime']>;
+  /** All values less than or equal the given value. */
+  readonly createdAt_lte?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are not equal to given value. */
+  readonly createdAt_not?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are not contained in given list. */
+  readonly createdAt_not_in?: InputMaybe<ReadonlyArray<Scalars['DateTime']>>;
+  readonly createdBy?: InputMaybe<UserWhereInput>;
+  readonly id?: InputMaybe<Scalars['ID']>;
+  /** All values containing the given string. */
+  readonly id_contains?: InputMaybe<Scalars['ID']>;
+  /** All values ending with the given string. */
+  readonly id_ends_with?: InputMaybe<Scalars['ID']>;
+  /** All values that are contained in given list. */
+  readonly id_in?: InputMaybe<ReadonlyArray<Scalars['ID']>>;
+  /** All values that are not equal to given value. */
+  readonly id_not?: InputMaybe<Scalars['ID']>;
+  /** All values not containing the given string. */
+  readonly id_not_contains?: InputMaybe<Scalars['ID']>;
+  /** All values not ending with the given string */
+  readonly id_not_ends_with?: InputMaybe<Scalars['ID']>;
+  /** All values that are not contained in given list. */
+  readonly id_not_in?: InputMaybe<ReadonlyArray<Scalars['ID']>>;
+  /** All values not starting with the given string. */
+  readonly id_not_starts_with?: InputMaybe<Scalars['ID']>;
+  /** All values starting with the given string. */
+  readonly id_starts_with?: InputMaybe<Scalars['ID']>;
+  readonly publishedAt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than the given value. */
+  readonly publishedAt_gt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than or equal the given value. */
+  readonly publishedAt_gte?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are contained in given list. */
+  readonly publishedAt_in?: InputMaybe<ReadonlyArray<Scalars['DateTime']>>;
+  /** All values less than the given value. */
+  readonly publishedAt_lt?: InputMaybe<Scalars['DateTime']>;
+  /** All values less than or equal the given value. */
+  readonly publishedAt_lte?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are not equal to given value. */
+  readonly publishedAt_not?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are not contained in given list. */
+  readonly publishedAt_not_in?: InputMaybe<ReadonlyArray<Scalars['DateTime']>>;
+  readonly publishedBy?: InputMaybe<UserWhereInput>;
+  readonly scheduledIn_every?: InputMaybe<ScheduledOperationWhereInput>;
+  readonly scheduledIn_none?: InputMaybe<ScheduledOperationWhereInput>;
+  readonly scheduledIn_some?: InputMaybe<ScheduledOperationWhereInput>;
+  readonly updatedAt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than the given value. */
+  readonly updatedAt_gt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than or equal the given value. */
+  readonly updatedAt_gte?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are contained in given list. */
+  readonly updatedAt_in?: InputMaybe<ReadonlyArray<Scalars['DateTime']>>;
+  /** All values less than the given value. */
+  readonly updatedAt_lt?: InputMaybe<Scalars['DateTime']>;
+  /** All values less than or equal the given value. */
+  readonly updatedAt_lte?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are not equal to given value. */
+  readonly updatedAt_not?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are not contained in given list. */
+  readonly updatedAt_not_in?: InputMaybe<ReadonlyArray<Scalars['DateTime']>>;
+  readonly updatedBy?: InputMaybe<UserWhereInput>;
+};
+
+/** References Info record uniquely */
+export type InfoWhereUniqueInput = {
+  readonly id?: InputMaybe<Scalars['ID']>;
+};
+
 /** Locale system enumeration */
 export enum Locale {
   /** System locale */
@@ -1421,16 +1778,18 @@ export type Mutation = {
   readonly createAsset?: Maybe<Asset>;
   /** Create one category */
   readonly createCategory?: Maybe<Category>;
+  /** Create one info */
+  readonly createInfo?: Maybe<Info>;
   /** Create one piece */
   readonly createPiece?: Maybe<Piece>;
-  /** Create one pieceType_v2 */
-  readonly createPieceType_v2?: Maybe<PieceType_V2>;
   /** Create one scheduledRelease */
   readonly createScheduledRelease?: Maybe<ScheduledRelease>;
   /** Delete one asset from _all_ existing stages. Returns deleted document. */
   readonly deleteAsset?: Maybe<Asset>;
   /** Delete one category from _all_ existing stages. Returns deleted document. */
   readonly deleteCategory?: Maybe<Category>;
+  /** Delete one info from _all_ existing stages. Returns deleted document. */
+  readonly deleteInfo?: Maybe<Info>;
   /**
    * Delete many Asset documents
    * @deprecated Please use the new paginated many mutation (deleteManyAssetsConnection)
@@ -1446,12 +1805,12 @@ export type Mutation = {
   /** Delete many Category documents, return deleted documents */
   readonly deleteManyCategoriesConnection: CategoryConnection;
   /**
-   * Delete many PieceType_v2 documents
-   * @deprecated Please use the new paginated many mutation (deleteManyPieceTypesConnection)
+   * Delete many Info documents
+   * @deprecated Please use the new paginated many mutation (deleteManyInfosConnection)
    */
-  readonly deleteManyPieceTypes: BatchPayload;
-  /** Delete many PieceType_v2 documents, return deleted documents */
-  readonly deleteManyPieceTypesConnection: PieceType_V2Connection;
+  readonly deleteManyInfos: BatchPayload;
+  /** Delete many Info documents, return deleted documents */
+  readonly deleteManyInfosConnection: InfoConnection;
   /**
    * Delete many Piece documents
    * @deprecated Please use the new paginated many mutation (deleteManyPiecesConnection)
@@ -1461,8 +1820,6 @@ export type Mutation = {
   readonly deleteManyPiecesConnection: PieceConnection;
   /** Delete one piece from _all_ existing stages. Returns deleted document. */
   readonly deletePiece?: Maybe<Piece>;
-  /** Delete one pieceType_v2 from _all_ existing stages. Returns deleted document. */
-  readonly deletePieceType_v2?: Maybe<PieceType_V2>;
   /** Delete and return scheduled operation */
   readonly deleteScheduledOperation?: Maybe<ScheduledOperation>;
   /** Delete one scheduledRelease from _all_ existing stages. Returns deleted document. */
@@ -1471,6 +1828,8 @@ export type Mutation = {
   readonly publishAsset?: Maybe<Asset>;
   /** Publish one category */
   readonly publishCategory?: Maybe<Category>;
+  /** Publish one info */
+  readonly publishInfo?: Maybe<Info>;
   /**
    * Publish many Asset documents
    * @deprecated Please use the new paginated many mutation (publishManyAssetsConnection)
@@ -1486,12 +1845,12 @@ export type Mutation = {
   /** Publish many Category documents */
   readonly publishManyCategoriesConnection: CategoryConnection;
   /**
-   * Publish many PieceType_v2 documents
-   * @deprecated Please use the new paginated many mutation (publishManyPieceTypesConnection)
+   * Publish many Info documents
+   * @deprecated Please use the new paginated many mutation (publishManyInfosConnection)
    */
-  readonly publishManyPieceTypes: BatchPayload;
-  /** Publish many PieceType_v2 documents */
-  readonly publishManyPieceTypesConnection: PieceType_V2Connection;
+  readonly publishManyInfos: BatchPayload;
+  /** Publish many Info documents */
+  readonly publishManyInfosConnection: InfoConnection;
   /**
    * Publish many Piece documents
    * @deprecated Please use the new paginated many mutation (publishManyPiecesConnection)
@@ -1501,28 +1860,28 @@ export type Mutation = {
   readonly publishManyPiecesConnection: PieceConnection;
   /** Publish one piece */
   readonly publishPiece?: Maybe<Piece>;
-  /** Publish one pieceType_v2 */
-  readonly publishPieceType_v2?: Maybe<PieceType_V2>;
   /** Schedule to publish one asset */
   readonly schedulePublishAsset?: Maybe<Asset>;
   /** Schedule to publish one category */
   readonly schedulePublishCategory?: Maybe<Category>;
+  /** Schedule to publish one info */
+  readonly schedulePublishInfo?: Maybe<Info>;
   /** Schedule to publish one piece */
   readonly schedulePublishPiece?: Maybe<Piece>;
-  /** Schedule to publish one pieceType_v2 */
-  readonly schedulePublishPieceType_v2?: Maybe<PieceType_V2>;
   /** Unpublish one asset from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
   readonly scheduleUnpublishAsset?: Maybe<Asset>;
   /** Unpublish one category from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
   readonly scheduleUnpublishCategory?: Maybe<Category>;
+  /** Unpublish one info from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
+  readonly scheduleUnpublishInfo?: Maybe<Info>;
   /** Unpublish one piece from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
   readonly scheduleUnpublishPiece?: Maybe<Piece>;
-  /** Unpublish one pieceType_v2 from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
-  readonly scheduleUnpublishPieceType_v2?: Maybe<PieceType_V2>;
   /** Unpublish one asset from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
   readonly unpublishAsset?: Maybe<Asset>;
   /** Unpublish one category from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
   readonly unpublishCategory?: Maybe<Category>;
+  /** Unpublish one info from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
+  readonly unpublishInfo?: Maybe<Info>;
   /**
    * Unpublish many Asset documents
    * @deprecated Please use the new paginated many mutation (unpublishManyAssetsConnection)
@@ -1538,12 +1897,12 @@ export type Mutation = {
   /** Find many Category documents that match criteria in specified stage and unpublish from target stages */
   readonly unpublishManyCategoriesConnection: CategoryConnection;
   /**
-   * Unpublish many PieceType_v2 documents
-   * @deprecated Please use the new paginated many mutation (unpublishManyPieceTypesConnection)
+   * Unpublish many Info documents
+   * @deprecated Please use the new paginated many mutation (unpublishManyInfosConnection)
    */
-  readonly unpublishManyPieceTypes: BatchPayload;
-  /** Find many PieceType_v2 documents that match criteria in specified stage and unpublish from target stages */
-  readonly unpublishManyPieceTypesConnection: PieceType_V2Connection;
+  readonly unpublishManyInfos: BatchPayload;
+  /** Find many Info documents that match criteria in specified stage and unpublish from target stages */
+  readonly unpublishManyInfosConnection: InfoConnection;
   /**
    * Unpublish many Piece documents
    * @deprecated Please use the new paginated many mutation (unpublishManyPiecesConnection)
@@ -1553,12 +1912,12 @@ export type Mutation = {
   readonly unpublishManyPiecesConnection: PieceConnection;
   /** Unpublish one piece from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
   readonly unpublishPiece?: Maybe<Piece>;
-  /** Unpublish one pieceType_v2 from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
-  readonly unpublishPieceType_v2?: Maybe<PieceType_V2>;
   /** Update one asset */
   readonly updateAsset?: Maybe<Asset>;
   /** Update one category */
   readonly updateCategory?: Maybe<Category>;
+  /** Update one info */
+  readonly updateInfo?: Maybe<Info>;
   /**
    * Update many assets
    * @deprecated Please use the new paginated many mutation (updateManyAssetsConnection)
@@ -1574,12 +1933,12 @@ export type Mutation = {
   /** Update many Category documents */
   readonly updateManyCategoriesConnection: CategoryConnection;
   /**
-   * Update many pieceTypes
-   * @deprecated Please use the new paginated many mutation (updateManyPieceTypesConnection)
+   * Update many infos
+   * @deprecated Please use the new paginated many mutation (updateManyInfosConnection)
    */
-  readonly updateManyPieceTypes: BatchPayload;
-  /** Update many PieceType_v2 documents */
-  readonly updateManyPieceTypesConnection: PieceType_V2Connection;
+  readonly updateManyInfos: BatchPayload;
+  /** Update many Info documents */
+  readonly updateManyInfosConnection: InfoConnection;
   /**
    * Update many pieces
    * @deprecated Please use the new paginated many mutation (updateManyPiecesConnection)
@@ -1589,18 +1948,16 @@ export type Mutation = {
   readonly updateManyPiecesConnection: PieceConnection;
   /** Update one piece */
   readonly updatePiece?: Maybe<Piece>;
-  /** Update one pieceType_v2 */
-  readonly updatePieceType_v2?: Maybe<PieceType_V2>;
   /** Update one scheduledRelease */
   readonly updateScheduledRelease?: Maybe<ScheduledRelease>;
   /** Upsert one asset */
   readonly upsertAsset?: Maybe<Asset>;
   /** Upsert one category */
   readonly upsertCategory?: Maybe<Category>;
+  /** Upsert one info */
+  readonly upsertInfo?: Maybe<Info>;
   /** Upsert one piece */
   readonly upsertPiece?: Maybe<Piece>;
-  /** Upsert one pieceType_v2 */
-  readonly upsertPieceType_v2?: Maybe<PieceType_V2>;
 };
 
 
@@ -1614,13 +1971,13 @@ export type MutationCreateCategoryArgs = {
 };
 
 
-export type MutationCreatePieceArgs = {
-  data: PieceCreateInput;
+export type MutationCreateInfoArgs = {
+  data: InfoCreateInput;
 };
 
 
-export type MutationCreatePieceType_V2Args = {
-  data: PieceType_V2CreateInput;
+export type MutationCreatePieceArgs = {
+  data: PieceCreateInput;
 };
 
 
@@ -1636,6 +1993,11 @@ export type MutationDeleteAssetArgs = {
 
 export type MutationDeleteCategoryArgs = {
   where: CategoryWhereUniqueInput;
+};
+
+
+export type MutationDeleteInfoArgs = {
+  where: InfoWhereUniqueInput;
 };
 
 
@@ -1669,18 +2031,18 @@ export type MutationDeleteManyCategoriesConnectionArgs = {
 };
 
 
-export type MutationDeleteManyPieceTypesArgs = {
-  where?: InputMaybe<PieceType_V2ManyWhereInput>;
+export type MutationDeleteManyInfosArgs = {
+  where?: InputMaybe<InfoManyWhereInput>;
 };
 
 
-export type MutationDeleteManyPieceTypesConnectionArgs = {
+export type MutationDeleteManyInfosConnectionArgs = {
   after?: InputMaybe<Scalars['ID']>;
   before?: InputMaybe<Scalars['ID']>;
   first?: InputMaybe<Scalars['Int']>;
   last?: InputMaybe<Scalars['Int']>;
   skip?: InputMaybe<Scalars['Int']>;
-  where?: InputMaybe<PieceType_V2ManyWhereInput>;
+  where?: InputMaybe<InfoManyWhereInput>;
 };
 
 
@@ -1701,11 +2063,6 @@ export type MutationDeleteManyPiecesConnectionArgs = {
 
 export type MutationDeletePieceArgs = {
   where: PieceWhereUniqueInput;
-};
-
-
-export type MutationDeletePieceType_V2Args = {
-  where: PieceType_V2WhereUniqueInput;
 };
 
 
@@ -1731,6 +2088,12 @@ export type MutationPublishAssetArgs = {
 export type MutationPublishCategoryArgs = {
   to?: ReadonlyArray<Stage>;
   where: CategoryWhereUniqueInput;
+};
+
+
+export type MutationPublishInfoArgs = {
+  to?: ReadonlyArray<Stage>;
+  where: InfoWhereUniqueInput;
 };
 
 
@@ -1776,13 +2139,13 @@ export type MutationPublishManyCategoriesConnectionArgs = {
 };
 
 
-export type MutationPublishManyPieceTypesArgs = {
+export type MutationPublishManyInfosArgs = {
   to?: ReadonlyArray<Stage>;
-  where?: InputMaybe<PieceType_V2ManyWhereInput>;
+  where?: InputMaybe<InfoManyWhereInput>;
 };
 
 
-export type MutationPublishManyPieceTypesConnectionArgs = {
+export type MutationPublishManyInfosConnectionArgs = {
   after?: InputMaybe<Scalars['ID']>;
   before?: InputMaybe<Scalars['ID']>;
   first?: InputMaybe<Scalars['Int']>;
@@ -1790,7 +2153,7 @@ export type MutationPublishManyPieceTypesConnectionArgs = {
   last?: InputMaybe<Scalars['Int']>;
   skip?: InputMaybe<Scalars['Int']>;
   to?: ReadonlyArray<Stage>;
-  where?: InputMaybe<PieceType_V2ManyWhereInput>;
+  where?: InputMaybe<InfoManyWhereInput>;
 };
 
 
@@ -1818,12 +2181,6 @@ export type MutationPublishPieceArgs = {
 };
 
 
-export type MutationPublishPieceType_V2Args = {
-  to?: ReadonlyArray<Stage>;
-  where: PieceType_V2WhereUniqueInput;
-};
-
-
 export type MutationSchedulePublishAssetArgs = {
   locales?: InputMaybe<ReadonlyArray<Locale>>;
   publishBase?: InputMaybe<Scalars['Boolean']>;
@@ -1843,19 +2200,19 @@ export type MutationSchedulePublishCategoryArgs = {
 };
 
 
+export type MutationSchedulePublishInfoArgs = {
+  releaseAt?: InputMaybe<Scalars['DateTime']>;
+  releaseId?: InputMaybe<Scalars['String']>;
+  to?: ReadonlyArray<Stage>;
+  where: InfoWhereUniqueInput;
+};
+
+
 export type MutationSchedulePublishPieceArgs = {
   releaseAt?: InputMaybe<Scalars['DateTime']>;
   releaseId?: InputMaybe<Scalars['String']>;
   to?: ReadonlyArray<Stage>;
   where: PieceWhereUniqueInput;
-};
-
-
-export type MutationSchedulePublishPieceType_V2Args = {
-  releaseAt?: InputMaybe<Scalars['DateTime']>;
-  releaseId?: InputMaybe<Scalars['String']>;
-  to?: ReadonlyArray<Stage>;
-  where: PieceType_V2WhereUniqueInput;
 };
 
 
@@ -1877,19 +2234,19 @@ export type MutationScheduleUnpublishCategoryArgs = {
 };
 
 
+export type MutationScheduleUnpublishInfoArgs = {
+  from?: ReadonlyArray<Stage>;
+  releaseAt?: InputMaybe<Scalars['DateTime']>;
+  releaseId?: InputMaybe<Scalars['String']>;
+  where: InfoWhereUniqueInput;
+};
+
+
 export type MutationScheduleUnpublishPieceArgs = {
   from?: ReadonlyArray<Stage>;
   releaseAt?: InputMaybe<Scalars['DateTime']>;
   releaseId?: InputMaybe<Scalars['String']>;
   where: PieceWhereUniqueInput;
-};
-
-
-export type MutationScheduleUnpublishPieceType_V2Args = {
-  from?: ReadonlyArray<Stage>;
-  releaseAt?: InputMaybe<Scalars['DateTime']>;
-  releaseId?: InputMaybe<Scalars['String']>;
-  where: PieceType_V2WhereUniqueInput;
 };
 
 
@@ -1904,6 +2261,12 @@ export type MutationUnpublishAssetArgs = {
 export type MutationUnpublishCategoryArgs = {
   from?: ReadonlyArray<Stage>;
   where: CategoryWhereUniqueInput;
+};
+
+
+export type MutationUnpublishInfoArgs = {
+  from?: ReadonlyArray<Stage>;
+  where: InfoWhereUniqueInput;
 };
 
 
@@ -1947,13 +2310,13 @@ export type MutationUnpublishManyCategoriesConnectionArgs = {
 };
 
 
-export type MutationUnpublishManyPieceTypesArgs = {
+export type MutationUnpublishManyInfosArgs = {
   from?: ReadonlyArray<Stage>;
-  where?: InputMaybe<PieceType_V2ManyWhereInput>;
+  where?: InputMaybe<InfoManyWhereInput>;
 };
 
 
-export type MutationUnpublishManyPieceTypesConnectionArgs = {
+export type MutationUnpublishManyInfosConnectionArgs = {
   after?: InputMaybe<Scalars['ID']>;
   before?: InputMaybe<Scalars['ID']>;
   first?: InputMaybe<Scalars['Int']>;
@@ -1961,7 +2324,7 @@ export type MutationUnpublishManyPieceTypesConnectionArgs = {
   last?: InputMaybe<Scalars['Int']>;
   skip?: InputMaybe<Scalars['Int']>;
   stage?: InputMaybe<Stage>;
-  where?: InputMaybe<PieceType_V2ManyWhereInput>;
+  where?: InputMaybe<InfoManyWhereInput>;
 };
 
 
@@ -1989,12 +2352,6 @@ export type MutationUnpublishPieceArgs = {
 };
 
 
-export type MutationUnpublishPieceType_V2Args = {
-  from?: ReadonlyArray<Stage>;
-  where: PieceType_V2WhereUniqueInput;
-};
-
-
 export type MutationUpdateAssetArgs = {
   data: AssetUpdateInput;
   where: AssetWhereUniqueInput;
@@ -2004,6 +2361,12 @@ export type MutationUpdateAssetArgs = {
 export type MutationUpdateCategoryArgs = {
   data: CategoryUpdateInput;
   where: CategoryWhereUniqueInput;
+};
+
+
+export type MutationUpdateInfoArgs = {
+  data: InfoUpdateInput;
+  where: InfoWhereUniqueInput;
 };
 
 
@@ -2041,20 +2404,20 @@ export type MutationUpdateManyCategoriesConnectionArgs = {
 };
 
 
-export type MutationUpdateManyPieceTypesArgs = {
-  data: PieceType_V2UpdateManyInput;
-  where?: InputMaybe<PieceType_V2ManyWhereInput>;
+export type MutationUpdateManyInfosArgs = {
+  data: InfoUpdateManyInput;
+  where?: InputMaybe<InfoManyWhereInput>;
 };
 
 
-export type MutationUpdateManyPieceTypesConnectionArgs = {
+export type MutationUpdateManyInfosConnectionArgs = {
   after?: InputMaybe<Scalars['ID']>;
   before?: InputMaybe<Scalars['ID']>;
-  data: PieceType_V2UpdateManyInput;
+  data: InfoUpdateManyInput;
   first?: InputMaybe<Scalars['Int']>;
   last?: InputMaybe<Scalars['Int']>;
   skip?: InputMaybe<Scalars['Int']>;
-  where?: InputMaybe<PieceType_V2ManyWhereInput>;
+  where?: InputMaybe<InfoManyWhereInput>;
 };
 
 
@@ -2081,12 +2444,6 @@ export type MutationUpdatePieceArgs = {
 };
 
 
-export type MutationUpdatePieceType_V2Args = {
-  data: PieceType_V2UpdateInput;
-  where: PieceType_V2WhereUniqueInput;
-};
-
-
 export type MutationUpdateScheduledReleaseArgs = {
   data: ScheduledReleaseUpdateInput;
   where: ScheduledReleaseWhereUniqueInput;
@@ -2105,15 +2462,15 @@ export type MutationUpsertCategoryArgs = {
 };
 
 
-export type MutationUpsertPieceArgs = {
-  upsert: PieceUpsertInput;
-  where: PieceWhereUniqueInput;
+export type MutationUpsertInfoArgs = {
+  upsert: InfoUpsertInput;
+  where: InfoWhereUniqueInput;
 };
 
 
-export type MutationUpsertPieceType_V2Args = {
-  upsert: PieceType_V2UpsertInput;
-  where: PieceType_V2WhereUniqueInput;
+export type MutationUpsertPieceArgs = {
+  upsert: PieceUpsertInput;
+  where: PieceWhereUniqueInput;
 };
 
 /** An object with an ID */
@@ -2127,7 +2484,6 @@ export type Node = {
 export enum PageColor {
   Kw = 'kw',
   Rw = 'rw',
-  Rk = 'rk',
   Wk = 'wk',
   Wr = 'wr'
 }
@@ -2179,7 +2535,6 @@ export type Piece = Node & {
   readonly technique?: Maybe<Scalars['String']>;
   readonly title: Scalars['String'];
   readonly type: PieceType;
-  readonly type_v2?: Maybe<PieceType_V2>;
   /** The time the document was updated */
   readonly updatedAt: Scalars['DateTime'];
   /** User that last updated this document */
@@ -2263,11 +2618,6 @@ export type PieceScheduledInArgs = {
 };
 
 
-export type PieceType_V2Args = {
-  locales?: InputMaybe<ReadonlyArray<Locale>>;
-};
-
-
 export type PieceUpdatedByArgs = {
   locales?: InputMaybe<ReadonlyArray<Locale>>;
 };
@@ -2305,7 +2655,6 @@ export type PieceCreateInput = {
   readonly technique?: InputMaybe<Scalars['String']>;
   readonly title: Scalars['String'];
   readonly type: PieceType;
-  readonly type_v2?: InputMaybe<PieceType_V2CreateOneInlineInput>;
   readonly updatedAt?: InputMaybe<Scalars['DateTime']>;
 };
 
@@ -2565,7 +2914,6 @@ export type PieceManyWhereInput = {
   readonly type_not?: InputMaybe<PieceType>;
   /** All values that are not contained in given list. */
   readonly type_not_in?: InputMaybe<ReadonlyArray<PieceType>>;
-  readonly type_v2?: InputMaybe<PieceType_V2WhereInput>;
   readonly updatedAt?: InputMaybe<Scalars['DateTime']>;
   /** All values greater than the given value. */
   readonly updatedAt_gt?: InputMaybe<Scalars['DateTime']>;
@@ -2622,407 +2970,6 @@ export enum PieceType {
   Video = 'Video'
 }
 
-export type PieceType_V2 = Node & {
-  /** The time the document was created */
-  readonly createdAt: Scalars['DateTime'];
-  /** User that created this document */
-  readonly createdBy?: Maybe<User>;
-  /** Get the document in other stages */
-  readonly documentInStages: ReadonlyArray<PieceType_V2>;
-  /** List of PieceType_v2 versions */
-  readonly history: ReadonlyArray<Version>;
-  /** The unique identifier */
-  readonly id: Scalars['ID'];
-  readonly name: Scalars['String'];
-  /** The time the document was published. Null on documents in draft stage. */
-  readonly publishedAt?: Maybe<Scalars['DateTime']>;
-  /** User that last published this document */
-  readonly publishedBy?: Maybe<User>;
-  readonly scheduledIn: ReadonlyArray<ScheduledOperation>;
-  /** System stage field */
-  readonly stage: Stage;
-  /** The time the document was updated */
-  readonly updatedAt: Scalars['DateTime'];
-  /** User that last updated this document */
-  readonly updatedBy?: Maybe<User>;
-};
-
-
-export type PieceType_V2CreatedByArgs = {
-  locales?: InputMaybe<ReadonlyArray<Locale>>;
-};
-
-
-export type PieceType_V2DocumentInStagesArgs = {
-  includeCurrent?: Scalars['Boolean'];
-  inheritLocale?: Scalars['Boolean'];
-  stages?: ReadonlyArray<Stage>;
-};
-
-
-export type PieceType_V2HistoryArgs = {
-  limit?: Scalars['Int'];
-  skip?: Scalars['Int'];
-  stageOverride?: InputMaybe<Stage>;
-};
-
-
-export type PieceType_V2PublishedByArgs = {
-  locales?: InputMaybe<ReadonlyArray<Locale>>;
-};
-
-
-export type PieceType_V2ScheduledInArgs = {
-  after?: InputMaybe<Scalars['String']>;
-  before?: InputMaybe<Scalars['String']>;
-  first?: InputMaybe<Scalars['Int']>;
-  last?: InputMaybe<Scalars['Int']>;
-  locales?: InputMaybe<ReadonlyArray<Locale>>;
-  skip?: InputMaybe<Scalars['Int']>;
-  where?: InputMaybe<ScheduledOperationWhereInput>;
-};
-
-
-export type PieceType_V2UpdatedByArgs = {
-  locales?: InputMaybe<ReadonlyArray<Locale>>;
-};
-
-export type PieceType_V2ConnectInput = {
-  /** Allow to specify document position in list of connected documents, will default to appending at end of list */
-  readonly position?: InputMaybe<ConnectPositionInput>;
-  /** Document to connect */
-  readonly where: PieceType_V2WhereUniqueInput;
-};
-
-/** A connection to a list of items. */
-export type PieceType_V2Connection = {
-  readonly aggregate: Aggregate;
-  /** A list of edges. */
-  readonly edges: ReadonlyArray<PieceType_V2Edge>;
-  /** Information to aid in pagination. */
-  readonly pageInfo: PageInfo;
-};
-
-export type PieceType_V2CreateInput = {
-  readonly ckufm7jkc8qw001xngik6g22f?: InputMaybe<PieceCreateManyInlineInput>;
-  readonly createdAt?: InputMaybe<Scalars['DateTime']>;
-  readonly name: Scalars['String'];
-  readonly updatedAt?: InputMaybe<Scalars['DateTime']>;
-};
-
-export type PieceType_V2CreateManyInlineInput = {
-  /** Connect multiple existing PieceType_v2 documents */
-  readonly connect?: InputMaybe<ReadonlyArray<PieceType_V2WhereUniqueInput>>;
-  /** Create and connect multiple existing PieceType_v2 documents */
-  readonly create?: InputMaybe<ReadonlyArray<PieceType_V2CreateInput>>;
-};
-
-export type PieceType_V2CreateOneInlineInput = {
-  /** Connect one existing PieceType_v2 document */
-  readonly connect?: InputMaybe<PieceType_V2WhereUniqueInput>;
-  /** Create and connect one PieceType_v2 document */
-  readonly create?: InputMaybe<PieceType_V2CreateInput>;
-};
-
-/** An edge in a connection. */
-export type PieceType_V2Edge = {
-  /** A cursor for use in pagination. */
-  readonly cursor: Scalars['String'];
-  /** The item at the end of the edge. */
-  readonly node: PieceType_V2;
-};
-
-/** Identifies documents */
-export type PieceType_V2ManyWhereInput = {
-  /** Logical AND on all given filters. */
-  readonly AND?: InputMaybe<ReadonlyArray<PieceType_V2WhereInput>>;
-  /** Logical NOT on all given filters combined by AND. */
-  readonly NOT?: InputMaybe<ReadonlyArray<PieceType_V2WhereInput>>;
-  /** Logical OR on all given filters. */
-  readonly OR?: InputMaybe<ReadonlyArray<PieceType_V2WhereInput>>;
-  /** Contains search across all appropriate fields. */
-  readonly _search?: InputMaybe<Scalars['String']>;
-  readonly createdAt?: InputMaybe<Scalars['DateTime']>;
-  /** All values greater than the given value. */
-  readonly createdAt_gt?: InputMaybe<Scalars['DateTime']>;
-  /** All values greater than or equal the given value. */
-  readonly createdAt_gte?: InputMaybe<Scalars['DateTime']>;
-  /** All values that are contained in given list. */
-  readonly createdAt_in?: InputMaybe<ReadonlyArray<Scalars['DateTime']>>;
-  /** All values less than the given value. */
-  readonly createdAt_lt?: InputMaybe<Scalars['DateTime']>;
-  /** All values less than or equal the given value. */
-  readonly createdAt_lte?: InputMaybe<Scalars['DateTime']>;
-  /** All values that are not equal to given value. */
-  readonly createdAt_not?: InputMaybe<Scalars['DateTime']>;
-  /** All values that are not contained in given list. */
-  readonly createdAt_not_in?: InputMaybe<ReadonlyArray<Scalars['DateTime']>>;
-  readonly createdBy?: InputMaybe<UserWhereInput>;
-  readonly id?: InputMaybe<Scalars['ID']>;
-  /** All values containing the given string. */
-  readonly id_contains?: InputMaybe<Scalars['ID']>;
-  /** All values ending with the given string. */
-  readonly id_ends_with?: InputMaybe<Scalars['ID']>;
-  /** All values that are contained in given list. */
-  readonly id_in?: InputMaybe<ReadonlyArray<Scalars['ID']>>;
-  /** All values that are not equal to given value. */
-  readonly id_not?: InputMaybe<Scalars['ID']>;
-  /** All values not containing the given string. */
-  readonly id_not_contains?: InputMaybe<Scalars['ID']>;
-  /** All values not ending with the given string */
-  readonly id_not_ends_with?: InputMaybe<Scalars['ID']>;
-  /** All values that are not contained in given list. */
-  readonly id_not_in?: InputMaybe<ReadonlyArray<Scalars['ID']>>;
-  /** All values not starting with the given string. */
-  readonly id_not_starts_with?: InputMaybe<Scalars['ID']>;
-  /** All values starting with the given string. */
-  readonly id_starts_with?: InputMaybe<Scalars['ID']>;
-  readonly name?: InputMaybe<Scalars['String']>;
-  /** All values containing the given string. */
-  readonly name_contains?: InputMaybe<Scalars['String']>;
-  /** All values ending with the given string. */
-  readonly name_ends_with?: InputMaybe<Scalars['String']>;
-  /** All values that are contained in given list. */
-  readonly name_in?: InputMaybe<ReadonlyArray<Scalars['String']>>;
-  /** All values that are not equal to given value. */
-  readonly name_not?: InputMaybe<Scalars['String']>;
-  /** All values not containing the given string. */
-  readonly name_not_contains?: InputMaybe<Scalars['String']>;
-  /** All values not ending with the given string */
-  readonly name_not_ends_with?: InputMaybe<Scalars['String']>;
-  /** All values that are not contained in given list. */
-  readonly name_not_in?: InputMaybe<ReadonlyArray<Scalars['String']>>;
-  /** All values not starting with the given string. */
-  readonly name_not_starts_with?: InputMaybe<Scalars['String']>;
-  /** All values starting with the given string. */
-  readonly name_starts_with?: InputMaybe<Scalars['String']>;
-  readonly publishedAt?: InputMaybe<Scalars['DateTime']>;
-  /** All values greater than the given value. */
-  readonly publishedAt_gt?: InputMaybe<Scalars['DateTime']>;
-  /** All values greater than or equal the given value. */
-  readonly publishedAt_gte?: InputMaybe<Scalars['DateTime']>;
-  /** All values that are contained in given list. */
-  readonly publishedAt_in?: InputMaybe<ReadonlyArray<Scalars['DateTime']>>;
-  /** All values less than the given value. */
-  readonly publishedAt_lt?: InputMaybe<Scalars['DateTime']>;
-  /** All values less than or equal the given value. */
-  readonly publishedAt_lte?: InputMaybe<Scalars['DateTime']>;
-  /** All values that are not equal to given value. */
-  readonly publishedAt_not?: InputMaybe<Scalars['DateTime']>;
-  /** All values that are not contained in given list. */
-  readonly publishedAt_not_in?: InputMaybe<ReadonlyArray<Scalars['DateTime']>>;
-  readonly publishedBy?: InputMaybe<UserWhereInput>;
-  readonly scheduledIn_every?: InputMaybe<ScheduledOperationWhereInput>;
-  readonly scheduledIn_none?: InputMaybe<ScheduledOperationWhereInput>;
-  readonly scheduledIn_some?: InputMaybe<ScheduledOperationWhereInput>;
-  readonly updatedAt?: InputMaybe<Scalars['DateTime']>;
-  /** All values greater than the given value. */
-  readonly updatedAt_gt?: InputMaybe<Scalars['DateTime']>;
-  /** All values greater than or equal the given value. */
-  readonly updatedAt_gte?: InputMaybe<Scalars['DateTime']>;
-  /** All values that are contained in given list. */
-  readonly updatedAt_in?: InputMaybe<ReadonlyArray<Scalars['DateTime']>>;
-  /** All values less than the given value. */
-  readonly updatedAt_lt?: InputMaybe<Scalars['DateTime']>;
-  /** All values less than or equal the given value. */
-  readonly updatedAt_lte?: InputMaybe<Scalars['DateTime']>;
-  /** All values that are not equal to given value. */
-  readonly updatedAt_not?: InputMaybe<Scalars['DateTime']>;
-  /** All values that are not contained in given list. */
-  readonly updatedAt_not_in?: InputMaybe<ReadonlyArray<Scalars['DateTime']>>;
-  readonly updatedBy?: InputMaybe<UserWhereInput>;
-};
-
-export enum PieceType_V2OrderByInput {
-  CreatedAtAsc = 'createdAt_ASC',
-  CreatedAtDesc = 'createdAt_DESC',
-  IdAsc = 'id_ASC',
-  IdDesc = 'id_DESC',
-  NameAsc = 'name_ASC',
-  NameDesc = 'name_DESC',
-  PublishedAtAsc = 'publishedAt_ASC',
-  PublishedAtDesc = 'publishedAt_DESC',
-  UpdatedAtAsc = 'updatedAt_ASC',
-  UpdatedAtDesc = 'updatedAt_DESC'
-}
-
-export type PieceType_V2UpdateInput = {
-  readonly ckufm7jkc8qw001xngik6g22f?: InputMaybe<PieceUpdateManyInlineInput>;
-  readonly name?: InputMaybe<Scalars['String']>;
-};
-
-export type PieceType_V2UpdateManyInlineInput = {
-  /** Connect multiple existing PieceType_v2 documents */
-  readonly connect?: InputMaybe<ReadonlyArray<PieceType_V2ConnectInput>>;
-  /** Create and connect multiple PieceType_v2 documents */
-  readonly create?: InputMaybe<ReadonlyArray<PieceType_V2CreateInput>>;
-  /** Delete multiple PieceType_v2 documents */
-  readonly delete?: InputMaybe<ReadonlyArray<PieceType_V2WhereUniqueInput>>;
-  /** Disconnect multiple PieceType_v2 documents */
-  readonly disconnect?: InputMaybe<ReadonlyArray<PieceType_V2WhereUniqueInput>>;
-  /** Override currently-connected documents with multiple existing PieceType_v2 documents */
-  readonly set?: InputMaybe<ReadonlyArray<PieceType_V2WhereUniqueInput>>;
-  /** Update multiple PieceType_v2 documents */
-  readonly update?: InputMaybe<ReadonlyArray<PieceType_V2UpdateWithNestedWhereUniqueInput>>;
-  /** Upsert multiple PieceType_v2 documents */
-  readonly upsert?: InputMaybe<ReadonlyArray<PieceType_V2UpsertWithNestedWhereUniqueInput>>;
-};
-
-export type PieceType_V2UpdateManyInput = {
-  /** No fields in updateMany data input */
-  readonly _?: InputMaybe<Scalars['String']>;
-};
-
-export type PieceType_V2UpdateManyWithNestedWhereInput = {
-  /** Update many input */
-  readonly data: PieceType_V2UpdateManyInput;
-  /** Document search */
-  readonly where: PieceType_V2WhereInput;
-};
-
-export type PieceType_V2UpdateOneInlineInput = {
-  /** Connect existing PieceType_v2 document */
-  readonly connect?: InputMaybe<PieceType_V2WhereUniqueInput>;
-  /** Create and connect one PieceType_v2 document */
-  readonly create?: InputMaybe<PieceType_V2CreateInput>;
-  /** Delete currently connected PieceType_v2 document */
-  readonly delete?: InputMaybe<Scalars['Boolean']>;
-  /** Disconnect currently connected PieceType_v2 document */
-  readonly disconnect?: InputMaybe<Scalars['Boolean']>;
-  /** Update single PieceType_v2 document */
-  readonly update?: InputMaybe<PieceType_V2UpdateWithNestedWhereUniqueInput>;
-  /** Upsert single PieceType_v2 document */
-  readonly upsert?: InputMaybe<PieceType_V2UpsertWithNestedWhereUniqueInput>;
-};
-
-export type PieceType_V2UpdateWithNestedWhereUniqueInput = {
-  /** Document to update */
-  readonly data: PieceType_V2UpdateInput;
-  /** Unique document search */
-  readonly where: PieceType_V2WhereUniqueInput;
-};
-
-export type PieceType_V2UpsertInput = {
-  /** Create document if it didn't exist */
-  readonly create: PieceType_V2CreateInput;
-  /** Update document if it exists */
-  readonly update: PieceType_V2UpdateInput;
-};
-
-export type PieceType_V2UpsertWithNestedWhereUniqueInput = {
-  /** Upsert data */
-  readonly data: PieceType_V2UpsertInput;
-  /** Unique document search */
-  readonly where: PieceType_V2WhereUniqueInput;
-};
-
-/** Identifies documents */
-export type PieceType_V2WhereInput = {
-  /** Logical AND on all given filters. */
-  readonly AND?: InputMaybe<ReadonlyArray<PieceType_V2WhereInput>>;
-  /** Logical NOT on all given filters combined by AND. */
-  readonly NOT?: InputMaybe<ReadonlyArray<PieceType_V2WhereInput>>;
-  /** Logical OR on all given filters. */
-  readonly OR?: InputMaybe<ReadonlyArray<PieceType_V2WhereInput>>;
-  /** Contains search across all appropriate fields. */
-  readonly _search?: InputMaybe<Scalars['String']>;
-  readonly createdAt?: InputMaybe<Scalars['DateTime']>;
-  /** All values greater than the given value. */
-  readonly createdAt_gt?: InputMaybe<Scalars['DateTime']>;
-  /** All values greater than or equal the given value. */
-  readonly createdAt_gte?: InputMaybe<Scalars['DateTime']>;
-  /** All values that are contained in given list. */
-  readonly createdAt_in?: InputMaybe<ReadonlyArray<Scalars['DateTime']>>;
-  /** All values less than the given value. */
-  readonly createdAt_lt?: InputMaybe<Scalars['DateTime']>;
-  /** All values less than or equal the given value. */
-  readonly createdAt_lte?: InputMaybe<Scalars['DateTime']>;
-  /** All values that are not equal to given value. */
-  readonly createdAt_not?: InputMaybe<Scalars['DateTime']>;
-  /** All values that are not contained in given list. */
-  readonly createdAt_not_in?: InputMaybe<ReadonlyArray<Scalars['DateTime']>>;
-  readonly createdBy?: InputMaybe<UserWhereInput>;
-  readonly id?: InputMaybe<Scalars['ID']>;
-  /** All values containing the given string. */
-  readonly id_contains?: InputMaybe<Scalars['ID']>;
-  /** All values ending with the given string. */
-  readonly id_ends_with?: InputMaybe<Scalars['ID']>;
-  /** All values that are contained in given list. */
-  readonly id_in?: InputMaybe<ReadonlyArray<Scalars['ID']>>;
-  /** All values that are not equal to given value. */
-  readonly id_not?: InputMaybe<Scalars['ID']>;
-  /** All values not containing the given string. */
-  readonly id_not_contains?: InputMaybe<Scalars['ID']>;
-  /** All values not ending with the given string */
-  readonly id_not_ends_with?: InputMaybe<Scalars['ID']>;
-  /** All values that are not contained in given list. */
-  readonly id_not_in?: InputMaybe<ReadonlyArray<Scalars['ID']>>;
-  /** All values not starting with the given string. */
-  readonly id_not_starts_with?: InputMaybe<Scalars['ID']>;
-  /** All values starting with the given string. */
-  readonly id_starts_with?: InputMaybe<Scalars['ID']>;
-  readonly name?: InputMaybe<Scalars['String']>;
-  /** All values containing the given string. */
-  readonly name_contains?: InputMaybe<Scalars['String']>;
-  /** All values ending with the given string. */
-  readonly name_ends_with?: InputMaybe<Scalars['String']>;
-  /** All values that are contained in given list. */
-  readonly name_in?: InputMaybe<ReadonlyArray<Scalars['String']>>;
-  /** All values that are not equal to given value. */
-  readonly name_not?: InputMaybe<Scalars['String']>;
-  /** All values not containing the given string. */
-  readonly name_not_contains?: InputMaybe<Scalars['String']>;
-  /** All values not ending with the given string */
-  readonly name_not_ends_with?: InputMaybe<Scalars['String']>;
-  /** All values that are not contained in given list. */
-  readonly name_not_in?: InputMaybe<ReadonlyArray<Scalars['String']>>;
-  /** All values not starting with the given string. */
-  readonly name_not_starts_with?: InputMaybe<Scalars['String']>;
-  /** All values starting with the given string. */
-  readonly name_starts_with?: InputMaybe<Scalars['String']>;
-  readonly publishedAt?: InputMaybe<Scalars['DateTime']>;
-  /** All values greater than the given value. */
-  readonly publishedAt_gt?: InputMaybe<Scalars['DateTime']>;
-  /** All values greater than or equal the given value. */
-  readonly publishedAt_gte?: InputMaybe<Scalars['DateTime']>;
-  /** All values that are contained in given list. */
-  readonly publishedAt_in?: InputMaybe<ReadonlyArray<Scalars['DateTime']>>;
-  /** All values less than the given value. */
-  readonly publishedAt_lt?: InputMaybe<Scalars['DateTime']>;
-  /** All values less than or equal the given value. */
-  readonly publishedAt_lte?: InputMaybe<Scalars['DateTime']>;
-  /** All values that are not equal to given value. */
-  readonly publishedAt_not?: InputMaybe<Scalars['DateTime']>;
-  /** All values that are not contained in given list. */
-  readonly publishedAt_not_in?: InputMaybe<ReadonlyArray<Scalars['DateTime']>>;
-  readonly publishedBy?: InputMaybe<UserWhereInput>;
-  readonly scheduledIn_every?: InputMaybe<ScheduledOperationWhereInput>;
-  readonly scheduledIn_none?: InputMaybe<ScheduledOperationWhereInput>;
-  readonly scheduledIn_some?: InputMaybe<ScheduledOperationWhereInput>;
-  readonly updatedAt?: InputMaybe<Scalars['DateTime']>;
-  /** All values greater than the given value. */
-  readonly updatedAt_gt?: InputMaybe<Scalars['DateTime']>;
-  /** All values greater than or equal the given value. */
-  readonly updatedAt_gte?: InputMaybe<Scalars['DateTime']>;
-  /** All values that are contained in given list. */
-  readonly updatedAt_in?: InputMaybe<ReadonlyArray<Scalars['DateTime']>>;
-  /** All values less than the given value. */
-  readonly updatedAt_lt?: InputMaybe<Scalars['DateTime']>;
-  /** All values less than or equal the given value. */
-  readonly updatedAt_lte?: InputMaybe<Scalars['DateTime']>;
-  /** All values that are not equal to given value. */
-  readonly updatedAt_not?: InputMaybe<Scalars['DateTime']>;
-  /** All values that are not contained in given list. */
-  readonly updatedAt_not_in?: InputMaybe<ReadonlyArray<Scalars['DateTime']>>;
-  readonly updatedBy?: InputMaybe<UserWhereInput>;
-};
-
-/** References PieceType_v2 record uniquely */
-export type PieceType_V2WhereUniqueInput = {
-  readonly id?: InputMaybe<Scalars['ID']>;
-  readonly name?: InputMaybe<Scalars['String']>;
-};
-
 export type PieceUpdateInput = {
   readonly category?: InputMaybe<CategoryUpdateOneInlineInput>;
   readonly content?: InputMaybe<Scalars['RichTextAST']>;
@@ -3039,7 +2986,6 @@ export type PieceUpdateInput = {
   readonly technique?: InputMaybe<Scalars['String']>;
   readonly title?: InputMaybe<Scalars['String']>;
   readonly type?: InputMaybe<PieceType>;
-  readonly type_v2?: InputMaybe<PieceType_V2UpdateOneInlineInput>;
 };
 
 export type PieceUpdateManyInlineInput = {
@@ -3348,7 +3294,6 @@ export type PieceWhereInput = {
   readonly type_not?: InputMaybe<PieceType>;
   /** All values that are not contained in given list. */
   readonly type_not_in?: InputMaybe<ReadonlyArray<PieceType>>;
-  readonly type_v2?: InputMaybe<PieceType_V2WhereInput>;
   readonly updatedAt?: InputMaybe<Scalars['DateTime']>;
   /** All values greater than the given value. */
   readonly updatedAt_gt?: InputMaybe<Scalars['DateTime']>;
@@ -3398,18 +3343,18 @@ export type Query = {
   readonly category?: Maybe<Category>;
   /** Retrieve document version */
   readonly categoryVersion?: Maybe<DocumentVersion>;
+  /** Retrieve a single info */
+  readonly info?: Maybe<Info>;
+  /** Retrieve document version */
+  readonly infoVersion?: Maybe<DocumentVersion>;
+  /** Retrieve multiple infos */
+  readonly infos: ReadonlyArray<Info>;
+  /** Retrieve multiple infos using the Relay connection interface */
+  readonly infosConnection: InfoConnection;
   /** Fetches an object given its ID */
   readonly node?: Maybe<Node>;
   /** Retrieve a single piece */
   readonly piece?: Maybe<Piece>;
-  /** Retrieve a single pieceType_v2 */
-  readonly pieceType_v2?: Maybe<PieceType_V2>;
-  /** Retrieve document version */
-  readonly pieceType_v2Version?: Maybe<DocumentVersion>;
-  /** Retrieve multiple pieceTypes */
-  readonly pieceTypes: ReadonlyArray<PieceType_V2>;
-  /** Retrieve multiple pieceTypes using the Relay connection interface */
-  readonly pieceTypesConnection: PieceType_V2Connection;
   /** Retrieve document version */
   readonly pieceVersion?: Maybe<DocumentVersion>;
   /** Retrieve multiple pieces */
@@ -3513,6 +3458,44 @@ export type QueryCategoryVersionArgs = {
 };
 
 
+export type QueryInfoArgs = {
+  locales?: ReadonlyArray<Locale>;
+  stage?: Stage;
+  where: InfoWhereUniqueInput;
+};
+
+
+export type QueryInfoVersionArgs = {
+  where: VersionWhereInput;
+};
+
+
+export type QueryInfosArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+  locales?: ReadonlyArray<Locale>;
+  orderBy?: InputMaybe<InfoOrderByInput>;
+  skip?: InputMaybe<Scalars['Int']>;
+  stage?: Stage;
+  where?: InputMaybe<InfoWhereInput>;
+};
+
+
+export type QueryInfosConnectionArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+  locales?: ReadonlyArray<Locale>;
+  orderBy?: InputMaybe<InfoOrderByInput>;
+  skip?: InputMaybe<Scalars['Int']>;
+  stage?: Stage;
+  where?: InputMaybe<InfoWhereInput>;
+};
+
+
 export type QueryNodeArgs = {
   id: Scalars['ID'];
   locales?: ReadonlyArray<Locale>;
@@ -3524,44 +3507,6 @@ export type QueryPieceArgs = {
   locales?: ReadonlyArray<Locale>;
   stage?: Stage;
   where: PieceWhereUniqueInput;
-};
-
-
-export type QueryPieceType_V2Args = {
-  locales?: ReadonlyArray<Locale>;
-  stage?: Stage;
-  where: PieceType_V2WhereUniqueInput;
-};
-
-
-export type QueryPieceType_V2VersionArgs = {
-  where: VersionWhereInput;
-};
-
-
-export type QueryPieceTypesArgs = {
-  after?: InputMaybe<Scalars['String']>;
-  before?: InputMaybe<Scalars['String']>;
-  first?: InputMaybe<Scalars['Int']>;
-  last?: InputMaybe<Scalars['Int']>;
-  locales?: ReadonlyArray<Locale>;
-  orderBy?: InputMaybe<PieceType_V2OrderByInput>;
-  skip?: InputMaybe<Scalars['Int']>;
-  stage?: Stage;
-  where?: InputMaybe<PieceType_V2WhereInput>;
-};
-
-
-export type QueryPieceTypesConnectionArgs = {
-  after?: InputMaybe<Scalars['String']>;
-  before?: InputMaybe<Scalars['String']>;
-  first?: InputMaybe<Scalars['Int']>;
-  last?: InputMaybe<Scalars['Int']>;
-  locales?: ReadonlyArray<Locale>;
-  orderBy?: InputMaybe<PieceType_V2OrderByInput>;
-  skip?: InputMaybe<Scalars['Int']>;
-  stage?: Stage;
-  where?: InputMaybe<PieceType_V2WhereInput>;
 };
 
 
@@ -3798,7 +3743,7 @@ export type ScheduledOperationUpdatedByArgs = {
   locales?: InputMaybe<ReadonlyArray<Locale>>;
 };
 
-export type ScheduledOperationAffectedDocument = Asset | Category | Piece | PieceType_V2;
+export type ScheduledOperationAffectedDocument = Asset | Category | Info | Piece;
 
 export type ScheduledOperationConnectInput = {
   /** Allow to specify document position in list of connected documents, will default to appending at end of list */
@@ -5191,6 +5136,13 @@ export type GetHeaderQueryVariables = Exact<{
 
 export type GetHeaderQuery = { readonly categories: ReadonlyArray<{ readonly id: string, readonly title: string, readonly slug: string, readonly color: PageColor }> };
 
+export type GetInfoQueryVariables = Exact<{
+  id: Scalars['ID'];
+}>;
+
+
+export type GetInfoQuery = { readonly info?: { readonly presentation?: { readonly markdown: string, readonly text: string } | null | undefined } | null | undefined };
+
 export type GetCategoryQueryVariables = Exact<{
   slug: Scalars['String'];
   stage: Stage;
@@ -5215,5 +5167,6 @@ export const PiecesFragmentFragmentDoc = {"kind":"Document","definitions":[{"kin
 export const CategoryFragmentFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"CategoryFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Category"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"color"}}]}}]} as unknown as DocumentNode<CategoryFragmentFragment, unknown>;
 export const GetCategoriesDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getCategories"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"stage"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Stage"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"categories"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"stage"},"value":{"kind":"Variable","name":{"kind":"Name","value":"stage"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"CategoryFragment"}},{"kind":"Field","name":{"kind":"Name","value":"backgroundVideo"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"mimeType"}},{"kind":"Field","name":{"kind":"Name","value":"url"}}]}},{"kind":"Field","name":{"kind":"Name","value":"backgroundVideoShort"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"mimeType"}},{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}}]}},...CategoryFragmentFragmentDoc.definitions]} as unknown as DocumentNode<GetCategoriesQuery, GetCategoriesQueryVariables>;
 export const GetHeaderDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getHeader"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"stage"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Stage"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"categories"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"stage"},"value":{"kind":"Variable","name":{"kind":"Name","value":"stage"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"CategoryFragment"}}]}}]}},...CategoryFragmentFragmentDoc.definitions]} as unknown as DocumentNode<GetHeaderQuery, GetHeaderQueryVariables>;
+export const GetInfoDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getInfo"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ID"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"info"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"presentation"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"markdown"}},{"kind":"Field","name":{"kind":"Name","value":"text"}}]}}]}}]}}]} as unknown as DocumentNode<GetInfoQuery, GetInfoQueryVariables>;
 export const GetCategoryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getCategory"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"slug"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"stage"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Stage"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"categories"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"stage"},"value":{"kind":"Variable","name":{"kind":"Name","value":"stage"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"CategoryFragment"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"PiecesFragment"}}]}},{"kind":"Field","name":{"kind":"Name","value":"category"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"slug"},"value":{"kind":"Variable","name":{"kind":"Name","value":"slug"}}}]}},{"kind":"Argument","name":{"kind":"Name","value":"stage"},"value":{"kind":"Variable","name":{"kind":"Name","value":"stage"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"CategoryFragment"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"content"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"markdown"}}]}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"PiecesFragment"}}]}}]}},...CategoryFragmentFragmentDoc.definitions,...PiecesFragmentFragmentDoc.definitions]} as unknown as DocumentNode<GetCategoryQuery, GetCategoryQueryVariables>;
 export const GetPieceDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getPiece"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"slug"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"stage"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Stage"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"categories"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"stage"},"value":{"kind":"Variable","name":{"kind":"Name","value":"stage"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"CategoryFragment"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"PiecesFragment"}}]}},{"kind":"Field","name":{"kind":"Name","value":"piece"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"slug"},"value":{"kind":"Variable","name":{"kind":"Name","value":"slug"}}}]}},{"kind":"Argument","name":{"kind":"Name","value":"stage"},"value":{"kind":"Variable","name":{"kind":"Name","value":"stage"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"type"}},{"kind":"Field","name":{"kind":"Name","value":"tags"}},{"kind":"Field","name":{"kind":"Name","value":"technique"}},{"kind":"Field","name":{"kind":"Name","value":"location"}},{"kind":"Field","name":{"kind":"Name","value":"dimensions"}},{"kind":"Field","name":{"kind":"Name","value":"duration"}},{"kind":"Field","name":{"kind":"Name","value":"participants"}},{"kind":"Field","name":{"kind":"Name","value":"category"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"color"}}]}},{"kind":"Field","name":{"kind":"Name","value":"content"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"markdown"}}]}},{"kind":"Field","name":{"kind":"Name","value":"images"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"mimeType_in"},"value":{"kind":"ListValue","values":[{"kind":"StringValue","value":"image/jpeg","block":false}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"mimeType"}},{"kind":"Field","alias":{"kind":"Name","value":"jpg"},"name":{"kind":"Name","value":"url"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"transformation"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"image"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"resize"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"width"},"value":{"kind":"IntValue","value":"1000"}},{"kind":"ObjectField","name":{"kind":"Name","value":"height"},"value":{"kind":"IntValue","value":"1000"}},{"kind":"ObjectField","name":{"kind":"Name","value":"fit"},"value":{"kind":"EnumValue","value":"max"}}]}}]}},{"kind":"ObjectField","name":{"kind":"Name","value":"document"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"output"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"format"},"value":{"kind":"EnumValue","value":"jpg"}}]}}]}}]}}]},{"kind":"Field","alias":{"kind":"Name","value":"webp"},"name":{"kind":"Name","value":"url"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"transformation"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"image"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"resize"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"width"},"value":{"kind":"IntValue","value":"1000"}},{"kind":"ObjectField","name":{"kind":"Name","value":"height"},"value":{"kind":"IntValue","value":"1000"}},{"kind":"ObjectField","name":{"kind":"Name","value":"fit"},"value":{"kind":"EnumValue","value":"max"}}]}}]}},{"kind":"ObjectField","name":{"kind":"Name","value":"document"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"output"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"format"},"value":{"kind":"EnumValue","value":"webp"}}]}}]}}]}}]}]}},{"kind":"Field","name":{"kind":"Name","value":"related"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"category"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"color"}}]}}]}}]}}]}},...CategoryFragmentFragmentDoc.definitions,...PiecesFragmentFragmentDoc.definitions]} as unknown as DocumentNode<GetPieceQuery, GetPieceQueryVariables>;

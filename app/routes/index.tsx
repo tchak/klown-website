@@ -2,7 +2,7 @@ import type { MetaFunction, LoaderFunction } from 'remix';
 import { useLoaderData, Link } from 'remix';
 
 import { getCategories, GetCategories as RouteData } from '~/cms.server';
-import { useHoverPageColor } from '~/hooks';
+import { useHoverPageColor, getHexColor } from '~/hooks';
 
 export const handle = {
   body: () => {
@@ -13,7 +13,10 @@ export const handle = {
     };
   },
 };
-export const meta: MetaFunction = () => ({ title: 'Klown' });
+export const meta: MetaFunction = () => ({
+  title: 'Klown',
+  'theme-color': getHexColor('w'),
+});
 export const loader: LoaderFunction = async () => getCategories();
 
 export default function Index() {
