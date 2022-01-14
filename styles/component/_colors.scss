@@ -29,6 +29,8 @@ body{
 	&[data-bg="r"]{ --bg: var(--cR); --bgg: var(--cRR); --bggg: var(--cRRR); }
 	&[data-bg="w"]{ --bg: var(--cW); --bgg: var(--cWW); --bggg: var(--cWWW); }
 	&[data-bg="k"]{ --bg: var(--cKK); --bgg: var(--cKK); --bggg: var(--cKKK); }
+	// Dirty overwrite
+	&[data-cc="w"][data-bg="k"]{ --cc: var(--cR); }
 
 	&.pulse{
 		animation: pulse 6s steps(12) infinite;		
