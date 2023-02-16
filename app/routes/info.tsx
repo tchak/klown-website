@@ -1,5 +1,5 @@
-import type { LoaderFunction, MetaFunction } from 'remix';
-import { useLoaderData } from 'remix';
+import type { LoaderFunction, MetaFunction } from '@remix-run/node';
+import { useLoaderData } from '@remix-run/react';
 
 import { Markdown } from '~/components/markdown';
 import { getInfo, GetInfo as RouteData } from '~/cms.server';

@@ -1,5 +1,5 @@
 import { useEffect, ChangeEventHandler, MouseEventHandler } from 'react';
-import { useSearchParams, Link } from 'remix';
+import { useSearchParams, Link } from '@remix-run/react';
 
 import type { GetCategory } from '~/cms.server';
 import { Picture } from './picture';

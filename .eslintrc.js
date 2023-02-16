@@ -14,7 +14,7 @@ module.exports = {
   },
   overrides: [
     {
-      files: ['.eslintrc.js', 'remix.config.js'],
+      files: ['.eslintrc.js', 'remix.config.js', 'postcss.config.js'],
       env: { node: true },
     },
   ],

@@ -1,5 +1,5 @@
-import type { MetaFunction, LoaderFunction } from 'remix';
-import { useLoaderData } from 'remix';
+import type { MetaFunction, LoaderFunction } from '@remix-run/node';
+import { useLoaderData } from '@remix-run/react';
 import { DynamicLinksFunction } from 'remix-utils';
 
 import { Markdown } from '~/components/markdown';

@@ -1,4 +1,4 @@
-import { LinksFunction, LoaderFunction, MetaFunction } from 'remix';
+import { LinksFunction, LoaderFunction, MetaFunction } from '@remix-run/node';
 import {
   Meta,
   Links,
@@ -7,7 +7,7 @@ import {
   ScrollRestoration,
   Outlet,
   useMatches,
-} from 'remix';
+} from '@remix-run/react';
 import { DynamicLinks } from 'remix-utils';
 
 import stylesUrl from './styles/index.css';

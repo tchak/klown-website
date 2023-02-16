@@ -1,6 +1,6 @@
 import { MutableRefObject, useEffect, useRef } from 'react';
-import type { MetaFunction, LoaderFunction } from 'remix';
-import { useLoaderData } from 'remix';
+import type { MetaFunction, LoaderFunction } from '@remix-run/node';
+import { useLoaderData } from '@remix-run/react';
 import Siema from 'siema';
 import { DynamicLinksFunction } from 'remix-utils';
 import { useWindowSize } from '@reach/window-size';

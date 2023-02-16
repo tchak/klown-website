@@ -1,5 +1,5 @@
-import type { MetaFunction, LoaderFunction } from 'remix';
-import { useLoaderData, Link } from 'remix';
+import type { MetaFunction, LoaderFunction } from '@remix-run/node';
+import { useLoaderData, Link } from '@remix-run/react';
 
 import { getCategories, GetCategories as RouteData } from '~/cms.server';
 import { useHoverPageColor, getHexColor } from '~/hooks';

@@ -11,18 +11,13 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
-  /** A date string, such as 2007-12-03 (YYYY-MM-DD), compliant with ISO 8601 standard for representation of dates using the Gregorian calendar. */
   Date: any;
-  /** A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the date-timeformat outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representationof dates and times using the Gregorian calendar. */
   DateTime: any;
   Hex: any;
-  /** Raw JSON value */
   Json: any;
-  /** The Long scalar type represents non-fractional signed whole numeric values. Long can represent values between -(2^63) and 2^63 - 1. */
   Long: any;
   RGBAHue: any;
   RGBATransparency: any;
-  /** Slate-compatible RichText AST */
   RichTextAST: any;
 };
 
@@ -82,6 +77,7 @@ export type AssetBackgroundVideoCategoryArgs = {
   after?: InputMaybe<Scalars['String']>;
   before?: InputMaybe<Scalars['String']>;
   first?: InputMaybe<Scalars['Int']>;
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   last?: InputMaybe<Scalars['Int']>;
   locales?: InputMaybe<ReadonlyArray<Locale>>;
   orderBy?: InputMaybe<CategoryOrderByInput>;
@@ -95,6 +91,7 @@ export type AssetBackgroundVideoShortCategoryArgs = {
   after?: InputMaybe<Scalars['String']>;
   before?: InputMaybe<Scalars['String']>;
   first?: InputMaybe<Scalars['Int']>;
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   last?: InputMaybe<Scalars['Int']>;
   locales?: InputMaybe<ReadonlyArray<Locale>>;
   orderBy?: InputMaybe<CategoryOrderByInput>;
@@ -111,6 +108,7 @@ export type AssetCreatedAtArgs = {
 
 /** Asset system model */
 export type AssetCreatedByArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   locales?: InputMaybe<ReadonlyArray<Locale>>;
 };
 
@@ -143,6 +141,7 @@ export type AssetPhotosPieceArgs = {
   after?: InputMaybe<Scalars['String']>;
   before?: InputMaybe<Scalars['String']>;
   first?: InputMaybe<Scalars['Int']>;
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   last?: InputMaybe<Scalars['Int']>;
   locales?: InputMaybe<ReadonlyArray<Locale>>;
   orderBy?: InputMaybe<PieceOrderByInput>;
@@ -159,6 +158,7 @@ export type AssetPublishedAtArgs = {
 
 /** Asset system model */
 export type AssetPublishedByArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   locales?: InputMaybe<ReadonlyArray<Locale>>;
 };
 
@@ -168,6 +168,7 @@ export type AssetScheduledInArgs = {
   after?: InputMaybe<Scalars['String']>;
   before?: InputMaybe<Scalars['String']>;
   first?: InputMaybe<Scalars['Int']>;
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   last?: InputMaybe<Scalars['Int']>;
   locales?: InputMaybe<ReadonlyArray<Locale>>;
   skip?: InputMaybe<Scalars['Int']>;
@@ -183,6 +184,7 @@ export type AssetUpdatedAtArgs = {
 
 /** Asset system model */
 export type AssetUpdatedByArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   locales?: InputMaybe<ReadonlyArray<Locale>>;
 };
 
@@ -290,7 +292,7 @@ export type AssetManyWhereInput = {
   /** All values greater than or equal the given value. */
   readonly createdAt_gte?: InputMaybe<Scalars['DateTime']>;
   /** All values that are contained in given list. */
-  readonly createdAt_in?: InputMaybe<ReadonlyArray<Scalars['DateTime']>>;
+  readonly createdAt_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['DateTime']>>>;
   /** All values less than the given value. */
   readonly createdAt_lt?: InputMaybe<Scalars['DateTime']>;
   /** All values less than or equal the given value. */
@@ -298,15 +300,18 @@ export type AssetManyWhereInput = {
   /** All values that are not equal to given value. */
   readonly createdAt_not?: InputMaybe<Scalars['DateTime']>;
   /** All values that are not contained in given list. */
-  readonly createdAt_not_in?: InputMaybe<ReadonlyArray<Scalars['DateTime']>>;
+  readonly createdAt_not_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['DateTime']>>>;
   readonly createdBy?: InputMaybe<UserWhereInput>;
+  readonly documentInStages_every?: InputMaybe<AssetWhereStageInput>;
+  readonly documentInStages_none?: InputMaybe<AssetWhereStageInput>;
+  readonly documentInStages_some?: InputMaybe<AssetWhereStageInput>;
   readonly id?: InputMaybe<Scalars['ID']>;
   /** All values containing the given string. */
   readonly id_contains?: InputMaybe<Scalars['ID']>;
   /** All values ending with the given string. */
   readonly id_ends_with?: InputMaybe<Scalars['ID']>;
   /** All values that are contained in given list. */
-  readonly id_in?: InputMaybe<ReadonlyArray<Scalars['ID']>>;
+  readonly id_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['ID']>>>;
   /** All values that are not equal to given value. */
   readonly id_not?: InputMaybe<Scalars['ID']>;
   /** All values not containing the given string. */
@@ -314,7 +319,7 @@ export type AssetManyWhereInput = {
   /** All values not ending with the given string */
   readonly id_not_ends_with?: InputMaybe<Scalars['ID']>;
   /** All values that are not contained in given list. */
-  readonly id_not_in?: InputMaybe<ReadonlyArray<Scalars['ID']>>;
+  readonly id_not_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['ID']>>>;
   /** All values not starting with the given string. */
   readonly id_not_starts_with?: InputMaybe<Scalars['ID']>;
   /** All values starting with the given string. */
@@ -328,7 +333,7 @@ export type AssetManyWhereInput = {
   /** All values greater than or equal the given value. */
   readonly publishedAt_gte?: InputMaybe<Scalars['DateTime']>;
   /** All values that are contained in given list. */
-  readonly publishedAt_in?: InputMaybe<ReadonlyArray<Scalars['DateTime']>>;
+  readonly publishedAt_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['DateTime']>>>;
   /** All values less than the given value. */
   readonly publishedAt_lt?: InputMaybe<Scalars['DateTime']>;
   /** All values less than or equal the given value. */
@@ -336,7 +341,7 @@ export type AssetManyWhereInput = {
   /** All values that are not equal to given value. */
   readonly publishedAt_not?: InputMaybe<Scalars['DateTime']>;
   /** All values that are not contained in given list. */
-  readonly publishedAt_not_in?: InputMaybe<ReadonlyArray<Scalars['DateTime']>>;
+  readonly publishedAt_not_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['DateTime']>>>;
   readonly publishedBy?: InputMaybe<UserWhereInput>;
   readonly scheduledIn_every?: InputMaybe<ScheduledOperationWhereInput>;
   readonly scheduledIn_none?: InputMaybe<ScheduledOperationWhereInput>;
@@ -347,7 +352,7 @@ export type AssetManyWhereInput = {
   /** All values greater than or equal the given value. */
   readonly updatedAt_gte?: InputMaybe<Scalars['DateTime']>;
   /** All values that are contained in given list. */
-  readonly updatedAt_in?: InputMaybe<ReadonlyArray<Scalars['DateTime']>>;
+  readonly updatedAt_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['DateTime']>>>;
   /** All values less than the given value. */
   readonly updatedAt_lt?: InputMaybe<Scalars['DateTime']>;
   /** All values less than or equal the given value. */
@@ -355,7 +360,7 @@ export type AssetManyWhereInput = {
   /** All values that are not equal to given value. */
   readonly updatedAt_not?: InputMaybe<Scalars['DateTime']>;
   /** All values that are not contained in given list. */
-  readonly updatedAt_not_in?: InputMaybe<ReadonlyArray<Scalars['DateTime']>>;
+  readonly updatedAt_not_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['DateTime']>>>;
   readonly updatedBy?: InputMaybe<UserWhereInput>;
 };
 
@@ -522,6 +527,12 @@ export type AssetUpsertWithNestedWhereUniqueInput = {
   readonly where: AssetWhereUniqueInput;
 };
 
+/** This contains a set of filters that can be used to compare values internally */
+export type AssetWhereComparatorInput = {
+  /** This field can be used to request to check if the entry is outdated by internal comparison */
+  readonly outdated_to?: InputMaybe<Scalars['Boolean']>;
+};
+
 /** Identifies documents */
 export type AssetWhereInput = {
   /** Logical AND on all given filters. */
@@ -544,7 +555,7 @@ export type AssetWhereInput = {
   /** All values greater than or equal the given value. */
   readonly createdAt_gte?: InputMaybe<Scalars['DateTime']>;
   /** All values that are contained in given list. */
-  readonly createdAt_in?: InputMaybe<ReadonlyArray<Scalars['DateTime']>>;
+  readonly createdAt_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['DateTime']>>>;
   /** All values less than the given value. */
   readonly createdAt_lt?: InputMaybe<Scalars['DateTime']>;
   /** All values less than or equal the given value. */
@@ -552,15 +563,18 @@ export type AssetWhereInput = {
   /** All values that are not equal to given value. */
   readonly createdAt_not?: InputMaybe<Scalars['DateTime']>;
   /** All values that are not contained in given list. */
-  readonly createdAt_not_in?: InputMaybe<ReadonlyArray<Scalars['DateTime']>>;
+  readonly createdAt_not_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['DateTime']>>>;
   readonly createdBy?: InputMaybe<UserWhereInput>;
+  readonly documentInStages_every?: InputMaybe<AssetWhereStageInput>;
+  readonly documentInStages_none?: InputMaybe<AssetWhereStageInput>;
+  readonly documentInStages_some?: InputMaybe<AssetWhereStageInput>;
   readonly fileName?: InputMaybe<Scalars['String']>;
   /** All values containing the given string. */
   readonly fileName_contains?: InputMaybe<Scalars['String']>;
   /** All values ending with the given string. */
   readonly fileName_ends_with?: InputMaybe<Scalars['String']>;
   /** All values that are contained in given list. */
-  readonly fileName_in?: InputMaybe<ReadonlyArray<Scalars['String']>>;
+  readonly fileName_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['String']>>>;
   /** All values that are not equal to given value. */
   readonly fileName_not?: InputMaybe<Scalars['String']>;
   /** All values not containing the given string. */
@@ -568,7 +582,7 @@ export type AssetWhereInput = {
   /** All values not ending with the given string */
   readonly fileName_not_ends_with?: InputMaybe<Scalars['String']>;
   /** All values that are not contained in given list. */
-  readonly fileName_not_in?: InputMaybe<ReadonlyArray<Scalars['String']>>;
+  readonly fileName_not_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['String']>>>;
   /** All values not starting with the given string. */
   readonly fileName_not_starts_with?: InputMaybe<Scalars['String']>;
   /** All values starting with the given string. */
@@ -579,7 +593,7 @@ export type AssetWhereInput = {
   /** All values ending with the given string. */
   readonly handle_ends_with?: InputMaybe<Scalars['String']>;
   /** All values that are contained in given list. */
-  readonly handle_in?: InputMaybe<ReadonlyArray<Scalars['String']>>;
+  readonly handle_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['String']>>>;
   /** All values that are not equal to given value. */
   readonly handle_not?: InputMaybe<Scalars['String']>;
   /** All values not containing the given string. */
@@ -587,7 +601,7 @@ export type AssetWhereInput = {
   /** All values not ending with the given string */
   readonly handle_not_ends_with?: InputMaybe<Scalars['String']>;
   /** All values that are not contained in given list. */
-  readonly handle_not_in?: InputMaybe<ReadonlyArray<Scalars['String']>>;
+  readonly handle_not_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['String']>>>;
   /** All values not starting with the given string. */
   readonly handle_not_starts_with?: InputMaybe<Scalars['String']>;
   /** All values starting with the given string. */
@@ -598,7 +612,7 @@ export type AssetWhereInput = {
   /** All values greater than or equal the given value. */
   readonly height_gte?: InputMaybe<Scalars['Float']>;
   /** All values that are contained in given list. */
-  readonly height_in?: InputMaybe<ReadonlyArray<Scalars['Float']>>;
+  readonly height_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['Float']>>>;
   /** All values less than the given value. */
   readonly height_lt?: InputMaybe<Scalars['Float']>;
   /** All values less than or equal the given value. */
@@ -606,14 +620,14 @@ export type AssetWhereInput = {
   /** All values that are not equal to given value. */
   readonly height_not?: InputMaybe<Scalars['Float']>;
   /** All values that are not contained in given list. */
-  readonly height_not_in?: InputMaybe<ReadonlyArray<Scalars['Float']>>;
+  readonly height_not_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['Float']>>>;
   readonly id?: InputMaybe<Scalars['ID']>;
   /** All values containing the given string. */
   readonly id_contains?: InputMaybe<Scalars['ID']>;
   /** All values ending with the given string. */
   readonly id_ends_with?: InputMaybe<Scalars['ID']>;
   /** All values that are contained in given list. */
-  readonly id_in?: InputMaybe<ReadonlyArray<Scalars['ID']>>;
+  readonly id_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['ID']>>>;
   /** All values that are not equal to given value. */
   readonly id_not?: InputMaybe<Scalars['ID']>;
   /** All values not containing the given string. */
@@ -621,7 +635,7 @@ export type AssetWhereInput = {
   /** All values not ending with the given string */
   readonly id_not_ends_with?: InputMaybe<Scalars['ID']>;
   /** All values that are not contained in given list. */
-  readonly id_not_in?: InputMaybe<ReadonlyArray<Scalars['ID']>>;
+  readonly id_not_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['ID']>>>;
   /** All values not starting with the given string. */
   readonly id_not_starts_with?: InputMaybe<Scalars['ID']>;
   /** All values starting with the given string. */
@@ -632,7 +646,7 @@ export type AssetWhereInput = {
   /** All values ending with the given string. */
   readonly mimeType_ends_with?: InputMaybe<Scalars['String']>;
   /** All values that are contained in given list. */
-  readonly mimeType_in?: InputMaybe<ReadonlyArray<Scalars['String']>>;
+  readonly mimeType_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['String']>>>;
   /** All values that are not equal to given value. */
   readonly mimeType_not?: InputMaybe<Scalars['String']>;
   /** All values not containing the given string. */
@@ -640,7 +654,7 @@ export type AssetWhereInput = {
   /** All values not ending with the given string */
   readonly mimeType_not_ends_with?: InputMaybe<Scalars['String']>;
   /** All values that are not contained in given list. */
-  readonly mimeType_not_in?: InputMaybe<ReadonlyArray<Scalars['String']>>;
+  readonly mimeType_not_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['String']>>>;
   /** All values not starting with the given string. */
   readonly mimeType_not_starts_with?: InputMaybe<Scalars['String']>;
   /** All values starting with the given string. */
@@ -654,7 +668,7 @@ export type AssetWhereInput = {
   /** All values greater than or equal the given value. */
   readonly publishedAt_gte?: InputMaybe<Scalars['DateTime']>;
   /** All values that are contained in given list. */
-  readonly publishedAt_in?: InputMaybe<ReadonlyArray<Scalars['DateTime']>>;
+  readonly publishedAt_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['DateTime']>>>;
   /** All values less than the given value. */
   readonly publishedAt_lt?: InputMaybe<Scalars['DateTime']>;
   /** All values less than or equal the given value. */
@@ -662,7 +676,7 @@ export type AssetWhereInput = {
   /** All values that are not equal to given value. */
   readonly publishedAt_not?: InputMaybe<Scalars['DateTime']>;
   /** All values that are not contained in given list. */
-  readonly publishedAt_not_in?: InputMaybe<ReadonlyArray<Scalars['DateTime']>>;
+  readonly publishedAt_not_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['DateTime']>>>;
   readonly publishedBy?: InputMaybe<UserWhereInput>;
   readonly scheduledIn_every?: InputMaybe<ScheduledOperationWhereInput>;
   readonly scheduledIn_none?: InputMaybe<ScheduledOperationWhereInput>;
@@ -673,7 +687,7 @@ export type AssetWhereInput = {
   /** All values greater than or equal the given value. */
   readonly size_gte?: InputMaybe<Scalars['Float']>;
   /** All values that are contained in given list. */
-  readonly size_in?: InputMaybe<ReadonlyArray<Scalars['Float']>>;
+  readonly size_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['Float']>>>;
   /** All values less than the given value. */
   readonly size_lt?: InputMaybe<Scalars['Float']>;
   /** All values less than or equal the given value. */
@@ -681,14 +695,14 @@ export type AssetWhereInput = {
   /** All values that are not equal to given value. */
   readonly size_not?: InputMaybe<Scalars['Float']>;
   /** All values that are not contained in given list. */
-  readonly size_not_in?: InputMaybe<ReadonlyArray<Scalars['Float']>>;
+  readonly size_not_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['Float']>>>;
   readonly updatedAt?: InputMaybe<Scalars['DateTime']>;
   /** All values greater than the given value. */
   readonly updatedAt_gt?: InputMaybe<Scalars['DateTime']>;
   /** All values greater than or equal the given value. */
   readonly updatedAt_gte?: InputMaybe<Scalars['DateTime']>;
   /** All values that are contained in given list. */
-  readonly updatedAt_in?: InputMaybe<ReadonlyArray<Scalars['DateTime']>>;
+  readonly updatedAt_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['DateTime']>>>;
   /** All values less than the given value. */
   readonly updatedAt_lt?: InputMaybe<Scalars['DateTime']>;
   /** All values less than or equal the given value. */
@@ -696,7 +710,7 @@ export type AssetWhereInput = {
   /** All values that are not equal to given value. */
   readonly updatedAt_not?: InputMaybe<Scalars['DateTime']>;
   /** All values that are not contained in given list. */
-  readonly updatedAt_not_in?: InputMaybe<ReadonlyArray<Scalars['DateTime']>>;
+  readonly updatedAt_not_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['DateTime']>>>;
   readonly updatedBy?: InputMaybe<UserWhereInput>;
   readonly width?: InputMaybe<Scalars['Float']>;
   /** All values greater than the given value. */
@@ -704,7 +718,7 @@ export type AssetWhereInput = {
   /** All values greater than or equal the given value. */
   readonly width_gte?: InputMaybe<Scalars['Float']>;
   /** All values that are contained in given list. */
-  readonly width_in?: InputMaybe<ReadonlyArray<Scalars['Float']>>;
+  readonly width_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['Float']>>>;
   /** All values less than the given value. */
   readonly width_lt?: InputMaybe<Scalars['Float']>;
   /** All values less than or equal the given value. */
@@ -712,7 +726,21 @@ export type AssetWhereInput = {
   /** All values that are not equal to given value. */
   readonly width_not?: InputMaybe<Scalars['Float']>;
   /** All values that are not contained in given list. */
-  readonly width_not_in?: InputMaybe<ReadonlyArray<Scalars['Float']>>;
+  readonly width_not_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['Float']>>>;
+};
+
+/** The document in stages filter allows specifying a stage entry to cross compare the same document between different stages */
+export type AssetWhereStageInput = {
+  /** Logical AND on all given filters. */
+  readonly AND?: InputMaybe<ReadonlyArray<AssetWhereStageInput>>;
+  /** Logical NOT on all given filters combined by AND. */
+  readonly NOT?: InputMaybe<ReadonlyArray<AssetWhereStageInput>>;
+  /** Logical OR on all given filters. */
+  readonly OR?: InputMaybe<ReadonlyArray<AssetWhereStageInput>>;
+  /** This field contains fields which can be set as true or false to specify an internal comparison */
+  readonly compareWithParent?: InputMaybe<AssetWhereComparatorInput>;
+  /** Specify the stage to compare with */
+  readonly stage?: InputMaybe<Stage>;
 };
 
 /** References Asset record uniquely */
@@ -759,16 +787,19 @@ export type Category = Node & {
 
 
 export type CategoryBackgroundVideoArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   locales?: InputMaybe<ReadonlyArray<Locale>>;
 };
 
 
 export type CategoryBackgroundVideoShortArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   locales?: InputMaybe<ReadonlyArray<Locale>>;
 };
 
 
 export type CategoryCreatedByArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   locales?: InputMaybe<ReadonlyArray<Locale>>;
 };
 
@@ -791,6 +822,7 @@ export type CategoryPiecesArgs = {
   after?: InputMaybe<Scalars['String']>;
   before?: InputMaybe<Scalars['String']>;
   first?: InputMaybe<Scalars['Int']>;
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   last?: InputMaybe<Scalars['Int']>;
   locales?: InputMaybe<ReadonlyArray<Locale>>;
   orderBy?: InputMaybe<PieceOrderByInput>;
@@ -800,6 +832,7 @@ export type CategoryPiecesArgs = {
 
 
 export type CategoryPublishedByArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   locales?: InputMaybe<ReadonlyArray<Locale>>;
 };
 
@@ -808,6 +841,7 @@ export type CategoryScheduledInArgs = {
   after?: InputMaybe<Scalars['String']>;
   before?: InputMaybe<Scalars['String']>;
   first?: InputMaybe<Scalars['Int']>;
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   last?: InputMaybe<Scalars['Int']>;
   locales?: InputMaybe<ReadonlyArray<Locale>>;
   skip?: InputMaybe<Scalars['Int']>;
@@ -816,6 +850,7 @@ export type CategoryScheduledInArgs = {
 
 
 export type CategoryUpdatedByArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   locales?: InputMaybe<ReadonlyArray<Locale>>;
 };
 
@@ -884,18 +919,18 @@ export type CategoryManyWhereInput = {
   readonly backgroundVideoShort?: InputMaybe<AssetWhereInput>;
   readonly color?: InputMaybe<PageColor>;
   /** All values that are contained in given list. */
-  readonly color_in?: InputMaybe<ReadonlyArray<PageColor>>;
+  readonly color_in?: InputMaybe<ReadonlyArray<InputMaybe<PageColor>>>;
   /** All values that are not equal to given value. */
   readonly color_not?: InputMaybe<PageColor>;
   /** All values that are not contained in given list. */
-  readonly color_not_in?: InputMaybe<ReadonlyArray<PageColor>>;
+  readonly color_not_in?: InputMaybe<ReadonlyArray<InputMaybe<PageColor>>>;
   readonly createdAt?: InputMaybe<Scalars['DateTime']>;
   /** All values greater than the given value. */
   readonly createdAt_gt?: InputMaybe<Scalars['DateTime']>;
   /** All values greater than or equal the given value. */
   readonly createdAt_gte?: InputMaybe<Scalars['DateTime']>;
   /** All values that are contained in given list. */
-  readonly createdAt_in?: InputMaybe<ReadonlyArray<Scalars['DateTime']>>;
+  readonly createdAt_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['DateTime']>>>;
   /** All values less than the given value. */
   readonly createdAt_lt?: InputMaybe<Scalars['DateTime']>;
   /** All values less than or equal the given value. */
@@ -903,7 +938,7 @@ export type CategoryManyWhereInput = {
   /** All values that are not equal to given value. */
   readonly createdAt_not?: InputMaybe<Scalars['DateTime']>;
   /** All values that are not contained in given list. */
-  readonly createdAt_not_in?: InputMaybe<ReadonlyArray<Scalars['DateTime']>>;
+  readonly createdAt_not_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['DateTime']>>>;
   readonly createdBy?: InputMaybe<UserWhereInput>;
   readonly description?: InputMaybe<Scalars['String']>;
   /** All values containing the given string. */
@@ -911,7 +946,7 @@ export type CategoryManyWhereInput = {
   /** All values ending with the given string. */
   readonly description_ends_with?: InputMaybe<Scalars['String']>;
   /** All values that are contained in given list. */
-  readonly description_in?: InputMaybe<ReadonlyArray<Scalars['String']>>;
+  readonly description_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['String']>>>;
   /** All values that are not equal to given value. */
   readonly description_not?: InputMaybe<Scalars['String']>;
   /** All values not containing the given string. */
@@ -919,18 +954,21 @@ export type CategoryManyWhereInput = {
   /** All values not ending with the given string */
   readonly description_not_ends_with?: InputMaybe<Scalars['String']>;
   /** All values that are not contained in given list. */
-  readonly description_not_in?: InputMaybe<ReadonlyArray<Scalars['String']>>;
+  readonly description_not_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['String']>>>;
   /** All values not starting with the given string. */
   readonly description_not_starts_with?: InputMaybe<Scalars['String']>;
   /** All values starting with the given string. */
   readonly description_starts_with?: InputMaybe<Scalars['String']>;
+  readonly documentInStages_every?: InputMaybe<CategoryWhereStageInput>;
+  readonly documentInStages_none?: InputMaybe<CategoryWhereStageInput>;
+  readonly documentInStages_some?: InputMaybe<CategoryWhereStageInput>;
   readonly id?: InputMaybe<Scalars['ID']>;
   /** All values containing the given string. */
   readonly id_contains?: InputMaybe<Scalars['ID']>;
   /** All values ending with the given string. */
   readonly id_ends_with?: InputMaybe<Scalars['ID']>;
   /** All values that are contained in given list. */
-  readonly id_in?: InputMaybe<ReadonlyArray<Scalars['ID']>>;
+  readonly id_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['ID']>>>;
   /** All values that are not equal to given value. */
   readonly id_not?: InputMaybe<Scalars['ID']>;
   /** All values not containing the given string. */
@@ -938,7 +976,7 @@ export type CategoryManyWhereInput = {
   /** All values not ending with the given string */
   readonly id_not_ends_with?: InputMaybe<Scalars['ID']>;
   /** All values that are not contained in given list. */
-  readonly id_not_in?: InputMaybe<ReadonlyArray<Scalars['ID']>>;
+  readonly id_not_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['ID']>>>;
   /** All values not starting with the given string. */
   readonly id_not_starts_with?: InputMaybe<Scalars['ID']>;
   /** All values starting with the given string. */
@@ -952,7 +990,7 @@ export type CategoryManyWhereInput = {
   /** All values greater than or equal the given value. */
   readonly publishedAt_gte?: InputMaybe<Scalars['DateTime']>;
   /** All values that are contained in given list. */
-  readonly publishedAt_in?: InputMaybe<ReadonlyArray<Scalars['DateTime']>>;
+  readonly publishedAt_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['DateTime']>>>;
   /** All values less than the given value. */
   readonly publishedAt_lt?: InputMaybe<Scalars['DateTime']>;
   /** All values less than or equal the given value. */
@@ -960,7 +998,7 @@ export type CategoryManyWhereInput = {
   /** All values that are not equal to given value. */
   readonly publishedAt_not?: InputMaybe<Scalars['DateTime']>;
   /** All values that are not contained in given list. */
-  readonly publishedAt_not_in?: InputMaybe<ReadonlyArray<Scalars['DateTime']>>;
+  readonly publishedAt_not_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['DateTime']>>>;
   readonly publishedBy?: InputMaybe<UserWhereInput>;
   readonly scheduledIn_every?: InputMaybe<ScheduledOperationWhereInput>;
   readonly scheduledIn_none?: InputMaybe<ScheduledOperationWhereInput>;
@@ -971,7 +1009,7 @@ export type CategoryManyWhereInput = {
   /** All values ending with the given string. */
   readonly slug_ends_with?: InputMaybe<Scalars['String']>;
   /** All values that are contained in given list. */
-  readonly slug_in?: InputMaybe<ReadonlyArray<Scalars['String']>>;
+  readonly slug_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['String']>>>;
   /** All values that are not equal to given value. */
   readonly slug_not?: InputMaybe<Scalars['String']>;
   /** All values not containing the given string. */
@@ -979,7 +1017,7 @@ export type CategoryManyWhereInput = {
   /** All values not ending with the given string */
   readonly slug_not_ends_with?: InputMaybe<Scalars['String']>;
   /** All values that are not contained in given list. */
-  readonly slug_not_in?: InputMaybe<ReadonlyArray<Scalars['String']>>;
+  readonly slug_not_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['String']>>>;
   /** All values not starting with the given string. */
   readonly slug_not_starts_with?: InputMaybe<Scalars['String']>;
   /** All values starting with the given string. */
@@ -990,7 +1028,7 @@ export type CategoryManyWhereInput = {
   /** All values ending with the given string. */
   readonly title_ends_with?: InputMaybe<Scalars['String']>;
   /** All values that are contained in given list. */
-  readonly title_in?: InputMaybe<ReadonlyArray<Scalars['String']>>;
+  readonly title_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['String']>>>;
   /** All values that are not equal to given value. */
   readonly title_not?: InputMaybe<Scalars['String']>;
   /** All values not containing the given string. */
@@ -998,7 +1036,7 @@ export type CategoryManyWhereInput = {
   /** All values not ending with the given string */
   readonly title_not_ends_with?: InputMaybe<Scalars['String']>;
   /** All values that are not contained in given list. */
-  readonly title_not_in?: InputMaybe<ReadonlyArray<Scalars['String']>>;
+  readonly title_not_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['String']>>>;
   /** All values not starting with the given string. */
   readonly title_not_starts_with?: InputMaybe<Scalars['String']>;
   /** All values starting with the given string. */
@@ -1009,7 +1047,7 @@ export type CategoryManyWhereInput = {
   /** All values greater than or equal the given value. */
   readonly updatedAt_gte?: InputMaybe<Scalars['DateTime']>;
   /** All values that are contained in given list. */
-  readonly updatedAt_in?: InputMaybe<ReadonlyArray<Scalars['DateTime']>>;
+  readonly updatedAt_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['DateTime']>>>;
   /** All values less than the given value. */
   readonly updatedAt_lt?: InputMaybe<Scalars['DateTime']>;
   /** All values less than or equal the given value. */
@@ -1017,7 +1055,7 @@ export type CategoryManyWhereInput = {
   /** All values that are not equal to given value. */
   readonly updatedAt_not?: InputMaybe<Scalars['DateTime']>;
   /** All values that are not contained in given list. */
-  readonly updatedAt_not_in?: InputMaybe<ReadonlyArray<Scalars['DateTime']>>;
+  readonly updatedAt_not_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['DateTime']>>>;
   readonly updatedBy?: InputMaybe<UserWhereInput>;
 };
 
@@ -1117,6 +1155,12 @@ export type CategoryUpsertWithNestedWhereUniqueInput = {
   readonly where: CategoryWhereUniqueInput;
 };
 
+/** This contains a set of filters that can be used to compare values internally */
+export type CategoryWhereComparatorInput = {
+  /** This field can be used to request to check if the entry is outdated by internal comparison */
+  readonly outdated_to?: InputMaybe<Scalars['Boolean']>;
+};
+
 /** Identifies documents */
 export type CategoryWhereInput = {
   /** Logical AND on all given filters. */
@@ -1131,18 +1175,18 @@ export type CategoryWhereInput = {
   readonly backgroundVideoShort?: InputMaybe<AssetWhereInput>;
   readonly color?: InputMaybe<PageColor>;
   /** All values that are contained in given list. */
-  readonly color_in?: InputMaybe<ReadonlyArray<PageColor>>;
+  readonly color_in?: InputMaybe<ReadonlyArray<InputMaybe<PageColor>>>;
   /** All values that are not equal to given value. */
   readonly color_not?: InputMaybe<PageColor>;
   /** All values that are not contained in given list. */
-  readonly color_not_in?: InputMaybe<ReadonlyArray<PageColor>>;
+  readonly color_not_in?: InputMaybe<ReadonlyArray<InputMaybe<PageColor>>>;
   readonly createdAt?: InputMaybe<Scalars['DateTime']>;
   /** All values greater than the given value. */
   readonly createdAt_gt?: InputMaybe<Scalars['DateTime']>;
   /** All values greater than or equal the given value. */
   readonly createdAt_gte?: InputMaybe<Scalars['DateTime']>;
   /** All values that are contained in given list. */
-  readonly createdAt_in?: InputMaybe<ReadonlyArray<Scalars['DateTime']>>;
+  readonly createdAt_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['DateTime']>>>;
   /** All values less than the given value. */
   readonly createdAt_lt?: InputMaybe<Scalars['DateTime']>;
   /** All values less than or equal the given value. */
@@ -1150,7 +1194,7 @@ export type CategoryWhereInput = {
   /** All values that are not equal to given value. */
   readonly createdAt_not?: InputMaybe<Scalars['DateTime']>;
   /** All values that are not contained in given list. */
-  readonly createdAt_not_in?: InputMaybe<ReadonlyArray<Scalars['DateTime']>>;
+  readonly createdAt_not_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['DateTime']>>>;
   readonly createdBy?: InputMaybe<UserWhereInput>;
   readonly description?: InputMaybe<Scalars['String']>;
   /** All values containing the given string. */
@@ -1158,7 +1202,7 @@ export type CategoryWhereInput = {
   /** All values ending with the given string. */
   readonly description_ends_with?: InputMaybe<Scalars['String']>;
   /** All values that are contained in given list. */
-  readonly description_in?: InputMaybe<ReadonlyArray<Scalars['String']>>;
+  readonly description_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['String']>>>;
   /** All values that are not equal to given value. */
   readonly description_not?: InputMaybe<Scalars['String']>;
   /** All values not containing the given string. */
@@ -1166,18 +1210,21 @@ export type CategoryWhereInput = {
   /** All values not ending with the given string */
   readonly description_not_ends_with?: InputMaybe<Scalars['String']>;
   /** All values that are not contained in given list. */
-  readonly description_not_in?: InputMaybe<ReadonlyArray<Scalars['String']>>;
+  readonly description_not_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['String']>>>;
   /** All values not starting with the given string. */
   readonly description_not_starts_with?: InputMaybe<Scalars['String']>;
   /** All values starting with the given string. */
   readonly description_starts_with?: InputMaybe<Scalars['String']>;
+  readonly documentInStages_every?: InputMaybe<CategoryWhereStageInput>;
+  readonly documentInStages_none?: InputMaybe<CategoryWhereStageInput>;
+  readonly documentInStages_some?: InputMaybe<CategoryWhereStageInput>;
   readonly id?: InputMaybe<Scalars['ID']>;
   /** All values containing the given string. */
   readonly id_contains?: InputMaybe<Scalars['ID']>;
   /** All values ending with the given string. */
   readonly id_ends_with?: InputMaybe<Scalars['ID']>;
   /** All values that are contained in given list. */
-  readonly id_in?: InputMaybe<ReadonlyArray<Scalars['ID']>>;
+  readonly id_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['ID']>>>;
   /** All values that are not equal to given value. */
   readonly id_not?: InputMaybe<Scalars['ID']>;
   /** All values not containing the given string. */
@@ -1185,7 +1232,7 @@ export type CategoryWhereInput = {
   /** All values not ending with the given string */
   readonly id_not_ends_with?: InputMaybe<Scalars['ID']>;
   /** All values that are not contained in given list. */
-  readonly id_not_in?: InputMaybe<ReadonlyArray<Scalars['ID']>>;
+  readonly id_not_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['ID']>>>;
   /** All values not starting with the given string. */
   readonly id_not_starts_with?: InputMaybe<Scalars['ID']>;
   /** All values starting with the given string. */
@@ -1199,7 +1246,7 @@ export type CategoryWhereInput = {
   /** All values greater than or equal the given value. */
   readonly publishedAt_gte?: InputMaybe<Scalars['DateTime']>;
   /** All values that are contained in given list. */
-  readonly publishedAt_in?: InputMaybe<ReadonlyArray<Scalars['DateTime']>>;
+  readonly publishedAt_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['DateTime']>>>;
   /** All values less than the given value. */
   readonly publishedAt_lt?: InputMaybe<Scalars['DateTime']>;
   /** All values less than or equal the given value. */
@@ -1207,7 +1254,7 @@ export type CategoryWhereInput = {
   /** All values that are not equal to given value. */
   readonly publishedAt_not?: InputMaybe<Scalars['DateTime']>;
   /** All values that are not contained in given list. */
-  readonly publishedAt_not_in?: InputMaybe<ReadonlyArray<Scalars['DateTime']>>;
+  readonly publishedAt_not_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['DateTime']>>>;
   readonly publishedBy?: InputMaybe<UserWhereInput>;
   readonly scheduledIn_every?: InputMaybe<ScheduledOperationWhereInput>;
   readonly scheduledIn_none?: InputMaybe<ScheduledOperationWhereInput>;
@@ -1218,7 +1265,7 @@ export type CategoryWhereInput = {
   /** All values ending with the given string. */
   readonly slug_ends_with?: InputMaybe<Scalars['String']>;
   /** All values that are contained in given list. */
-  readonly slug_in?: InputMaybe<ReadonlyArray<Scalars['String']>>;
+  readonly slug_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['String']>>>;
   /** All values that are not equal to given value. */
   readonly slug_not?: InputMaybe<Scalars['String']>;
   /** All values not containing the given string. */
@@ -1226,7 +1273,7 @@ export type CategoryWhereInput = {
   /** All values not ending with the given string */
   readonly slug_not_ends_with?: InputMaybe<Scalars['String']>;
   /** All values that are not contained in given list. */
-  readonly slug_not_in?: InputMaybe<ReadonlyArray<Scalars['String']>>;
+  readonly slug_not_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['String']>>>;
   /** All values not starting with the given string. */
   readonly slug_not_starts_with?: InputMaybe<Scalars['String']>;
   /** All values starting with the given string. */
@@ -1237,7 +1284,7 @@ export type CategoryWhereInput = {
   /** All values ending with the given string. */
   readonly title_ends_with?: InputMaybe<Scalars['String']>;
   /** All values that are contained in given list. */
-  readonly title_in?: InputMaybe<ReadonlyArray<Scalars['String']>>;
+  readonly title_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['String']>>>;
   /** All values that are not equal to given value. */
   readonly title_not?: InputMaybe<Scalars['String']>;
   /** All values not containing the given string. */
@@ -1245,7 +1292,7 @@ export type CategoryWhereInput = {
   /** All values not ending with the given string */
   readonly title_not_ends_with?: InputMaybe<Scalars['String']>;
   /** All values that are not contained in given list. */
-  readonly title_not_in?: InputMaybe<ReadonlyArray<Scalars['String']>>;
+  readonly title_not_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['String']>>>;
   /** All values not starting with the given string. */
   readonly title_not_starts_with?: InputMaybe<Scalars['String']>;
   /** All values starting with the given string. */
@@ -1256,7 +1303,7 @@ export type CategoryWhereInput = {
   /** All values greater than or equal the given value. */
   readonly updatedAt_gte?: InputMaybe<Scalars['DateTime']>;
   /** All values that are contained in given list. */
-  readonly updatedAt_in?: InputMaybe<ReadonlyArray<Scalars['DateTime']>>;
+  readonly updatedAt_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['DateTime']>>>;
   /** All values less than the given value. */
   readonly updatedAt_lt?: InputMaybe<Scalars['DateTime']>;
   /** All values less than or equal the given value. */
@@ -1264,8 +1311,22 @@ export type CategoryWhereInput = {
   /** All values that are not equal to given value. */
   readonly updatedAt_not?: InputMaybe<Scalars['DateTime']>;
   /** All values that are not contained in given list. */
-  readonly updatedAt_not_in?: InputMaybe<ReadonlyArray<Scalars['DateTime']>>;
+  readonly updatedAt_not_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['DateTime']>>>;
   readonly updatedBy?: InputMaybe<UserWhereInput>;
+};
+
+/** The document in stages filter allows specifying a stage entry to cross compare the same document between different stages */
+export type CategoryWhereStageInput = {
+  /** Logical AND on all given filters. */
+  readonly AND?: InputMaybe<ReadonlyArray<CategoryWhereStageInput>>;
+  /** Logical NOT on all given filters combined by AND. */
+  readonly NOT?: InputMaybe<ReadonlyArray<CategoryWhereStageInput>>;
+  /** Logical OR on all given filters. */
+  readonly OR?: InputMaybe<ReadonlyArray<CategoryWhereStageInput>>;
+  /** This field contains fields which can be set as true or false to specify an internal comparison */
+  readonly compareWithParent?: InputMaybe<CategoryWhereComparatorInput>;
+  /** Specify the stage to compare with */
+  readonly stage?: InputMaybe<Stage>;
 };
 
 /** References Category record uniquely */
@@ -1415,6 +1476,7 @@ export type Info = Node & {
 
 
 export type InfoCreatedByArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   locales?: InputMaybe<ReadonlyArray<Locale>>;
 };
 
@@ -1434,6 +1496,7 @@ export type InfoHistoryArgs = {
 
 
 export type InfoPublishedByArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   locales?: InputMaybe<ReadonlyArray<Locale>>;
 };
 
@@ -1442,6 +1505,7 @@ export type InfoScheduledInArgs = {
   after?: InputMaybe<Scalars['String']>;
   before?: InputMaybe<Scalars['String']>;
   first?: InputMaybe<Scalars['Int']>;
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   last?: InputMaybe<Scalars['Int']>;
   locales?: InputMaybe<ReadonlyArray<Locale>>;
   skip?: InputMaybe<Scalars['Int']>;
@@ -1450,6 +1514,7 @@ export type InfoScheduledInArgs = {
 
 
 export type InfoUpdatedByArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   locales?: InputMaybe<ReadonlyArray<Locale>>;
 };
 
@@ -1513,7 +1578,7 @@ export type InfoManyWhereInput = {
   /** All values greater than or equal the given value. */
   readonly createdAt_gte?: InputMaybe<Scalars['DateTime']>;
   /** All values that are contained in given list. */
-  readonly createdAt_in?: InputMaybe<ReadonlyArray<Scalars['DateTime']>>;
+  readonly createdAt_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['DateTime']>>>;
   /** All values less than the given value. */
   readonly createdAt_lt?: InputMaybe<Scalars['DateTime']>;
   /** All values less than or equal the given value. */
@@ -1521,15 +1586,18 @@ export type InfoManyWhereInput = {
   /** All values that are not equal to given value. */
   readonly createdAt_not?: InputMaybe<Scalars['DateTime']>;
   /** All values that are not contained in given list. */
-  readonly createdAt_not_in?: InputMaybe<ReadonlyArray<Scalars['DateTime']>>;
+  readonly createdAt_not_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['DateTime']>>>;
   readonly createdBy?: InputMaybe<UserWhereInput>;
+  readonly documentInStages_every?: InputMaybe<InfoWhereStageInput>;
+  readonly documentInStages_none?: InputMaybe<InfoWhereStageInput>;
+  readonly documentInStages_some?: InputMaybe<InfoWhereStageInput>;
   readonly id?: InputMaybe<Scalars['ID']>;
   /** All values containing the given string. */
   readonly id_contains?: InputMaybe<Scalars['ID']>;
   /** All values ending with the given string. */
   readonly id_ends_with?: InputMaybe<Scalars['ID']>;
   /** All values that are contained in given list. */
-  readonly id_in?: InputMaybe<ReadonlyArray<Scalars['ID']>>;
+  readonly id_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['ID']>>>;
   /** All values that are not equal to given value. */
   readonly id_not?: InputMaybe<Scalars['ID']>;
   /** All values not containing the given string. */
@@ -1537,7 +1605,7 @@ export type InfoManyWhereInput = {
   /** All values not ending with the given string */
   readonly id_not_ends_with?: InputMaybe<Scalars['ID']>;
   /** All values that are not contained in given list. */
-  readonly id_not_in?: InputMaybe<ReadonlyArray<Scalars['ID']>>;
+  readonly id_not_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['ID']>>>;
   /** All values not starting with the given string. */
   readonly id_not_starts_with?: InputMaybe<Scalars['ID']>;
   /** All values starting with the given string. */
@@ -1548,7 +1616,7 @@ export type InfoManyWhereInput = {
   /** All values greater than or equal the given value. */
   readonly publishedAt_gte?: InputMaybe<Scalars['DateTime']>;
   /** All values that are contained in given list. */
-  readonly publishedAt_in?: InputMaybe<ReadonlyArray<Scalars['DateTime']>>;
+  readonly publishedAt_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['DateTime']>>>;
   /** All values less than the given value. */
   readonly publishedAt_lt?: InputMaybe<Scalars['DateTime']>;
   /** All values less than or equal the given value. */
@@ -1556,7 +1624,7 @@ export type InfoManyWhereInput = {
   /** All values that are not equal to given value. */
   readonly publishedAt_not?: InputMaybe<Scalars['DateTime']>;
   /** All values that are not contained in given list. */
-  readonly publishedAt_not_in?: InputMaybe<ReadonlyArray<Scalars['DateTime']>>;
+  readonly publishedAt_not_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['DateTime']>>>;
   readonly publishedBy?: InputMaybe<UserWhereInput>;
   readonly scheduledIn_every?: InputMaybe<ScheduledOperationWhereInput>;
   readonly scheduledIn_none?: InputMaybe<ScheduledOperationWhereInput>;
@@ -1567,7 +1635,7 @@ export type InfoManyWhereInput = {
   /** All values greater than or equal the given value. */
   readonly updatedAt_gte?: InputMaybe<Scalars['DateTime']>;
   /** All values that are contained in given list. */
-  readonly updatedAt_in?: InputMaybe<ReadonlyArray<Scalars['DateTime']>>;
+  readonly updatedAt_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['DateTime']>>>;
   /** All values less than the given value. */
   readonly updatedAt_lt?: InputMaybe<Scalars['DateTime']>;
   /** All values less than or equal the given value. */
@@ -1575,7 +1643,7 @@ export type InfoManyWhereInput = {
   /** All values that are not equal to given value. */
   readonly updatedAt_not?: InputMaybe<Scalars['DateTime']>;
   /** All values that are not contained in given list. */
-  readonly updatedAt_not_in?: InputMaybe<ReadonlyArray<Scalars['DateTime']>>;
+  readonly updatedAt_not_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['DateTime']>>>;
   readonly updatedBy?: InputMaybe<UserWhereInput>;
 };
 
@@ -1658,6 +1726,12 @@ export type InfoUpsertWithNestedWhereUniqueInput = {
   readonly where: InfoWhereUniqueInput;
 };
 
+/** This contains a set of filters that can be used to compare values internally */
+export type InfoWhereComparatorInput = {
+  /** This field can be used to request to check if the entry is outdated by internal comparison */
+  readonly outdated_to?: InputMaybe<Scalars['Boolean']>;
+};
+
 /** Identifies documents */
 export type InfoWhereInput = {
   /** Logical AND on all given filters. */
@@ -1674,7 +1748,7 @@ export type InfoWhereInput = {
   /** All values greater than or equal the given value. */
   readonly createdAt_gte?: InputMaybe<Scalars['DateTime']>;
   /** All values that are contained in given list. */
-  readonly createdAt_in?: InputMaybe<ReadonlyArray<Scalars['DateTime']>>;
+  readonly createdAt_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['DateTime']>>>;
   /** All values less than the given value. */
   readonly createdAt_lt?: InputMaybe<Scalars['DateTime']>;
   /** All values less than or equal the given value. */
@@ -1682,15 +1756,18 @@ export type InfoWhereInput = {
   /** All values that are not equal to given value. */
   readonly createdAt_not?: InputMaybe<Scalars['DateTime']>;
   /** All values that are not contained in given list. */
-  readonly createdAt_not_in?: InputMaybe<ReadonlyArray<Scalars['DateTime']>>;
+  readonly createdAt_not_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['DateTime']>>>;
   readonly createdBy?: InputMaybe<UserWhereInput>;
+  readonly documentInStages_every?: InputMaybe<InfoWhereStageInput>;
+  readonly documentInStages_none?: InputMaybe<InfoWhereStageInput>;
+  readonly documentInStages_some?: InputMaybe<InfoWhereStageInput>;
   readonly id?: InputMaybe<Scalars['ID']>;
   /** All values containing the given string. */
   readonly id_contains?: InputMaybe<Scalars['ID']>;
   /** All values ending with the given string. */
   readonly id_ends_with?: InputMaybe<Scalars['ID']>;
   /** All values that are contained in given list. */
-  readonly id_in?: InputMaybe<ReadonlyArray<Scalars['ID']>>;
+  readonly id_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['ID']>>>;
   /** All values that are not equal to given value. */
   readonly id_not?: InputMaybe<Scalars['ID']>;
   /** All values not containing the given string. */
@@ -1698,7 +1775,7 @@ export type InfoWhereInput = {
   /** All values not ending with the given string */
   readonly id_not_ends_with?: InputMaybe<Scalars['ID']>;
   /** All values that are not contained in given list. */
-  readonly id_not_in?: InputMaybe<ReadonlyArray<Scalars['ID']>>;
+  readonly id_not_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['ID']>>>;
   /** All values not starting with the given string. */
   readonly id_not_starts_with?: InputMaybe<Scalars['ID']>;
   /** All values starting with the given string. */
@@ -1709,7 +1786,7 @@ export type InfoWhereInput = {
   /** All values greater than or equal the given value. */
   readonly publishedAt_gte?: InputMaybe<Scalars['DateTime']>;
   /** All values that are contained in given list. */
-  readonly publishedAt_in?: InputMaybe<ReadonlyArray<Scalars['DateTime']>>;
+  readonly publishedAt_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['DateTime']>>>;
   /** All values less than the given value. */
   readonly publishedAt_lt?: InputMaybe<Scalars['DateTime']>;
   /** All values less than or equal the given value. */
@@ -1717,7 +1794,7 @@ export type InfoWhereInput = {
   /** All values that are not equal to given value. */
   readonly publishedAt_not?: InputMaybe<Scalars['DateTime']>;
   /** All values that are not contained in given list. */
-  readonly publishedAt_not_in?: InputMaybe<ReadonlyArray<Scalars['DateTime']>>;
+  readonly publishedAt_not_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['DateTime']>>>;
   readonly publishedBy?: InputMaybe<UserWhereInput>;
   readonly scheduledIn_every?: InputMaybe<ScheduledOperationWhereInput>;
   readonly scheduledIn_none?: InputMaybe<ScheduledOperationWhereInput>;
@@ -1728,7 +1805,7 @@ export type InfoWhereInput = {
   /** All values greater than or equal the given value. */
   readonly updatedAt_gte?: InputMaybe<Scalars['DateTime']>;
   /** All values that are contained in given list. */
-  readonly updatedAt_in?: InputMaybe<ReadonlyArray<Scalars['DateTime']>>;
+  readonly updatedAt_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['DateTime']>>>;
   /** All values less than the given value. */
   readonly updatedAt_lt?: InputMaybe<Scalars['DateTime']>;
   /** All values less than or equal the given value. */
@@ -1736,8 +1813,22 @@ export type InfoWhereInput = {
   /** All values that are not equal to given value. */
   readonly updatedAt_not?: InputMaybe<Scalars['DateTime']>;
   /** All values that are not contained in given list. */
-  readonly updatedAt_not_in?: InputMaybe<ReadonlyArray<Scalars['DateTime']>>;
+  readonly updatedAt_not_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['DateTime']>>>;
   readonly updatedBy?: InputMaybe<UserWhereInput>;
+};
+
+/** The document in stages filter allows specifying a stage entry to cross compare the same document between different stages */
+export type InfoWhereStageInput = {
+  /** Logical AND on all given filters. */
+  readonly AND?: InputMaybe<ReadonlyArray<InfoWhereStageInput>>;
+  /** Logical NOT on all given filters combined by AND. */
+  readonly NOT?: InputMaybe<ReadonlyArray<InfoWhereStageInput>>;
+  /** Logical OR on all given filters. */
+  readonly OR?: InputMaybe<ReadonlyArray<InfoWhereStageInput>>;
+  /** This field contains fields which can be set as true or false to specify an internal comparison */
+  readonly compareWithParent?: InputMaybe<InfoWhereComparatorInput>;
+  /** Specify the stage to compare with */
+  readonly stage?: InputMaybe<Stage>;
 };
 
 /** References Info record uniquely */
@@ -2543,11 +2634,13 @@ export type Piece = Node & {
 
 
 export type PieceCategoryArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   locales?: InputMaybe<ReadonlyArray<Locale>>;
 };
 
 
 export type PieceCreatedByArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   locales?: InputMaybe<ReadonlyArray<Locale>>;
 };
 
@@ -2570,6 +2663,7 @@ export type PieceImagesArgs = {
   after?: InputMaybe<Scalars['String']>;
   before?: InputMaybe<Scalars['String']>;
   first?: InputMaybe<Scalars['Int']>;
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   last?: InputMaybe<Scalars['Int']>;
   locales?: InputMaybe<ReadonlyArray<Locale>>;
   orderBy?: InputMaybe<AssetOrderByInput>;
@@ -2579,6 +2673,7 @@ export type PieceImagesArgs = {
 
 
 export type PiecePublishedByArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   locales?: InputMaybe<ReadonlyArray<Locale>>;
 };
 
@@ -2587,6 +2682,7 @@ export type PieceRelatedArgs = {
   after?: InputMaybe<Scalars['String']>;
   before?: InputMaybe<Scalars['String']>;
   first?: InputMaybe<Scalars['Int']>;
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   last?: InputMaybe<Scalars['Int']>;
   locales?: InputMaybe<ReadonlyArray<Locale>>;
   orderBy?: InputMaybe<PieceOrderByInput>;
@@ -2599,6 +2695,7 @@ export type PieceRelatedFromArgs = {
   after?: InputMaybe<Scalars['String']>;
   before?: InputMaybe<Scalars['String']>;
   first?: InputMaybe<Scalars['Int']>;
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   last?: InputMaybe<Scalars['Int']>;
   locales?: InputMaybe<ReadonlyArray<Locale>>;
   orderBy?: InputMaybe<PieceOrderByInput>;
@@ -2611,6 +2708,7 @@ export type PieceScheduledInArgs = {
   after?: InputMaybe<Scalars['String']>;
   before?: InputMaybe<Scalars['String']>;
   first?: InputMaybe<Scalars['Int']>;
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   last?: InputMaybe<Scalars['Int']>;
   locales?: InputMaybe<ReadonlyArray<Locale>>;
   skip?: InputMaybe<Scalars['Int']>;
@@ -2619,6 +2717,7 @@ export type PieceScheduledInArgs = {
 
 
 export type PieceUpdatedByArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   locales?: InputMaybe<ReadonlyArray<Locale>>;
 };
 
@@ -2697,7 +2796,7 @@ export type PieceManyWhereInput = {
   /** All values greater than or equal the given value. */
   readonly createdAt_gte?: InputMaybe<Scalars['DateTime']>;
   /** All values that are contained in given list. */
-  readonly createdAt_in?: InputMaybe<ReadonlyArray<Scalars['DateTime']>>;
+  readonly createdAt_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['DateTime']>>>;
   /** All values less than the given value. */
   readonly createdAt_lt?: InputMaybe<Scalars['DateTime']>;
   /** All values less than or equal the given value. */
@@ -2705,7 +2804,7 @@ export type PieceManyWhereInput = {
   /** All values that are not equal to given value. */
   readonly createdAt_not?: InputMaybe<Scalars['DateTime']>;
   /** All values that are not contained in given list. */
-  readonly createdAt_not_in?: InputMaybe<ReadonlyArray<Scalars['DateTime']>>;
+  readonly createdAt_not_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['DateTime']>>>;
   readonly createdBy?: InputMaybe<UserWhereInput>;
   readonly description?: InputMaybe<Scalars['String']>;
   /** All values containing the given string. */
@@ -2713,7 +2812,7 @@ export type PieceManyWhereInput = {
   /** All values ending with the given string. */
   readonly description_ends_with?: InputMaybe<Scalars['String']>;
   /** All values that are contained in given list. */
-  readonly description_in?: InputMaybe<ReadonlyArray<Scalars['String']>>;
+  readonly description_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['String']>>>;
   /** All values that are not equal to given value. */
   readonly description_not?: InputMaybe<Scalars['String']>;
   /** All values not containing the given string. */
@@ -2721,7 +2820,7 @@ export type PieceManyWhereInput = {
   /** All values not ending with the given string */
   readonly description_not_ends_with?: InputMaybe<Scalars['String']>;
   /** All values that are not contained in given list. */
-  readonly description_not_in?: InputMaybe<ReadonlyArray<Scalars['String']>>;
+  readonly description_not_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['String']>>>;
   /** All values not starting with the given string. */
   readonly description_not_starts_with?: InputMaybe<Scalars['String']>;
   /** All values starting with the given string. */
@@ -2732,7 +2831,7 @@ export type PieceManyWhereInput = {
   /** All values ending with the given string. */
   readonly dimensions_ends_with?: InputMaybe<Scalars['String']>;
   /** All values that are contained in given list. */
-  readonly dimensions_in?: InputMaybe<ReadonlyArray<Scalars['String']>>;
+  readonly dimensions_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['String']>>>;
   /** All values that are not equal to given value. */
   readonly dimensions_not?: InputMaybe<Scalars['String']>;
   /** All values not containing the given string. */
@@ -2740,18 +2839,21 @@ export type PieceManyWhereInput = {
   /** All values not ending with the given string */
   readonly dimensions_not_ends_with?: InputMaybe<Scalars['String']>;
   /** All values that are not contained in given list. */
-  readonly dimensions_not_in?: InputMaybe<ReadonlyArray<Scalars['String']>>;
+  readonly dimensions_not_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['String']>>>;
   /** All values not starting with the given string. */
   readonly dimensions_not_starts_with?: InputMaybe<Scalars['String']>;
   /** All values starting with the given string. */
   readonly dimensions_starts_with?: InputMaybe<Scalars['String']>;
+  readonly documentInStages_every?: InputMaybe<PieceWhereStageInput>;
+  readonly documentInStages_none?: InputMaybe<PieceWhereStageInput>;
+  readonly documentInStages_some?: InputMaybe<PieceWhereStageInput>;
   readonly duration?: InputMaybe<Scalars['String']>;
   /** All values containing the given string. */
   readonly duration_contains?: InputMaybe<Scalars['String']>;
   /** All values ending with the given string. */
   readonly duration_ends_with?: InputMaybe<Scalars['String']>;
   /** All values that are contained in given list. */
-  readonly duration_in?: InputMaybe<ReadonlyArray<Scalars['String']>>;
+  readonly duration_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['String']>>>;
   /** All values that are not equal to given value. */
   readonly duration_not?: InputMaybe<Scalars['String']>;
   /** All values not containing the given string. */
@@ -2759,7 +2861,7 @@ export type PieceManyWhereInput = {
   /** All values not ending with the given string */
   readonly duration_not_ends_with?: InputMaybe<Scalars['String']>;
   /** All values that are not contained in given list. */
-  readonly duration_not_in?: InputMaybe<ReadonlyArray<Scalars['String']>>;
+  readonly duration_not_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['String']>>>;
   /** All values not starting with the given string. */
   readonly duration_not_starts_with?: InputMaybe<Scalars['String']>;
   /** All values starting with the given string. */
@@ -2770,7 +2872,7 @@ export type PieceManyWhereInput = {
   /** All values ending with the given string. */
   readonly id_ends_with?: InputMaybe<Scalars['ID']>;
   /** All values that are contained in given list. */
-  readonly id_in?: InputMaybe<ReadonlyArray<Scalars['ID']>>;
+  readonly id_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['ID']>>>;
   /** All values that are not equal to given value. */
   readonly id_not?: InputMaybe<Scalars['ID']>;
   /** All values not containing the given string. */
@@ -2778,7 +2880,7 @@ export type PieceManyWhereInput = {
   /** All values not ending with the given string */
   readonly id_not_ends_with?: InputMaybe<Scalars['ID']>;
   /** All values that are not contained in given list. */
-  readonly id_not_in?: InputMaybe<ReadonlyArray<Scalars['ID']>>;
+  readonly id_not_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['ID']>>>;
   /** All values not starting with the given string. */
   readonly id_not_starts_with?: InputMaybe<Scalars['ID']>;
   /** All values starting with the given string. */
@@ -2792,7 +2894,7 @@ export type PieceManyWhereInput = {
   /** All values ending with the given string. */
   readonly location_ends_with?: InputMaybe<Scalars['String']>;
   /** All values that are contained in given list. */
-  readonly location_in?: InputMaybe<ReadonlyArray<Scalars['String']>>;
+  readonly location_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['String']>>>;
   /** All values that are not equal to given value. */
   readonly location_not?: InputMaybe<Scalars['String']>;
   /** All values not containing the given string. */
@@ -2800,7 +2902,7 @@ export type PieceManyWhereInput = {
   /** All values not ending with the given string */
   readonly location_not_ends_with?: InputMaybe<Scalars['String']>;
   /** All values that are not contained in given list. */
-  readonly location_not_in?: InputMaybe<ReadonlyArray<Scalars['String']>>;
+  readonly location_not_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['String']>>>;
   /** All values not starting with the given string. */
   readonly location_not_starts_with?: InputMaybe<Scalars['String']>;
   /** All values starting with the given string. */
@@ -2821,7 +2923,7 @@ export type PieceManyWhereInput = {
   /** All values greater than or equal the given value. */
   readonly publishedAt_gte?: InputMaybe<Scalars['DateTime']>;
   /** All values that are contained in given list. */
-  readonly publishedAt_in?: InputMaybe<ReadonlyArray<Scalars['DateTime']>>;
+  readonly publishedAt_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['DateTime']>>>;
   /** All values less than the given value. */
   readonly publishedAt_lt?: InputMaybe<Scalars['DateTime']>;
   /** All values less than or equal the given value. */
@@ -2829,7 +2931,7 @@ export type PieceManyWhereInput = {
   /** All values that are not equal to given value. */
   readonly publishedAt_not?: InputMaybe<Scalars['DateTime']>;
   /** All values that are not contained in given list. */
-  readonly publishedAt_not_in?: InputMaybe<ReadonlyArray<Scalars['DateTime']>>;
+  readonly publishedAt_not_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['DateTime']>>>;
   readonly publishedBy?: InputMaybe<UserWhereInput>;
   readonly relatedFrom_every?: InputMaybe<PieceWhereInput>;
   readonly relatedFrom_none?: InputMaybe<PieceWhereInput>;
@@ -2846,7 +2948,7 @@ export type PieceManyWhereInput = {
   /** All values ending with the given string. */
   readonly slug_ends_with?: InputMaybe<Scalars['String']>;
   /** All values that are contained in given list. */
-  readonly slug_in?: InputMaybe<ReadonlyArray<Scalars['String']>>;
+  readonly slug_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['String']>>>;
   /** All values that are not equal to given value. */
   readonly slug_not?: InputMaybe<Scalars['String']>;
   /** All values not containing the given string. */
@@ -2854,7 +2956,7 @@ export type PieceManyWhereInput = {
   /** All values not ending with the given string */
   readonly slug_not_ends_with?: InputMaybe<Scalars['String']>;
   /** All values that are not contained in given list. */
-  readonly slug_not_in?: InputMaybe<ReadonlyArray<Scalars['String']>>;
+  readonly slug_not_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['String']>>>;
   /** All values not starting with the given string. */
   readonly slug_not_starts_with?: InputMaybe<Scalars['String']>;
   /** All values starting with the given string. */
@@ -2875,7 +2977,7 @@ export type PieceManyWhereInput = {
   /** All values ending with the given string. */
   readonly technique_ends_with?: InputMaybe<Scalars['String']>;
   /** All values that are contained in given list. */
-  readonly technique_in?: InputMaybe<ReadonlyArray<Scalars['String']>>;
+  readonly technique_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['String']>>>;
   /** All values that are not equal to given value. */
   readonly technique_not?: InputMaybe<Scalars['String']>;
   /** All values not containing the given string. */
@@ -2883,7 +2985,7 @@ export type PieceManyWhereInput = {
   /** All values not ending with the given string */
   readonly technique_not_ends_with?: InputMaybe<Scalars['String']>;
   /** All values that are not contained in given list. */
-  readonly technique_not_in?: InputMaybe<ReadonlyArray<Scalars['String']>>;
+  readonly technique_not_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['String']>>>;
   /** All values not starting with the given string. */
   readonly technique_not_starts_with?: InputMaybe<Scalars['String']>;
   /** All values starting with the given string. */
@@ -2894,7 +2996,7 @@ export type PieceManyWhereInput = {
   /** All values ending with the given string. */
   readonly title_ends_with?: InputMaybe<Scalars['String']>;
   /** All values that are contained in given list. */
-  readonly title_in?: InputMaybe<ReadonlyArray<Scalars['String']>>;
+  readonly title_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['String']>>>;
   /** All values that are not equal to given value. */
   readonly title_not?: InputMaybe<Scalars['String']>;
   /** All values not containing the given string. */
@@ -2902,25 +3004,25 @@ export type PieceManyWhereInput = {
   /** All values not ending with the given string */
   readonly title_not_ends_with?: InputMaybe<Scalars['String']>;
   /** All values that are not contained in given list. */
-  readonly title_not_in?: InputMaybe<ReadonlyArray<Scalars['String']>>;
+  readonly title_not_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['String']>>>;
   /** All values not starting with the given string. */
   readonly title_not_starts_with?: InputMaybe<Scalars['String']>;
   /** All values starting with the given string. */
   readonly title_starts_with?: InputMaybe<Scalars['String']>;
   readonly type?: InputMaybe<PieceType>;
   /** All values that are contained in given list. */
-  readonly type_in?: InputMaybe<ReadonlyArray<PieceType>>;
+  readonly type_in?: InputMaybe<ReadonlyArray<InputMaybe<PieceType>>>;
   /** All values that are not equal to given value. */
   readonly type_not?: InputMaybe<PieceType>;
   /** All values that are not contained in given list. */
-  readonly type_not_in?: InputMaybe<ReadonlyArray<PieceType>>;
+  readonly type_not_in?: InputMaybe<ReadonlyArray<InputMaybe<PieceType>>>;
   readonly updatedAt?: InputMaybe<Scalars['DateTime']>;
   /** All values greater than the given value. */
   readonly updatedAt_gt?: InputMaybe<Scalars['DateTime']>;
   /** All values greater than or equal the given value. */
   readonly updatedAt_gte?: InputMaybe<Scalars['DateTime']>;
   /** All values that are contained in given list. */
-  readonly updatedAt_in?: InputMaybe<ReadonlyArray<Scalars['DateTime']>>;
+  readonly updatedAt_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['DateTime']>>>;
   /** All values less than the given value. */
   readonly updatedAt_lt?: InputMaybe<Scalars['DateTime']>;
   /** All values less than or equal the given value. */
@@ -2928,7 +3030,7 @@ export type PieceManyWhereInput = {
   /** All values that are not equal to given value. */
   readonly updatedAt_not?: InputMaybe<Scalars['DateTime']>;
   /** All values that are not contained in given list. */
-  readonly updatedAt_not_in?: InputMaybe<ReadonlyArray<Scalars['DateTime']>>;
+  readonly updatedAt_not_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['DateTime']>>>;
   readonly updatedBy?: InputMaybe<UserWhereInput>;
 };
 
@@ -3060,6 +3162,12 @@ export type PieceUpsertWithNestedWhereUniqueInput = {
   readonly where: PieceWhereUniqueInput;
 };
 
+/** This contains a set of filters that can be used to compare values internally */
+export type PieceWhereComparatorInput = {
+  /** This field can be used to request to check if the entry is outdated by internal comparison */
+  readonly outdated_to?: InputMaybe<Scalars['Boolean']>;
+};
+
 /** Identifies documents */
 export type PieceWhereInput = {
   /** Logical AND on all given filters. */
@@ -3077,7 +3185,7 @@ export type PieceWhereInput = {
   /** All values greater than or equal the given value. */
   readonly createdAt_gte?: InputMaybe<Scalars['DateTime']>;
   /** All values that are contained in given list. */
-  readonly createdAt_in?: InputMaybe<ReadonlyArray<Scalars['DateTime']>>;
+  readonly createdAt_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['DateTime']>>>;
   /** All values less than the given value. */
   readonly createdAt_lt?: InputMaybe<Scalars['DateTime']>;
   /** All values less than or equal the given value. */
@@ -3085,7 +3193,7 @@ export type PieceWhereInput = {
   /** All values that are not equal to given value. */
   readonly createdAt_not?: InputMaybe<Scalars['DateTime']>;
   /** All values that are not contained in given list. */
-  readonly createdAt_not_in?: InputMaybe<ReadonlyArray<Scalars['DateTime']>>;
+  readonly createdAt_not_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['DateTime']>>>;
   readonly createdBy?: InputMaybe<UserWhereInput>;
   readonly description?: InputMaybe<Scalars['String']>;
   /** All values containing the given string. */
@@ -3093,7 +3201,7 @@ export type PieceWhereInput = {
   /** All values ending with the given string. */
   readonly description_ends_with?: InputMaybe<Scalars['String']>;
   /** All values that are contained in given list. */
-  readonly description_in?: InputMaybe<ReadonlyArray<Scalars['String']>>;
+  readonly description_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['String']>>>;
   /** All values that are not equal to given value. */
   readonly description_not?: InputMaybe<Scalars['String']>;
   /** All values not containing the given string. */
@@ -3101,7 +3209,7 @@ export type PieceWhereInput = {
   /** All values not ending with the given string */
   readonly description_not_ends_with?: InputMaybe<Scalars['String']>;
   /** All values that are not contained in given list. */
-  readonly description_not_in?: InputMaybe<ReadonlyArray<Scalars['String']>>;
+  readonly description_not_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['String']>>>;
   /** All values not starting with the given string. */
   readonly description_not_starts_with?: InputMaybe<Scalars['String']>;
   /** All values starting with the given string. */
@@ -3112,7 +3220,7 @@ export type PieceWhereInput = {
   /** All values ending with the given string. */
   readonly dimensions_ends_with?: InputMaybe<Scalars['String']>;
   /** All values that are contained in given list. */
-  readonly dimensions_in?: InputMaybe<ReadonlyArray<Scalars['String']>>;
+  readonly dimensions_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['String']>>>;
   /** All values that are not equal to given value. */
   readonly dimensions_not?: InputMaybe<Scalars['String']>;
   /** All values not containing the given string. */
@@ -3120,18 +3228,21 @@ export type PieceWhereInput = {
   /** All values not ending with the given string */
   readonly dimensions_not_ends_with?: InputMaybe<Scalars['String']>;
   /** All values that are not contained in given list. */
-  readonly dimensions_not_in?: InputMaybe<ReadonlyArray<Scalars['String']>>;
+  readonly dimensions_not_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['String']>>>;
   /** All values not starting with the given string. */
   readonly dimensions_not_starts_with?: InputMaybe<Scalars['String']>;
   /** All values starting with the given string. */
   readonly dimensions_starts_with?: InputMaybe<Scalars['String']>;
+  readonly documentInStages_every?: InputMaybe<PieceWhereStageInput>;
+  readonly documentInStages_none?: InputMaybe<PieceWhereStageInput>;
+  readonly documentInStages_some?: InputMaybe<PieceWhereStageInput>;
   readonly duration?: InputMaybe<Scalars['String']>;
   /** All values containing the given string. */
   readonly duration_contains?: InputMaybe<Scalars['String']>;
   /** All values ending with the given string. */
   readonly duration_ends_with?: InputMaybe<Scalars['String']>;
   /** All values that are contained in given list. */
-  readonly duration_in?: InputMaybe<ReadonlyArray<Scalars['String']>>;
+  readonly duration_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['String']>>>;
   /** All values that are not equal to given value. */
   readonly duration_not?: InputMaybe<Scalars['String']>;
   /** All values not containing the given string. */
@@ -3139,7 +3250,7 @@ export type PieceWhereInput = {
   /** All values not ending with the given string */
   readonly duration_not_ends_with?: InputMaybe<Scalars['String']>;
   /** All values that are not contained in given list. */
-  readonly duration_not_in?: InputMaybe<ReadonlyArray<Scalars['String']>>;
+  readonly duration_not_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['String']>>>;
   /** All values not starting with the given string. */
   readonly duration_not_starts_with?: InputMaybe<Scalars['String']>;
   /** All values starting with the given string. */
@@ -3150,7 +3261,7 @@ export type PieceWhereInput = {
   /** All values ending with the given string. */
   readonly id_ends_with?: InputMaybe<Scalars['ID']>;
   /** All values that are contained in given list. */
-  readonly id_in?: InputMaybe<ReadonlyArray<Scalars['ID']>>;
+  readonly id_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['ID']>>>;
   /** All values that are not equal to given value. */
   readonly id_not?: InputMaybe<Scalars['ID']>;
   /** All values not containing the given string. */
@@ -3158,7 +3269,7 @@ export type PieceWhereInput = {
   /** All values not ending with the given string */
   readonly id_not_ends_with?: InputMaybe<Scalars['ID']>;
   /** All values that are not contained in given list. */
-  readonly id_not_in?: InputMaybe<ReadonlyArray<Scalars['ID']>>;
+  readonly id_not_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['ID']>>>;
   /** All values not starting with the given string. */
   readonly id_not_starts_with?: InputMaybe<Scalars['ID']>;
   /** All values starting with the given string. */
@@ -3172,7 +3283,7 @@ export type PieceWhereInput = {
   /** All values ending with the given string. */
   readonly location_ends_with?: InputMaybe<Scalars['String']>;
   /** All values that are contained in given list. */
-  readonly location_in?: InputMaybe<ReadonlyArray<Scalars['String']>>;
+  readonly location_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['String']>>>;
   /** All values that are not equal to given value. */
   readonly location_not?: InputMaybe<Scalars['String']>;
   /** All values not containing the given string. */
@@ -3180,7 +3291,7 @@ export type PieceWhereInput = {
   /** All values not ending with the given string */
   readonly location_not_ends_with?: InputMaybe<Scalars['String']>;
   /** All values that are not contained in given list. */
-  readonly location_not_in?: InputMaybe<ReadonlyArray<Scalars['String']>>;
+  readonly location_not_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['String']>>>;
   /** All values not starting with the given string. */
   readonly location_not_starts_with?: InputMaybe<Scalars['String']>;
   /** All values starting with the given string. */
@@ -3201,7 +3312,7 @@ export type PieceWhereInput = {
   /** All values greater than or equal the given value. */
   readonly publishedAt_gte?: InputMaybe<Scalars['DateTime']>;
   /** All values that are contained in given list. */
-  readonly publishedAt_in?: InputMaybe<ReadonlyArray<Scalars['DateTime']>>;
+  readonly publishedAt_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['DateTime']>>>;
   /** All values less than the given value. */
   readonly publishedAt_lt?: InputMaybe<Scalars['DateTime']>;
   /** All values less than or equal the given value. */
@@ -3209,7 +3320,7 @@ export type PieceWhereInput = {
   /** All values that are not equal to given value. */
   readonly publishedAt_not?: InputMaybe<Scalars['DateTime']>;
   /** All values that are not contained in given list. */
-  readonly publishedAt_not_in?: InputMaybe<ReadonlyArray<Scalars['DateTime']>>;
+  readonly publishedAt_not_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['DateTime']>>>;
   readonly publishedBy?: InputMaybe<UserWhereInput>;
   readonly relatedFrom_every?: InputMaybe<PieceWhereInput>;
   readonly relatedFrom_none?: InputMaybe<PieceWhereInput>;
@@ -3226,7 +3337,7 @@ export type PieceWhereInput = {
   /** All values ending with the given string. */
   readonly slug_ends_with?: InputMaybe<Scalars['String']>;
   /** All values that are contained in given list. */
-  readonly slug_in?: InputMaybe<ReadonlyArray<Scalars['String']>>;
+  readonly slug_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['String']>>>;
   /** All values that are not equal to given value. */
   readonly slug_not?: InputMaybe<Scalars['String']>;
   /** All values not containing the given string. */
@@ -3234,7 +3345,7 @@ export type PieceWhereInput = {
   /** All values not ending with the given string */
   readonly slug_not_ends_with?: InputMaybe<Scalars['String']>;
   /** All values that are not contained in given list. */
-  readonly slug_not_in?: InputMaybe<ReadonlyArray<Scalars['String']>>;
+  readonly slug_not_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['String']>>>;
   /** All values not starting with the given string. */
   readonly slug_not_starts_with?: InputMaybe<Scalars['String']>;
   /** All values starting with the given string. */
@@ -3255,7 +3366,7 @@ export type PieceWhereInput = {
   /** All values ending with the given string. */
   readonly technique_ends_with?: InputMaybe<Scalars['String']>;
   /** All values that are contained in given list. */
-  readonly technique_in?: InputMaybe<ReadonlyArray<Scalars['String']>>;
+  readonly technique_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['String']>>>;
   /** All values that are not equal to given value. */
   readonly technique_not?: InputMaybe<Scalars['String']>;
   /** All values not containing the given string. */
@@ -3263,7 +3374,7 @@ export type PieceWhereInput = {
   /** All values not ending with the given string */
   readonly technique_not_ends_with?: InputMaybe<Scalars['String']>;
   /** All values that are not contained in given list. */
-  readonly technique_not_in?: InputMaybe<ReadonlyArray<Scalars['String']>>;
+  readonly technique_not_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['String']>>>;
   /** All values not starting with the given string. */
   readonly technique_not_starts_with?: InputMaybe<Scalars['String']>;
   /** All values starting with the given string. */
@@ -3274,7 +3385,7 @@ export type PieceWhereInput = {
   /** All values ending with the given string. */
   readonly title_ends_with?: InputMaybe<Scalars['String']>;
   /** All values that are contained in given list. */
-  readonly title_in?: InputMaybe<ReadonlyArray<Scalars['String']>>;
+  readonly title_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['String']>>>;
   /** All values that are not equal to given value. */
   readonly title_not?: InputMaybe<Scalars['String']>;
   /** All values not containing the given string. */
@@ -3282,25 +3393,25 @@ export type PieceWhereInput = {
   /** All values not ending with the given string */
   readonly title_not_ends_with?: InputMaybe<Scalars['String']>;
   /** All values that are not contained in given list. */
-  readonly title_not_in?: InputMaybe<ReadonlyArray<Scalars['String']>>;
+  readonly title_not_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['String']>>>;
   /** All values not starting with the given string. */
   readonly title_not_starts_with?: InputMaybe<Scalars['String']>;
   /** All values starting with the given string. */
   readonly title_starts_with?: InputMaybe<Scalars['String']>;
   readonly type?: InputMaybe<PieceType>;
   /** All values that are contained in given list. */
-  readonly type_in?: InputMaybe<ReadonlyArray<PieceType>>;
+  readonly type_in?: InputMaybe<ReadonlyArray<InputMaybe<PieceType>>>;
   /** All values that are not equal to given value. */
   readonly type_not?: InputMaybe<PieceType>;
   /** All values that are not contained in given list. */
-  readonly type_not_in?: InputMaybe<ReadonlyArray<PieceType>>;
+  readonly type_not_in?: InputMaybe<ReadonlyArray<InputMaybe<PieceType>>>;
   readonly updatedAt?: InputMaybe<Scalars['DateTime']>;
   /** All values greater than the given value. */
   readonly updatedAt_gt?: InputMaybe<Scalars['DateTime']>;
   /** All values greater than or equal the given value. */
   readonly updatedAt_gte?: InputMaybe<Scalars['DateTime']>;
   /** All values that are contained in given list. */
-  readonly updatedAt_in?: InputMaybe<ReadonlyArray<Scalars['DateTime']>>;
+  readonly updatedAt_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['DateTime']>>>;
   /** All values less than the given value. */
   readonly updatedAt_lt?: InputMaybe<Scalars['DateTime']>;
   /** All values less than or equal the given value. */
@@ -3308,8 +3419,22 @@ export type PieceWhereInput = {
   /** All values that are not equal to given value. */
   readonly updatedAt_not?: InputMaybe<Scalars['DateTime']>;
   /** All values that are not contained in given list. */
-  readonly updatedAt_not_in?: InputMaybe<ReadonlyArray<Scalars['DateTime']>>;
+  readonly updatedAt_not_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['DateTime']>>>;
   readonly updatedBy?: InputMaybe<UserWhereInput>;
+};
+
+/** The document in stages filter allows specifying a stage entry to cross compare the same document between different stages */
+export type PieceWhereStageInput = {
+  /** Logical AND on all given filters. */
+  readonly AND?: InputMaybe<ReadonlyArray<PieceWhereStageInput>>;
+  /** Logical NOT on all given filters combined by AND. */
+  readonly NOT?: InputMaybe<ReadonlyArray<PieceWhereStageInput>>;
+  /** Logical OR on all given filters. */
+  readonly OR?: InputMaybe<ReadonlyArray<PieceWhereStageInput>>;
+  /** This field contains fields which can be set as true or false to specify an internal comparison */
+  readonly compareWithParent?: InputMaybe<PieceWhereComparatorInput>;
+  /** Specify the stage to compare with */
+  readonly stage?: InputMaybe<Stage>;
 };
 
 /** References Piece record uniquely */
@@ -3706,6 +3831,7 @@ export type ScheduledOperationAffectedDocumentsArgs = {
   after?: InputMaybe<Scalars['String']>;
   before?: InputMaybe<Scalars['String']>;
   first?: InputMaybe<Scalars['Int']>;
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   last?: InputMaybe<Scalars['Int']>;
   locales?: InputMaybe<ReadonlyArray<Locale>>;
   skip?: InputMaybe<Scalars['Int']>;
@@ -3714,6 +3840,7 @@ export type ScheduledOperationAffectedDocumentsArgs = {
 
 /** Scheduled Operation system model */
 export type ScheduledOperationCreatedByArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   locales?: InputMaybe<ReadonlyArray<Locale>>;
 };
 
@@ -3728,18 +3855,21 @@ export type ScheduledOperationDocumentInStagesArgs = {
 
 /** Scheduled Operation system model */
 export type ScheduledOperationPublishedByArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   locales?: InputMaybe<ReadonlyArray<Locale>>;
 };
 
 
 /** Scheduled Operation system model */
 export type ScheduledOperationReleaseArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   locales?: InputMaybe<ReadonlyArray<Locale>>;
 };
 
 
 /** Scheduled Operation system model */
 export type ScheduledOperationUpdatedByArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   locales?: InputMaybe<ReadonlyArray<Locale>>;
 };
 
@@ -3795,7 +3925,7 @@ export type ScheduledOperationManyWhereInput = {
   /** All values greater than or equal the given value. */
   readonly createdAt_gte?: InputMaybe<Scalars['DateTime']>;
   /** All values that are contained in given list. */
-  readonly createdAt_in?: InputMaybe<ReadonlyArray<Scalars['DateTime']>>;
+  readonly createdAt_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['DateTime']>>>;
   /** All values less than the given value. */
   readonly createdAt_lt?: InputMaybe<Scalars['DateTime']>;
   /** All values less than or equal the given value. */
@@ -3803,7 +3933,7 @@ export type ScheduledOperationManyWhereInput = {
   /** All values that are not equal to given value. */
   readonly createdAt_not?: InputMaybe<Scalars['DateTime']>;
   /** All values that are not contained in given list. */
-  readonly createdAt_not_in?: InputMaybe<ReadonlyArray<Scalars['DateTime']>>;
+  readonly createdAt_not_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['DateTime']>>>;
   readonly createdBy?: InputMaybe<UserWhereInput>;
   readonly description?: InputMaybe<Scalars['String']>;
   /** All values containing the given string. */
@@ -3811,7 +3941,7 @@ export type ScheduledOperationManyWhereInput = {
   /** All values ending with the given string. */
   readonly description_ends_with?: InputMaybe<Scalars['String']>;
   /** All values that are contained in given list. */
-  readonly description_in?: InputMaybe<ReadonlyArray<Scalars['String']>>;
+  readonly description_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['String']>>>;
   /** All values that are not equal to given value. */
   readonly description_not?: InputMaybe<Scalars['String']>;
   /** All values not containing the given string. */
@@ -3819,7 +3949,7 @@ export type ScheduledOperationManyWhereInput = {
   /** All values not ending with the given string */
   readonly description_not_ends_with?: InputMaybe<Scalars['String']>;
   /** All values that are not contained in given list. */
-  readonly description_not_in?: InputMaybe<ReadonlyArray<Scalars['String']>>;
+  readonly description_not_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['String']>>>;
   /** All values not starting with the given string. */
   readonly description_not_starts_with?: InputMaybe<Scalars['String']>;
   /** All values starting with the given string. */
@@ -3830,7 +3960,7 @@ export type ScheduledOperationManyWhereInput = {
   /** All values ending with the given string. */
   readonly errorMessage_ends_with?: InputMaybe<Scalars['String']>;
   /** All values that are contained in given list. */
-  readonly errorMessage_in?: InputMaybe<ReadonlyArray<Scalars['String']>>;
+  readonly errorMessage_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['String']>>>;
   /** All values that are not equal to given value. */
   readonly errorMessage_not?: InputMaybe<Scalars['String']>;
   /** All values not containing the given string. */
@@ -3838,7 +3968,7 @@ export type ScheduledOperationManyWhereInput = {
   /** All values not ending with the given string */
   readonly errorMessage_not_ends_with?: InputMaybe<Scalars['String']>;
   /** All values that are not contained in given list. */
-  readonly errorMessage_not_in?: InputMaybe<ReadonlyArray<Scalars['String']>>;
+  readonly errorMessage_not_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['String']>>>;
   /** All values not starting with the given string. */
   readonly errorMessage_not_starts_with?: InputMaybe<Scalars['String']>;
   /** All values starting with the given string. */
@@ -3849,7 +3979,7 @@ export type ScheduledOperationManyWhereInput = {
   /** All values ending with the given string. */
   readonly id_ends_with?: InputMaybe<Scalars['ID']>;
   /** All values that are contained in given list. */
-  readonly id_in?: InputMaybe<ReadonlyArray<Scalars['ID']>>;
+  readonly id_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['ID']>>>;
   /** All values that are not equal to given value. */
   readonly id_not?: InputMaybe<Scalars['ID']>;
   /** All values not containing the given string. */
@@ -3857,7 +3987,7 @@ export type ScheduledOperationManyWhereInput = {
   /** All values not ending with the given string */
   readonly id_not_ends_with?: InputMaybe<Scalars['ID']>;
   /** All values that are not contained in given list. */
-  readonly id_not_in?: InputMaybe<ReadonlyArray<Scalars['ID']>>;
+  readonly id_not_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['ID']>>>;
   /** All values not starting with the given string. */
   readonly id_not_starts_with?: InputMaybe<Scalars['ID']>;
   /** All values starting with the given string. */
@@ -3868,7 +3998,7 @@ export type ScheduledOperationManyWhereInput = {
   /** All values greater than or equal the given value. */
   readonly publishedAt_gte?: InputMaybe<Scalars['DateTime']>;
   /** All values that are contained in given list. */
-  readonly publishedAt_in?: InputMaybe<ReadonlyArray<Scalars['DateTime']>>;
+  readonly publishedAt_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['DateTime']>>>;
   /** All values less than the given value. */
   readonly publishedAt_lt?: InputMaybe<Scalars['DateTime']>;
   /** All values less than or equal the given value. */
@@ -3876,23 +4006,25 @@ export type ScheduledOperationManyWhereInput = {
   /** All values that are not equal to given value. */
   readonly publishedAt_not?: InputMaybe<Scalars['DateTime']>;
   /** All values that are not contained in given list. */
-  readonly publishedAt_not_in?: InputMaybe<ReadonlyArray<Scalars['DateTime']>>;
+  readonly publishedAt_not_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['DateTime']>>>;
   readonly publishedBy?: InputMaybe<UserWhereInput>;
+  /** All values containing the given json path. */
+  readonly rawPayload_json_path_exists?: InputMaybe<Scalars['String']>;
   readonly release?: InputMaybe<ScheduledReleaseWhereInput>;
   readonly status?: InputMaybe<ScheduledOperationStatus>;
   /** All values that are contained in given list. */
-  readonly status_in?: InputMaybe<ReadonlyArray<ScheduledOperationStatus>>;
+  readonly status_in?: InputMaybe<ReadonlyArray<InputMaybe<ScheduledOperationStatus>>>;
   /** All values that are not equal to given value. */
   readonly status_not?: InputMaybe<ScheduledOperationStatus>;
   /** All values that are not contained in given list. */
-  readonly status_not_in?: InputMaybe<ReadonlyArray<ScheduledOperationStatus>>;
+  readonly status_not_in?: InputMaybe<ReadonlyArray<InputMaybe<ScheduledOperationStatus>>>;
   readonly updatedAt?: InputMaybe<Scalars['DateTime']>;
   /** All values greater than the given value. */
   readonly updatedAt_gt?: InputMaybe<Scalars['DateTime']>;
   /** All values greater than or equal the given value. */
   readonly updatedAt_gte?: InputMaybe<Scalars['DateTime']>;
   /** All values that are contained in given list. */
-  readonly updatedAt_in?: InputMaybe<ReadonlyArray<Scalars['DateTime']>>;
+  readonly updatedAt_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['DateTime']>>>;
   /** All values less than the given value. */
   readonly updatedAt_lt?: InputMaybe<Scalars['DateTime']>;
   /** All values less than or equal the given value. */
@@ -3900,7 +4032,7 @@ export type ScheduledOperationManyWhereInput = {
   /** All values that are not equal to given value. */
   readonly updatedAt_not?: InputMaybe<Scalars['DateTime']>;
   /** All values that are not contained in given list. */
-  readonly updatedAt_not_in?: InputMaybe<ReadonlyArray<Scalars['DateTime']>>;
+  readonly updatedAt_not_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['DateTime']>>>;
   readonly updatedBy?: InputMaybe<UserWhereInput>;
 };
 
@@ -3962,7 +4094,7 @@ export type ScheduledOperationWhereInput = {
   /** All values greater than or equal the given value. */
   readonly createdAt_gte?: InputMaybe<Scalars['DateTime']>;
   /** All values that are contained in given list. */
-  readonly createdAt_in?: InputMaybe<ReadonlyArray<Scalars['DateTime']>>;
+  readonly createdAt_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['DateTime']>>>;
   /** All values less than the given value. */
   readonly createdAt_lt?: InputMaybe<Scalars['DateTime']>;
   /** All values less than or equal the given value. */
@@ -3970,7 +4102,7 @@ export type ScheduledOperationWhereInput = {
   /** All values that are not equal to given value. */
   readonly createdAt_not?: InputMaybe<Scalars['DateTime']>;
   /** All values that are not contained in given list. */
-  readonly createdAt_not_in?: InputMaybe<ReadonlyArray<Scalars['DateTime']>>;
+  readonly createdAt_not_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['DateTime']>>>;
   readonly createdBy?: InputMaybe<UserWhereInput>;
   readonly description?: InputMaybe<Scalars['String']>;
   /** All values containing the given string. */
@@ -3978,7 +4110,7 @@ export type ScheduledOperationWhereInput = {
   /** All values ending with the given string. */
   readonly description_ends_with?: InputMaybe<Scalars['String']>;
   /** All values that are contained in given list. */
-  readonly description_in?: InputMaybe<ReadonlyArray<Scalars['String']>>;
+  readonly description_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['String']>>>;
   /** All values that are not equal to given value. */
   readonly description_not?: InputMaybe<Scalars['String']>;
   /** All values not containing the given string. */
@@ -3986,7 +4118,7 @@ export type ScheduledOperationWhereInput = {
   /** All values not ending with the given string */
   readonly description_not_ends_with?: InputMaybe<Scalars['String']>;
   /** All values that are not contained in given list. */
-  readonly description_not_in?: InputMaybe<ReadonlyArray<Scalars['String']>>;
+  readonly description_not_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['String']>>>;
   /** All values not starting with the given string. */
   readonly description_not_starts_with?: InputMaybe<Scalars['String']>;
   /** All values starting with the given string. */
@@ -3997,7 +4129,7 @@ export type ScheduledOperationWhereInput = {
   /** All values ending with the given string. */
   readonly errorMessage_ends_with?: InputMaybe<Scalars['String']>;
   /** All values that are contained in given list. */
-  readonly errorMessage_in?: InputMaybe<ReadonlyArray<Scalars['String']>>;
+  readonly errorMessage_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['String']>>>;
   /** All values that are not equal to given value. */
   readonly errorMessage_not?: InputMaybe<Scalars['String']>;
   /** All values not containing the given string. */
@@ -4005,7 +4137,7 @@ export type ScheduledOperationWhereInput = {
   /** All values not ending with the given string */
   readonly errorMessage_not_ends_with?: InputMaybe<Scalars['String']>;
   /** All values that are not contained in given list. */
-  readonly errorMessage_not_in?: InputMaybe<ReadonlyArray<Scalars['String']>>;
+  readonly errorMessage_not_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['String']>>>;
   /** All values not starting with the given string. */
   readonly errorMessage_not_starts_with?: InputMaybe<Scalars['String']>;
   /** All values starting with the given string. */
@@ -4016,7 +4148,7 @@ export type ScheduledOperationWhereInput = {
   /** All values ending with the given string. */
   readonly id_ends_with?: InputMaybe<Scalars['ID']>;
   /** All values that are contained in given list. */
-  readonly id_in?: InputMaybe<ReadonlyArray<Scalars['ID']>>;
+  readonly id_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['ID']>>>;
   /** All values that are not equal to given value. */
   readonly id_not?: InputMaybe<Scalars['ID']>;
   /** All values not containing the given string. */
@@ -4024,7 +4156,7 @@ export type ScheduledOperationWhereInput = {
   /** All values not ending with the given string */
   readonly id_not_ends_with?: InputMaybe<Scalars['ID']>;
   /** All values that are not contained in given list. */
-  readonly id_not_in?: InputMaybe<ReadonlyArray<Scalars['ID']>>;
+  readonly id_not_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['ID']>>>;
   /** All values not starting with the given string. */
   readonly id_not_starts_with?: InputMaybe<Scalars['ID']>;
   /** All values starting with the given string. */
@@ -4035,7 +4167,7 @@ export type ScheduledOperationWhereInput = {
   /** All values greater than or equal the given value. */
   readonly publishedAt_gte?: InputMaybe<Scalars['DateTime']>;
   /** All values that are contained in given list. */
-  readonly publishedAt_in?: InputMaybe<ReadonlyArray<Scalars['DateTime']>>;
+  readonly publishedAt_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['DateTime']>>>;
   /** All values less than the given value. */
   readonly publishedAt_lt?: InputMaybe<Scalars['DateTime']>;
   /** All values less than or equal the given value. */
@@ -4043,23 +4175,25 @@ export type ScheduledOperationWhereInput = {
   /** All values that are not equal to given value. */
   readonly publishedAt_not?: InputMaybe<Scalars['DateTime']>;
   /** All values that are not contained in given list. */
-  readonly publishedAt_not_in?: InputMaybe<ReadonlyArray<Scalars['DateTime']>>;
+  readonly publishedAt_not_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['DateTime']>>>;
   readonly publishedBy?: InputMaybe<UserWhereInput>;
+  /** All values containing the given json path. */
+  readonly rawPayload_json_path_exists?: InputMaybe<Scalars['String']>;
   readonly release?: InputMaybe<ScheduledReleaseWhereInput>;
   readonly status?: InputMaybe<ScheduledOperationStatus>;
   /** All values that are contained in given list. */
-  readonly status_in?: InputMaybe<ReadonlyArray<ScheduledOperationStatus>>;
+  readonly status_in?: InputMaybe<ReadonlyArray<InputMaybe<ScheduledOperationStatus>>>;
   /** All values that are not equal to given value. */
   readonly status_not?: InputMaybe<ScheduledOperationStatus>;
   /** All values that are not contained in given list. */
-  readonly status_not_in?: InputMaybe<ReadonlyArray<ScheduledOperationStatus>>;
+  readonly status_not_in?: InputMaybe<ReadonlyArray<InputMaybe<ScheduledOperationStatus>>>;
   readonly updatedAt?: InputMaybe<Scalars['DateTime']>;
   /** All values greater than the given value. */
   readonly updatedAt_gt?: InputMaybe<Scalars['DateTime']>;
   /** All values greater than or equal the given value. */
   readonly updatedAt_gte?: InputMaybe<Scalars['DateTime']>;
   /** All values that are contained in given list. */
-  readonly updatedAt_in?: InputMaybe<ReadonlyArray<Scalars['DateTime']>>;
+  readonly updatedAt_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['DateTime']>>>;
   /** All values less than the given value. */
   readonly updatedAt_lt?: InputMaybe<Scalars['DateTime']>;
   /** All values less than or equal the given value. */
@@ -4067,7 +4201,7 @@ export type ScheduledOperationWhereInput = {
   /** All values that are not equal to given value. */
   readonly updatedAt_not?: InputMaybe<Scalars['DateTime']>;
   /** All values that are not contained in given list. */
-  readonly updatedAt_not_in?: InputMaybe<ReadonlyArray<Scalars['DateTime']>>;
+  readonly updatedAt_not_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['DateTime']>>>;
   readonly updatedBy?: InputMaybe<UserWhereInput>;
 };
 
@@ -4117,6 +4251,7 @@ export type ScheduledRelease = Node & {
 
 /** Scheduled Release system model */
 export type ScheduledReleaseCreatedByArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   locales?: InputMaybe<ReadonlyArray<Locale>>;
 };
 
@@ -4134,6 +4269,7 @@ export type ScheduledReleaseOperationsArgs = {
   after?: InputMaybe<Scalars['String']>;
   before?: InputMaybe<Scalars['String']>;
   first?: InputMaybe<Scalars['Int']>;
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   last?: InputMaybe<Scalars['Int']>;
   locales?: InputMaybe<ReadonlyArray<Locale>>;
   orderBy?: InputMaybe<ScheduledOperationOrderByInput>;
@@ -4144,12 +4280,14 @@ export type ScheduledReleaseOperationsArgs = {
 
 /** Scheduled Release system model */
 export type ScheduledReleasePublishedByArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   locales?: InputMaybe<ReadonlyArray<Locale>>;
 };
 
 
 /** Scheduled Release system model */
 export type ScheduledReleaseUpdatedByArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
   locales?: InputMaybe<ReadonlyArray<Locale>>;
 };
 
@@ -4217,7 +4355,7 @@ export type ScheduledReleaseManyWhereInput = {
   /** All values greater than or equal the given value. */
   readonly createdAt_gte?: InputMaybe<Scalars['DateTime']>;
   /** All values that are contained in given list. */
-  readonly createdAt_in?: InputMaybe<ReadonlyArray<Scalars['DateTime']>>;
+  readonly createdAt_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['DateTime']>>>;
   /** All values less than the given value. */
   readonly createdAt_lt?: InputMaybe<Scalars['DateTime']>;
   /** All values less than or equal the given value. */
@@ -4225,7 +4363,7 @@ export type ScheduledReleaseManyWhereInput = {
   /** All values that are not equal to given value. */
   readonly createdAt_not?: InputMaybe<Scalars['DateTime']>;
   /** All values that are not contained in given list. */
-  readonly createdAt_not_in?: InputMaybe<ReadonlyArray<Scalars['DateTime']>>;
+  readonly createdAt_not_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['DateTime']>>>;
   readonly createdBy?: InputMaybe<UserWhereInput>;
   readonly description?: InputMaybe<Scalars['String']>;
   /** All values containing the given string. */
@@ -4233,7 +4371,7 @@ export type ScheduledReleaseManyWhereInput = {
   /** All values ending with the given string. */
   readonly description_ends_with?: InputMaybe<Scalars['String']>;
   /** All values that are contained in given list. */
-  readonly description_in?: InputMaybe<ReadonlyArray<Scalars['String']>>;
+  readonly description_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['String']>>>;
   /** All values that are not equal to given value. */
   readonly description_not?: InputMaybe<Scalars['String']>;
   /** All values not containing the given string. */
@@ -4241,7 +4379,7 @@ export type ScheduledReleaseManyWhereInput = {
   /** All values not ending with the given string */
   readonly description_not_ends_with?: InputMaybe<Scalars['String']>;
   /** All values that are not contained in given list. */
-  readonly description_not_in?: InputMaybe<ReadonlyArray<Scalars['String']>>;
+  readonly description_not_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['String']>>>;
   /** All values not starting with the given string. */
   readonly description_not_starts_with?: InputMaybe<Scalars['String']>;
   /** All values starting with the given string. */
@@ -4252,7 +4390,7 @@ export type ScheduledReleaseManyWhereInput = {
   /** All values ending with the given string. */
   readonly errorMessage_ends_with?: InputMaybe<Scalars['String']>;
   /** All values that are contained in given list. */
-  readonly errorMessage_in?: InputMaybe<ReadonlyArray<Scalars['String']>>;
+  readonly errorMessage_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['String']>>>;
   /** All values that are not equal to given value. */
   readonly errorMessage_not?: InputMaybe<Scalars['String']>;
   /** All values not containing the given string. */
@@ -4260,7 +4398,7 @@ export type ScheduledReleaseManyWhereInput = {
   /** All values not ending with the given string */
   readonly errorMessage_not_ends_with?: InputMaybe<Scalars['String']>;
   /** All values that are not contained in given list. */
-  readonly errorMessage_not_in?: InputMaybe<ReadonlyArray<Scalars['String']>>;
+  readonly errorMessage_not_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['String']>>>;
   /** All values not starting with the given string. */
   readonly errorMessage_not_starts_with?: InputMaybe<Scalars['String']>;
   /** All values starting with the given string. */
@@ -4271,7 +4409,7 @@ export type ScheduledReleaseManyWhereInput = {
   /** All values ending with the given string. */
   readonly id_ends_with?: InputMaybe<Scalars['ID']>;
   /** All values that are contained in given list. */
-  readonly id_in?: InputMaybe<ReadonlyArray<Scalars['ID']>>;
+  readonly id_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['ID']>>>;
   /** All values that are not equal to given value. */
   readonly id_not?: InputMaybe<Scalars['ID']>;
   /** All values not containing the given string. */
@@ -4279,7 +4417,7 @@ export type ScheduledReleaseManyWhereInput = {
   /** All values not ending with the given string */
   readonly id_not_ends_with?: InputMaybe<Scalars['ID']>;
   /** All values that are not contained in given list. */
-  readonly id_not_in?: InputMaybe<ReadonlyArray<Scalars['ID']>>;
+  readonly id_not_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['ID']>>>;
   /** All values not starting with the given string. */
   readonly id_not_starts_with?: InputMaybe<Scalars['ID']>;
   /** All values starting with the given string. */
@@ -4299,7 +4437,7 @@ export type ScheduledReleaseManyWhereInput = {
   /** All values greater than or equal the given value. */
   readonly publishedAt_gte?: InputMaybe<Scalars['DateTime']>;
   /** All values that are contained in given list. */
-  readonly publishedAt_in?: InputMaybe<ReadonlyArray<Scalars['DateTime']>>;
+  readonly publishedAt_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['DateTime']>>>;
   /** All values less than the given value. */
   readonly publishedAt_lt?: InputMaybe<Scalars['DateTime']>;
   /** All values less than or equal the given value. */
@@ -4307,7 +4445,7 @@ export type ScheduledReleaseManyWhereInput = {
   /** All values that are not equal to given value. */
   readonly publishedAt_not?: InputMaybe<Scalars['DateTime']>;
   /** All values that are not contained in given list. */
-  readonly publishedAt_not_in?: InputMaybe<ReadonlyArray<Scalars['DateTime']>>;
+  readonly publishedAt_not_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['DateTime']>>>;
   readonly publishedBy?: InputMaybe<UserWhereInput>;
   readonly releaseAt?: InputMaybe<Scalars['DateTime']>;
   /** All values greater than the given value. */
@@ -4315,7 +4453,7 @@ export type ScheduledReleaseManyWhereInput = {
   /** All values greater than or equal the given value. */
   readonly releaseAt_gte?: InputMaybe<Scalars['DateTime']>;
   /** All values that are contained in given list. */
-  readonly releaseAt_in?: InputMaybe<ReadonlyArray<Scalars['DateTime']>>;
+  readonly releaseAt_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['DateTime']>>>;
   /** All values less than the given value. */
   readonly releaseAt_lt?: InputMaybe<Scalars['DateTime']>;
   /** All values less than or equal the given value. */
@@ -4323,21 +4461,21 @@ export type ScheduledReleaseManyWhereInput = {
   /** All values that are not equal to given value. */
   readonly releaseAt_not?: InputMaybe<Scalars['DateTime']>;
   /** All values that are not contained in given list. */
-  readonly releaseAt_not_in?: InputMaybe<ReadonlyArray<Scalars['DateTime']>>;
+  readonly releaseAt_not_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['DateTime']>>>;
   readonly status?: InputMaybe<ScheduledReleaseStatus>;
   /** All values that are contained in given list. */
-  readonly status_in?: InputMaybe<ReadonlyArray<ScheduledReleaseStatus>>;
+  readonly status_in?: InputMaybe<ReadonlyArray<InputMaybe<ScheduledReleaseStatus>>>;
   /** All values that are not equal to given value. */
   readonly status_not?: InputMaybe<ScheduledReleaseStatus>;
   /** All values that are not contained in given list. */
-  readonly status_not_in?: InputMaybe<ReadonlyArray<ScheduledReleaseStatus>>;
+  readonly status_not_in?: InputMaybe<ReadonlyArray<InputMaybe<ScheduledReleaseStatus>>>;
   readonly title?: InputMaybe<Scalars['String']>;
   /** All values containing the given string. */
   readonly title_contains?: InputMaybe<Scalars['String']>;
   /** All values ending with the given string. */
   readonly title_ends_with?: InputMaybe<Scalars['String']>;
   /** All values that are contained in given list. */
-  readonly title_in?: InputMaybe<ReadonlyArray<Scalars['String']>>;
+  readonly title_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['String']>>>;
   /** All values that are not equal to given value. */
   readonly title_not?: InputMaybe<Scalars['String']>;
   /** All values not containing the given string. */
@@ -4345,7 +4483,7 @@ export type ScheduledReleaseManyWhereInput = {
   /** All values not ending with the given string */
   readonly title_not_ends_with?: InputMaybe<Scalars['String']>;
   /** All values that are not contained in given list. */
-  readonly title_not_in?: InputMaybe<ReadonlyArray<Scalars['String']>>;
+  readonly title_not_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['String']>>>;
   /** All values not starting with the given string. */
   readonly title_not_starts_with?: InputMaybe<Scalars['String']>;
   /** All values starting with the given string. */
@@ -4356,7 +4494,7 @@ export type ScheduledReleaseManyWhereInput = {
   /** All values greater than or equal the given value. */
   readonly updatedAt_gte?: InputMaybe<Scalars['DateTime']>;
   /** All values that are contained in given list. */
-  readonly updatedAt_in?: InputMaybe<ReadonlyArray<Scalars['DateTime']>>;
+  readonly updatedAt_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['DateTime']>>>;
   /** All values less than the given value. */
   readonly updatedAt_lt?: InputMaybe<Scalars['DateTime']>;
   /** All values less than or equal the given value. */
@@ -4364,7 +4502,7 @@ export type ScheduledReleaseManyWhereInput = {
   /** All values that are not equal to given value. */
   readonly updatedAt_not?: InputMaybe<Scalars['DateTime']>;
   /** All values that are not contained in given list. */
-  readonly updatedAt_not_in?: InputMaybe<ReadonlyArray<Scalars['DateTime']>>;
+  readonly updatedAt_not_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['DateTime']>>>;
   readonly updatedBy?: InputMaybe<UserWhereInput>;
 };
 
@@ -4493,7 +4631,7 @@ export type ScheduledReleaseWhereInput = {
   /** All values greater than or equal the given value. */
   readonly createdAt_gte?: InputMaybe<Scalars['DateTime']>;
   /** All values that are contained in given list. */
-  readonly createdAt_in?: InputMaybe<ReadonlyArray<Scalars['DateTime']>>;
+  readonly createdAt_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['DateTime']>>>;
   /** All values less than the given value. */
   readonly createdAt_lt?: InputMaybe<Scalars['DateTime']>;
   /** All values less than or equal the given value. */
@@ -4501,7 +4639,7 @@ export type ScheduledReleaseWhereInput = {
   /** All values that are not equal to given value. */
   readonly createdAt_not?: InputMaybe<Scalars['DateTime']>;
   /** All values that are not contained in given list. */
-  readonly createdAt_not_in?: InputMaybe<ReadonlyArray<Scalars['DateTime']>>;
+  readonly createdAt_not_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['DateTime']>>>;
   readonly createdBy?: InputMaybe<UserWhereInput>;
   readonly description?: InputMaybe<Scalars['String']>;
   /** All values containing the given string. */
@@ -4509,7 +4647,7 @@ export type ScheduledReleaseWhereInput = {
   /** All values ending with the given string. */
   readonly description_ends_with?: InputMaybe<Scalars['String']>;
   /** All values that are contained in given list. */
-  readonly description_in?: InputMaybe<ReadonlyArray<Scalars['String']>>;
+  readonly description_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['String']>>>;
   /** All values that are not equal to given value. */
   readonly description_not?: InputMaybe<Scalars['String']>;
   /** All values not containing the given string. */
@@ -4517,7 +4655,7 @@ export type ScheduledReleaseWhereInput = {
   /** All values not ending with the given string */
   readonly description_not_ends_with?: InputMaybe<Scalars['String']>;
   /** All values that are not contained in given list. */
-  readonly description_not_in?: InputMaybe<ReadonlyArray<Scalars['String']>>;
+  readonly description_not_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['String']>>>;
   /** All values not starting with the given string. */
   readonly description_not_starts_with?: InputMaybe<Scalars['String']>;
   /** All values starting with the given string. */
@@ -4528,7 +4666,7 @@ export type ScheduledReleaseWhereInput = {
   /** All values ending with the given string. */
   readonly errorMessage_ends_with?: InputMaybe<Scalars['String']>;
   /** All values that are contained in given list. */
-  readonly errorMessage_in?: InputMaybe<ReadonlyArray<Scalars['String']>>;
+  readonly errorMessage_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['String']>>>;
   /** All values that are not equal to given value. */
   readonly errorMessage_not?: InputMaybe<Scalars['String']>;
   /** All values not containing the given string. */
@@ -4536,7 +4674,7 @@ export type ScheduledReleaseWhereInput = {
   /** All values not ending with the given string */
   readonly errorMessage_not_ends_with?: InputMaybe<Scalars['String']>;
   /** All values that are not contained in given list. */
-  readonly errorMessage_not_in?: InputMaybe<ReadonlyArray<Scalars['String']>>;
+  readonly errorMessage_not_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['String']>>>;
   /** All values not starting with the given string. */
   readonly errorMessage_not_starts_with?: InputMaybe<Scalars['String']>;
   /** All values starting with the given string. */
@@ -4547,7 +4685,7 @@ export type ScheduledReleaseWhereInput = {
   /** All values ending with the given string. */
   readonly id_ends_with?: InputMaybe<Scalars['ID']>;
   /** All values that are contained in given list. */
-  readonly id_in?: InputMaybe<ReadonlyArray<Scalars['ID']>>;
+  readonly id_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['ID']>>>;
   /** All values that are not equal to given value. */
   readonly id_not?: InputMaybe<Scalars['ID']>;
   /** All values not containing the given string. */
@@ -4555,7 +4693,7 @@ export type ScheduledReleaseWhereInput = {
   /** All values not ending with the given string */
   readonly id_not_ends_with?: InputMaybe<Scalars['ID']>;
   /** All values that are not contained in given list. */
-  readonly id_not_in?: InputMaybe<ReadonlyArray<Scalars['ID']>>;
+  readonly id_not_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['ID']>>>;
   /** All values not starting with the given string. */
   readonly id_not_starts_with?: InputMaybe<Scalars['ID']>;
   /** All values starting with the given string. */
@@ -4575,7 +4713,7 @@ export type ScheduledReleaseWhereInput = {
   /** All values greater than or equal the given value. */
   readonly publishedAt_gte?: InputMaybe<Scalars['DateTime']>;
   /** All values that are contained in given list. */
-  readonly publishedAt_in?: InputMaybe<ReadonlyArray<Scalars['DateTime']>>;
+  readonly publishedAt_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['DateTime']>>>;
   /** All values less than the given value. */
   readonly publishedAt_lt?: InputMaybe<Scalars['DateTime']>;
   /** All values less than or equal the given value. */
@@ -4583,7 +4721,7 @@ export type ScheduledReleaseWhereInput = {
   /** All values that are not equal to given value. */
   readonly publishedAt_not?: InputMaybe<Scalars['DateTime']>;
   /** All values that are not contained in given list. */
-  readonly publishedAt_not_in?: InputMaybe<ReadonlyArray<Scalars['DateTime']>>;
+  readonly publishedAt_not_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['DateTime']>>>;
   readonly publishedBy?: InputMaybe<UserWhereInput>;
   readonly releaseAt?: InputMaybe<Scalars['DateTime']>;
   /** All values greater than the given value. */
@@ -4591,7 +4729,7 @@ export type ScheduledReleaseWhereInput = {
   /** All values greater than or equal the given value. */
   readonly releaseAt_gte?: InputMaybe<Scalars['DateTime']>;
   /** All values that are contained in given list. */
-  readonly releaseAt_in?: InputMaybe<ReadonlyArray<Scalars['DateTime']>>;
+  readonly releaseAt_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['DateTime']>>>;
   /** All values less than the given value. */
   readonly releaseAt_lt?: InputMaybe<Scalars['DateTime']>;
   /** All values less than or equal the given value. */
@@ -4599,21 +4737,21 @@ export type ScheduledReleaseWhereInput = {
   /** All values that are not equal to given value. */
   readonly releaseAt_not?: InputMaybe<Scalars['DateTime']>;
   /** All values that are not contained in given list. */
-  readonly releaseAt_not_in?: InputMaybe<ReadonlyArray<Scalars['DateTime']>>;
+  readonly releaseAt_not_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['DateTime']>>>;
   readonly status?: InputMaybe<ScheduledReleaseStatus>;
   /** All values that are contained in given list. */
-  readonly status_in?: InputMaybe<ReadonlyArray<ScheduledReleaseStatus>>;
+  readonly status_in?: InputMaybe<ReadonlyArray<InputMaybe<ScheduledReleaseStatus>>>;
   /** All values that are not equal to given value. */
   readonly status_not?: InputMaybe<ScheduledReleaseStatus>;
   /** All values that are not contained in given list. */
-  readonly status_not_in?: InputMaybe<ReadonlyArray<ScheduledReleaseStatus>>;
+  readonly status_not_in?: InputMaybe<ReadonlyArray<InputMaybe<ScheduledReleaseStatus>>>;
   readonly title?: InputMaybe<Scalars['String']>;
   /** All values containing the given string. */
   readonly title_contains?: InputMaybe<Scalars['String']>;
   /** All values ending with the given string. */
   readonly title_ends_with?: InputMaybe<Scalars['String']>;
   /** All values that are contained in given list. */
-  readonly title_in?: InputMaybe<ReadonlyArray<Scalars['String']>>;
+  readonly title_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['String']>>>;
   /** All values that are not equal to given value. */
   readonly title_not?: InputMaybe<Scalars['String']>;
   /** All values not containing the given string. */
@@ -4621,7 +4759,7 @@ export type ScheduledReleaseWhereInput = {
   /** All values not ending with the given string */
   readonly title_not_ends_with?: InputMaybe<Scalars['String']>;
   /** All values that are not contained in given list. */
-  readonly title_not_in?: InputMaybe<ReadonlyArray<Scalars['String']>>;
+  readonly title_not_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['String']>>>;
   /** All values not starting with the given string. */
   readonly title_not_starts_with?: InputMaybe<Scalars['String']>;
   /** All values starting with the given string. */
@@ -4632,7 +4770,7 @@ export type ScheduledReleaseWhereInput = {
   /** All values greater than or equal the given value. */
   readonly updatedAt_gte?: InputMaybe<Scalars['DateTime']>;
   /** All values that are contained in given list. */
-  readonly updatedAt_in?: InputMaybe<ReadonlyArray<Scalars['DateTime']>>;
+  readonly updatedAt_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['DateTime']>>>;
   /** All values less than the given value. */
   readonly updatedAt_lt?: InputMaybe<Scalars['DateTime']>;
   /** All values less than or equal the given value. */
@@ -4640,7 +4778,7 @@ export type ScheduledReleaseWhereInput = {
   /** All values that are not equal to given value. */
   readonly updatedAt_not?: InputMaybe<Scalars['DateTime']>;
   /** All values that are not contained in given list. */
-  readonly updatedAt_not_in?: InputMaybe<ReadonlyArray<Scalars['DateTime']>>;
+  readonly updatedAt_not_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['DateTime']>>>;
   readonly updatedBy?: InputMaybe<UserWhereInput>;
 };
 
@@ -4760,7 +4898,7 @@ export type UserManyWhereInput = {
   /** All values greater than or equal the given value. */
   readonly createdAt_gte?: InputMaybe<Scalars['DateTime']>;
   /** All values that are contained in given list. */
-  readonly createdAt_in?: InputMaybe<ReadonlyArray<Scalars['DateTime']>>;
+  readonly createdAt_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['DateTime']>>>;
   /** All values less than the given value. */
   readonly createdAt_lt?: InputMaybe<Scalars['DateTime']>;
   /** All values less than or equal the given value. */
@@ -4768,14 +4906,17 @@ export type UserManyWhereInput = {
   /** All values that are not equal to given value. */
   readonly createdAt_not?: InputMaybe<Scalars['DateTime']>;
   /** All values that are not contained in given list. */
-  readonly createdAt_not_in?: InputMaybe<ReadonlyArray<Scalars['DateTime']>>;
+  readonly createdAt_not_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['DateTime']>>>;
+  readonly documentInStages_every?: InputMaybe<UserWhereStageInput>;
+  readonly documentInStages_none?: InputMaybe<UserWhereStageInput>;
+  readonly documentInStages_some?: InputMaybe<UserWhereStageInput>;
   readonly id?: InputMaybe<Scalars['ID']>;
   /** All values containing the given string. */
   readonly id_contains?: InputMaybe<Scalars['ID']>;
   /** All values ending with the given string. */
   readonly id_ends_with?: InputMaybe<Scalars['ID']>;
   /** All values that are contained in given list. */
-  readonly id_in?: InputMaybe<ReadonlyArray<Scalars['ID']>>;
+  readonly id_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['ID']>>>;
   /** All values that are not equal to given value. */
   readonly id_not?: InputMaybe<Scalars['ID']>;
   /** All values not containing the given string. */
@@ -4783,7 +4924,7 @@ export type UserManyWhereInput = {
   /** All values not ending with the given string */
   readonly id_not_ends_with?: InputMaybe<Scalars['ID']>;
   /** All values that are not contained in given list. */
-  readonly id_not_in?: InputMaybe<ReadonlyArray<Scalars['ID']>>;
+  readonly id_not_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['ID']>>>;
   /** All values not starting with the given string. */
   readonly id_not_starts_with?: InputMaybe<Scalars['ID']>;
   /** All values starting with the given string. */
@@ -4793,18 +4934,18 @@ export type UserManyWhereInput = {
   readonly isActive_not?: InputMaybe<Scalars['Boolean']>;
   readonly kind?: InputMaybe<UserKind>;
   /** All values that are contained in given list. */
-  readonly kind_in?: InputMaybe<ReadonlyArray<UserKind>>;
+  readonly kind_in?: InputMaybe<ReadonlyArray<InputMaybe<UserKind>>>;
   /** All values that are not equal to given value. */
   readonly kind_not?: InputMaybe<UserKind>;
   /** All values that are not contained in given list. */
-  readonly kind_not_in?: InputMaybe<ReadonlyArray<UserKind>>;
+  readonly kind_not_in?: InputMaybe<ReadonlyArray<InputMaybe<UserKind>>>;
   readonly name?: InputMaybe<Scalars['String']>;
   /** All values containing the given string. */
   readonly name_contains?: InputMaybe<Scalars['String']>;
   /** All values ending with the given string. */
   readonly name_ends_with?: InputMaybe<Scalars['String']>;
   /** All values that are contained in given list. */
-  readonly name_in?: InputMaybe<ReadonlyArray<Scalars['String']>>;
+  readonly name_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['String']>>>;
   /** All values that are not equal to given value. */
   readonly name_not?: InputMaybe<Scalars['String']>;
   /** All values not containing the given string. */
@@ -4812,7 +4953,7 @@ export type UserManyWhereInput = {
   /** All values not ending with the given string */
   readonly name_not_ends_with?: InputMaybe<Scalars['String']>;
   /** All values that are not contained in given list. */
-  readonly name_not_in?: InputMaybe<ReadonlyArray<Scalars['String']>>;
+  readonly name_not_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['String']>>>;
   /** All values not starting with the given string. */
   readonly name_not_starts_with?: InputMaybe<Scalars['String']>;
   /** All values starting with the given string. */
@@ -4823,7 +4964,7 @@ export type UserManyWhereInput = {
   /** All values ending with the given string. */
   readonly picture_ends_with?: InputMaybe<Scalars['String']>;
   /** All values that are contained in given list. */
-  readonly picture_in?: InputMaybe<ReadonlyArray<Scalars['String']>>;
+  readonly picture_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['String']>>>;
   /** All values that are not equal to given value. */
   readonly picture_not?: InputMaybe<Scalars['String']>;
   /** All values not containing the given string. */
@@ -4831,7 +4972,7 @@ export type UserManyWhereInput = {
   /** All values not ending with the given string */
   readonly picture_not_ends_with?: InputMaybe<Scalars['String']>;
   /** All values that are not contained in given list. */
-  readonly picture_not_in?: InputMaybe<ReadonlyArray<Scalars['String']>>;
+  readonly picture_not_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['String']>>>;
   /** All values not starting with the given string. */
   readonly picture_not_starts_with?: InputMaybe<Scalars['String']>;
   /** All values starting with the given string. */
@@ -4842,7 +4983,7 @@ export type UserManyWhereInput = {
   /** All values greater than or equal the given value. */
   readonly publishedAt_gte?: InputMaybe<Scalars['DateTime']>;
   /** All values that are contained in given list. */
-  readonly publishedAt_in?: InputMaybe<ReadonlyArray<Scalars['DateTime']>>;
+  readonly publishedAt_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['DateTime']>>>;
   /** All values less than the given value. */
   readonly publishedAt_lt?: InputMaybe<Scalars['DateTime']>;
   /** All values less than or equal the given value. */
@@ -4850,14 +4991,14 @@ export type UserManyWhereInput = {
   /** All values that are not equal to given value. */
   readonly publishedAt_not?: InputMaybe<Scalars['DateTime']>;
   /** All values that are not contained in given list. */
-  readonly publishedAt_not_in?: InputMaybe<ReadonlyArray<Scalars['DateTime']>>;
+  readonly publishedAt_not_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['DateTime']>>>;
   readonly updatedAt?: InputMaybe<Scalars['DateTime']>;
   /** All values greater than the given value. */
   readonly updatedAt_gt?: InputMaybe<Scalars['DateTime']>;
   /** All values greater than or equal the given value. */
   readonly updatedAt_gte?: InputMaybe<Scalars['DateTime']>;
   /** All values that are contained in given list. */
-  readonly updatedAt_in?: InputMaybe<ReadonlyArray<Scalars['DateTime']>>;
+  readonly updatedAt_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['DateTime']>>>;
   /** All values less than the given value. */
   readonly updatedAt_lt?: InputMaybe<Scalars['DateTime']>;
   /** All values less than or equal the given value. */
@@ -4865,7 +5006,7 @@ export type UserManyWhereInput = {
   /** All values that are not equal to given value. */
   readonly updatedAt_not?: InputMaybe<Scalars['DateTime']>;
   /** All values that are not contained in given list. */
-  readonly updatedAt_not_in?: InputMaybe<ReadonlyArray<Scalars['DateTime']>>;
+  readonly updatedAt_not_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['DateTime']>>>;
 };
 
 export enum UserOrderByInput {
@@ -4903,6 +5044,12 @@ export type UserUpdateOneInlineInput = {
   readonly disconnect?: InputMaybe<Scalars['Boolean']>;
 };
 
+/** This contains a set of filters that can be used to compare values internally */
+export type UserWhereComparatorInput = {
+  /** This field can be used to request to check if the entry is outdated by internal comparison */
+  readonly outdated_to?: InputMaybe<Scalars['Boolean']>;
+};
+
 /** Identifies documents */
 export type UserWhereInput = {
   /** Logical AND on all given filters. */
@@ -4919,7 +5066,7 @@ export type UserWhereInput = {
   /** All values greater than or equal the given value. */
   readonly createdAt_gte?: InputMaybe<Scalars['DateTime']>;
   /** All values that are contained in given list. */
-  readonly createdAt_in?: InputMaybe<ReadonlyArray<Scalars['DateTime']>>;
+  readonly createdAt_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['DateTime']>>>;
   /** All values less than the given value. */
   readonly createdAt_lt?: InputMaybe<Scalars['DateTime']>;
   /** All values less than or equal the given value. */
@@ -4927,14 +5074,17 @@ export type UserWhereInput = {
   /** All values that are not equal to given value. */
   readonly createdAt_not?: InputMaybe<Scalars['DateTime']>;
   /** All values that are not contained in given list. */
-  readonly createdAt_not_in?: InputMaybe<ReadonlyArray<Scalars['DateTime']>>;
+  readonly createdAt_not_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['DateTime']>>>;
+  readonly documentInStages_every?: InputMaybe<UserWhereStageInput>;
+  readonly documentInStages_none?: InputMaybe<UserWhereStageInput>;
+  readonly documentInStages_some?: InputMaybe<UserWhereStageInput>;
   readonly id?: InputMaybe<Scalars['ID']>;
   /** All values containing the given string. */
   readonly id_contains?: InputMaybe<Scalars['ID']>;
   /** All values ending with the given string. */
   readonly id_ends_with?: InputMaybe<Scalars['ID']>;
   /** All values that are contained in given list. */
-  readonly id_in?: InputMaybe<ReadonlyArray<Scalars['ID']>>;
+  readonly id_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['ID']>>>;
   /** All values that are not equal to given value. */
   readonly id_not?: InputMaybe<Scalars['ID']>;
   /** All values not containing the given string. */
@@ -4942,7 +5092,7 @@ export type UserWhereInput = {
   /** All values not ending with the given string */
   readonly id_not_ends_with?: InputMaybe<Scalars['ID']>;
   /** All values that are not contained in given list. */
-  readonly id_not_in?: InputMaybe<ReadonlyArray<Scalars['ID']>>;
+  readonly id_not_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['ID']>>>;
   /** All values not starting with the given string. */
   readonly id_not_starts_with?: InputMaybe<Scalars['ID']>;
   /** All values starting with the given string. */
@@ -4952,18 +5102,18 @@ export type UserWhereInput = {
   readonly isActive_not?: InputMaybe<Scalars['Boolean']>;
   readonly kind?: InputMaybe<UserKind>;
   /** All values that are contained in given list. */
-  readonly kind_in?: InputMaybe<ReadonlyArray<UserKind>>;
+  readonly kind_in?: InputMaybe<ReadonlyArray<InputMaybe<UserKind>>>;
   /** All values that are not equal to given value. */
   readonly kind_not?: InputMaybe<UserKind>;
   /** All values that are not contained in given list. */
-  readonly kind_not_in?: InputMaybe<ReadonlyArray<UserKind>>;
+  readonly kind_not_in?: InputMaybe<ReadonlyArray<InputMaybe<UserKind>>>;
   readonly name?: InputMaybe<Scalars['String']>;
   /** All values containing the given string. */
   readonly name_contains?: InputMaybe<Scalars['String']>;
   /** All values ending with the given string. */
   readonly name_ends_with?: InputMaybe<Scalars['String']>;
   /** All values that are contained in given list. */
-  readonly name_in?: InputMaybe<ReadonlyArray<Scalars['String']>>;
+  readonly name_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['String']>>>;
   /** All values that are not equal to given value. */
   readonly name_not?: InputMaybe<Scalars['String']>;
   /** All values not containing the given string. */
@@ -4971,7 +5121,7 @@ export type UserWhereInput = {
   /** All values not ending with the given string */
   readonly name_not_ends_with?: InputMaybe<Scalars['String']>;
   /** All values that are not contained in given list. */
-  readonly name_not_in?: InputMaybe<ReadonlyArray<Scalars['String']>>;
+  readonly name_not_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['String']>>>;
   /** All values not starting with the given string. */
   readonly name_not_starts_with?: InputMaybe<Scalars['String']>;
   /** All values starting with the given string. */
@@ -4982,7 +5132,7 @@ export type UserWhereInput = {
   /** All values ending with the given string. */
   readonly picture_ends_with?: InputMaybe<Scalars['String']>;
   /** All values that are contained in given list. */
-  readonly picture_in?: InputMaybe<ReadonlyArray<Scalars['String']>>;
+  readonly picture_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['String']>>>;
   /** All values that are not equal to given value. */
   readonly picture_not?: InputMaybe<Scalars['String']>;
   /** All values not containing the given string. */
@@ -4990,7 +5140,7 @@ export type UserWhereInput = {
   /** All values not ending with the given string */
   readonly picture_not_ends_with?: InputMaybe<Scalars['String']>;
   /** All values that are not contained in given list. */
-  readonly picture_not_in?: InputMaybe<ReadonlyArray<Scalars['String']>>;
+  readonly picture_not_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['String']>>>;
   /** All values not starting with the given string. */
   readonly picture_not_starts_with?: InputMaybe<Scalars['String']>;
   /** All values starting with the given string. */
@@ -5001,7 +5151,7 @@ export type UserWhereInput = {
   /** All values greater than or equal the given value. */
   readonly publishedAt_gte?: InputMaybe<Scalars['DateTime']>;
   /** All values that are contained in given list. */
-  readonly publishedAt_in?: InputMaybe<ReadonlyArray<Scalars['DateTime']>>;
+  readonly publishedAt_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['DateTime']>>>;
   /** All values less than the given value. */
   readonly publishedAt_lt?: InputMaybe<Scalars['DateTime']>;
   /** All values less than or equal the given value. */
@@ -5009,14 +5159,14 @@ export type UserWhereInput = {
   /** All values that are not equal to given value. */
   readonly publishedAt_not?: InputMaybe<Scalars['DateTime']>;
   /** All values that are not contained in given list. */
-  readonly publishedAt_not_in?: InputMaybe<ReadonlyArray<Scalars['DateTime']>>;
+  readonly publishedAt_not_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['DateTime']>>>;
   readonly updatedAt?: InputMaybe<Scalars['DateTime']>;
   /** All values greater than the given value. */
   readonly updatedAt_gt?: InputMaybe<Scalars['DateTime']>;
   /** All values greater than or equal the given value. */
   readonly updatedAt_gte?: InputMaybe<Scalars['DateTime']>;
   /** All values that are contained in given list. */
-  readonly updatedAt_in?: InputMaybe<ReadonlyArray<Scalars['DateTime']>>;
+  readonly updatedAt_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['DateTime']>>>;
   /** All values less than the given value. */
   readonly updatedAt_lt?: InputMaybe<Scalars['DateTime']>;
   /** All values less than or equal the given value. */
@@ -5024,7 +5174,21 @@ export type UserWhereInput = {
   /** All values that are not equal to given value. */
   readonly updatedAt_not?: InputMaybe<Scalars['DateTime']>;
   /** All values that are not contained in given list. */
-  readonly updatedAt_not_in?: InputMaybe<ReadonlyArray<Scalars['DateTime']>>;
+  readonly updatedAt_not_in?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['DateTime']>>>;
+};
+
+/** The document in stages filter allows specifying a stage entry to cross compare the same document between different stages */
+export type UserWhereStageInput = {
+  /** Logical AND on all given filters. */
+  readonly AND?: InputMaybe<ReadonlyArray<UserWhereStageInput>>;
+  /** Logical NOT on all given filters combined by AND. */
+  readonly NOT?: InputMaybe<ReadonlyArray<UserWhereStageInput>>;
+  /** Logical OR on all given filters. */
+  readonly OR?: InputMaybe<ReadonlyArray<UserWhereStageInput>>;
+  /** This field contains fields which can be set as true or false to specify an internal comparison */
+  readonly compareWithParent?: InputMaybe<UserWhereComparatorInput>;
+  /** Specify the stage to compare with */
+  readonly stage?: InputMaybe<Stage>;
 };
 
 /** References User record uniquely */
@@ -5059,6 +5223,7 @@ export enum _FilterKind {
   Gt = 'gt',
   Gte = 'gte',
   In = 'in',
+  JsonPathExists = 'json_path_exists',
   Lt = 'lt',
   Lte = 'lte',
   NotContains = 'not_contains',
@@ -5089,6 +5254,8 @@ export enum _MutationKind {
   DeleteMany = 'deleteMany',
   Publish = 'publish',
   PublishMany = 'publishMany',
+  SchedulePublish = 'schedulePublish',
+  ScheduleUnpublish = 'scheduleUnpublish',
   Unpublish = 'unpublish',
   UnpublishMany = 'unpublishMany',
   Update = 'update',
@@ -5127,7 +5294,7 @@ export type GetCategoriesQueryVariables = Exact<{
 }>;
 
 
-export type GetCategoriesQuery = { readonly categories: ReadonlyArray<{ readonly id: string, readonly title: string, readonly slug: string, readonly color: PageColor, readonly backgroundVideo?: { readonly mimeType?: string | null | undefined, readonly url: string } | null | undefined, readonly backgroundVideoShort?: { readonly mimeType?: string | null | undefined, readonly url: string } | null | undefined }> };
+export type GetCategoriesQuery = { readonly categories: ReadonlyArray<{ readonly id: string, readonly title: string, readonly slug: string, readonly color: PageColor, readonly backgroundVideo?: { readonly mimeType?: string | null, readonly url: string } | null, readonly backgroundVideoShort?: { readonly mimeType?: string | null, readonly url: string } | null }> };
 
 export type GetHeaderQueryVariables = Exact<{
   stage: Stage;
@@ -5141,7 +5308,7 @@ export type GetInfoQueryVariables = Exact<{
 }>;
 
 
-export type GetInfoQuery = { readonly info?: { readonly presentation?: { readonly markdown: string, readonly text: string } | null | undefined } | null | undefined };
+export type GetInfoQuery = { readonly info?: { readonly presentation?: { readonly markdown: string, readonly text: string } | null } | null };
 
 export type GetCategoryQueryVariables = Exact<{
   slug: Scalars['String'];
@@ -5149,7 +5316,7 @@ export type GetCategoryQueryVariables = Exact<{
 }>;
 
 
-export type GetCategoryQuery = { readonly categories: ReadonlyArray<{ readonly id: string, readonly title: string, readonly slug: string, readonly color: PageColor, readonly pieces: ReadonlyArray<{ readonly id: string, readonly title: string, readonly slug: string, readonly type: PieceType, readonly images: ReadonlyArray<{ readonly id: string, readonly mimeType?: string | null | undefined, readonly jpg: string, readonly webp: string }> }> }>, readonly category?: { readonly description?: string | null | undefined, readonly id: string, readonly title: string, readonly slug: string, readonly color: PageColor, readonly content?: { readonly markdown: string } | null | undefined, readonly pieces: ReadonlyArray<{ readonly id: string, readonly title: string, readonly slug: string, readonly type: PieceType, readonly images: ReadonlyArray<{ readonly id: string, readonly mimeType?: string | null | undefined, readonly jpg: string, readonly webp: string }> }> } | null | undefined };
+export type GetCategoryQuery = { readonly categories: ReadonlyArray<{ readonly id: string, readonly title: string, readonly slug: string, readonly color: PageColor, readonly pieces: ReadonlyArray<{ readonly id: string, readonly title: string, readonly slug: string, readonly type: PieceType, readonly images: ReadonlyArray<{ readonly id: string, readonly mimeType?: string | null, readonly jpg: string, readonly webp: string }> }> }>, readonly category?: { readonly description?: string | null, readonly id: string, readonly title: string, readonly slug: string, readonly color: PageColor, readonly content?: { readonly markdown: string } | null, readonly pieces: ReadonlyArray<{ readonly id: string, readonly title: string, readonly slug: string, readonly type: PieceType, readonly images: ReadonlyArray<{ readonly id: string, readonly mimeType?: string | null, readonly jpg: string, readonly webp: string }> }> } | null };
 
 export type GetPieceQueryVariables = Exact<{
   slug: Scalars['String'];
@@ -5157,16 +5324,16 @@ export type GetPieceQueryVariables = Exact<{
 }>;
 
 
-export type GetPieceQuery = { readonly categories: ReadonlyArray<{ readonly id: string, readonly title: string, readonly slug: string, readonly color: PageColor, readonly pieces: ReadonlyArray<{ readonly id: string, readonly title: string, readonly slug: string, readonly type: PieceType, readonly images: ReadonlyArray<{ readonly id: string, readonly mimeType?: string | null | undefined, readonly jpg: string, readonly webp: string }> }> }>, readonly piece?: { readonly id: string, readonly title: string, readonly slug: string, readonly description?: string | null | undefined, readonly type: PieceType, readonly tags: ReadonlyArray<string>, readonly technique?: string | null | undefined, readonly location?: string | null | undefined, readonly dimensions?: string | null | undefined, readonly duration?: string | null | undefined, readonly participants: ReadonlyArray<string>, readonly category?: { readonly title: string, readonly color: PageColor } | null | undefined, readonly content?: { readonly markdown: string } | null | undefined, readonly images: ReadonlyArray<{ readonly id: string, readonly mimeType?: string | null | undefined, readonly jpg: string, readonly webp: string }>, readonly related: ReadonlyArray<{ readonly id: string, readonly title: string, readonly slug: string, readonly category?: { readonly title: string, readonly color: PageColor } | null | undefined }> } | null | undefined };
+export type GetPieceQuery = { readonly categories: ReadonlyArray<{ readonly id: string, readonly title: string, readonly slug: string, readonly color: PageColor, readonly pieces: ReadonlyArray<{ readonly id: string, readonly title: string, readonly slug: string, readonly type: PieceType, readonly images: ReadonlyArray<{ readonly id: string, readonly mimeType?: string | null, readonly jpg: string, readonly webp: string }> }> }>, readonly piece?: { readonly id: string, readonly title: string, readonly slug: string, readonly description?: string | null, readonly type: PieceType, readonly tags: ReadonlyArray<string>, readonly technique?: string | null, readonly location?: string | null, readonly dimensions?: string | null, readonly duration?: string | null, readonly participants: ReadonlyArray<string>, readonly category?: { readonly title: string, readonly color: PageColor } | null, readonly content?: { readonly markdown: string } | null, readonly images: ReadonlyArray<{ readonly id: string, readonly mimeType?: string | null, readonly jpg: string, readonly webp: string }>, readonly related: ReadonlyArray<{ readonly id: string, readonly title: string, readonly slug: string, readonly category?: { readonly title: string, readonly color: PageColor } | null }> } | null };
 
-export type PiecesFragmentFragment = { readonly pieces: ReadonlyArray<{ readonly id: string, readonly title: string, readonly slug: string, readonly type: PieceType, readonly images: ReadonlyArray<{ readonly id: string, readonly mimeType?: string | null | undefined, readonly jpg: string, readonly webp: string }> }> };
+export type PiecesFragmentFragment = { readonly pieces: ReadonlyArray<{ readonly id: string, readonly title: string, readonly slug: string, readonly type: PieceType, readonly images: ReadonlyArray<{ readonly id: string, readonly mimeType?: string | null, readonly jpg: string, readonly webp: string }> }> };
 
 export type CategoryFragmentFragment = { readonly id: string, readonly title: string, readonly slug: string, readonly color: PageColor };
 
 export const PiecesFragmentFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"PiecesFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Category"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"pieces"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"type"}},{"kind":"Field","name":{"kind":"Name","value":"images"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"first"},"value":{"kind":"IntValue","value":"1"}},{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"mimeType_in"},"value":{"kind":"ListValue","values":[{"kind":"StringValue","value":"image/jpeg","block":false}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"mimeType"}},{"kind":"Field","alias":{"kind":"Name","value":"jpg"},"name":{"kind":"Name","value":"url"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"transformation"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"image"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"resize"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"width"},"value":{"kind":"IntValue","value":"500"}},{"kind":"ObjectField","name":{"kind":"Name","value":"height"},"value":{"kind":"IntValue","value":"500"}},{"kind":"ObjectField","name":{"kind":"Name","value":"fit"},"value":{"kind":"EnumValue","value":"max"}}]}}]}},{"kind":"ObjectField","name":{"kind":"Name","value":"document"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"output"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"format"},"value":{"kind":"EnumValue","value":"jpg"}}]}}]}}]}}]},{"kind":"Field","alias":{"kind":"Name","value":"webp"},"name":{"kind":"Name","value":"url"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"transformation"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"image"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"resize"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"width"},"value":{"kind":"IntValue","value":"500"}},{"kind":"ObjectField","name":{"kind":"Name","value":"height"},"value":{"kind":"IntValue","value":"500"}},{"kind":"ObjectField","name":{"kind":"Name","value":"fit"},"value":{"kind":"EnumValue","value":"max"}}]}}]}},{"kind":"ObjectField","name":{"kind":"Name","value":"document"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"output"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"format"},"value":{"kind":"EnumValue","value":"webp"}}]}}]}}]}}]}]}}]}}]}}]} as unknown as DocumentNode<PiecesFragmentFragment, unknown>;
 export const CategoryFragmentFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"CategoryFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Category"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"color"}}]}}]} as unknown as DocumentNode<CategoryFragmentFragment, unknown>;
-export const GetCategoriesDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getCategories"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"stage"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Stage"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"categories"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"stage"},"value":{"kind":"Variable","name":{"kind":"Name","value":"stage"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"CategoryFragment"}},{"kind":"Field","name":{"kind":"Name","value":"backgroundVideo"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"mimeType"}},{"kind":"Field","name":{"kind":"Name","value":"url"}}]}},{"kind":"Field","name":{"kind":"Name","value":"backgroundVideoShort"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"mimeType"}},{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}}]}},...CategoryFragmentFragmentDoc.definitions]} as unknown as DocumentNode<GetCategoriesQuery, GetCategoriesQueryVariables>;
-export const GetHeaderDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getHeader"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"stage"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Stage"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"categories"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"stage"},"value":{"kind":"Variable","name":{"kind":"Name","value":"stage"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"CategoryFragment"}}]}}]}},...CategoryFragmentFragmentDoc.definitions]} as unknown as DocumentNode<GetHeaderQuery, GetHeaderQueryVariables>;
+export const GetCategoriesDocument = {"kind":"Document", "definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getCategories"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"stage"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Stage"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"categories"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"stage"},"value":{"kind":"Variable","name":{"kind":"Name","value":"stage"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"CategoryFragment"}},{"kind":"Field","name":{"kind":"Name","value":"backgroundVideo"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"mimeType"}},{"kind":"Field","name":{"kind":"Name","value":"url"}}]}},{"kind":"Field","name":{"kind":"Name","value":"backgroundVideoShort"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"mimeType"}},{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}}]}},...CategoryFragmentFragmentDoc.definitions]} as unknown as DocumentNode<GetCategoriesQuery, GetCategoriesQueryVariables>;
+export const GetHeaderDocument = {"kind":"Document", "definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getHeader"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"stage"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Stage"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"categories"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"stage"},"value":{"kind":"Variable","name":{"kind":"Name","value":"stage"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"CategoryFragment"}}]}}]}},...CategoryFragmentFragmentDoc.definitions]} as unknown as DocumentNode<GetHeaderQuery, GetHeaderQueryVariables>;
 export const GetInfoDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getInfo"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ID"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"info"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"presentation"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"markdown"}},{"kind":"Field","name":{"kind":"Name","value":"text"}}]}}]}}]}}]} as unknown as DocumentNode<GetInfoQuery, GetInfoQueryVariables>;
-export const GetCategoryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getCategory"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"slug"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"stage"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Stage"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"categories"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"stage"},"value":{"kind":"Variable","name":{"kind":"Name","value":"stage"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"CategoryFragment"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"PiecesFragment"}}]}},{"kind":"Field","name":{"kind":"Name","value":"category"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"slug"},"value":{"kind":"Variable","name":{"kind":"Name","value":"slug"}}}]}},{"kind":"Argument","name":{"kind":"Name","value":"stage"},"value":{"kind":"Variable","name":{"kind":"Name","value":"stage"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"CategoryFragment"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"content"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"markdown"}}]}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"PiecesFragment"}}]}}]}},...CategoryFragmentFragmentDoc.definitions,...PiecesFragmentFragmentDoc.definitions]} as unknown as DocumentNode<GetCategoryQuery, GetCategoryQueryVariables>;
-export const GetPieceDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getPiece"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"slug"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"stage"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Stage"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"categories"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"stage"},"value":{"kind":"Variable","name":{"kind":"Name","value":"stage"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"CategoryFragment"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"PiecesFragment"}}]}},{"kind":"Field","name":{"kind":"Name","value":"piece"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"slug"},"value":{"kind":"Variable","name":{"kind":"Name","value":"slug"}}}]}},{"kind":"Argument","name":{"kind":"Name","value":"stage"},"value":{"kind":"Variable","name":{"kind":"Name","value":"stage"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"type"}},{"kind":"Field","name":{"kind":"Name","value":"tags"}},{"kind":"Field","name":{"kind":"Name","value":"technique"}},{"kind":"Field","name":{"kind":"Name","value":"location"}},{"kind":"Field","name":{"kind":"Name","value":"dimensions"}},{"kind":"Field","name":{"kind":"Name","value":"duration"}},{"kind":"Field","name":{"kind":"Name","value":"participants"}},{"kind":"Field","name":{"kind":"Name","value":"category"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"color"}}]}},{"kind":"Field","name":{"kind":"Name","value":"content"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"markdown"}}]}},{"kind":"Field","name":{"kind":"Name","value":"images"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"mimeType_in"},"value":{"kind":"ListValue","values":[{"kind":"StringValue","value":"image/jpeg","block":false}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"mimeType"}},{"kind":"Field","alias":{"kind":"Name","value":"jpg"},"name":{"kind":"Name","value":"url"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"transformation"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"image"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"resize"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"width"},"value":{"kind":"IntValue","value":"1000"}},{"kind":"ObjectField","name":{"kind":"Name","value":"height"},"value":{"kind":"IntValue","value":"1000"}},{"kind":"ObjectField","name":{"kind":"Name","value":"fit"},"value":{"kind":"EnumValue","value":"max"}}]}}]}},{"kind":"ObjectField","name":{"kind":"Name","value":"document"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"output"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"format"},"value":{"kind":"EnumValue","value":"jpg"}}]}}]}}]}}]},{"kind":"Field","alias":{"kind":"Name","value":"webp"},"name":{"kind":"Name","value":"url"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"transformation"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"image"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"resize"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"width"},"value":{"kind":"IntValue","value":"1000"}},{"kind":"ObjectField","name":{"kind":"Name","value":"height"},"value":{"kind":"IntValue","value":"1000"}},{"kind":"ObjectField","name":{"kind":"Name","value":"fit"},"value":{"kind":"EnumValue","value":"max"}}]}}]}},{"kind":"ObjectField","name":{"kind":"Name","value":"document"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"output"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"format"},"value":{"kind":"EnumValue","value":"webp"}}]}}]}}]}}]}]}},{"kind":"Field","name":{"kind":"Name","value":"related"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"category"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"color"}}]}}]}}]}}]}},...CategoryFragmentFragmentDoc.definitions,...PiecesFragmentFragmentDoc.definitions]} as unknown as DocumentNode<GetPieceQuery, GetPieceQueryVariables>;
+export const GetCategoryDocument = {"kind":"Document", "definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getCategory"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"slug"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"stage"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Stage"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"categories"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"stage"},"value":{"kind":"Variable","name":{"kind":"Name","value":"stage"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"CategoryFragment"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"PiecesFragment"}}]}},{"kind":"Field","name":{"kind":"Name","value":"category"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"slug"},"value":{"kind":"Variable","name":{"kind":"Name","value":"slug"}}}]}},{"kind":"Argument","name":{"kind":"Name","value":"stage"},"value":{"kind":"Variable","name":{"kind":"Name","value":"stage"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"CategoryFragment"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"content"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"markdown"}}]}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"PiecesFragment"}}]}}]}},...CategoryFragmentFragmentDoc.definitions,...PiecesFragmentFragmentDoc.definitions]} as unknown as DocumentNode<GetCategoryQuery, GetCategoryQueryVariables>;
+export const GetPieceDocument = {"kind":"Document", "definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getPiece"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"slug"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"stage"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Stage"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"categories"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"stage"},"value":{"kind":"Variable","name":{"kind":"Name","value":"stage"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"CategoryFragment"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"PiecesFragment"}}]}},{"kind":"Field","name":{"kind":"Name","value":"piece"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"slug"},"value":{"kind":"Variable","name":{"kind":"Name","value":"slug"}}}]}},{"kind":"Argument","name":{"kind":"Name","value":"stage"},"value":{"kind":"Variable","name":{"kind":"Name","value":"stage"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"type"}},{"kind":"Field","name":{"kind":"Name","value":"tags"}},{"kind":"Field","name":{"kind":"Name","value":"technique"}},{"kind":"Field","name":{"kind":"Name","value":"location"}},{"kind":"Field","name":{"kind":"Name","value":"dimensions"}},{"kind":"Field","name":{"kind":"Name","value":"duration"}},{"kind":"Field","name":{"kind":"Name","value":"participants"}},{"kind":"Field","name":{"kind":"Name","value":"category"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"color"}}]}},{"kind":"Field","name":{"kind":"Name","value":"content"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"markdown"}}]}},{"kind":"Field","name":{"kind":"Name","value":"images"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"mimeType_in"},"value":{"kind":"ListValue","values":[{"kind":"StringValue","value":"image/jpeg","block":false}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"mimeType"}},{"kind":"Field","alias":{"kind":"Name","value":"jpg"},"name":{"kind":"Name","value":"url"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"transformation"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"image"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"resize"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"width"},"value":{"kind":"IntValue","value":"1000"}},{"kind":"ObjectField","name":{"kind":"Name","value":"height"},"value":{"kind":"IntValue","value":"1000"}},{"kind":"ObjectField","name":{"kind":"Name","value":"fit"},"value":{"kind":"EnumValue","value":"max"}}]}}]}},{"kind":"ObjectField","name":{"kind":"Name","value":"document"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"output"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"format"},"value":{"kind":"EnumValue","value":"jpg"}}]}}]}}]}}]},{"kind":"Field","alias":{"kind":"Name","value":"webp"},"name":{"kind":"Name","value":"url"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"transformation"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"image"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"resize"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"width"},"value":{"kind":"IntValue","value":"1000"}},{"kind":"ObjectField","name":{"kind":"Name","value":"height"},"value":{"kind":"IntValue","value":"1000"}},{"kind":"ObjectField","name":{"kind":"Name","value":"fit"},"value":{"kind":"EnumValue","value":"max"}}]}}]}},{"kind":"ObjectField","name":{"kind":"Name","value":"document"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"output"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"format"},"value":{"kind":"EnumValue","value":"webp"}}]}}]}}]}}]}]}},{"kind":"Field","name":{"kind":"Name","value":"related"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"category"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"color"}}]}}]}}]}}]}},...CategoryFragmentFragmentDoc.definitions,...PiecesFragmentFragmentDoc.definitions]} as unknown as DocumentNode<GetPieceQuery, GetPieceQueryVariables>;

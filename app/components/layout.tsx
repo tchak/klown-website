@@ -1,4 +1,4 @@
-import { useLoaderData, Link } from 'remix';
+import { useLoaderData, Link } from '@remix-run/react';
 
 import type { GetHeader } from '~/cms.server';
 
@@ -6,7 +6,7 @@ export function Header() {
   const data = useLoaderData<GetHeader>();
 
   return (
-    <header id="topbar" role="navigation" aria-label="topbar">
+    <header id="topbar" aria-label="topbar">
       <h1>
         <Link to="/info">Klown</Link>
       </h1>
